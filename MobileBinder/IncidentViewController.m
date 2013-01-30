@@ -45,13 +45,13 @@
     {
         [self.employeeRecord addAbsenceForDate:self.incidentDate];
     }
-    else if(self.incidentTypeControl.selectedSegmentIndex = TARDY_INDEX)
+    else if(self.incidentTypeControl.selectedSegmentIndex == TARDY_INDEX)
     {
         [self.employeeRecord addTardyForDate:self.incidentDate];
     }
-    else if(self.incidentTypeControl.selectedSegmentIndex = TIMECARD_INDEX)
+    else if(self.incidentTypeControl.selectedSegmentIndex == TIMECARD_INDEX)
     {
-        [self.employeeRecord addOtherForDate:self.incidentDate];
+        [self.employeeRecord addMissedSwipeForDate:self.incidentDate];
     }
     [Database saveAttendanceDatabase];
     [self.navigationController popViewControllerAnimated:YES];

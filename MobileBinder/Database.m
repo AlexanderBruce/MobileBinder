@@ -1,6 +1,6 @@
 #import "Database.h"
 
-#define DATABASE_PATH @"AttendanceDatabase2"
+#define DATABASE_PATH @"AttendanceDatabase4"
 
 @interface Database()
 @end

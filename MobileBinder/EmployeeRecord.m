@@ -2,48 +2,78 @@
 #import "EmployeeRecordManagedObject.h"
 
 @interface EmployeeRecord()
+@property (nonatomic, strong) NSMutableArray *mutableAbsences;
+@property (nonatomic, strong) NSMutableArray *mutableTardies;
+@property (nonatomic, strong) NSMutableArray *mutableMissedSwipes;
 @end
 
 @implementation EmployeeRecord
 
+- (NSArray *) absences
+{
+    return [self.mutableAbsences copy];
+}
+
+- (NSArray *) tardies
+{
+    return [self.mutableTardies copy];
+}
+
+- (NSArray *) missedSwipes
+{
+    return [self.mutableMissedSwipes copy];
+}
+
 
 - (void) addAbsenceForDate: (NSDate *) date
 {
-    NSMutableArray *mutable = [self.absences mutableCopy];
-    [mutable addObject:date];
-    self.absences = mutable;
-    self.myManagedObject.absences = self.absences;
+    [self.mutableAbsences addObject:date];
+    self.myManagedObject.absences = self.mutableAbsences;
 }
 
 - (void) addTardyForDate: (NSDate *) date
 {
-    NSMutableArray *mutable = [self.tardies mutableCopy];
-    [mutable addObject:date];
-    self.tardies = mutable;
-    self.myManagedObject.tardies = self.tardies;
+    [self.mutableTardies addObject:date];
+    self.myManagedObject.tardies = self.mutableTardies;
 }
 
-- (void) addOtherForDate: (NSDate *) date
+- (void) addMissedSwipeForDate: (NSDate *) date
 {
-    NSMutableArray *mutable = [self.other mutableCopy];
-    [mutable addObject:date];
-    self.other = mutable;
-    self.myManagedObject.other = self.other;
+    [self.mutableMissedSwipes addObject:date];
+    self.myManagedObject.missedSwipes = self.mutableMissedSwipes;
+}
+
+- (void) removeAbsence: (NSDate *) date
+{
+    [self.mutableAbsences removeObject:date];
+    self.myManagedObject.absences = self.mutableAbsences;
+}
+
+- (void) removeTardy: (NSDate *) date
+{
+    [self.mutableTardies removeObject:date];
+    self.myManagedObject.tardies = self.mutableTardies;
+}
+
+- (void) removeMissedSwipes: (NSDate *) date
+{
+    [self.mutableMissedSwipes removeObject:date];
+    self.myManagedObject.missedSwipes = self.mutableMissedSwipes;
 }
 
 - (int) getNumberOfAbsencesInPastYear
 {
-    return self.absences.count;
+    return self.mutableAbsences.count;
 }
 
 - (int) getNumberOfTardiesInPastYear
 {
-    return self.tardies.count;
+    return self.mutableTardies.count;
 }
 
-- (int) getNumberOfOtherInPastYear
+- (int) getNumberOfMissedSwipesInPastYear
 {
-    return self.other.count;
+    return self.mutableMissedSwipes.count;
 }
 
 - (id) initWithManagedObject:(EmployeeRecordManagedObject *)managedObject
@@ -52,9 +82,9 @@
     {
         self.firstName = (managedObject.firstName != nil) ? managedObject.firstName : @"";
         self.lastName = (managedObject.lastName != nil)  ? managedObject.lastName : @"";
-        self.absences = (managedObject.absences != nil) ? managedObject.absences : [[NSMutableArray alloc] init];
-        self.tardies = (managedObject.tardies != nil) ? managedObject.tardies : [[NSMutableArray alloc] init];
-        self.other = (managedObject.absences != nil) ? managedObject.other : [[NSMutableArray alloc] init];
+        self.mutableAbsences = (managedObject.absences != nil) ? [managedObject.absences mutableCopy] : [[NSMutableArray alloc] init];
+        self.mutableTardies = (managedObject.tardies != nil) ? [managedObject.tardies mutableCopy] : [[NSMutableArray alloc] init];
+        self.mutableMissedSwipes = (managedObject.absences != nil) ? [managedObject.missedSwipes mutableCopy] : [[NSMutableArray alloc] init];
         self.myManagedObject = managedObject;
     }
     return self;
@@ -64,9 +94,9 @@
 {
     if(self = [super init])
     {
-        self.absences = [[NSMutableArray alloc] init];
-        self.tardies = [[NSMutableArray alloc] init];
-        self.other = [[NSMutableArray alloc] init];
+        self.mutableAbsences = [[NSMutableArray alloc] init];
+        self.mutableTardies = [[NSMutableArray alloc] init];
+        self.mutableMissedSwipes = [[NSMutableArray alloc] init];
     }
     return self;
 }

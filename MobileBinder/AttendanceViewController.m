@@ -13,7 +13,7 @@
 
 #define MAX_ABSENCES 8.0
 #define MAX_TARDIES 8.0
-#define MAX_OTHER 8.0
+#define MAX_MISSED_SWIPES 8.0
 
 @interface AttendanceViewController () <UITableViewDataSource, UITableViewDelegate, AttendanceModelDelegate,AddEmployeeDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
@@ -68,8 +68,8 @@
     NSArray *employeeRecords = [self.myModel getEmployeeRecords];
     EmployeeRecord *recordForRow = [employeeRecords objectAtIndex:indexPath.row];
     [cell updateAbsenceProgress:[recordForRow getNumberOfAbsencesInPastYear] / MAX_ABSENCES];
-    [cell updateTardyProgress:([recordForRow getNumberOfTardiesInPastYear] + 1) / MAX_TARDIES];
-    [cell updateOtherProgress:([recordForRow getNumberOfOtherInPastYear] + 2) / MAX_OTHER];
+    [cell updateTardyProgress:([recordForRow getNumberOfTardiesInPastYear]) / MAX_TARDIES];
+    [cell updateMissedSwipesProgress:([recordForRow getNumberOfMissedSwipesInPastYear]) / MAX_MISSED_SWIPES];
     [cell updateFirstName:recordForRow.firstName lastName:recordForRow.lastName];
     return cell;
 }
