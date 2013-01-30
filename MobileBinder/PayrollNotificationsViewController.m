@@ -9,22 +9,19 @@
 #import "PayrollNotificationsViewController.h"
 
 @interface PayrollNotificationsViewController ()
-@property (strong, nonatomic) NSString *BIWEEKLY_HEADING_STRING;
-@property (strong, nonatomic) UISwitch *beginDateSwitch;
-@property (strong, nonatomic) NSString *BEGIN_DATE_STRING;
-
-@property (strong, nonatomic) UISwitch *endDateSwitch;
-@property (strong, nonatomic) NSString *END_DATE_STRING;
-
-@property (strong, nonatomic) UISwitch *payDateSwitch;
-@property (strong, nonatomic) NSString *PAY_DATE_STRING;
-
-@property (strong, nonatomic) NSString *MONTHLY_HEADING_STRING;
-@property (strong, nonatomic) NSString *MONTHLY_NOTIFICATIONS_STRING;
+//@property (strong, nonatomic) NSString *BIWEEKLY_HEADING_STRING;
+//@property (strong, nonatomic) NSString *BEGIN_DATE_STRING;
+//
+//@property (strong, nonatomic) NSString *END_DATE_STRING;
+//
+//@property (strong, nonatomic) NSString *PAY_DATE_STRING;
+//
+//@property (strong, nonatomic) NSString *MONTHLY_HEADING_STRING;
+//@property (strong, nonatomic) NSString *MONTHLY_NOTIFICATIONS_STRING;
 
 @property (strong, nonatomic) NSUserDefaults *notificationUserSettings;
 @property (strong, nonatomic) NSMutableDictionary *notificationSettingsSectionsAndRows;
-@property (strong, nonatomic) NSMutableDictionary *notificationSwitchesToLabels;
+@property (strong, nonatomic) NSMutableDictionary *switchesToLabels;
 @end
 
 @implementation PayrollNotificationsViewController
@@ -32,34 +29,50 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.BIWEEKLY_HEADING_STRING = @"Biweekly";
-    self.BEGIN_DATE_STRING = @"Begin Date";
-    self.END_DATE_STRING = @"End Date";
-    self.PAY_DATE_STRING = @"Pay Date";
-    self.MONTHLY_HEADING_STRING = @"Monthly";
-    self.MONTHLY_NOTIFICATIONS_STRING = @"Monthly Notifications";
-    
+    NSString *BIWEEKLY_HEADING_STRING = @"Biweekly Employees";
+    NSString *PP_BIWEEKLY_STRING = @"Pay Period";
+    NSString *TIME_ATTENDANCE_STRING = @"Time/Attendance";
+    NSString *FORMS_DUE_STRING = @"Forms Due";
     self.notificationSettingsSectionsAndRows = [NSMutableDictionary dictionary];
     [self.notificationSettingsSectionsAndRows setObject:
-     [[NSArray alloc]initWithObjects:self.BEGIN_DATE_STRING,self.END_DATE_STRING, self.PAY_DATE_STRING, nil]
-                                                 forKey:self.BIWEEKLY_HEADING_STRING];
+     [[NSArray alloc]initWithObjects:PP_BIWEEKLY_STRING,TIME_ATTENDANCE_STRING, FORMS_DUE_STRING, nil]
+                                                 forKey:BIWEEKLY_HEADING_STRING]; 
     
+//    NSString *LOCK_DOWN_STRING = @"Card Lock Down";
+//    NSString *GROSS_STRING = @"Gross Adjustments";
+//    NSString *MGMENT_CENTERS_STRING = @"Management Centers";
+//    [self.notificationSettingsSectionsAndRows setObject:
+//     [[NSArray alloc]initWithObjects:BEGIN_DATE_STRING,END_DATE_STRING, PAY_DATE_STRING, LOCK_DOWN_STRING, GROSS_STRING, nil]
+//                                                 forKey:BIWEEKLY_HEADING_STRING];
+    
+    NSString *MONTHLY_HEADING_STRING = @"Monthly Employees";
+    NSString *MONTHLY_FORMS_DUE_STRING = @"Forms Due ";
+    NSString *MONTHLY_TIME_ATTENDANCE_STRING = @"Time/Attendance ";
     [self.notificationSettingsSectionsAndRows setObject:
-     [[NSArray alloc]initWithObjects:self.MONTHLY_NOTIFICATIONS_STRING, nil]
-                                                 forKey:self.MONTHLY_HEADING_STRING];
-    self.notificationUserSettings = [NSUserDefaults standardUserDefaults];
-    self.beginDateSwitch = [[UISwitch alloc]init];
-    self.endDateSwitch = [[UISwitch alloc]init];
-    self.payDateSwitch = [[UISwitch alloc]init];
-    [self.beginDateSwitch setOn:[self.notificationUserSettings boolForKey:self.BEGIN_DATE_STRING]];
-    [self.endDateSwitch setOn: [self.notificationUserSettings boolForKey:self.END_DATE_STRING]];
-    [self.payDateSwitch setOn: [self.notificationUserSettings boolForKey:self.PAY_DATE_STRING]];
-
+     [[NSArray alloc]initWithObjects:MONTHLY_FORMS_DUE_STRING, MONTHLY_TIME_ATTENDANCE_STRING, nil]
+                                                 forKey:MONTHLY_HEADING_STRING];
     
-    self.notificationSwitchesToLabels = [NSMutableDictionary dictionary];
-    [self.notificationSwitchesToLabels setObject:self.beginDateSwitch forKey:self.BEGIN_DATE_STRING];
-    [self.notificationSwitchesToLabels setObject:self.endDateSwitch forKey:self.END_DATE_STRING];
-    [self.notificationSwitchesToLabels setObject:self.payDateSwitch forKey:self.PAY_DATE_STRING];
+    self.switchesToLabels = [NSMutableDictionary dictionary];
+    for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
+        NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
+        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
+            NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
+            UISwitch *swtch = [[UISwitch alloc]init];
+            [self.switchesToLabels setObject:swtch forKey:jString];
+        }
+    }
+
+    self.notificationUserSettings = [NSUserDefaults standardUserDefaults];
+    for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
+        NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
+        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
+            NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
+            
+            UISwitch *swtch = [self.switchesToLabels objectForKey:jString];
+            [swtch setOn:[self.notificationUserSettings boolForKey:jString]];
+        }
+    }
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -71,13 +84,16 @@
 {
     
     [super viewWillDisappear:animated];
-    NSLog(@"UISwitch, %@, is %i\n", self.beginDateSwitch, self.beginDateSwitch.isOn);
-
-    [self.notificationUserSettings setBool:[self.beginDateSwitch isOn] forKey:self.BEGIN_DATE_STRING];
-    [self.notificationUserSettings setBool:[self.endDateSwitch isOn] forKey:self.END_DATE_STRING];
-    [self.notificationUserSettings setBool:[self.payDateSwitch isOn] forKey:self.PAY_DATE_STRING];
+    for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
+        NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
+        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
+            NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
+            
+            UISwitch *swtch = [self.switchesToLabels objectForKey:jString];
+            [self.notificationUserSettings setBool:[swtch isOn] forKey:jString];
+        }
+    }
     [self.notificationUserSettings synchronize];
-    NSLog(@"It should be %i\n",[self.notificationUserSettings boolForKey:self.BEGIN_DATE_STRING]);
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,7 +130,7 @@
     [cell addSubview:title];
     
     CGRect switchFrame = CGRectMake(220, 10, 40, 22);
-    UISwitch *mySwitch = [self.notificationSwitchesToLabels objectForKey:title.text];
+    UISwitch *mySwitch = [self.switchesToLabels objectForKey:title.text];
     mySwitch.frame = switchFrame;
     [cell addSubview:mySwitch];
     
@@ -179,9 +195,6 @@
 }
 
 - (void)viewDidUnload {
-    [self setBeginDateSwitch:nil];
-    [self setEndDateSwitch:nil];
-    [self setPayDateSwitch:nil];
     [super viewDidUnload];
 }
 @end

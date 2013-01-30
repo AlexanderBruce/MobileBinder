@@ -254,6 +254,8 @@
 				4960AFC116B8751600F16ED6 /* EmployeeRecordManagedObject.m in Sources */,
 				4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */,
 				F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */,
+				FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */,
+				492D1EF416B8BC1300D04E7D /* Database.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,13 +344,13 @@
 		494D0E5716B84BAB00354964 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Patterson (NNKDJN5V6E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Rang (6LVTH56BGF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileBinder/MobileBinder-Prefix.pch";
 				INFOPLIST_FILE = "MobileBinder/MobileBinder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0BF17D52-BC5E-4D9B-8787-0ABA7D0FB6D5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -356,13 +358,13 @@
 		494D0E5816B84BAB00354964 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Patterson (NNKDJN5V6E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Rang (6LVTH56BGF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileBinder/MobileBinder-Prefix.pch";
 				INFOPLIST_FILE = "MobileBinder/MobileBinder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0BF17D52-BC5E-4D9B-8787-0ABA7D0FB6D5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
