@@ -4,6 +4,7 @@
 #import "AddEmployeeViewController.h"
 #import "EmployeeRecord.h"
 #import "EmployeeViewController.h"
+#import "testNotification.h"
 
 #define CUSTOM_CELL_NIB @"AttendanceCell"
 #define CUSTOM_CELL_IDENTIFIER @"AttendanceCellIdentifier"
@@ -99,6 +100,9 @@
     self.myModel = [[AttendanceModel alloc] init];
     self.myModel.delegate = self;
     [self.myModel fetchEmployeeRecordsForFutureUse];
+    testNotification* b = [[testNotification alloc] init];
+    [b scheduleNotification];
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated

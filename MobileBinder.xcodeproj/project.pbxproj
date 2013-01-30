@@ -30,6 +30,7 @@
 		4960AFC116B8751600F16ED6 /* EmployeeRecordManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC016B8751600F16ED6 /* EmployeeRecordManagedObject.m */; };
 		4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC316B8759600F16ED6 /* IncidentViewController.m */; };
 		F7A9A7EE16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7A9A7ED16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard */; };
+		FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA2F1BA16B8AA80009466A1 /* testNotification.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,8 @@
 		4960AFC216B8759600F16ED6 /* IncidentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentViewController.h; sourceTree = "<group>"; };
 		4960AFC316B8759600F16ED6 /* IncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentViewController.m; sourceTree = "<group>"; };
 		F7A9A7ED16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		FAA2F1B916B8AA80009466A1 /* testNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testNotification.h; sourceTree = "<group>"; };
+		FAA2F1BA16B8AA80009466A1 /* testNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testNotification.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,8 @@
 				4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */,
 				4960AFC216B8759600F16ED6 /* IncidentViewController.h */,
 				4960AFC316B8759600F16ED6 /* IncidentViewController.m */,
+				FAA2F1B916B8AA80009466A1 /* testNotification.h */,
+				FAA2F1BA16B8AA80009466A1 /* testNotification.m */,
 			);
 			path = MobileBinder;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				4960AFB816B8707D00F16ED6 /* EmployeeViewController.m in Sources */,
 				4960AFC116B8751600F16ED6 /* EmployeeRecordManagedObject.m in Sources */,
 				4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */,
+				FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
