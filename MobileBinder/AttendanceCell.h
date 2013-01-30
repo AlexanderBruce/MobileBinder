@@ -7,7 +7,7 @@
 
 - (void) updateTardyProgress: (float) tardyProgress;
 
-- (void) updateOtherProgress: (float) otherProgress;
+- (void) updateMissedSwipesProgress: (float) missedSwipesProgress;
 
 - (void) updateFirstName: (NSString *) first lastName: (NSString *) last;
 

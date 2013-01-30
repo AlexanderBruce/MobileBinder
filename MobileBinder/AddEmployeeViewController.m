@@ -35,6 +35,11 @@
     [super viewDidLoad];
 }
 
+-(void) viewWillAppear:(BOOL)animated   
+{
+    [self.firstNameField becomeFirstResponder];
+}
+
 
 - (void)viewDidUnload {
     [self setFirstNameField:nil];

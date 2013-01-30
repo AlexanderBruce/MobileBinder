@@ -16,6 +16,6 @@
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) id absences;
 @property (nonatomic, retain) id tardies;
-@property (nonatomic, retain) id other;
+@property (nonatomic, retain) id missedSwipes;
 
 @end

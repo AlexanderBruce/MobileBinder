@@ -1,12 +1,19 @@
 #import "IncidentViewController.h"
+#import "EmployeeRecord.h"
+#import "Database.h"
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
+
+#define ABSENCE_INDEX 0
+#define TARDY_INDEX 1
+#define TIMECARD_INDEX 2
 
 @interface IncidentViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *employeeNameField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *incidentTypeControl;
 @property (weak, nonatomic) IBOutlet UITextField *incidentDateField;
+@property (nonatomic, strong) NSDate *incidentDate;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 @end
 
@@ -21,6 +28,33 @@
     self.incidentDateField.inputView = [self createDatePicker];
     self.incidentTypeControl.selectedSegmentIndex = -1;
     self.incidentDateField.delegate = self;
+    self.incidentDate = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterLongStyle;
+    self.incidentDateField.text = [formatter stringFromDate:[NSDate date]];
+}
+
+- (IBAction)savePressed:(UIButton *)sender
+{
+    if(self.incidentTypeControl.selectedSegmentIndex < 0)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Please select the incident type" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+        return;
+    }
+    if(self.incidentTypeControl.selectedSegmentIndex == ABSENCE_INDEX)
+    {
+        [self.employeeRecord addAbsenceForDate:self.incidentDate];
+    }
+    else if(self.incidentTypeControl.selectedSegmentIndex == TARDY_INDEX)
+    {
+        [self.employeeRecord addTardyForDate:self.incidentDate];
+    }
+    else if(self.incidentTypeControl.selectedSegmentIndex == TIMECARD_INDEX)
+    {
+        [self.employeeRecord addMissedSwipeForDate:self.incidentDate];
+    }
+    [Database saveAttendanceDatabase];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
@@ -69,6 +103,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateStyle = NSDateFormatterLongStyle;
     self.incidentDateField.text = [formatter stringFromDate:picker.date];
+    self.incidentDate = picker.date;
 }
 
 - (void) doneUsingPicker

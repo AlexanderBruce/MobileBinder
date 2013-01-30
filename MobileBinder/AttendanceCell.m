@@ -3,7 +3,7 @@
 @interface AttendanceCell()
 @property (weak, nonatomic) IBOutlet UIProgressView *absencesProgressView;
 @property (weak, nonatomic) IBOutlet UIProgressView *tardiesProgressView;
-@property (weak, nonatomic) IBOutlet UIProgressView *otherProgressView;
+@property (weak, nonatomic) IBOutlet UIProgressView *missedSwipesProgressView;
 @property (weak, nonatomic) IBOutlet UILabel *firstNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastNameLabel;
 @end
@@ -26,9 +26,9 @@
     self.tardiesProgressView.progress = tardyProgress;
 }
 
-- (void) updateOtherProgress: (float) otherProgress
+- (void) updateMissedSwipesProgress: (float) missedSwipesProgress
 {
-    self.otherProgressView.progress = otherProgress;
+    self.missedSwipesProgressView.progress = missedSwipesProgress;
 }
 
 

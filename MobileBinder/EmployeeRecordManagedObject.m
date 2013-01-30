@@ -15,6 +15,6 @@
 @dynamic lastName;
 @dynamic absences;
 @dynamic tardies;
-@dynamic other;
+@dynamic missedSwipes;
 
 @end
