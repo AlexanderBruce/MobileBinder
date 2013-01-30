@@ -1,4 +1,5 @@
 #import "IncidentViewController.h"
+#import "EmployeeRecord.h"
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
@@ -21,6 +22,11 @@
     self.incidentDateField.inputView = [self createDatePicker];
     self.incidentTypeControl.selectedSegmentIndex = -1;
     self.incidentDateField.delegate = self;
+}
+
+- (IBAction)savePressed:(UIButton *)sender
+{
+    self.employeeRecord.absences
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField

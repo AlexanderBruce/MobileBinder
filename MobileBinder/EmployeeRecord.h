@@ -10,6 +10,12 @@
 
 - (id) initWithManagedObject:(EmployeeRecordManagedObject *) managedObject;
 
+- (void) addAbsenceForDate: (NSDate *) date;
+
+- (void) addTardyForDate: (NSDate *) date;
+
+- (void) addOtherForDate: (NSDate *) date;
+
 - (int) getNumberOfAbsencesInPastYear;
 
 - (int) getNumberOfTardiesInPastYear;
