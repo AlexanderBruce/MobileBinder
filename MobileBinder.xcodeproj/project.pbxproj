@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		492D1EF416B8BC1300D04E7D /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 492D1EF316B8BC1300D04E7D /* Database.m */; };
 		494D0E3416B84BAB00354964 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3316B84BAB00354964 /* UIKit.framework */; };
 		494D0E3616B84BAB00354964 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3516B84BAB00354964 /* Foundation.framework */; };
 		494D0E3816B84BAB00354964 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3716B84BAB00354964 /* CoreGraphics.framework */; };
@@ -34,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		492D1EF216B8BC1300D04E7D /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		492D1EF316B8BC1300D04E7D /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		494D0E2F16B84BAB00354964 /* MobileBinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileBinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		494D0E3316B84BAB00354964 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		494D0E3516B84BAB00354964 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -145,6 +148,8 @@
 				4960AFC316B8759600F16ED6 /* IncidentViewController.m */,
 				FAA2F1B916B8AA80009466A1 /* testNotification.h */,
 				FAA2F1BA16B8AA80009466A1 /* testNotification.m */,
+				492D1EF216B8BC1300D04E7D /* Database.h */,
+				492D1EF316B8BC1300D04E7D /* Database.m */,
 			);
 			path = MobileBinder;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 				4960AFC116B8751600F16ED6 /* EmployeeRecordManagedObject.m in Sources */,
 				4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */,
 				FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */,
+				492D1EF416B8BC1300D04E7D /* Database.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,11 +338,13 @@
 		494D0E5716B84BAB00354964 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Patterson (NNKDJN5V6E)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileBinder/MobileBinder-Prefix.pch";
 				INFOPLIST_FILE = "MobileBinder/MobileBinder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -344,11 +352,13 @@
 		494D0E5816B84BAB00354964 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Patterson (NNKDJN5V6E)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileBinder/MobileBinder-Prefix.pch";
 				INFOPLIST_FILE = "MobileBinder/MobileBinder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

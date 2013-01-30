@@ -29,7 +29,6 @@
 - (void) showAbsences
 {
     NSArray *absenceDates = self.employeeRecord.absences;
-    NSLog(@"%d absences", absenceDates.count);
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateStyle = NSDateFormatterShortStyle;
     double xOrigin = 0;

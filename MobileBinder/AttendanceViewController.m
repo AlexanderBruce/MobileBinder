@@ -15,10 +15,11 @@
 #define MAX_TARDIES 8.0
 #define MAX_OTHER 8.0
 
-@interface AttendanceViewController () <UITableViewDataSource, UITableViewDelegate, AttendanceModelDelegate,AddEmployeeDelegate>
+@interface AttendanceViewController () <UITableViewDataSource, UITableViewDelegate, AttendanceModelDelegate,AddEmployeeDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic, strong) AttendanceModel *myModel;
 @property (nonatomic, strong) EmployeeRecord *selectedEmployeeRecord;
+@property (weak, nonatomic) IBOutlet UISearchBar *mySearchBar;
 @end
 
 @implementation AttendanceViewController
@@ -46,7 +47,7 @@
 - (void) addedNewEmployeeRecord: (EmployeeRecord *) record
 {
     [self.myModel addEmployeeRecord:record];
-    [self.myTableView reloadData];
+    [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -54,7 +55,7 @@
 
 - (void) doneRetrievingEmployeeRecords
 {
-    [self.myTableView reloadData];
+    [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -90,6 +91,39 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - UISearchBarDelegate
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [self.mySearchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [self.mySearchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [self.mySearchBar resignFirstResponder];
+}
+
+- (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [self.mySearchBar resignFirstResponder];
+    [self.myModel filterEmployeesByString:searchBar.text];
+    [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if(searchText.length == 0)
+    {
+        [self.mySearchBar resignFirstResponder];
+        [self.myModel stopFilteringEmployees];
+        [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -100,6 +134,7 @@
     self.myModel = [[AttendanceModel alloc] init];
     self.myModel.delegate = self;
     [self.myModel fetchEmployeeRecordsForFutureUse];
+    self.mySearchBar.delegate = self;
     testNotification* b = [[testNotification alloc] init];
     [b scheduleNotification];
     
@@ -107,13 +142,14 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [self.myTableView reloadData];
+    [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 
 - (void)viewDidUnload
 {
     [self setMyTableView:nil];
+    [self setMySearchBar:nil];
     [super viewDidUnload];
 }
 @end

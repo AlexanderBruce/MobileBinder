@@ -21,7 +21,6 @@
         UILocalNotification *notif = [[cls alloc] init];
         notif.fireDate = [NSDate dateWithTimeIntervalSinceNow:25];
         notif.timeZone = [NSTimeZone defaultTimeZone];
-        NSLog(@"%@",notif.fireDate);
         notif.alertBody = @"Did you forget something?";
         notif.alertAction = @"Show me";
         notif.soundName = UILocalNotificationDefaultSoundName;

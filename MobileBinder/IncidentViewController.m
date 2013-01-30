@@ -1,5 +1,6 @@
 #import "IncidentViewController.h"
 #import "EmployeeRecord.h"
+#import "Database.h"
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
@@ -52,6 +53,7 @@
     {
         [self.employeeRecord addOtherForDate:self.incidentDate];
     }
+    [Database saveAttendanceDatabase];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

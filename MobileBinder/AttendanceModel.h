@@ -18,4 +18,8 @@
 
 - (NSArray *) getEmployeeRecords;
 
+- (void) filterEmployeesByString: (NSString *) filterString;
+
+- (void) stopFilteringEmployees;
+
 @end

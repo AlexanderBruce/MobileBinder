@@ -1,44 +1,17 @@
 #import "AttendanceModel.h"
 #import "EmployeeRecord.h"
 #import "EmployeeRecordManagedObject.h"
+#import "Database.h"
 
-#define DATABASE_PATH @"AttendanceDatabase2"
 
-@interface AttendanceModel()
+@interface AttendanceModel() <DatabaseDelegate>
 @property (nonatomic, strong) UIManagedDocument *database;
 @property (nonatomic, strong) NSMutableArray *employeeRecords;
+@property (nonatomic, strong) NSMutableArray *filteredRecords;
+@property (nonatomic) BOOL usingFilter;
 @end
 
 @implementation AttendanceModel
-
-- (void) createAndOpenDatabase
-{
-    NSURL *dataBaseURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    dataBaseURL = [dataBaseURL URLByAppendingPathComponent:DATABASE_PATH];
-    self.database = [[UIManagedDocument alloc] initWithFileURL:dataBaseURL];
-    
-    //If the database does not exist, create it
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[self.database.fileURL path]])
-    {
-        [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success)
-        {
-            [self fetchEmployeeRecordsFromDatabase];
-        }];
-    }
-    //If the database exists on disk but is not open, then open it
-    else if (self.database.documentState == UIDocumentStateClosed)
-    {
-        [self.database openWithCompletionHandler:^(BOOL success)
-        {
-            [self fetchEmployeeRecordsFromDatabase];
-        }];
-    }
-    //If the database exists on disk and is open
-    else if (self.database.documentState == UIDocumentStateNormal)
-    {
-        [self fetchEmployeeRecordsFromDatabase];
-    }
-}
 
 - (void) fetchEmployeeRecordsFromDatabase
 {
@@ -77,24 +50,59 @@
     managedObject.lastName = record.lastName;
     record.myManagedObject = managedObject;
     [self sortEmployeeRecords];
-    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success)
-     {}];
+    [Database saveAttendanceDatabase];
+}
 
+- (void) filterEmployeesByString: (NSString *) filterString
+{
+    self.usingFilter = YES;
+    self.filteredRecords = [[NSMutableArray alloc] init];
+    NSMutableArray *filterArray = (NSMutableArray *)[[filterString componentsSeparatedByString:@" "] mutableCopy];
+    [filterArray removeObject:@""];
+    for (EmployeeRecord *currentRecord in self.employeeRecords)
+    {
+        BOOL matchesFilter = YES;
+        for (NSString *currentFilter in filterArray)
+        {
+            NSRange firstRange = [currentRecord.firstName rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
+            NSRange lastRange = [currentRecord.lastName rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
+            if(firstRange.location == NSNotFound && lastRange.location == NSNotFound)
+            {
+                matchesFilter = NO;
+                break;
+            }
+        }
+        if(matchesFilter) [self.filteredRecords addObject:currentRecord];
+    }
+}
+
+- (void) stopFilteringEmployees
+{
+    self.usingFilter = NO;
+}
+
+#pragma mark - DatabaseDelegate
+- (void) obtainedDatabse:(UIManagedDocument *)database
+{
+    self.database = database;
+    [self fetchEmployeeRecordsFromDatabase];
 }
 
 - (void) fetchEmployeeRecordsForFutureUse
 {
-    [self createAndOpenDatabase];
+    [Database getAttendanceDatabaseWithDelegate:self];
 }
 
 - (int) getNumberOfEmployeeRecords
 {
-    return self.employeeRecords.count;
+    if(self.usingFilter) return self.filteredRecords.count;
+    else return self.employeeRecords.count;
 }
 
 - (NSArray *) getEmployeeRecords
 {
-    return self.employeeRecords;
+    if(self.usingFilter) return self.filteredRecords;
+    else return self.employeeRecords;
 }
 
 @end

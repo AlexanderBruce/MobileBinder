@@ -249,10 +249,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="XhF-h6-omt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="Search" id="ENK-Kn-FNL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -264,6 +273,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mySearchBar" destination="ENK-Kn-FNL" id="BtA-kF-xzA"/>
                         <outlet property="myTableView" destination="XhF-h6-omt" id="gKl-fC-4ps"/>
                         <segue destination="4xS-81-scm" kind="push" identifier="viewEmployeeRecordSegue" id="cOW-Zj-ULp"/>
                     </connections>
@@ -273,6 +283,42 @@
             <point key="canvasLocation" x="39" y="169"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AddEmployeeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEmployeeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="donePressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AttendanceViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AttendanceViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="EmployeeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="absencesScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="otherScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="tardiesScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="IncidentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IncidentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="savePressed:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="employeeNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="incidentDateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="incidentTypeControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
