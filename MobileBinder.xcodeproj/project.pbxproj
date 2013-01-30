@@ -29,6 +29,7 @@
 		4960AFB816B8707D00F16ED6 /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */; };
 		4960AFC116B8751600F16ED6 /* EmployeeRecordManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC016B8751600F16ED6 /* EmployeeRecordManagedObject.m */; };
 		4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC316B8759600F16ED6 /* IncidentViewController.m */; };
+		F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */; };
 		F7A9A7EE16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7A9A7ED16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,8 @@
 		4960AFC016B8751600F16ED6 /* EmployeeRecordManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRecordManagedObject.m; sourceTree = "<group>"; };
 		4960AFC216B8759600F16ED6 /* IncidentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentViewController.h; sourceTree = "<group>"; };
 		4960AFC316B8759600F16ED6 /* IncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentViewController.m; sourceTree = "<group>"; };
+		F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollNotificationsViewController.h; sourceTree = "<group>"; };
+		F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollNotificationsViewController.m; sourceTree = "<group>"; };
 		F7A9A7ED16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +136,8 @@
 				494D0E4E16B84BAB00354964 /* iPad.storyboard */,
 				494D0E4B16B84BAB00354964 /* iPhone.storyboard */,
 				F7A9A7ED16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard */,
+				F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */,
+				F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */,
 				494D0E3A16B84BAB00354964 /* Supporting Files */,
 				4960AFB316B8639300F16ED6 /* EmployeeRecord.h */,
 				4960AFB416B8639300F16ED6 /* EmployeeRecord.m */,
@@ -238,6 +243,7 @@
 				4960AFB816B8707D00F16ED6 /* EmployeeViewController.m in Sources */,
 				4960AFC116B8751600F16ED6 /* EmployeeRecordManagedObject.m in Sources */,
 				4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */,
+				F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
