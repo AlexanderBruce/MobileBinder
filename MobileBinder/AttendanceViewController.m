@@ -101,6 +101,11 @@
     [self.myModel fetchEmployeeRecordsForFutureUse];
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self.myTableView reloadData];
+}
+
 
 - (void)viewDidUnload
 {

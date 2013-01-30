@@ -7,6 +7,7 @@
 @property (nonatomic, strong) NSArray *absences;
 @property (nonatomic, strong) NSArray *tardies;
 @property (nonatomic, strong) NSArray *other;
+@property (nonatomic, strong) EmployeeRecordManagedObject *myManagedObject;
 
 - (id) initWithManagedObject:(EmployeeRecordManagedObject *) managedObject;
 

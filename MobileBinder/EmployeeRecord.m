@@ -2,37 +2,33 @@
 #import "EmployeeRecordManagedObject.h"
 
 @interface EmployeeRecord()
-@property (nonatomic, strong) EmployeeRecordManagedObject *myManagedObject;
 @end
 
 @implementation EmployeeRecord
 
-- (void) saveInContext: (NSManagedObjectContext *) context
-{
-    if(!self.myManagedObject)
-    {
-        self.myManagedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([EmployeeRecordManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
-    }
-    self.myManagedObject.firstName = self.firstName;
-    self.myManagedObject.lastName = self.lastName;
-    self.myManagedObject.absences = self.absences;
-    self.myManagedObject.tardies = self.tardies;
-    self.myManagedObject.other = self.other;
-}
 
 - (void) addAbsenceForDate: (NSDate *) date
 {
-    
+    NSMutableArray *mutable = [self.absences mutableCopy];
+    [mutable addObject:date];
+    self.absences = mutable;
+    self.myManagedObject.absences = self.absences;
 }
 
 - (void) addTardyForDate: (NSDate *) date
 {
-    
+    NSMutableArray *mutable = [self.tardies mutableCopy];
+    [mutable addObject:date];
+    self.tardies = mutable;
+    self.myManagedObject.tardies = self.tardies;
 }
 
 - (void) addOtherForDate: (NSDate *) date
 {
-    
+    NSMutableArray *mutable = [self.other mutableCopy];
+    [mutable addObject:date];
+    self.other = mutable;
+    self.myManagedObject.other = self.other;
 }
 
 - (int) getNumberOfAbsencesInPastYear
@@ -54,12 +50,23 @@
 {
     if(self = [super init])
     {
-        self.firstName = managedObject.firstName;
-        self.lastName = managedObject.lastName;
-        self.absences = managedObject.absences;
-        self.tardies = managedObject.tardies;
-        self.other = managedObject.other;
+        self.firstName = (managedObject.firstName != nil) ? managedObject.firstName : @"";
+        self.lastName = (managedObject.lastName != nil)  ? managedObject.lastName : @"";
+        self.absences = (managedObject.absences != nil) ? managedObject.absences : [[NSMutableArray alloc] init];
+        self.tardies = (managedObject.tardies != nil) ? managedObject.tardies : [[NSMutableArray alloc] init];
+        self.other = (managedObject.absences != nil) ? managedObject.other : [[NSMutableArray alloc] init];
         self.myManagedObject = managedObject;
+    }
+    return self;
+}
+
+- (id) init
+{
+    if(self = [super init])
+    {
+        self.absences = [[NSMutableArray alloc] init];
+        self.tardies = [[NSMutableArray alloc] init];
+        self.other = [[NSMutableArray alloc] init];
     }
     return self;
 }

@@ -53,10 +53,20 @@
         {
             [self.employeeRecords addObject:[[EmployeeRecord alloc] initWithManagedObject:currentManagedObject]];
         }
+        [self sortEmployeeRecords];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delegate doneRetrievingEmployeeRecords];
         });
     });
+}
+
+- (void) sortEmployeeRecords
+{
+    self.employeeRecords = [[self.employeeRecords sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = [(EmployeeRecord *)a lastName];
+        NSString *second = [(EmployeeRecord *)b lastName];
+        return [first compare:second];
+    }] mutableCopy];
 }
 
 - (void) addEmployeeRecord: (EmployeeRecord *) record
@@ -65,7 +75,9 @@
     EmployeeRecordManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([EmployeeRecordManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
     managedObject.firstName = record.firstName;
     managedObject.lastName = record.lastName;
-    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success)\
+    record.myManagedObject = managedObject;
+    [self sortEmployeeRecords];
+    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success)
      {}];
 
 }
