@@ -3,11 +3,11 @@
 @interface AttendanceCell : UITableViewCell
 
 
-- (void) updateAbsenceProgress: (float) absenceProgress;
+- (void) updateAbsenceProgress: (float) absenceProgress withLevel: (int) level;
 
-- (void) updateTardyProgress: (float) tardyProgress;
+- (void) updateTardyProgress: (float) tardyProgress withLevel: (int) level;
 
-- (void) updateMissedSwipesProgress: (float) missedSwipesProgress;
+- (void) updateMissedSwipesProgress: (float) missedSwipesProgress withLevel: (int) level;
 
 - (void) updateFirstName: (NSString *) first lastName: (NSString *) last;
 

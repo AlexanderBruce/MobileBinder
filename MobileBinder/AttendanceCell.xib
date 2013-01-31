@@ -33,7 +33,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITableViewCell" id="71058918">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">301</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="70743863">
@@ -45,6 +45,7 @@
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{209, 20}, {121, 9}}</string>
 								<reference key="NSSuperview" ref="70743863"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="226708535"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -56,6 +57,7 @@
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{209, 60}, {121, 9}}</string>
 								<reference key="NSSuperview" ref="70743863"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="172629195"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -67,6 +69,7 @@
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{209, 101}, {121, 9}}</string>
 								<reference key="NSSuperview" ref="70743863"/>
+								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -77,6 +80,7 @@
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{209, 0}, {75, 21}}</string>
 								<reference key="NSSuperview" ref="70743863"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="940905584"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -111,6 +115,7 @@
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{209, 37}, {57, 21}}</string>
 								<reference key="NSSuperview" ref="70743863"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="675468201"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -129,8 +134,9 @@
 							<object class="IBUILabel" id="601223286">
 								<reference key="NSNextResponder" ref="70743863"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{209, 77}, {43, 21}}</string>
+								<string key="NSFrame">{{209, 77}, {121, 21}}</string>
 								<reference key="NSSuperview" ref="70743863"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="540850735"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -138,7 +144,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Other</string>
+								<string key="IBUIText">Missed Swipes</string>
 								<reference key="IBUITextColor" ref="585732887"/>
 								<reference key="IBUIHighlightedColor" ref="7754769"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -151,6 +157,7 @@
 								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{13, 20}, {193, 28}}</string>
 								<reference key="NSSuperview" ref="70743863"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="358097367"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -178,6 +185,7 @@
 								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{13, 71}, {193, 33}}</string>
 								<reference key="NSSuperview" ref="70743863"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="601223286"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -203,6 +211,7 @@
 						</array>
 						<string key="NSFrameSize">{340, 118}</string>
 						<reference key="NSSuperview" ref="71058918"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="176462847"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -217,6 +226,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{340, 119}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="70743863"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -374,7 +385,7 @@
 						<string key="absencesProgressView">UIProgressView</string>
 						<string key="firstNameLabel">UILabel</string>
 						<string key="lastNameLabel">UILabel</string>
-						<string key="otherProgressView">UIProgressView</string>
+						<string key="missedSwipesProgressView">UIProgressView</string>
 						<string key="tardiesProgressView">UIProgressView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -390,8 +401,8 @@
 							<string key="name">lastNameLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="otherProgressView">
-							<string key="name">otherProgressView</string>
+						<object class="IBToOneOutletInfo" key="missedSwipesProgressView">
+							<string key="name">missedSwipesProgressView</string>
 							<string key="candidateClassName">UIProgressView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="tardiesProgressView">

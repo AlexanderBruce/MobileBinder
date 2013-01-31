@@ -1,6 +1,6 @@
 #import "Database.h"
 
-#define DATABASE_PATH @"AttendanceDatabase4"
+#define DATABASE_PATH @"AttendanceDatabase9"
 
 @interface Database()
 @end
@@ -47,7 +47,8 @@ static UIManagedDocument *attendanceDatabase;
 
 + (void) saveAttendanceDatabase
 {
-    [attendanceDatabase saveToURL:attendanceDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {}];
+    [attendanceDatabase saveToURL:attendanceDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+    }];
 
 }
 

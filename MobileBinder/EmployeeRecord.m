@@ -24,41 +24,40 @@
     return [self.mutableMissedSwipes copy];
 }
 
-
 - (void) addAbsenceForDate: (NSDate *) date
 {
     [self.mutableAbsences addObject:date];
-    self.myManagedObject.absences = self.mutableAbsences;
+    self.myManagedObject.absences = [self.mutableAbsences copy];
 }
 
 - (void) addTardyForDate: (NSDate *) date
 {
     [self.mutableTardies addObject:date];
-    self.myManagedObject.tardies = self.mutableTardies;
+    self.myManagedObject.tardies = [self.mutableTardies copy];
 }
 
 - (void) addMissedSwipeForDate: (NSDate *) date
 {
     [self.mutableMissedSwipes addObject:date];
-    self.myManagedObject.missedSwipes = self.mutableMissedSwipes;
+    self.myManagedObject.missedSwipes = [self.mutableMissedSwipes copy];
 }
 
 - (void) removeAbsence: (NSDate *) date
 {
     [self.mutableAbsences removeObject:date];
-    self.myManagedObject.absences = self.mutableAbsences;
+    self.myManagedObject.absences = [self.mutableAbsences copy];
 }
 
 - (void) removeTardy: (NSDate *) date
 {
     [self.mutableTardies removeObject:date];
-    self.myManagedObject.tardies = self.mutableTardies;
+    self.myManagedObject.tardies = [self.mutableTardies copy];
 }
 
 - (void) removeMissedSwipes: (NSDate *) date
 {
     [self.mutableMissedSwipes removeObject:date];
-    self.myManagedObject.missedSwipes = self.mutableMissedSwipes;
+    self.myManagedObject.missedSwipes = [self.mutableMissedSwipes copy];
 }
 
 - (int) getNumberOfAbsencesInPastYear
@@ -75,6 +74,31 @@
 {
     return self.mutableMissedSwipes.count;
 }
+
+- (int) getNextAbsenceLevel
+{
+    int absences = [self getNumberOfAbsencesInPastYear];
+    if(absences < LEVEL_1_ABSENCE_THRESHOLD) return 1;
+    else if(absences < LEVEL_2_ABSENCE_THRESHOLD) return 2;
+    else return 3;
+}
+
+- (int) getNextTardyLevel
+{
+    int tardies = [self getNumberOfTardiesInPastYear];
+    if(tardies < LEVEL_1_TARDY_THRESHOLD) return 1;
+    else if(tardies < LEVEL_2_TARDY_THRESHOLD) return 2;
+    else return 3;
+}
+
+- (int) getNextMissedSwipeLevel
+{
+    int swipes = [self getNumberOfMissedSwipesInPastYear];
+    if(swipes < LEVEL_1_SWIPE_THRESHOLD) return 1;
+    else if(swipes < LEVEL_2_SWIPE_THRESHOLD) return 2;
+    else return 3;
+}
+
 
 - (id) initWithManagedObject:(EmployeeRecordManagedObject *)managedObject
 {

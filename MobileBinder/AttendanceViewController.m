@@ -11,15 +11,14 @@
 #define VIEW_EMPLOYEE_RECORD_SEGUE @"viewEmployeeRecordSegue"
 #define CELL_HEIGHT 119
 
-#define MAX_ABSENCES 8.0
-#define MAX_TARDIES 8.0
-#define MAX_MISSED_SWIPES 8.0
+
 
 @interface AttendanceViewController () <UITableViewDataSource, UITableViewDelegate, AttendanceModelDelegate,AddEmployeeDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic, strong) AttendanceModel *myModel;
 @property (nonatomic, strong) EmployeeRecord *selectedEmployeeRecord;
 @property (weak, nonatomic) IBOutlet UISearchBar *mySearchBar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 @end
 
 @implementation AttendanceViewController
@@ -55,6 +54,7 @@
 
 - (void) doneRetrievingEmployeeRecords
 {
+    self.addButton.enabled = YES;
     [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -67,10 +67,17 @@
 
     NSArray *employeeRecords = [self.myModel getEmployeeRecords];
     EmployeeRecord *recordForRow = [employeeRecords objectAtIndex:indexPath.row];
-    [cell updateAbsenceProgress:[recordForRow getNumberOfAbsencesInPastYear] / MAX_ABSENCES];
-    [cell updateTardyProgress:([recordForRow getNumberOfTardiesInPastYear]) / MAX_TARDIES];
-    [cell updateMissedSwipesProgress:([recordForRow getNumberOfMissedSwipesInPastYear]) / MAX_MISSED_SWIPES];
     [cell updateFirstName:recordForRow.firstName lastName:recordForRow.lastName];
+    
+    int absenceLevel = [recordForRow getNextAbsenceLevel];
+    [cell updateAbsenceProgress:[recordForRow getNumberOfAbsencesInPastYear] / MAX_ABSENCES withLevel:absenceLevel];
+    
+    int tardyLevel = [recordForRow getNextTardyLevel];
+    [cell updateTardyProgress:([recordForRow getNumberOfTardiesInPastYear]) / MAX_TARDIES withLevel:tardyLevel];
+    
+    int missedSwipeLevel = [recordForRow getNextMissedSwipeLevel];
+    [cell updateMissedSwipesProgress:([recordForRow getNumberOfMissedSwipesInPastYear]) / MAX_MISSED_SWIPES withLevel:missedSwipeLevel];
+    
     return cell;
 }
 
@@ -129,6 +136,7 @@
     [super viewDidLoad];
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
+    self.addButton.enabled = NO;
     UINib* customCellNib = [UINib nibWithNibName:CUSTOM_CELL_NIB bundle:nil];
     [self.myTableView registerNib: customCellNib forCellReuseIdentifier:CUSTOM_CELL_IDENTIFIER];
     self.myModel = [[AttendanceModel alloc] init];
@@ -150,6 +158,7 @@
 {
     [self setMyTableView:nil];
     [self setMySearchBar:nil];
+    [self setAddButton:nil];
     [super viewDidUnload];
 }
 @end
