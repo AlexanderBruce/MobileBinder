@@ -27,37 +27,37 @@
 - (void) addAbsenceForDate: (NSDate *) date
 {
     [self.mutableAbsences addObject:date];
-    self.myManagedObject.absences = [self.mutableAbsences copy];
+    self.myManagedObject.absences = self.mutableAbsences;
 }
 
 - (void) addTardyForDate: (NSDate *) date
 {
     [self.mutableTardies addObject:date];
-    self.myManagedObject.tardies = [self.mutableTardies copy];
+    self.myManagedObject.tardies = self.mutableTardies;
 }
 
 - (void) addMissedSwipeForDate: (NSDate *) date
 {
     [self.mutableMissedSwipes addObject:date];
-    self.myManagedObject.missedSwipes = [self.mutableMissedSwipes copy];
+    self.myManagedObject.missedSwipes = self.mutableMissedSwipes;
 }
 
 - (void) removeAbsence: (NSDate *) date
 {
     [self.mutableAbsences removeObject:date];
-    self.myManagedObject.absences = [self.mutableAbsences copy];
+    self.myManagedObject.absences = self.mutableAbsences;
 }
 
 - (void) removeTardy: (NSDate *) date
 {
     [self.mutableTardies removeObject:date];
-    self.myManagedObject.tardies = [self.mutableTardies copy];
+    self.myManagedObject.tardies = self.mutableTardies;
 }
 
 - (void) removeMissedSwipes: (NSDate *) date
 {
     [self.mutableMissedSwipes removeObject:date];
-    self.myManagedObject.missedSwipes = [self.mutableMissedSwipes copy];
+    self.myManagedObject.missedSwipes = self.mutableMissedSwipes;
 }
 
 - (int) getNumberOfAbsencesInPastYear
