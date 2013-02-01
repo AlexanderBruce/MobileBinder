@@ -38,6 +38,10 @@
     self.employeeRecords = [[self.employeeRecords sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSString *first = [(EmployeeRecord *)a lastName];
         NSString *second = [(EmployeeRecord *)b lastName];
+        NSComparisonResult lastNameResult = [first compare:second];
+        if(lastNameResult != NSOrderedSame) return lastNameResult;
+        first = [(EmployeeRecord *)a firstName];
+        second = [(EmployeeRecord *)b firstName];
         return [first compare:second];
     }] mutableCopy];
 }

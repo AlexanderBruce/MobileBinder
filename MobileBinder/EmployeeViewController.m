@@ -16,6 +16,9 @@
 #define INCIDENT_SECTION 3
 #define INCIDENT_SEGUE @"reportIncidentSegue"
 
+#define DEFAULT_CELL_HEIGHT 38
+#define INCIDENT_CELL_HEIGHT 42
+
 @interface EmployeeViewController() <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
@@ -128,6 +131,12 @@
     return 4;
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == INCIDENT_SECTION) return INCIDENT_CELL_HEIGHT;
+    else return DEFAULT_CELL_HEIGHT;
+}
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == INCIDENT_SECTION)
@@ -166,6 +175,7 @@
         [Database saveAttendanceDatabase];
     }
 }
+
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender
 {

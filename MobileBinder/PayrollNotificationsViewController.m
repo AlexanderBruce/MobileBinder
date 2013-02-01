@@ -120,9 +120,11 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(!cell) cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellIdentifier];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     CGRect labelFrame = CGRectMake(20, 13, 150, 20);
     UILabel *title = [[UILabel alloc]initWithFrame:labelFrame];
+    title.backgroundColor = [UIColor clearColor];
     NSString *key = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:indexPath.section];
     title.text = [[self.notificationSettingsSectionsAndRows objectForKey:key]objectAtIndex:indexPath.row];
     title.backgroundColor = [UIColor clearColor];

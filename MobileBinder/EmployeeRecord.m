@@ -24,7 +24,6 @@
     return [self.mutableMissedSwipes copy];
 }
 
-
 - (void) addAbsenceForDate: (NSDate *) date
 {
     [self.mutableAbsences addObject:date];
@@ -75,6 +74,31 @@
 {
     return self.mutableMissedSwipes.count;
 }
+
+- (int) getNextAbsenceLevel
+{
+    int absences = [self getNumberOfAbsencesInPastYear];
+    if(absences < LEVEL_1_ABSENCE_THRESHOLD) return 1;
+    else if(absences < LEVEL_2_ABSENCE_THRESHOLD) return 2;
+    else return 3;
+}
+
+- (int) getNextTardyLevel
+{
+    int tardies = [self getNumberOfTardiesInPastYear];
+    if(tardies < LEVEL_1_TARDY_THRESHOLD) return 1;
+    else if(tardies < LEVEL_2_TARDY_THRESHOLD) return 2;
+    else return 3;
+}
+
+- (int) getNextMissedSwipeLevel
+{
+    int swipes = [self getNumberOfMissedSwipesInPastYear];
+    if(swipes < LEVEL_1_SWIPE_THRESHOLD) return 1;
+    else if(swipes < LEVEL_2_SWIPE_THRESHOLD) return 2;
+    else return 3;
+}
+
 
 - (id) initWithManagedObject:(EmployeeRecordManagedObject *)managedObject
 {
