@@ -108,7 +108,7 @@
         self.lastName = (managedObject.lastName != nil)  ? managedObject.lastName : @"";
         self.mutableAbsences = (managedObject.absences != nil) ? [managedObject.absences mutableCopy] : [[NSMutableArray alloc] init];
         self.mutableTardies = (managedObject.tardies != nil) ? [managedObject.tardies mutableCopy] : [[NSMutableArray alloc] init];
-        self.mutableMissedSwipes = (managedObject.absences != nil) ? [managedObject.missedSwipes mutableCopy] : [[NSMutableArray alloc] init];
+        self.mutableMissedSwipes = (managedObject.missedSwipes != nil) ? [managedObject.missedSwipes mutableCopy] : [[NSMutableArray alloc] init];
         self.myManagedObject = managedObject;
     }
     return self;
