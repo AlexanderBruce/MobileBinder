@@ -19,7 +19,7 @@
     if (cls != nil) {
         
         UILocalNotification *notif = [[cls alloc] init];
-        notif.fireDate = [NSDate dateWithTimeIntervalSinceNow:25];
+        notif.fireDate = [NSDate dateWithTimeIntervalSinceNow:15];
         notif.timeZone = [NSTimeZone defaultTimeZone];
         notif.alertBody = @"Did you forget something?";
         notif.alertAction = @"Show me";
