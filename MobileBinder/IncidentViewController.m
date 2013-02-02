@@ -54,7 +54,8 @@
         [self.employeeRecord addMissedSwipeForDate:self.incidentDate];
     }
     [Database saveAttendanceDatabase];
-    [self.navigationController popViewControllerAnimated:YES];
+    [[[UIAlertView alloc] initWithTitle:@"Action Needed" message:@"This employee needs to be terminated immediately" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:@"Learn more", nil] show];
+    [self.navigationController popViewControllerAnimated:YES]; 
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
