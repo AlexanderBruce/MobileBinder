@@ -31,6 +31,7 @@
 		4960AFC116B8751600F16ED6 /* EmployeeRecordManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC016B8751600F16ED6 /* EmployeeRecordManagedObject.m */; };
 		4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC316B8759600F16ED6 /* IncidentViewController.m */; };
 		F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */; };
+		F79A34E916BD8FAE00ACAABB /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = F79A34E816BD8FAE00ACAABB /* Database.m */; };
 		F7A9A7EE16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7A9A7ED16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard */; };
 		F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */; };
 		FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA2F1BA16B8AA80009466A1 /* testNotification.m */; };
@@ -74,6 +75,8 @@
 		4960AFC316B8759600F16ED6 /* IncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentViewController.m; sourceTree = "<group>"; };
 		F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollNotificationsViewController.h; sourceTree = "<group>"; };
 		F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollNotificationsViewController.m; sourceTree = "<group>"; };
+		F79A34E716BD8FAE00ACAABB /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		F79A34E816BD8FAE00ACAABB /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		F7A9A7ED16B89F9F00C26BBC /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		F7EFBFE116B9CCAD00C46D04 /* PayrollPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollPeriodViewController.h; sourceTree = "<group>"; };
 		F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollPeriodViewController.m; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 		494D0E3916B84BAB00354964 /* MobileBinder */ = {
 			isa = PBXGroup;
 			children = (
+				F79A34E716BD8FAE00ACAABB /* Database.h */,
+				F79A34E816BD8FAE00ACAABB /* Database.m */,
 				4960AFA816B85CF400F16ED6 /* AddEmployeeViewController.h */,
 				4960AFA916B85CF400F16ED6 /* AddEmployeeViewController.m */,
 				494D0E4216B84BAB00354964 /* AppDelegate.h */,
@@ -265,6 +270,7 @@
 				FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */,
 				492D1EF416B8BC1300D04E7D /* Database.m in Sources */,
 				F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */,
+				F79A34E916BD8FAE00ACAABB /* Database.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
