@@ -2,7 +2,7 @@
 //  EmployeeRecordManagedObject.m
 //  MobileBinder
 //
-//  Created by Andrew Patterson on 1/29/13.
+//  Created by Samuel Rang on 2/2/13.
 //  Copyright (c) 2013 Duke University. All rights reserved.
 //
 
@@ -11,9 +11,9 @@
 
 @implementation EmployeeRecordManagedObject
 
+@dynamic absences;
 @dynamic firstName;
 @dynamic lastName;
-@dynamic absences;
 @dynamic tardies;
 @dynamic missedSwipes;
 

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PayrollPeriodViewController : UITableViewController
+@interface PayrollPeriodViewController : UIViewController;
+
+@property (strong, nonatomic) NSMutableArray* possiblePayPeriods;
 
 @end
