@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490A5AF916C1D25F0062F36F /* WebviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5AF816C1D25F0062F36F /* WebviewViewController.m */; };
+		490A5AFE16C1D9730062F36F /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5AFD16C1D9730062F36F /* MarqueeLabel.m */; };
+		490A5B0116C1D9990062F36F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5B0016C1D9990062F36F /* HomeViewController.m */; };
+		490A5B0316C1DA900062F36F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490A5B0216C1DA900062F36F /* QuartzCore.framework */; };
+		490A5B0616C1DC390062F36F /* ReminderCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5B0516C1DC390062F36F /* ReminderCenter.m */; };
+		490A5B0916C1DD170062F36F /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5B0816C1DD170062F36F /* Reminder.m */; };
 		494D0E3416B84BAB00354964 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3316B84BAB00354964 /* UIKit.framework */; };
 		494D0E3616B84BAB00354964 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3516B84BAB00354964 /* Foundation.framework */; };
 		494D0E3816B84BAB00354964 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3716B84BAB00354964 /* CoreGraphics.framework */; };
@@ -26,16 +32,30 @@
 		4960AFB216B8633600F16ED6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4960AFB116B8633600F16ED6 /* CoreData.framework */; };
 		4960AFB816B8707D00F16ED6 /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */; };
 		4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC316B8759600F16ED6 /* IncidentViewController.m */; };
+		49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F216C1E39E007AA467 /* RemindersViewController.m */; };
+		49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */; };
+		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
 		F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */; };
 		F79A34E916BD8FAE00ACAABB /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = F79A34E816BD8FAE00ACAABB /* Database.m */; };
 		F79A34EC16BDAB4600ACAABB /* EmployeeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB416B8639300F16ED6 /* EmployeeRecord.m */; };
-		F79A34ED16BDABE500ACAABB /* AttendanceData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA516B85B5400F16ED6 /* AttendanceData.xcdatamodeld */; };
+		F79A34ED16BDABE500ACAABB /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */; };
 		F79A34F616BDAFDC00ACAABB /* EmployeeRecordManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F79A34F516BDAFDC00ACAABB /* EmployeeRecordManagedObject.m */; };
 		F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */; };
 		FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA2F1BA16B8AA80009466A1 /* testNotification.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		490A5AF716C1D25F0062F36F /* WebviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebviewViewController.h; sourceTree = "<group>"; };
+		490A5AF816C1D25F0062F36F /* WebviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebviewViewController.m; sourceTree = "<group>"; };
+		490A5AFC16C1D9730062F36F /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
+		490A5AFD16C1D9730062F36F /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
+		490A5AFF16C1D9990062F36F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		490A5B0016C1D9990062F36F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		490A5B0216C1DA900062F36F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		490A5B0416C1DC390062F36F /* ReminderCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderCenter.h; sourceTree = "<group>"; };
+		490A5B0516C1DC390062F36F /* ReminderCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderCenter.m; sourceTree = "<group>"; };
+		490A5B0716C1DD170062F36F /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
+		490A5B0816C1DD170062F36F /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
 		494D0E2F16B84BAB00354964 /* MobileBinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileBinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		494D0E3316B84BAB00354964 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		494D0E3516B84BAB00354964 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,7 +78,7 @@
 		494D0E6316B8509300354964 /* AttendanceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttendanceCell.xib; sourceTree = "<group>"; };
 		4960AF9F16B8590900F16ED6 /* AttendanceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceModel.h; sourceTree = "<group>"; };
 		4960AFA016B8590900F16ED6 /* AttendanceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceModel.m; sourceTree = "<group>"; };
-		4960AFA616B85B5400F16ED6 /* AttendanceData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AttendanceData.xcdatamodel; sourceTree = "<group>"; };
+		4960AFA616B85B5400F16ED6 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
 		4960AFA816B85CF400F16ED6 /* AddEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEmployeeViewController.h; sourceTree = "<group>"; };
 		4960AFA916B85CF400F16ED6 /* AddEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEmployeeViewController.m; sourceTree = "<group>"; };
 		4960AFB116B8633600F16ED6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -68,6 +88,12 @@
 		4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
 		4960AFC216B8759600F16ED6 /* IncidentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentViewController.h; sourceTree = "<group>"; };
 		4960AFC316B8759600F16ED6 /* IncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentViewController.m; sourceTree = "<group>"; };
+		49AB41F116C1E39E007AA467 /* RemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindersViewController.h; sourceTree = "<group>"; };
+		49AB41F216C1E39E007AA467 /* RemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindersViewController.m; sourceTree = "<group>"; };
+		49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
+		49AB41F716C222B0007AA467 /* ReminderManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderManagedObject.h; sourceTree = "<group>"; };
+		49AB41F816C222B0007AA467 /* ReminderManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderManagedObject.m; sourceTree = "<group>"; };
 		F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollNotificationsViewController.h; sourceTree = "<group>"; };
 		F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollNotificationsViewController.m; sourceTree = "<group>"; };
 		F79A34E716BD8FAE00ACAABB /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
@@ -85,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				490A5B0316C1DA900062F36F /* QuartzCore.framework in Frameworks */,
 				4960AFB216B8633600F16ED6 /* CoreData.framework in Frameworks */,
 				494D0E3416B84BAB00354964 /* UIKit.framework in Frameworks */,
 				494D0E3616B84BAB00354964 /* Foundation.framework in Frameworks */,
@@ -95,6 +122,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		490A5AFA16C1D95A0062F36F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */,
+				49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */,
+				490A5AFC16C1D9730062F36F /* MarqueeLabel.h */,
+				490A5AFD16C1D9730062F36F /* MarqueeLabel.m */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		490A5B0A16C1DD1F0062F36F /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				490A5B0716C1DD170062F36F /* Reminder.h */,
+				490A5B0816C1DD170062F36F /* Reminder.m */,
+				490A5B0416C1DC390062F36F /* ReminderCenter.h */,
+				490A5B0516C1DC390062F36F /* ReminderCenter.m */,
+				49AB41F716C222B0007AA467 /* ReminderManagedObject.h */,
+				49AB41F816C222B0007AA467 /* ReminderManagedObject.m */,
+				49AB41F116C1E39E007AA467 /* RemindersViewController.h */,
+				49AB41F216C1E39E007AA467 /* RemindersViewController.m */,
+			);
+			name = Reminders;
+			sourceTree = "<group>";
+		};
 		494D0E2416B84BAB00354964 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +168,7 @@
 		494D0E3216B84BAB00354964 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				490A5B0216C1DA900062F36F /* QuartzCore.framework */,
 				4960AFB116B8633600F16ED6 /* CoreData.framework */,
 				494D0E3316B84BAB00354964 /* UIKit.framework */,
 				494D0E3516B84BAB00354964 /* Foundation.framework */,
@@ -133,11 +187,11 @@
 				494D0E6016B84FE900354964 /* AttendanceCell.h */,
 				494D0E6116B84FE900354964 /* AttendanceCell.m */,
 				494D0E6316B8509300354964 /* AttendanceCell.xib */,
-				4960AFA516B85B5400F16ED6 /* AttendanceData.xcdatamodeld */,
 				4960AF9F16B8590900F16ED6 /* AttendanceModel.h */,
 				4960AFA016B8590900F16ED6 /* AttendanceModel.m */,
 				494D0E5D16B84F7300354964 /* AttendanceViewController.h */,
 				494D0E5E16B84F7300354964 /* AttendanceViewController.m */,
+				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
 				F79A34E716BD8FAE00ACAABB /* Database.h */,
 				F79A34E816BD8FAE00ACAABB /* Database.m */,
 				4960AFB316B8639300F16ED6 /* EmployeeRecord.h */,
@@ -146,18 +200,24 @@
 				F79A34F516BDAFDC00ACAABB /* EmployeeRecordManagedObject.m */,
 				4960AFB616B8707D00F16ED6 /* EmployeeViewController.h */,
 				4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */,
+				490A5AFF16C1D9990062F36F /* HomeViewController.h */,
+				490A5B0016C1D9990062F36F /* HomeViewController.m */,
 				4960AFC216B8759600F16ED6 /* IncidentViewController.h */,
 				4960AFC316B8759600F16ED6 /* IncidentViewController.m */,
 				494D0E4E16B84BAB00354964 /* iPad.storyboard */,
 				494D0E4B16B84BAB00354964 /* iPhone.storyboard */,
+				490A5AFA16C1D95A0062F36F /* Library */,
 				F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */,
 				F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */,
 				F7EFBFE116B9CCAD00C46D04 /* PayrollPeriodViewController.h */,
 				F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */,
-				494D0E4E16B84BAB00354964 /* iPad.storyboard */,
+				490A5B0A16C1DD1F0062F36F /* Reminders */,
 				494D0E3A16B84BAB00354964 /* Supporting Files */,
+				494D0E4E16B84BAB00354964 /* iPad.storyboard */,
 				FAA2F1B916B8AA80009466A1 /* testNotification.h */,
 				FAA2F1BA16B8AA80009466A1 /* testNotification.m */,
+				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
+				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
 				494D0E4B16B84BAB00354964 /* iPhone.storyboard */,
 				F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */,
 				F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */,
@@ -248,7 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F79A34ED16BDABE500ACAABB /* AttendanceData.xcdatamodeld in Sources */,
+				F79A34ED16BDABE500ACAABB /* Data.xcdatamodeld in Sources */,
 				F79A34EC16BDAB4600ACAABB /* EmployeeRecord.m in Sources */,
 				494D0E4016B84BAB00354964 /* main.m in Sources */,
 				494D0E4416B84BAB00354964 /* AppDelegate.m in Sources */,
@@ -263,6 +323,14 @@
 				F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */,
 				F79A34E916BD8FAE00ACAABB /* Database.m in Sources */,
 				F79A34F616BDAFDC00ACAABB /* EmployeeRecordManagedObject.m in Sources */,
+				490A5AF916C1D25F0062F36F /* WebviewViewController.m in Sources */,
+				490A5AFE16C1D9730062F36F /* MarqueeLabel.m in Sources */,
+				490A5B0116C1D9990062F36F /* HomeViewController.m in Sources */,
+				490A5B0616C1DC390062F36F /* ReminderCenter.m in Sources */,
+				490A5B0916C1DD170062F36F /* Reminder.m in Sources */,
+				49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */,
+				49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,14 +468,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4960AFA516B85B5400F16ED6 /* AttendanceData.xcdatamodeld */ = {
+		4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4960AFA616B85B5400F16ED6 /* AttendanceData.xcdatamodel */,
+				4960AFA616B85B5400F16ED6 /* Data.xcdatamodel */,
 			);
-			currentVersion = 4960AFA616B85B5400F16ED6 /* AttendanceData.xcdatamodel */;
-			name = AttendanceData.xcdatamodeld;
-			path = ../AttendanceData.xcdatamodeld;
+			currentVersion = 4960AFA616B85B5400F16ED6 /* Data.xcdatamodel */;
+			name = Data.xcdatamodeld;
+			path = ../Data.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

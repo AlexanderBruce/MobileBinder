@@ -54,7 +54,7 @@
     managedObject.lastName = record.lastName;
     record.myManagedObject = managedObject;
     [self sortEmployeeRecords];
-    [Database saveAttendanceDatabase];
+    [Database saveDatabase];
 }
 
 - (void) filterEmployeesByString: (NSString *) filterString
@@ -86,7 +86,7 @@
 }
 
 #pragma mark - DatabaseDelegate
-- (void) obtainedDatabse:(UIManagedDocument *)database
+- (void) obtainedDatabase:(UIManagedDocument *)database
 {
     self.database = database;
     [self fetchEmployeeRecordsFromDatabase];
@@ -94,7 +94,7 @@
 
 - (void) fetchEmployeeRecordsForFutureUse
 {
-    [Database getAttendanceDatabaseWithDelegate:self];
+    [Database getDatabaseWithDelegate:self];
 }
 
 - (int) getNumberOfEmployeeRecords

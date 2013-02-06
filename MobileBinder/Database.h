@@ -2,14 +2,16 @@
 
 @protocol DatabaseDelegate <NSObject>
 
-- (void) obtainedDatabse: (UIManagedDocument *) database;
+- (void) obtainedDatabase: (UIManagedDocument *) database;
 
 @end
 
 @interface Database : NSObject
 
-+ (void) getAttendanceDatabaseWithDelegate: (id<DatabaseDelegate>) delegate;
++ (UIManagedDocument *) getInstance;
 
-+ (void) saveAttendanceDatabase;
++ (void) getDatabaseWithDelegate: (id<DatabaseDelegate>) delegate;
+
++ (void) saveDatabase;
 
 @end

@@ -1,5 +1,6 @@
 #import "IncidentViewController.h"
 #import "EmployeeRecord.h"
+#import "WebviewViewController.h"
 #import "Database.h"
 
 #define KEYBOARD_HEIGHT 216.0f
@@ -9,7 +10,10 @@
 #define TARDY_INDEX 1
 #define TIMECARD_INDEX 2
 
-@interface IncidentViewController () <UITextFieldDelegate>
+#define YELLOW_SEGUE @"yellowSegue"
+#define YELLOW_WEBPAGE_URL @"http://www.hr.duke.edu/policies/time_away/availability.php"
+
+@interface IncidentViewController () <UITextFieldDelegate, WebviewViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *employeeNameField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *incidentTypeControl;
 @property (weak, nonatomic) IBOutlet UITextField *incidentDateField;
@@ -18,6 +22,16 @@
 @end
 
 @implementation IncidentViewController
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:YELLOW_SEGUE])
+    {
+        WebviewViewController *dest = (WebviewViewController *) segue.destinationViewController;
+        dest.delegate = self;
+        dest.webpageURL = @"http://www.hr.duke.edu/policies/time_away/availability.php";
+    }
+}
 
 - (void)viewDidLoad
 {
@@ -32,6 +46,17 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateStyle = NSDateFormatterLongStyle;
     self.incidentDateField.text = [formatter stringFromDate:[NSDate date]];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [self performSegueWithIdentifier:YELLOW_SEGUE sender:self];
+}
+
+#pragma mark - WebviewViewControllerDelegate
+- (void) doneViewingWebpage
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)savePressed:(UIButton *)sender
@@ -53,7 +78,8 @@
     {
         [self.employeeRecord addMissedSwipeForDate:self.incidentDate];
     }
-    [Database saveAttendanceDatabase];
+    [Database saveDatabase];
+    
     [[[UIAlertView alloc] initWithTitle:@"Action Needed" message:@"This employee needs to be terminated immediately" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:@"Learn more", nil] show];
     [self.navigationController popViewControllerAnimated:YES]; 
 }

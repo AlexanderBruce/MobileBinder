@@ -12,12 +12,13 @@
 
 
 
-- (void)scheduleNotification {
+- (void)scheduleNotification
+{
     
     
     Class cls = NSClassFromString(@"UILocalNotification");
-    if (cls != nil) {
-        
+    if (cls != nil)
+    {
         UILocalNotification *notif = [[cls alloc] init];
         notif.fireDate = [NSDate dateWithTimeIntervalSinceNow:15];
         notif.timeZone = [NSTimeZone defaultTimeZone];
@@ -25,12 +26,9 @@
         notif.alertAction = @"Show me";
         notif.soundName = UILocalNotificationDefaultSoundName;
         notif.applicationIconBadgeNumber = 1;
-        
         NSDictionary *userDict = nil;
         notif.userInfo = userDict;
-        
         [[UIApplication sharedApplication] scheduleLocalNotification:notif];
-
     }
 }
 

@@ -1,54 +1,58 @@
 #import "Database.h"
 //TEst
 
-#define DATABASE_PATH @"AttendanceDatabase18"
+#define DATABASE_PATH @"Database9"
 
 @interface Database()
 @end
 
 @implementation Database
 
-static UIManagedDocument *attendanceDatabase;
+static UIManagedDocument *database;
 
-
-+ (void) getAttendanceDatabaseWithDelegate: (id<DatabaseDelegate>) delegate
++ (UIManagedDocument *) getInstance
 {
-    if(attendanceDatabase)
+    return database;
+}
+
++ (void) getDatabaseWithDelegate: (id<DatabaseDelegate>) delegate
+{
+    if(database)
     {
-        [delegate obtainedDatabse:attendanceDatabase];
+        [delegate obtainedDatabase:database];
         return;
     }
         
     NSURL *dataBaseURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     dataBaseURL = [dataBaseURL URLByAppendingPathComponent:DATABASE_PATH];
-    attendanceDatabase = [[UIManagedDocument alloc] initWithFileURL:dataBaseURL];
+    database = [[UIManagedDocument alloc] initWithFileURL:dataBaseURL];
     
     //If the database does not exist, create it
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[attendanceDatabase.fileURL path]])
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[database.fileURL path]])
     {
-        [attendanceDatabase saveToURL:attendanceDatabase.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success)
+        [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success)
          {
-             [delegate obtainedDatabse:attendanceDatabase];
+             [delegate obtainedDatabase:database];
          }];
     }
     //If the database exists on disk but is not open, then open it
-    else if (attendanceDatabase.documentState == UIDocumentStateClosed)
+    else if (database.documentState == UIDocumentStateClosed)
     {
-        [attendanceDatabase openWithCompletionHandler:^(BOOL success)
+        [database openWithCompletionHandler:^(BOOL success)
          {
-             [delegate obtainedDatabse:attendanceDatabase];
+             [delegate obtainedDatabase:database];
          }];
     }
     //If the database exists on disk and is open
-    else if (attendanceDatabase.documentState == UIDocumentStateNormal)
+    else if (database.documentState == UIDocumentStateNormal)
     {
-        [delegate obtainedDatabse:attendanceDatabase];
+        [delegate obtainedDatabase:database];
     }
 }
 
-+ (void) saveAttendanceDatabase
++ (void) saveDatabase
 {
-    [attendanceDatabase saveToURL:attendanceDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+    [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
     }];
 
 }

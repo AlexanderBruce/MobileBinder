@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "ReminderCenter.h"
+#import "Database.h"
 
 @implementation AppDelegate
 
@@ -35,6 +37,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [Database getDatabaseWithDelegate:nil];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

@@ -172,7 +172,7 @@
         }
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self checkEnablingOfEditButton];
-        [Database saveAttendanceDatabase];
+        [Database saveDatabase];
     }
 }
 

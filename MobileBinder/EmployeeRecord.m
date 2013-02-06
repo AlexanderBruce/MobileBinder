@@ -78,25 +78,25 @@
 - (int) getNextAbsenceLevel
 {
     int absences = [self getNumberOfAbsencesInPastYear];
-    if(absences < LEVEL_1_ABSENCE_THRESHOLD) return 1;
-    else if(absences < LEVEL_2_ABSENCE_THRESHOLD) return 2;
-    else return 3;
+    if(absences < LEVEL_1_ABSENCE_THRESHOLD) return LEVEL_1_ID;
+    else if(absences < LEVEL_2_ABSENCE_THRESHOLD) return LEVEL_2_ID;
+    else return LEVEL_3_ID;
 }
 
 - (int) getNextTardyLevel
 {
     int tardies = [self getNumberOfTardiesInPastYear];
-    if(tardies < LEVEL_1_TARDY_THRESHOLD) return 1;
-    else if(tardies < LEVEL_2_TARDY_THRESHOLD) return 2;
-    else return 3;
+    if(tardies < LEVEL_1_TARDY_THRESHOLD) return LEVEL_1_ID;
+    else if(tardies < LEVEL_2_TARDY_THRESHOLD) return LEVEL_2_ID;
+    else return LEVEL_3_ID;
 }
 
 - (int) getNextMissedSwipeLevel
 {
     int swipes = [self getNumberOfMissedSwipesInPastYear];
-    if(swipes < LEVEL_1_SWIPE_THRESHOLD) return 1;
-    else if(swipes < LEVEL_2_SWIPE_THRESHOLD) return 2;
-    else return 3;
+    if(swipes < LEVEL_1_SWIPE_THRESHOLD) return LEVEL_1_ID;
+    else if(swipes < LEVEL_2_SWIPE_THRESHOLD) return LEVEL_2_ID;
+    else return LEVEL_3_ID;
 }
 
 
