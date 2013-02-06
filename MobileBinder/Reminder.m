@@ -10,6 +10,7 @@
 
 @implementation Reminder
 
+
 - (id) initWithText:(NSString *)text eventDate:(NSDate *)eventDate fireDate:(NSDate *)fireDate typeID:(int)typeID
 {
     if(self = [super init])

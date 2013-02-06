@@ -5,12 +5,11 @@
 
 + (ReminderCenter *) getInstance;
 
-- (void) addReminder: (Reminder *) reminder;
+- (void) addReminders: (NSArray *) reminders completion: (void (^) (void)) block;
 
-- (void) cancelRemindersWithTypeID: (int) typeID;
+//TypeIDArray is an array of NSNumbers of the typeIDs that you wish to cancel
+- (void) cancelRemindersWithTypeIDs: (NSArray *) typeIDArray completion: (void (^)(void)) block;
 
 - (NSArray *) getRemindersBetween: (NSDate *) begin andEndDate: (NSDate *) end;
-
-- (void) synchronize;
 
 @end

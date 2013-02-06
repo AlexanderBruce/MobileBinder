@@ -2,4 +2,6 @@
 
 @interface PayrollModel : NSObject
 
+- (NSArray *) getDatesForTypeID: (int) typeID;
+
 @end

@@ -3,6 +3,8 @@
 #import "Database.h"
 #import "ReminderManagedObject.h"
 
+#define TYPE_ID_KEY @"TypeID"
+
 @interface ReminderCenter()
 @property (nonatomic, strong) UIManagedDocument *database;
 @end
@@ -20,18 +22,83 @@ static ReminderCenter *instance;
     return instance;
 }
 
-- (void) addReminder: (Reminder *) reminder
-{
-    ReminderManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([ReminderManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
-    managedObject.text = reminder.text;
-    managedObject.eventDate = reminder.eventDate;
-    managedObject.fireDate = reminder.fireDate;
-    managedObject.typeID = [NSNumber numberWithInt:reminder.typeID];
-}
-
-- (void) cancelRemindersWithTypeID: (int) typeID
+- (void) addReminders: (NSArray *) reminders completion: (void (^) (void)) block
 {
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (Reminder *reminder in reminders)
+        {
+            ReminderManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([ReminderManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
+            managedObject.text = reminder.text;
+            managedObject.eventDate = reminder.eventDate;
+            managedObject.fireDate = reminder.fireDate;
+            managedObject.typeID = [NSNumber numberWithInt:reminder.typeID];
+            
+            UILocalNotification *notif = [[UILocalNotification alloc] init];
+            notif.fireDate = reminder.fireDate;
+            notif.timeZone = [NSTimeZone defaultTimeZone];
+            notif.alertBody = reminder.text;
+            notif.hasAction = NO;
+            notif.soundName = UILocalNotificationDefaultSoundName;
+            notif.applicationIconBadgeNumber = 1;
+            NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+            [dictionary setObject:[NSNumber numberWithInt:reminder.typeID] forKey:TYPE_ID_KEY];
+            notif.userInfo = dictionary;
+            [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+        }
+        [self synchronize];
+        block();
+    });
+
+}
+
+- (void) cancelRemindersWithTypeIDs: (NSArray *) typeIDArray completion: (void (^)(void)) block
+{
+    if(!typeIDArray || typeIDArray.count == 0)
+    {
+        block();
+        return;
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //Remove notifications
+        NSArray *notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+        NSMutableArray *notifsToRemove = [[NSMutableArray alloc] init];
+        for (UILocalNotification *currentNotif in notifications)
+        {
+            NSNumber *currentNotifTypeID = [currentNotif.userInfo objectForKey:TYPE_ID_KEY];
+            for (NSNumber *typeIDToRemove in typeIDArray)
+            {
+                if([currentNotifTypeID integerValue] == [typeIDToRemove integerValue])
+                {
+                    [notifsToRemove addObject:currentNotif];
+                    break;
+                }
+            }
+        }
+        for(UILocalNotification *currentNotif in notifsToRemove)
+        {
+            [[UIApplication sharedApplication] cancelLocalNotification:currentNotif];
+        }
+        
+        //Remove reminders
+        NSMutableArray *objectsToDelete = [[NSMutableArray alloc] init];
+        for (NSNumber *typeID in typeIDArray)
+        {
+            NSFetchRequest *fetchRequest = [NSFetchRequest new];
+            fetchRequest.entity = [NSEntityDescription entityForName:NSStringFromClass([ReminderManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"typeID = %d", [typeID intValue]];
+            [fetchRequest setPredicate:predicate];
+            [objectsToDelete addObjectsFromArray:[self.database.managedObjectContext executeFetchRequest: fetchRequest error: nil] ];
+        }
+        for (NSManagedObject *managedObject in objectsToDelete)
+        {
+            [self.database.managedObjectContext deleteObject:managedObject];
+        }
+        [self synchronize];
+        block();
+    });
 }
 
 - (NSArray *) getRemindersBetween: (NSDate *) begin andEndDate: (NSDate *) end

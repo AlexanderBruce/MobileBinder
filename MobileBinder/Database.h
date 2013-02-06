@@ -8,6 +8,8 @@
 
 @interface Database : NSObject
 
+//REFACTOR THIS AT SOME POINT
+
 + (UIManagedDocument *) getInstance;
 
 + (void) getDatabaseWithDelegate: (id<DatabaseDelegate>) delegate;

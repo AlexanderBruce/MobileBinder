@@ -75,7 +75,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self createTestReminders];
+//    [self createTestReminders];
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         int64_t delayInSeconds = 2.0; //These two seconds are necessary...who knows why
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -142,34 +142,38 @@
     NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
     dayComponent.day = 0;
     NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSMutableArray *remindersToAdd = [[NSMutableArray alloc] init];
     
-    for(int i = 0; i < 10000; i ++)
+    for(int i = 0; i < 1000; i ++)
     {
         Reminder *r1 = [[Reminder alloc] initWithText:@"Time Card Due" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [center addReminder:r1];
+        [remindersToAdd addObject:r1];
         dayComponent.day = dayComponent.day + 1;
 
         Reminder *r2 = [[Reminder alloc] initWithText:@"Pay check issued" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [center addReminder:r2];
+        [remindersToAdd addObject:r2];
 
         Reminder *r3 = [[Reminder alloc] initWithText:@"Employee Attendance sheet filing date" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [center addReminder:r3];
+        [remindersToAdd addObject:r3];
         dayComponent.day = dayComponent.day + 1;
 
         Reminder *r4 = [[Reminder alloc] initWithText:@"2 weeks until pay day" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [center addReminder:r4];
+        [remindersToAdd addObject:r4];
 
         Reminder *r5 = [[Reminder alloc] initWithText:@"New Employee Orientation" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [center addReminder:r5];
+        [remindersToAdd addObject:r5];
 
         Reminder *r6 = [[Reminder alloc] initWithText:@"Company Picnic" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [center addReminder:r6];
+        [remindersToAdd addObject:r6];
 
         Reminder *r7 = [[Reminder alloc] initWithText:@"Nuclear Weapon Testing" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [center addReminder:r7];
+        [remindersToAdd addObject:r7];
         dayComponent.day = dayComponent.day + 1;
+        
+        [center addReminders:remindersToAdd completion:^{
+           [self.tableView triggerInfiniteScrolling]; 
+        }];
     }
-    [center synchronize];
 }
 
 - (void)viewDidUnload
