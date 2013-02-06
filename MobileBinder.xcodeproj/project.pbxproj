@@ -35,6 +35,7 @@
 		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
 		49AB41FE16C2C93D007AA467 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AB41FA16C2C93D007AA467 /* iPad.storyboard */; };
 		49AB41FF16C2C93D007AA467 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AB41FC16C2C93D007AA467 /* iPhone.storyboard */; };
+		49FB66FF16C2CA0D004F576F /* PayrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FB66FE16C2CA0D004F576F /* PayrollModel.m */; };
 		F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */; };
 		F79A34E916BD8FAE00ACAABB /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = F79A34E816BD8FAE00ACAABB /* Database.m */; };
 		F79A34EC16BDAB4600ACAABB /* EmployeeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB416B8639300F16ED6 /* EmployeeRecord.m */; };
@@ -94,6 +95,8 @@
 		49AB41F816C222B0007AA467 /* ReminderManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderManagedObject.m; sourceTree = "<group>"; };
 		49AB41FB16C2C93D007AA467 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		49AB41FD16C2C93D007AA467 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
+		49FB66FD16C2CA0D004F576F /* PayrollModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollModel.h; sourceTree = "<group>"; };
+		49FB66FE16C2CA0D004F576F /* PayrollModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollModel.m; sourceTree = "<group>"; };
 		F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollNotificationsViewController.h; sourceTree = "<group>"; };
 		F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollNotificationsViewController.m; sourceTree = "<group>"; };
 		F79A34E716BD8FAE00ACAABB /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
@@ -148,6 +151,22 @@
 			name = Reminders;
 			sourceTree = "<group>";
 		};
+		4939165816C2CADD00F9365D /* Supporting_Files */ = {
+			isa = PBXGroup;
+			children = (
+				494D0E4316B84BAB00354964 /* AppDelegate.m */,
+				494D0E4216B84BAB00354964 /* AppDelegate.h */,
+				494D0E3B16B84BAB00354964 /* MobileBinder-Info.plist */,
+				494D0E3C16B84BAB00354964 /* InfoPlist.strings */,
+				494D0E3F16B84BAB00354964 /* main.m */,
+				494D0E4116B84BAB00354964 /* MobileBinder-Prefix.pch */,
+				494D0E4516B84BAB00354964 /* Default.png */,
+				494D0E4716B84BAB00354964 /* Default@2x.png */,
+				494D0E4916B84BAB00354964 /* Default-568h@2x.png */,
+			);
+			name = Supporting_Files;
+			sourceTree = "<group>";
+		};
 		494D0E2416B84BAB00354964 = {
 			isa = PBXGroup;
 			children = (
@@ -180,10 +199,33 @@
 		494D0E3916B84BAB00354964 /* MobileBinder */ = {
 			isa = PBXGroup;
 			children = (
+				49FB670016C2CA21004F576F /* Attendance */,
+				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
+				F79A34E716BD8FAE00ACAABB /* Database.h */,
+				F79A34E816BD8FAE00ACAABB /* Database.m */,
+				490A5AFF16C1D9990062F36F /* HomeViewController.h */,
+				490A5B0016C1D9990062F36F /* HomeViewController.m */,
+				49AB41FA16C2C93D007AA467 /* iPad.storyboard */,
+				49AB41FC16C2C93D007AA467 /* iPhone.storyboard */,
+				490A5AFA16C1D95A0062F36F /* Library */,
+				49FB670116C2CA50004F576F /* Payroll */,
+				490A5B0A16C1DD1F0062F36F /* Reminders */,
+				4939165816C2CADD00F9365D /* Supporting_Files */,
+				FAA2F1B916B8AA80009466A1 /* testNotification.h */,
+				FAA2F1BA16B8AA80009466A1 /* testNotification.m */,
+				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
+				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
+			);
+			path = MobileBinder;
+			sourceTree = "<group>";
+		};
+		49FB670016C2CA21004F576F /* Attendance */ = {
+			isa = PBXGroup;
+			children = (
+				4960AFC216B8759600F16ED6 /* IncidentViewController.h */,
+				4960AFC316B8759600F16ED6 /* IncidentViewController.m */,
 				4960AFA816B85CF400F16ED6 /* AddEmployeeViewController.h */,
 				4960AFA916B85CF400F16ED6 /* AddEmployeeViewController.m */,
-				494D0E4216B84BAB00354964 /* AppDelegate.h */,
-				494D0E4316B84BAB00354964 /* AppDelegate.m */,
 				494D0E6016B84FE900354964 /* AttendanceCell.h */,
 				494D0E6116B84FE900354964 /* AttendanceCell.m */,
 				494D0E6316B8509300354964 /* AttendanceCell.xib */,
@@ -191,51 +233,27 @@
 				4960AFA016B8590900F16ED6 /* AttendanceModel.m */,
 				494D0E5D16B84F7300354964 /* AttendanceViewController.h */,
 				494D0E5E16B84F7300354964 /* AttendanceViewController.m */,
-				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
-				F79A34E716BD8FAE00ACAABB /* Database.h */,
-				F79A34E816BD8FAE00ACAABB /* Database.m */,
 				4960AFB316B8639300F16ED6 /* EmployeeRecord.h */,
 				4960AFB416B8639300F16ED6 /* EmployeeRecord.m */,
 				F79A34F416BDAFDC00ACAABB /* EmployeeRecordManagedObject.h */,
 				F79A34F516BDAFDC00ACAABB /* EmployeeRecordManagedObject.m */,
 				4960AFB616B8707D00F16ED6 /* EmployeeViewController.h */,
 				4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */,
-				490A5AFF16C1D9990062F36F /* HomeViewController.h */,
-				490A5B0016C1D9990062F36F /* HomeViewController.m */,
-				4960AFC216B8759600F16ED6 /* IncidentViewController.h */,
-				4960AFC316B8759600F16ED6 /* IncidentViewController.m */,
-				49AB41FA16C2C93D007AA467 /* iPad.storyboard */,
-				49AB41FC16C2C93D007AA467 /* iPhone.storyboard */,
-				490A5AFA16C1D95A0062F36F /* Library */,
+			);
+			name = Attendance;
+			sourceTree = "<group>";
+		};
+		49FB670116C2CA50004F576F /* Payroll */ = {
+			isa = PBXGroup;
+			children = (
+				49FB66FD16C2CA0D004F576F /* PayrollModel.h */,
+				49FB66FE16C2CA0D004F576F /* PayrollModel.m */,
 				F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */,
 				F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */,
 				F7EFBFE116B9CCAD00C46D04 /* PayrollPeriodViewController.h */,
 				F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */,
-				490A5B0A16C1DD1F0062F36F /* Reminders */,
-				494D0E3A16B84BAB00354964 /* Supporting Files */,
-				FAA2F1B916B8AA80009466A1 /* testNotification.h */,
-				FAA2F1BA16B8AA80009466A1 /* testNotification.m */,
-				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
-				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
-				F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */,
-				F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */,
-				494D0E3A16B84BAB00354964 /* Supporting Files */,
 			);
-			path = MobileBinder;
-			sourceTree = "<group>";
-		};
-		494D0E3A16B84BAB00354964 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				494D0E3B16B84BAB00354964 /* MobileBinder-Info.plist */,
-				494D0E3C16B84BAB00354964 /* InfoPlist.strings */,
-				494D0E3F16B84BAB00354964 /* main.m */,
-				494D0E4116B84BAB00354964 /* MobileBinder-Prefix.pch */,
-				494D0E4516B84BAB00354964 /* Default.png */,
-				494D0E4716B84BAB00354964 /* Default@2x.png */,
-				494D0E4916B84BAB00354964 /* Default-568h@2x.png */,
-			);
-			name = "Supporting Files";
+			name = Payroll;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +347,7 @@
 				49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */,
 				49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */,
+				49FB66FF16C2CA0D004F576F /* PayrollModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
