@@ -52,6 +52,7 @@
     else if (self.periodTypeSegmented.selectedSegmentIndex == -1){
     }
     else{
+        NSLog(@"here");
 //        self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:[self.myPicker selectedRowInComponent:0]forComponent:0];
     }
 }
