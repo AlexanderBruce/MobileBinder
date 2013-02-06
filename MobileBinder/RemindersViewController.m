@@ -14,11 +14,7 @@
 #define MONTH_TITLE @"Month"
 #define YEAR_TITLE @"Year"
 
-@interface RemindersViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, strong) UIView *pickerView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *rangeButton;
-@property (nonatomic, strong) NSArray *pickerTitles;
-@property (nonatomic) BOOL pickerVisible;
+@interface RemindersViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSDate *minDateInTable;
 @property (nonatomic, strong) NSDate *maxDateInTable;
@@ -30,75 +26,6 @@
 
 @implementation RemindersViewController
 
-#pragma mark - UIPickerDelegate & UIPickerDatasource
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return [self.pickerTitles objectAtIndex:row];
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return self.pickerTitles.count;
-}
-
-- (IBAction)reminderRangeButtonPressed:(UIBarButtonItem *)sender
-{
-    if(self.pickerVisible) return;
-    self.pickerVisible = YES;
-    [UIView animateWithDuration:PICKER_APPEAR_TIME animations:^{
-        self.pickerView.frame = CGRectMake(0, self.view.frame.size.height - self.pickerView.frame.size.height, self.pickerView.frame.size.width, self.pickerView.frame.size.height);
-    }];
-}
-
-- (void) createRangePicker
-{
-     self.pickerView = [[UIView alloc] init];
-    
-    // Create done button
-    UIToolbar* toolBar = [[UIToolbar alloc] init];
-    toolBar.barStyle = UIBarStyleBlack;
-    toolBar.translucent = YES;
-    toolBar.tintColor = nil;
-    [toolBar sizeToFit];
-    
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                   style:UIBarButtonItemStyleDone target:self
-                                                                  action:@selector(doneUsingPicker)];
-    
-    [toolBar setItems:[NSArray arrayWithObjects:flexibleSpace, doneButton, nil]];
-    [self.pickerView addSubview:toolBar];
-    toolBar.frame = CGRectMake(0, 0, self.view.frame.size.width, TOOLBAR_HEIGHT);
-    
-    UIPickerView *picker = [[UIPickerView alloc] initWithFrame: CGRectMake(0, toolBar.frame.size.height, self.view.frame.size.width, 216.0)];
-    picker.delegate = self;
-    picker.dataSource = self;
-    picker.showsSelectionIndicator = YES;
-    [picker sizeToFit];
-    [self.pickerView addSubview:picker];
-    self.pickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, picker.frame.size.height + toolBar.frame.size.height);
-    [self.view addSubview:self.pickerView];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    self.rangeButton.title = [self.pickerTitles objectAtIndex:row];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-- (void) doneUsingPicker
-{
-    self.pickerVisible = NO;
-    [UIView animateWithDuration:PICKER_DISAPPEAR_TIME animations:^{
-        self.pickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, TOOLBAR_HEIGHT + KEYBOARD_HEIGHT); 
-    }];
-}
 
 #pragma mark - UITableViewDataSource & Delegate
 
@@ -146,10 +73,8 @@
     dayComponent.day = 7;
     self.maxDateInTable = [calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
     
-    self.pickerTitles = [[NSArray alloc] initWithObjects:DAY_TITLE,WEEK_TITLE,MONTH_TITLE,YEAR_TITLE, nil];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self createRangePicker];
     [self createTestReminders];
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         int64_t delayInSeconds = 2.0; //These two seconds are necessary...who knows why
@@ -247,8 +172,8 @@
     [center synchronize];
 }
 
-- (void)viewDidUnload {
-    [self setRangeButton:nil];
+- (void)viewDidUnload
+{
     [self setTableView:nil];
     [super viewDidUnload];
 }

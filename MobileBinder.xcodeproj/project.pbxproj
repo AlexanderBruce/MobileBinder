@@ -22,8 +22,6 @@
 		494D0E4616B84BAB00354964 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E4516B84BAB00354964 /* Default.png */; };
 		494D0E4816B84BAB00354964 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E4716B84BAB00354964 /* Default@2x.png */; };
 		494D0E4A16B84BAB00354964 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E4916B84BAB00354964 /* Default-568h@2x.png */; };
-		494D0E4D16B84BAB00354964 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E4B16B84BAB00354964 /* iPhone.storyboard */; };
-		494D0E5016B84BAB00354964 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E4E16B84BAB00354964 /* iPad.storyboard */; };
 		494D0E5F16B84F7300354964 /* AttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E5E16B84F7300354964 /* AttendanceViewController.m */; };
 		494D0E6216B84FE900354964 /* AttendanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E6116B84FE900354964 /* AttendanceCell.m */; };
 		494D0E6416B8509300354964 /* AttendanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E6316B8509300354964 /* AttendanceCell.xib */; };
@@ -35,6 +33,8 @@
 		49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F216C1E39E007AA467 /* RemindersViewController.m */; };
 		49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */; };
 		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
+		49AB41FE16C2C93D007AA467 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AB41FA16C2C93D007AA467 /* iPad.storyboard */; };
+		49AB41FF16C2C93D007AA467 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AB41FC16C2C93D007AA467 /* iPhone.storyboard */; };
 		F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */; };
 		F79A34E916BD8FAE00ACAABB /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = F79A34E816BD8FAE00ACAABB /* Database.m */; };
 		F79A34EC16BDAB4600ACAABB /* EmployeeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB416B8639300F16ED6 /* EmployeeRecord.m */; };
@@ -69,8 +69,6 @@
 		494D0E4516B84BAB00354964 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		494D0E4716B84BAB00354964 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		494D0E4916B84BAB00354964 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		494D0E4C16B84BAB00354964 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
-		494D0E4F16B84BAB00354964 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		494D0E5D16B84F7300354964 /* AttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceViewController.h; sourceTree = "<group>"; };
 		494D0E5E16B84F7300354964 /* AttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceViewController.m; sourceTree = "<group>"; };
 		494D0E6016B84FE900354964 /* AttendanceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceCell.h; sourceTree = "<group>"; };
@@ -94,6 +92,8 @@
 		49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		49AB41F716C222B0007AA467 /* ReminderManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderManagedObject.h; sourceTree = "<group>"; };
 		49AB41F816C222B0007AA467 /* ReminderManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderManagedObject.m; sourceTree = "<group>"; };
+		49AB41FB16C2C93D007AA467 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
+		49AB41FD16C2C93D007AA467 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollNotificationsViewController.h; sourceTree = "<group>"; };
 		F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollNotificationsViewController.m; sourceTree = "<group>"; };
 		F79A34E716BD8FAE00ACAABB /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
@@ -204,8 +204,8 @@
 				490A5B0016C1D9990062F36F /* HomeViewController.m */,
 				4960AFC216B8759600F16ED6 /* IncidentViewController.h */,
 				4960AFC316B8759600F16ED6 /* IncidentViewController.m */,
-				494D0E4E16B84BAB00354964 /* iPad.storyboard */,
-				494D0E4B16B84BAB00354964 /* iPhone.storyboard */,
+				49AB41FA16C2C93D007AA467 /* iPad.storyboard */,
+				49AB41FC16C2C93D007AA467 /* iPhone.storyboard */,
 				490A5AFA16C1D95A0062F36F /* Library */,
 				F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */,
 				F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */,
@@ -213,12 +213,10 @@
 				F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */,
 				490A5B0A16C1DD1F0062F36F /* Reminders */,
 				494D0E3A16B84BAB00354964 /* Supporting Files */,
-				494D0E4E16B84BAB00354964 /* iPad.storyboard */,
 				FAA2F1B916B8AA80009466A1 /* testNotification.h */,
 				FAA2F1BA16B8AA80009466A1 /* testNotification.m */,
 				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
 				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
-				494D0E4B16B84BAB00354964 /* iPhone.storyboard */,
 				F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */,
 				F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */,
 				494D0E3A16B84BAB00354964 /* Supporting Files */,
@@ -295,9 +293,9 @@
 				494D0E4616B84BAB00354964 /* Default.png in Resources */,
 				494D0E4816B84BAB00354964 /* Default@2x.png in Resources */,
 				494D0E4A16B84BAB00354964 /* Default-568h@2x.png in Resources */,
-				494D0E4D16B84BAB00354964 /* iPhone.storyboard in Resources */,
-				494D0E5016B84BAB00354964 /* iPad.storyboard in Resources */,
 				494D0E6416B8509300354964 /* AttendanceCell.xib in Resources */,
+				49AB41FE16C2C93D007AA467 /* iPad.storyboard in Resources */,
+				49AB41FF16C2C93D007AA467 /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,20 +343,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		494D0E4B16B84BAB00354964 /* iPhone.storyboard */ = {
+		49AB41FA16C2C93D007AA467 /* iPad.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				494D0E4C16B84BAB00354964 /* en */,
-			);
-			name = iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		494D0E4E16B84BAB00354964 /* iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				494D0E4F16B84BAB00354964 /* en */,
+				49AB41FB16C2C93D007AA467 /* en */,
 			);
 			name = iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		49AB41FC16C2C93D007AA467 /* iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49AB41FD16C2C93D007AA467 /* en */,
+			);
+			name = iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

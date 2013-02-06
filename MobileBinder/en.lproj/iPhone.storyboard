@@ -553,15 +553,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Reminders" id="cxX-oy-Wzu">
-                        <barButtonItem key="rightBarButtonItem" title=" " id="qOa-yN-44f">
-                            <connections>
-                                <action selector="reminderRangeButtonPressed:" destination="8eA-uo-g08" id="JbY-im-jfP"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Reminders" id="cxX-oy-Wzu"/>
                     <connections>
-                        <outlet property="rangeButton" destination="qOa-yN-44f" id="Hrg-1i-Rk1"/>
                         <outlet property="tableView" destination="R2B-es-ngj" id="M92-1A-Glg"/>
                     </connections>
                 </viewController>
@@ -652,7 +645,6 @@
         <class className="EmployeeViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeViewController.h"/>
             <relationships>
-                <relationship kind="action" name="editPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
             </relationships>
