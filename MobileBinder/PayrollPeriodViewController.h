@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PayrollPeriodViewController : UIViewController;
+@interface PayrollPeriodViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>;
 
 @property (strong, nonatomic) NSMutableArray* possiblePayPeriods;
 
