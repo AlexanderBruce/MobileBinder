@@ -355,7 +355,18 @@
                             <outlet property="delegate" destination="AHj-au-6ik" id="Qfm-cU-SUy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="STZ-zu-bMa"/>
+                    <navigationItem key="navigationItem" id="STZ-zu-bMa">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="qTX-YT-qjh">
+                            <connections>
+                                <action selector="cancelPressed:" destination="AHj-au-6ik" id="7JA-Qv-q8t"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="HGk-6A-Zs1">
+                            <connections>
+                                <action selector="savePressed:" destination="AHj-au-6ik" id="iAH-lB-4df"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97C-Lt-kx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewSection headerTitle="Notifications" id="buB-Ld-l4t">
@@ -553,15 +564,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Reminders" id="cxX-oy-Wzu">
-                        <barButtonItem key="rightBarButtonItem" title=" " id="qOa-yN-44f">
-                            <connections>
-                                <action selector="reminderRangeButtonPressed:" destination="8eA-uo-g08" id="JbY-im-jfP"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Reminders" id="cxX-oy-Wzu"/>
                     <connections>
-                        <outlet property="rangeButton" destination="qOa-yN-44f" id="Hrg-1i-Rk1"/>
                         <outlet property="tableView" destination="R2B-es-ngj" id="M92-1A-Glg"/>
                     </connections>
                 </viewController>

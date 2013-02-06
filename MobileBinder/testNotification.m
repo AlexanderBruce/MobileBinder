@@ -20,10 +20,11 @@
     if (cls != nil)
     {
         UILocalNotification *notif = [[cls alloc] init];
-        notif.fireDate = [NSDate dateWithTimeIntervalSinceNow:15];
+        notif.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
         notif.timeZone = [NSTimeZone defaultTimeZone];
         notif.alertBody = @"Did you forget something?";
-        notif.alertAction = @"Show me";
+        notif.hasAction = NO;
+//        notif.alertAction = @"Show me";
         notif.soundName = UILocalNotificationDefaultSoundName;
         notif.applicationIconBadgeNumber = 1;
         NSDictionary *userDict = nil;
