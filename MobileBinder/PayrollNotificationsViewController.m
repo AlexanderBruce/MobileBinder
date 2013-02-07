@@ -127,7 +127,7 @@
     self.jStringToTypeID = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
     
     
-    values = [[NSArray alloc] initWithObjects:@"Pay period ends in 2 days", @"Biweekly time cards due today",@"Biweekly forms due tomorrow",@"Monthly Forms due tomorrow",@"Montly time cards due tomorrow", nil];
+    values = [[NSArray alloc] initWithObjects:@"Pay period ends in 2 days", @"Biweekly time cards due today",@"Biweekly forms due tomorrow",@"Monthly Forms due tomorrow",@"Monthly time cards due tomorrow", nil];
     
     self.jStringToReminderText = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
     

@@ -2,6 +2,7 @@
 #import "EmployeeRecord.h"
 #import "WebviewViewController.h"
 #import "Database.h"
+#import "Constants.h"
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
@@ -10,10 +11,14 @@
 #define TARDY_INDEX 1
 #define TIMECARD_INDEX 2
 
-#define YELLOW_SEGUE @"yellowSegue"
+#define LEVEL_1_SEGUE @"yellowSegue"
 #define YELLOW_WEBPAGE_URL @"http://www.hr.duke.edu/policies/time_away/availability.php"
 
-@interface IncidentViewController () <UITextFieldDelegate, WebviewViewControllerDelegate>
+#define LEVEL_1_ALERT_TAG 2
+#define LEVEL_2_ALERT_TAG 3
+#define LEVEL_3_ALERT_TAG 4
+
+@interface IncidentViewController () <UITextFieldDelegate, WebviewViewControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *employeeNameField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *incidentTypeControl;
 @property (weak, nonatomic) IBOutlet UITextField *incidentDateField;
@@ -25,7 +30,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:YELLOW_SEGUE])
+    if([segue.identifier isEqualToString:LEVEL_1_SEGUE])
     {
         WebviewViewController *dest = (WebviewViewController *) segue.destinationViewController;
         dest.delegate = self;
@@ -48,15 +53,13 @@
     self.incidentDateField.text = [formatter stringFromDate:[NSDate date]];
 }
 
-- (void) viewDidAppear:(BOOL)animated
-{
-    [self performSegueWithIdentifier:YELLOW_SEGUE sender:self];
-}
-
 #pragma mark - WebviewViewControllerDelegate
 - (void) doneViewingWebpage
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^
+     {
+         [self.navigationController popViewControllerAnimated:YES];
+     }];
 }
 
 - (IBAction)savePressed:(UIButton *)sender
@@ -66,32 +69,82 @@
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Please select the incident type" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
         return;
     }
+    int changeOfLevel = -1;
     if(self.incidentTypeControl.selectedSegmentIndex == ABSENCE_INDEX)
     {
-        [self.employeeRecord addAbsenceForDate:self.incidentDate];
+        changeOfLevel = [self.employeeRecord addAbsenceForDate:self.incidentDate];
     }
     else if(self.incidentTypeControl.selectedSegmentIndex == TARDY_INDEX)
     {
-        [self.employeeRecord addTardyForDate:self.incidentDate];
+        changeOfLevel = [self.employeeRecord addTardyForDate:self.incidentDate];
     }
     else if(self.incidentTypeControl.selectedSegmentIndex == TIMECARD_INDEX)
     {
-        [self.employeeRecord addMissedSwipeForDate:self.incidentDate];
+        changeOfLevel =[self.employeeRecord addMissedSwipeForDate:self.incidentDate];
     }
-    [Database saveDatabase];
     
-    [[[UIAlertView alloc] initWithTitle:@"Action Needed" message:@"This employee needs to be terminated immediately" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:@"Learn more", nil] show];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [Database saveDatabase];
+    });
+    
+    if (changeOfLevel >= 0)
+    {
+        NSString *alertTitle = [NSString stringWithFormat:@"%@",[self.employeeRecord getTextForLevel:changeOfLevel]];
+        if (changeOfLevel == LEVEL_1_ID)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"Please review the availability to work policy" delegate:self cancelButtonTitle:@"View policy" otherButtonTitles:nil];
+            alert.tag = LEVEL_1_ALERT_TAG;
+            [alert show];
+            return;
+        }
+        else if (changeOfLevel == LEVEL_2_ID)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            alert.tag = LEVEL_2_ALERT_TAG;
+            [alert show];
+            return;
+        }
+        else if(changeOfLevel == LEVEL_3_ID)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"Please prepare termination proposal and submit to Staff and Labor Relations for review" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            alert.tag = LEVEL_3_ALERT_TAG;
+            [alert show];
+            return;
+        }
+    }
     [self.navigationController popViewControllerAnimated:YES]; 
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.tag == LEVEL_1_ALERT_TAG)
+    {
+        [self performSegueWithIdentifier:LEVEL_1_SEGUE sender:self];
+    }
+    else if(alertView.tag == LEVEL_2_ALERT_TAG)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else if(alertView.tag == LEVEL_3_ALERT_TAG)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+    if(!IS_4_INCH_SCREEN)
+    {
+        [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+    }
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
-    [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    if(!IS_4_INCH_SCREEN)
+    {
+        [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
 }
 
 - (UIView *) createDatePicker
@@ -108,7 +161,7 @@
     
     // Create done button
     UIToolbar* toolBar = [[UIToolbar alloc] init];
-    toolBar.barStyle = UIBarStyleBlack;
+    toolBar.barStyle = UIBarStyleBlackTranslucent;
     toolBar.translucent = YES;
     toolBar.tintColor = nil;
     [toolBar sizeToFit];

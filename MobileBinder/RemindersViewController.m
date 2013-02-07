@@ -14,6 +14,9 @@
 #define MONTH_TITLE @"Month"
 #define YEAR_TITLE @"Year"
 
+#define FIRST_DAY_IN_TABLE -7
+#define NUMBER_OF_DAYS_IN_FETCH 14
+
 @interface RemindersViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSDate *minDateInTable;
@@ -66,12 +69,14 @@
     
     
     NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
-    dayComponent.day = -7;
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    self.minDateInTable = [calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
     
-    dayComponent.day = 7;
-    self.maxDateInTable = [calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+    dayComponent.day = FIRST_DAY_IN_TABLE;
+
+    NSDateComponents *comps = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
+    NSDate *max = [calendar dateFromComponents:comps];
+    
+    self.maxDateInTable = [calendar dateByAddingComponents:dayComponent toDate:max options:0];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -93,7 +98,7 @@
     NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     [self.tableView beginUpdates];
-    dayComponent.day = 7;
+    dayComponent.day = NUMBER_OF_DAYS_IN_FETCH;
     self.minDateInTable = self.maxDateInTable;
     self.maxDateInTable = [calendar dateByAddingComponents:dayComponent toDate:self.maxDateInTable options:0];
     NSArray *newReminders =[center getRemindersBetween:self.minDateInTable andEndDate:self.maxDateInTable];
