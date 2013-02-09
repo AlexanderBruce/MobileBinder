@@ -52,8 +52,7 @@
     else if (self.periodTypeSegmented.selectedSegmentIndex == -1){
     }
     else{
-        NSLog(@"here");
-//        self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:[self.myPicker selectedRowInComponent:0]forComponent:0];
+        [self.periodSelection resignFirstResponder];
     }
 }
 
@@ -64,8 +63,7 @@
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
-    [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    [textField setText:self.selectedPayPeriod];
+    [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];    
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
@@ -76,15 +74,16 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     self.selectedPayPeriod = [self pickerView:pickerView titleForRow:row forComponent:component];
+    [self.periodSelection setText:self.selectedPayPeriod];
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
 {
     NSInteger ret = 0;
-    if(self.periodTypeSegmented.selectedSegmentIndex == 0){
+    if(self.periodTypeSegmented.selectedSegmentIndex == 1){
         ret = [self.monthlyPayPeriods count];
     }
-    else if (self.periodTypeSegmented.selectedSegmentIndex == 1) {
+    else if (self.periodTypeSegmented.selectedSegmentIndex == 0) {
         ret = [self.biweeklyPayPeriods count];
     }
     return ret;
@@ -95,10 +94,10 @@
     NSString *result = nil;
     if([pickerView isEqual:self.myPicker])
     {
-        if(self.periodTypeSegmented.selectedSegmentIndex == 0){
+        if(self.periodTypeSegmented.selectedSegmentIndex == 1){
             result = [self.monthlyPayPeriods objectAtIndex:row];
         }
-        else if (self.periodTypeSegmented.selectedSegmentIndex == 1) {
+        else if (self.periodTypeSegmented.selectedSegmentIndex == 0) {
             result = [self.biweeklyPayPeriods objectAtIndex:row];
         }
  
