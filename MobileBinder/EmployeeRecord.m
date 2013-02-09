@@ -9,6 +9,34 @@
 
 @implementation EmployeeRecord
 
+- (void) setFirstName:(NSString *)firstName
+{
+    _firstName = firstName;
+    self.myManagedObject.firstName = _firstName;
+}
+
+- (void) setLastName:(NSString *)lastName
+{
+    _lastName = lastName;
+    self.myManagedObject.lastName = _lastName;
+}
+
+- (void) setDepartment:(NSString *)department
+{
+    _department = department;
+    self.myManagedObject.department = _department;
+}
+
+- (void) setUnit:(NSString *)unit
+{
+    _unit = unit;
+    self.myManagedObject.unit = _unit;
+}
+
+
+
+
+
 - (NSArray *) absences
 {
     return [self.mutableAbsences copy];
@@ -140,6 +168,8 @@
     {
         self.firstName = (managedObject.firstName != nil) ? managedObject.firstName : @"";
         self.lastName = (managedObject.lastName != nil)  ? managedObject.lastName : @"";
+        self.department = (managedObject.department != nil) ? managedObject.department : @"";
+        self.unit = (managedObject.unit != nil)  ? managedObject.unit : @"";
         self.mutableAbsences = (managedObject.absences != nil) ? [managedObject.absences mutableCopy] : [[NSMutableArray alloc] init];
         self.mutableTardies = (managedObject.tardies != nil) ? [managedObject.tardies mutableCopy] : [[NSMutableArray alloc] init];
         self.mutableMissedSwipes = (managedObject.missedSwipes != nil) ? [managedObject.missedSwipes mutableCopy] : [[NSMutableArray alloc] init];
