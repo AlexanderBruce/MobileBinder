@@ -14,16 +14,6 @@
 #import "Reminder.h"
 
 @interface PayrollNotificationsViewController ()
-//@property (strong, nonatomic) NSString *BIWEEKLY_HEADING_STRING;
-//@property (strong, nonatomic) NSString *BEGIN_DATE_STRING;
-//
-//@property (strong, nonatomic) NSString *END_DATE_STRING;
-//
-//@property (strong, nonatomic) NSString *PAY_DATE_STRING;
-//
-//@property (strong, nonatomic) NSString *MONTHLY_HEADING_STRING;
-//@property (strong, nonatomic) NSString *MONTHLY_NOTIFICATIONS_STRING;
-
 
 //Temporary testing properties
 @property (strong, nonatomic) NSDictionary *jStringToTypeID;
@@ -97,39 +87,40 @@
 {
     [super viewDidLoad];
     self.model = [[PayrollModel alloc] init];
-    NSString *BIWEEKLY_HEADING_STRING = @"Biweekly Employees";
-    NSString *PP_BIWEEKLY_STRING = @"Pay Period";
-    NSString *TIME_ATTENDANCE_STRING = @"Time/Attendance";
-    NSString *FORMS_DUE_STRING = @"Forms Due";
+    NSString *BIWEEKLY_HEADING = @"Biweekly Employees";
+    NSString *BIWEEKLY_PAY_PERIOD = @"Pay Period";
+    NSString *BIWEEKLY_PAY_DATE = @"Pay Date";
+    NSString *BIWEEKLY_TIME_CARD = @"Time Card Locks";
     self.notificationSettingsSectionsAndRows = [NSMutableDictionary dictionary];
     [self.notificationSettingsSectionsAndRows setObject:
-     [[NSArray alloc]initWithObjects:PP_BIWEEKLY_STRING,TIME_ATTENDANCE_STRING, FORMS_DUE_STRING, nil]
-                                                 forKey:BIWEEKLY_HEADING_STRING]; 
+     [[NSArray alloc]initWithObjects:BIWEEKLY_PAY_PERIOD,BIWEEKLY_TIME_CARD, BIWEEKLY_PAY_DATE, nil]
+                                                 forKey:BIWEEKLY_HEADING]; 
     
-//    NSString *LOCK_DOWN_STRING = @"Card Lock Down";
-//    NSString *GROSS_STRING = @"Gross Adjustments";
-//    NSString *MGMENT_CENTERS_STRING = @"Management Centers";
-//    [self.notificationSettingsSectionsAndRows setObject:
-//     [[NSArray alloc]initWithObjects:BEGIN_DATE_STRING,END_DATE_STRING, PAY_DATE_STRING, LOCK_DOWN_STRING, GROSS_STRING, nil]
-//                                                 forKey:BIWEEKLY_HEADING_STRING];
-    
-    NSString *MONTHLY_HEADING_STRING = @"Monthly Employees";
-    NSString *MONTHLY_FORMS_DUE_STRING = @"Forms Due ";
-    NSString *MONTHLY_TIME_ATTENDANCE_STRING = @"Time/Attendance ";
+    NSString *MONTHLY_HEADING = @"Monthly Employees";
+    NSString *MONTHLY_TIME_ATTENDANCE = @"Pay Period ";
+    NSString *MONTHLY_PAY_DATE = @"Pay Date ";
+    NSString *MONTHLY_HR_FORMS = @"Corporate Payroll";
     [self.notificationSettingsSectionsAndRows setObject:
-     [[NSArray alloc]initWithObjects:MONTHLY_FORMS_DUE_STRING, MONTHLY_TIME_ATTENDANCE_STRING, nil]
-                                                 forKey:MONTHLY_HEADING_STRING];
+     [[NSArray alloc]initWithObjects:MONTHLY_TIME_ATTENDANCE, MONTHLY_PAY_DATE, nil]
+                                                 forKey:MONTHLY_HEADING];
+    
+    NSString *FORMS_HEADING = @"Forms Due To";
+    NSString *BIWEEKLY_DRH_HR = @"DRH HR";
+    [self.notificationSettingsSectionsAndRows setObject:
+     [[NSArray alloc]initWithObjects:MONTHLY_HR_FORMS, BIWEEKLY_DRH_HR, nil]
+                                                 forKey:FORMS_HEADING];
+
     
     
     //Testing purposes only
-    NSArray *keys = [[NSArray alloc] initWithObjects:PP_BIWEEKLY_STRING,TIME_ATTENDANCE_STRING,FORMS_DUE_STRING,MONTHLY_FORMS_DUE_STRING,MONTHLY_TIME_ATTENDANCE_STRING, nil];
-    NSArray *values = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:3],[NSNumber numberWithInt:4],[NSNumber numberWithInt:5],[NSNumber numberWithInt:6],nil];    
-    self.jStringToTypeID = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
-    
-    
-    values = [[NSArray alloc] initWithObjects:@"Pay period ends in 2 days", @"Biweekly time cards due today",@"Biweekly forms due tomorrow",@"Monthly Forms due tomorrow",@"Monthly time cards due tomorrow", nil];
-    
-    self.jStringToReminderText = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
+//    NSArray *keys = [[NSArray alloc] initWithObjects:BIWEEKLY_PAY_PERIOD, BIWEEKLY_PAY_DATE, BIWEEKLY_TIME_CARD, nil];
+//    NSArray *values = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:BIWEEKLY_PAYPERIOD_TYPEID], [NSNumber numberWithInt:BIWEEKLY_PAYDATE_TYPEID], [NSNumber numberWithInt:BIWEEKLY_ETIMECARD_LOCK_TYPEID ],nil];
+//    self.jStringToTypeID = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
+//    
+//    
+//    values = [[NSArray alloc] initWithObjects:@"Pay period ends in 2 days", @"Biweekly pay day today",@"Biweekly forms due tomorrow", nil];//@"Monthly Forms due tomorrow",@"Monthly time cards due tomorrow", nil];
+//    
+//    self.jStringToReminderText = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
     
     
     
@@ -138,8 +129,8 @@
         NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
         for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
             NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
-            UISwitch *swtch = [[UISwitch alloc]init];
-            [self.switchesToLabels setObject:swtch forKey:jString];
+            UISwitch *mySwitch = [[UISwitch alloc]init];
+            [self.switchesToLabels setObject:mySwitch forKey:jString];
         }
     }
 
@@ -194,7 +185,7 @@
     if(!cell) cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    CGRect labelFrame = CGRectMake(20, 13, 150, 20);
+    CGRect labelFrame = CGRectMake(20, 13, 200, 20);
     UILabel *title = [[UILabel alloc]initWithFrame:labelFrame];
     title.backgroundColor = [UIColor clearColor];
     NSString *key = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:indexPath.section];
@@ -202,7 +193,7 @@
     title.backgroundColor = [UIColor clearColor];
     [cell addSubview:title];
     
-    CGRect switchFrame = CGRectMake(220, 10, 40, 22);
+    CGRect switchFrame = CGRectMake(230, 10, 0, 0);
     UISwitch *mySwitch = [self.switchesToLabels objectForKey:title.text];
     mySwitch.frame = switchFrame;
     [cell addSubview:mySwitch];
@@ -216,3 +207,4 @@
 }
 
 @end
+
