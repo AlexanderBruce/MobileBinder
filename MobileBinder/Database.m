@@ -1,6 +1,6 @@
 #import "Database.h"
 
-#define DATABASE_PATH @"Database20"
+#define DATABASE_PATH @"Database21"
 
 @interface Database()
 @end

@@ -16,6 +16,9 @@
 #define INCIDENT_SECTION 3
 #define INCIDENT_SEGUE @"reportIncidentSegue"
 
+#define EDIT_EMPLOYEE_SECTION 4
+#define EDIT_EMPLOYEE_SEGUE @"editEmployeeSegue"
+
 #define DEFAULT_CELL_HEIGHT 38
 #define INCIDENT_CELL_HEIGHT 42
 
@@ -142,6 +145,11 @@
     if(indexPath.section == INCIDENT_SECTION)
     {
         [self performSegueWithIdentifier:INCIDENT_SEGUE sender:self];
+    }
+    
+    else if (indexPath.section == EDIT_EMPLOYEE_SECTION)
+    {
+        [self performSegueWithIdentifier:EDIT_EMPLOYEE_SEGUE sender:self];
     }
 }
 
