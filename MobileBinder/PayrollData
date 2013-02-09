@@ -1,4 +1,4 @@
-##Pay Period Begin##2##
+##Pay Period Begin##1##
 14-01
 28-01
 11-02
@@ -24,7 +24,7 @@
 18-11
 02-12
 
-##Pay Period End##3##
+##Pay Period End##2##
 13-01
 27-01
 10-02
@@ -52,7 +52,7 @@
 15-12
 29-12
 
-##Pay Date##4##
+##Pay Date##3##
 11-01
 25-01
 08-02
@@ -80,7 +80,7 @@
 13-12
 27-12
 
-##Time and Attendance and electronic time cards employee lock down##5##
+##Time and Attendance and electronic time cards employee lock down##4##
 02-01
 14-01
 28-01
@@ -109,7 +109,7 @@
 16-12
 30-12
 
-##Time and Attendance and electronic time cards supervisor lock down##6##
+##Time and Attendance and electronic time cards supervisor lock down##5##
 03-01
 15-01
 29-01
@@ -137,7 +137,8 @@
 03-12
 17-12
 
-##Time and Attendance and electronic time cards supervisor lock down##7##
+##Gross Adjustment forms due to corporate payroll##6##
+03-01
 15-01
 29-01
 12-02
@@ -164,7 +165,7 @@
 03-12
 17-12
 
-##Forms due to management centers##8##
+##Forms due to management centers##7##
 04-01
 16-01
 01-02
@@ -192,7 +193,7 @@
 06-12
 18-12
 
-##All forms due to DRH HR##9##
+##All forms due to DRH HR##8##
 04-01
 16-01
 01-02
@@ -220,7 +221,7 @@
 06-12
 18-12
 
-##All types of iForms##10##
+##All types of iForms##9##
 07-01
 18-01
 04-02
@@ -248,7 +249,7 @@
 09-12
 20-12
 
-##Forms Due to Management Centers (except DRH)##11##
+##Forms Due to Management Centers (except DRH)##10##
 10-01
 12-02
 12-03
@@ -262,7 +263,7 @@
 11-11
 09-12
 
-##Forms Due To DRH HR##12##
+##Forms Due To DRH HR##11##
 10-01
 12-02
 12-03
@@ -276,7 +277,7 @@
 11-11
 09-12
 
-##Leave of Absence Forms Due to Corporate Payroll##13##
+##Leave of Absence Forms Due to Corporate Payroll##12##
 10-01
 12-02
 12-03
@@ -290,7 +291,7 @@
 11-11
 09-12
 
-##Pay Exception Forms Due to Corporate Payroll##14##
+##Pay Exception Forms Due to Corporate Payroll##13##
 15-01
 15-02
 15-03
@@ -304,7 +305,7 @@
 14-11
 12-12
 
-##All Types of iForms##15##
+##All Types of iForms##14##
 15-01
 15-02
 15-03
@@ -318,7 +319,7 @@
 14-11
 12-12
 
-##Time and Attendance Closing to Update PTO Balances (previous month)##16##
+##Time and Attendance Closing to Update PTO Balances (previous month)##15##
 04-01
 05-02
 05-03
@@ -333,7 +334,7 @@
 03-12
 
 
-##Pay Date##17##
+##Pay Date##16##
 25-01
 25-02
 25-03
