@@ -107,7 +107,7 @@
     NSString *FORMS_HEADING = @"Forms Due To";
     NSString *BIWEEKLY_DRH_HR = @"DRH HR";
     [self.notificationSettingsSectionsAndRows setObject:
-     [[NSArray alloc]initWithObjects:MONTHLY_HR_FORMS, BIWEEKLY_MNGMT_CENTERS, BIWEEKLY_DRH_HR, nil]
+     [[NSArray alloc]initWithObjects:MONTHLY_HR_FORMS, BIWEEKLY_DRH_HR, nil]
                                                  forKey:FORMS_HEADING];
 
     
