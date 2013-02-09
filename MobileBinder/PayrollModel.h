@@ -4,7 +4,7 @@
 
 @interface PayrollModel : NSObject
 
-- (NSArray *) getDatesForTypeID: (int) typeID;
+- (void) addRemindersForTypeIDs: (NSArray *) toAdd andCancelRemindersForTypeIDs: (NSArray *) toCancel;
 
 
 @end

@@ -32,6 +32,8 @@
 		4960AFB816B8707D00F16ED6 /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */; };
 		4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC316B8759600F16ED6 /* IncidentViewController.m */; };
 		4968BB6016C43D40002600AF /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968BB5F16C43CD3002600AF /* CustomAlert.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		496DFF5616C6D70D00111136 /* PayrollData in Resources */ = {isa = PBXBuildFile; fileRef = 496DFF5516C6D70D00111136 /* PayrollData */; };
+		496DFF5716C6D82D00111136 /* PayrollData in Sources */ = {isa = PBXBuildFile; fileRef = 496DFF5516C6D70D00111136 /* PayrollData */; };
 		49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F216C1E39E007AA467 /* RemindersViewController.m */; };
 		49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */; };
 		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
@@ -94,6 +96,7 @@
 		4960AFC316B8759600F16ED6 /* IncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentViewController.m; sourceTree = "<group>"; };
 		4968BB5E16C43CD3002600AF /* CustomAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
 		4968BB5F16C43CD3002600AF /* CustomAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAlert.m; sourceTree = "<group>"; };
+		496DFF5516C6D70D00111136 /* PayrollData */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PayrollData; sourceTree = "<group>"; };
 		49AB41F116C1E39E007AA467 /* RemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindersViewController.h; sourceTree = "<group>"; };
 		49AB41F216C1E39E007AA467 /* RemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindersViewController.m; sourceTree = "<group>"; };
 		49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
@@ -264,6 +267,7 @@
 				F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */,
 				F7EFBFE116B9CCAD00C46D04 /* PayrollPeriodViewController.h */,
 				F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */,
+				496DFF5516C6D70D00111136 /* PayrollData */,
 			);
 			name = Payroll;
 			sourceTree = "<group>";
@@ -326,6 +330,7 @@
 				494D0E6416B8509300354964 /* AttendanceCell.xib in Resources */,
 				49AB41FE16C2C93D007AA467 /* iPad.storyboard in Resources */,
 				49AB41FF16C2C93D007AA467 /* iPhone.storyboard in Resources */,
+				496DFF5616C6D70D00111136 /* PayrollData in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				496DFF5716C6D82D00111136 /* PayrollData in Sources */,
 				4968BB6016C43D40002600AF /* CustomAlert.m in Sources */,
 				F79A34ED16BDABE500ACAABB /* Data.xcdatamodeld in Sources */,
 				F79A34EC16BDAB4600ACAABB /* EmployeeRecord.m in Sources */,
