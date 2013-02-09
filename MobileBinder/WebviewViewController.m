@@ -2,6 +2,7 @@
 
 @interface WebviewViewController () <UIWebViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @end
 
 @implementation WebviewViewController
@@ -12,6 +13,16 @@
     self.webview.delegate = self;
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:self.webpageURL]];
     [self.webview loadRequest:requestObj];
+}
+
+- (void) webViewDidStartLoad:(UIWebView *)webView
+{
+    [self.loadingIndicator startAnimating];
+}
+
+- (void) webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.loadingIndicator stopAnimating];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -40,6 +51,7 @@
 - (void)viewDidUnload
 {
     [self setWebview:nil];
+    [self setLoadingIndicator:nil];
     [super viewDidUnload];
 }
 @end

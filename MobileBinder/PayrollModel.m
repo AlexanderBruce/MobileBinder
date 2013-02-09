@@ -7,7 +7,7 @@
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
-    dayComponent.day = 0;
+    dayComponent.day = -7;
     for(int i = 0; i < 52; i++)
     {
         [returnArray addObject:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]];

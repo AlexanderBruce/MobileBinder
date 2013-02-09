@@ -24,7 +24,11 @@ static ReminderCenter *instance;
 
 - (void) addReminders: (NSArray *) reminders completion: (void (^) (void)) block
 {
-    
+    if(!reminders || reminders.count == 0)
+    {
+        block();
+        return;
+    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (Reminder *reminder in reminders)
         {
@@ -47,9 +51,10 @@ static ReminderCenter *instance;
             [[UIApplication sharedApplication] scheduleLocalNotification:notif];
         }
         [self synchronize];
-        block();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block();
+        });
     });
-
 }
 
 - (void) cancelRemindersWithTypeIDs: (NSArray *) typeIDArray completion: (void (^)(void)) block
@@ -97,7 +102,9 @@ static ReminderCenter *instance;
             [self.database.managedObjectContext deleteObject:managedObject];
         }
         [self synchronize];
-        block();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block();
+        });
     });
 }
 
@@ -105,7 +112,7 @@ static ReminderCenter *instance;
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
     fetchRequest.entity = [NSEntityDescription entityForName:NSStringFromClass([ReminderManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(fireDate >= %@) AND (fireDate <= %@)", begin, end];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(fireDate >= %@) AND (fireDate < %@)", begin, end];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fireDate" ascending:YES];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
@@ -119,17 +126,6 @@ static ReminderCenter *instance;
     }
     return remindersToReturn;
 
-}
-
-+ (BOOL)date:(NSDate*)date isBetweenDate:(NSDate*)beginDate andDate:(NSDate*)endDate
-{
-    if ([date compare:beginDate] == NSOrderedAscending)
-    	return NO;
-    
-    if ([date compare:endDate] == NSOrderedDescending)
-    	return NO;
-    
-    return YES;
 }
 
 - (void) synchronize
