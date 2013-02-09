@@ -1,5 +1,6 @@
 #import "HomeViewController.h"
 #import "MarqueeLabel.h"
+#import "PayrollModel.h"
 
 @interface HomeViewController ()
 @property (nonatomic, strong) MarqueeLabel *reminderLabel;
@@ -15,6 +16,7 @@
     self.reminderLabel.text = @"";
     self.reminderLabel.marqueeType = MLContinuous;
     [self.view addSubview:self.reminderLabel];
+    PayrollModel *model = [[PayrollModel alloc] init];
 }
 
 @end
