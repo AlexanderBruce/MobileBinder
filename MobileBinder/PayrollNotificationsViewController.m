@@ -44,7 +44,7 @@
     self.view.userInteractionEnabled = NO;
     
     NSMutableArray *typeIDsToRemove = [[NSMutableArray alloc] init];
-    NSMutableArray *remindersToAdd = [[NSMutableArray alloc] init];
+    NSMutableArray *typeIDsToAdd = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
         NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
         for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
@@ -59,23 +59,19 @@
             }
             else if((oldSetting == NO) && (newSetting == YES)) //Add new reminders
             {
-                NSArray *datesToAdd = [self.model getDatesForTypeID:[[self.jStringToTypeID objectForKey:jString] intValue]];
-                for (NSDate *date in datesToAdd)
-                {
-                    Reminder *reminder = [[Reminder alloc] initWithText:[self.jStringToReminderText objectForKey:jString] eventDate:date fireDate:date typeID:[[self.jStringToTypeID objectForKey:jString] intValue]];
-                    [remindersToAdd addObject:reminder];
-                }
-
+                [typeIDsToAdd addObject:[self.jStringToTypeID objectForKey:jString]];
             }
             [self.notificationUserSettings setBool:[swtch isOn] forKey:jString];
         }
     }
     
+    [self.model addRemindersForTypeIDs:typeIDsToAdd andCancelRemindersForTypeIDs:typeIDsToRemove];
+    
     [self.notificationUserSettings synchronize];
     
     ReminderCenter *center = [ReminderCenter getInstance];
     [center cancelRemindersWithTypeIDs:typeIDsToRemove completion:^{
-        [center addReminders:remindersToAdd completion:^{
+        [center addReminders:typeIDsToAdd completion:^{
             self.view.userInteractionEnabled = YES;
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self.navigationController popViewControllerAnimated:YES];
@@ -94,7 +90,7 @@
     self.notificationSettingsSectionsAndRows = [NSMutableDictionary dictionary];
     [self.notificationSettingsSectionsAndRows setObject:
      [[NSArray alloc]initWithObjects:BIWEEKLY_PAY_PERIOD,BIWEEKLY_TIME_CARD, BIWEEKLY_PAY_DATE, nil]
-                                                 forKey:BIWEEKLY_HEADING]; 
+                                                 forKey:BIWEEKLY_HEADING];
     
     NSString *MONTHLY_HEADING = @"Monthly Employees";
     NSString *MONTHLY_TIME_ATTENDANCE = @"Pay Period ";
@@ -109,18 +105,18 @@
     [self.notificationSettingsSectionsAndRows setObject:
      [[NSArray alloc]initWithObjects:MONTHLY_HR_FORMS, BIWEEKLY_DRH_HR, nil]
                                                  forKey:FORMS_HEADING];
-
+    
     
     
     //Testing purposes only
-//    NSArray *keys = [[NSArray alloc] initWithObjects:BIWEEKLY_PAY_PERIOD, BIWEEKLY_PAY_DATE, BIWEEKLY_TIME_CARD, nil];
-//    NSArray *values = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:BIWEEKLY_PAYPERIOD_TYPEID], [NSNumber numberWithInt:BIWEEKLY_PAYDATE_TYPEID], [NSNumber numberWithInt:BIWEEKLY_ETIMECARD_LOCK_TYPEID ],nil];
-//    self.jStringToTypeID = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
-//    
-//    
-//    values = [[NSArray alloc] initWithObjects:@"Pay period ends in 2 days", @"Biweekly pay day today",@"Biweekly forms due tomorrow", nil];//@"Monthly Forms due tomorrow",@"Monthly time cards due tomorrow", nil];
-//    
-//    self.jStringToReminderText = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
+    //    NSArray *keys = [[NSArray alloc] initWithObjects:BIWEEKLY_PAY_PERIOD, BIWEEKLY_PAY_DATE, BIWEEKLY_TIME_CARD, nil];
+    //    NSArray *values = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:BIWEEKLY_PAYPERIOD_TYPEID], [NSNumber numberWithInt:BIWEEKLY_PAYDATE_TYPEID], [NSNumber numberWithInt:BIWEEKLY_ETIMECARD_LOCK_TYPEID ],nil];
+    //    self.jStringToTypeID = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
+    //
+    //
+    //    values = [[NSArray alloc] initWithObjects:@"Pay period ends in 2 days", @"Biweekly pay day today",@"Biweekly forms due tomorrow", nil];//@"Monthly Forms due tomorrow",@"Monthly time cards due tomorrow", nil];
+    //
+    //    self.jStringToReminderText = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
     
     
     
@@ -133,7 +129,7 @@
             [self.switchesToLabels setObject:mySwitch forKey:jString];
         }
     }
-
+    
     self.notificationUserSettings = [NSUserDefaults standardUserDefaults];
     for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
         NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
@@ -147,7 +143,7 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
