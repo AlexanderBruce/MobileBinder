@@ -16,8 +16,8 @@
 @interface PayrollNotificationsViewController ()
 
 //Temporary testing properties
-@property (strong, nonatomic) NSDictionary *jStringToTypeID;
-@property (strong, nonatomic) NSDictionary *jStringToReminderText;
+@property (strong, nonatomic) NSDictionary *payrollNotificationToArrayofTypeIDs;
+@property (strong, nonatomic) NSDictionary *payrollNotificationToReminderText;
 
 @property (strong, nonatomic) NSUserDefaults *notificationUserSettings;
 @property (strong, nonatomic) NSMutableDictionary *notificationSettingsSectionsAndRows;
@@ -46,22 +46,24 @@
     NSMutableArray *typeIDsToRemove = [[NSMutableArray alloc] init];
     NSMutableArray *typeIDsToAdd = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
-        NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
-        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
-            NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
-            UISwitch *swtch = [self.switchesToLabels objectForKey:jString];
+        NSString *notificationSection = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
+        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:notificationSection]count]; j++) {
+            NSString *notificationLabel = [[self.notificationSettingsSectionsAndRows objectForKey:notificationSection]objectAtIndex:j];
+            UISwitch *swtch = [self.switchesToLabels objectForKey:notificationLabel];
             
-            BOOL oldSetting = [self.notificationUserSettings boolForKey:jString];
+            BOOL oldSetting = [self.notificationUserSettings boolForKey:notificationLabel];
             BOOL newSetting = swtch.isOn;
             if((oldSetting == YES) && (newSetting == NO)) //Cancel reminders
             {
-                [typeIDsToRemove addObject:[self.jStringToTypeID objectForKey:jString]];
+                [typeIDsToRemove addObject:[self.payrollNotificationToArrayofTypeIDs objectForKey:notificationLabel]];
+                NSLog(@"Cancel %@\n",notificationLabel);
             }
             else if((oldSetting == NO) && (newSetting == YES)) //Add new reminders
             {
-                [typeIDsToAdd addObject:[self.jStringToTypeID objectForKey:jString]];
+                [typeIDsToAdd addObject:[self.payrollNotificationToArrayofTypeIDs objectForKey:notificationLabel]];
+                NSLog(@"ADD %@ \n",notificationLabel);
             }
-            [self.notificationUserSettings setBool:[swtch isOn] forKey:jString];
+            [self.notificationUserSettings setBool:[swtch isOn] forKey:notificationLabel];
         }
     }
     
@@ -83,27 +85,45 @@
 {
     [super viewDidLoad];
     self.model = [[PayrollModel alloc] init];
+    self.payrollNotificationToArrayofTypeIDs = [NSMutableDictionary dictionary];
     NSString *BIWEEKLY_HEADING = @"Biweekly Employees";
     NSString *BIWEEKLY_PAY_PERIOD = @"Pay Period";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:BIWEEKLY_PAYPERIOD_BEGIN_DATE_TYPEID], [NSNumber numberWithInt:BIWEEKLY_PAYPERIOD_END_DATE_TYPEID], nil ]forKey:BIWEEKLY_PAY_PERIOD];
     NSString *BIWEEKLY_PAY_DATE = @"Pay Date";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:BIWEEKLY_PAYDATE_TYPEID], nil ]forKey:BIWEEKLY_PAY_DATE];
     NSString *BIWEEKLY_TIME_CARD = @"Time Card Locks";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:BIWEEKLY_ETIMECARD_LOCK_EMPLOYEE_TYPEID], [NSNumber numberWithInt:BIWEEKLY_ETIMECARD_LOCK_SUPERVISOR_TYPEID],[NSNumber numberWithInt:BIWEEKLY_GROSS_ADJUSTMENTS_TYPEID], nil ]forKey:BIWEEKLY_TIME_CARD];
     self.notificationSettingsSectionsAndRows = [NSMutableDictionary dictionary];
     [self.notificationSettingsSectionsAndRows setObject:
      [[NSArray alloc]initWithObjects:BIWEEKLY_PAY_PERIOD,BIWEEKLY_TIME_CARD, BIWEEKLY_PAY_DATE, nil]
                                                  forKey:BIWEEKLY_HEADING];
     
     NSString *MONTHLY_HEADING = @"Monthly Employees";
-    NSString *MONTHLY_TIME_ATTENDANCE = @"Pay Period ";
     NSString *MONTHLY_PAY_DATE = @"Pay Date ";
-    NSString *MONTHLY_HR_FORMS = @"Corporate Payroll";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:MONTHLY_PAY_DATE_TYPEID], nil ]forKey:MONTHLY_PAY_DATE];
     [self.notificationSettingsSectionsAndRows setObject:
-     [[NSArray alloc]initWithObjects:MONTHLY_TIME_ATTENDANCE, MONTHLY_PAY_DATE, nil]
+     [[NSArray alloc]initWithObjects:MONTHLY_PAY_DATE, nil]
                                                  forKey:MONTHLY_HEADING];
     
     NSString *FORMS_HEADING = @"Forms Due To";
-    NSString *BIWEEKLY_DRH_HR = @"DRH HR";
+    NSString *DRH_HR = @"Hospital HR";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:BIWEEKLY_DRH_HR_FORMS_TYPEID], [NSNumber numberWithInt:MONTHLY_DRH_HR_FORMS_TYPEID], nil ]forKey:DRH_HR];
+    NSString *MNGMT_CENTERS = @"Management Centers";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:BIWEEKLY_MANAGEMENTCENTER_FORMS_TYPEID], [NSNumber numberWithInt:MONTHLY_MANAGEMENTCENTER_FORMS_TYPEID], nil ]forKey:MNGMT_CENTERS];
+    NSString *IFORMS = @"iForms";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:BIWEEKLY_IFORMS_TYPEID], [NSNumber numberWithInt:MONTHLY_IFORMS_TYPEID], nil ]forKey:IFORMS];
+    NSString *MONTHLY_PTO_FORMS = @"Time Closing PTO";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:MONTHLY_PTO_FORMS], nil ]forKey:MONTHLY_PTO_FORMS];
     [self.notificationSettingsSectionsAndRows setObject:
-     [[NSArray alloc]initWithObjects:MONTHLY_HR_FORMS, BIWEEKLY_DRH_HR, nil]
+     [[NSArray alloc]initWithObjects:DRH_HR, nil]
                                                  forKey:FORMS_HEADING];
     
     
@@ -122,24 +142,25 @@
     
     self.switchesToLabels = [NSMutableDictionary dictionary];
     for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
-        NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
-        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
-            NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
+        NSString *notificationSections = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
+        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:notificationSections]count]; j++) {
+            NSString *notificationLabel = [[self.notificationSettingsSectionsAndRows objectForKey:notificationSections]objectAtIndex:j];
             UISwitch *mySwitch = [[UISwitch alloc]init];
-            [self.switchesToLabels setObject:mySwitch forKey:jString];
+            [self.switchesToLabels setObject:mySwitch forKey:notificationLabel];
+            [mySwitch setOn:[self.notificationUserSettings boolForKey:notificationLabel]];
         }
     }
-    
-    self.notificationUserSettings = [NSUserDefaults standardUserDefaults];
-    for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
-        NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
-        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
-            NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
-            
-            UISwitch *swtch = [self.switchesToLabels objectForKey:jString];
-            [swtch setOn:[self.notificationUserSettings boolForKey:jString]];
-        }
-    }
+//    
+//    self.notificationUserSettings = [NSUserDefaults standardUserDefaults];
+//    for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
+//        NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
+//        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
+//            NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
+//            
+//            UISwitch *swtch = [self.switchesToLabels objectForKey:jString];
+//            [swtch setOn:[self.notificationUserSettings boolForKey:jString]];
+//        }
+//    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
