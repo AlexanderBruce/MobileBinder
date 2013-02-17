@@ -18,7 +18,7 @@
     self.reminderLabel.text = @"";
     self.reminderLabel.marqueeType = MLContinuous;
     [self.view addSubview:self.reminderLabel];
-    [self writeToTextFile];
+//    [self writeToTextFile];
 }
 
 -(void) writeToTextFile
@@ -29,11 +29,13 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
     //make a file name to write the data to using the documents directory:
-    NSString *fileName = [NSString stringWithFormat:@"%@/textfile.rtf",
+    NSString *fileName = [NSString stringWithFormat:@"%@/textfile.RTF",
                           documentsDirectory];
-    //create content - four lines of text
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"Hello World"];
-    [str setAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:[UIFont systemFontSize]]} range:[@"Hello World" rangeOfString:@"World"]];
+    
+    NSString *contents =  @"{\\rtf1\\ansi\\deff0 {\\fonttbl {\\f0 Courier;}}\n{\\colortbl;\\red0\\green0\\blue0;\\red255\\green0\\blue0;}\n\\landscape\n\\paperw15840\\paperh12240\\margl720\\margr720\\margt720\\margb720\n\\tx720\\tx1440\\tx2880\\tx5760\nThis line is the default color\\line\n\\tab this line has 1 tab\\line\n\\tab\\tab this line has 2 tabs\\line\n\\tab\\tab\\tab this line has 3 tabs\\line\n\\tab\\tab\\tab\\tab this line has 4 tabs\\line\n\\cf2\n\\tab This line is red and has a tab before it\\line\n\\cf1\n\\page This line is the default color and the first line on page 2\n}";
+    
+    
+    [[contents dataUsingEncoding:NSUTF8StringEncoding] writeToFile:fileName atomically:YES];
     
     
     //save content to the documents directory
@@ -88,6 +90,8 @@
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
+
+    
     switch (result)
     {
         case MFMailComposeResultCancelled:
@@ -108,6 +112,20 @@
     }
     
     // Remove the mail view
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:NO];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"textfile.rtf"];
+        
+        
+    NSURL *rtfUrl = [NSURL URLWithString:[filePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:rtfUrl];
+    NSLog(@"%@",request);
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:webView];
+    [webView loadRequest:request];
 }
 @end
