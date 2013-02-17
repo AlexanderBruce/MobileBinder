@@ -92,14 +92,14 @@
         NSString *alertTitle = [NSString stringWithFormat:@"%@",[self.employeeRecord getTextForLevel:changeOfLevel]];
         if (changeOfLevel == LEVEL_1_ID)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"Please review the availability to work policy" delegate:self cancelButtonTitle:@"View policy" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"Review for written warning" delegate:self cancelButtonTitle:@"Review" otherButtonTitles:nil];
             alert.tag = LEVEL_1_ALERT_TAG;
             [alert show];
             return;
         }
         else if (changeOfLevel == LEVEL_2_ID)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"Review for final written warning" delegate:self cancelButtonTitle:@"Review" otherButtonTitles:nil];
             alert.tag = LEVEL_2_ALERT_TAG;
             [alert show];
             return;
