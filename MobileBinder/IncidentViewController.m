@@ -2,6 +2,7 @@
 #import "EmployeeRecord.h"
 #import "WebviewViewController.h"
 #import "Database.h"
+#import "CorrectiveActionModel.h"
 #import "Constants.h"
 
 #define KEYBOARD_HEIGHT 216.0f
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *incidentDateField;
 @property (nonatomic, strong) NSDate *incidentDate;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
+@property (nonatomic, strong) CorrectiveActionModel *myModel;
 @end
 
 @implementation IncidentViewController
@@ -51,6 +53,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateStyle = NSDateFormatterLongStyle;
     self.incidentDateField.text = [formatter stringFromDate:[NSDate date]];
+    self.myModel = [[CorrectiveActionModel alloc] init];
 }
 
 #pragma mark - WebviewViewControllerDelegate
@@ -70,16 +73,20 @@
         return;
     }
     int changeOfLevel = -1;
+    Behavior *behavior;
     if(self.incidentTypeControl.selectedSegmentIndex == ABSENCE_INDEX)
     {
+        behavior = Absence;
         changeOfLevel = [self.employeeRecord addAbsenceForDate:self.incidentDate];
     }
     else if(self.incidentTypeControl.selectedSegmentIndex == TARDY_INDEX)
     {
+        behavior = Tardy;
         changeOfLevel = [self.employeeRecord addTardyForDate:self.incidentDate];
     }
     else if(self.incidentTypeControl.selectedSegmentIndex == TIMECARD_INDEX)
     {
+        behavior = Missed_Swipe;
         changeOfLevel =[self.employeeRecord addMissedSwipeForDate:self.incidentDate];
     }
     
@@ -89,24 +96,13 @@
     
     if (changeOfLevel >= 0)
     {
-        NSString *alertTitle = [NSString stringWithFormat:@"%@",[self.employeeRecord getTextForLevel:changeOfLevel]];
-        if (changeOfLevel == LEVEL_1_ID)
+        if(changeOfLevel == 1 || changeOfLevel == 2)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"Review for written warning" delegate:self cancelButtonTitle:@"Review" otherButtonTitles:nil];
-            alert.tag = LEVEL_1_ALERT_TAG;
-            [alert show];
-            return;
-        }
-        else if (changeOfLevel == LEVEL_2_ID)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"Review for final written warning" delegate:self cancelButtonTitle:@"Review" otherButtonTitles:nil];
-            alert.tag = LEVEL_2_ALERT_TAG;
-            [alert show];
-            return;
+            [self.myModel generateCorrectiveActionDocumentFor:self.employeeRecord forBehavior:behavior level:changeOfLevel];
         }
         else if(changeOfLevel == LEVEL_3_ID)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:@"Please prepare termination proposal and submit to Staff and Labor Relations for review" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Action Needed" message:@"Please prepare termination proposal and submit to Staff and Labor Relations for review" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
             alert.tag = LEVEL_3_ALERT_TAG;
             [alert show];
             return;
