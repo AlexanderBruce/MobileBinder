@@ -1,10 +1,9 @@
 #import "HomeViewController.h"
 #import "MarqueeLabel.h"
 #import "PayrollModel.h"
-#import <MessageUI/MessageUI.h>
-#import <MessageUI/MFMailComposeViewController.h>
 
-@interface HomeViewController () <MFMailComposeViewControllerDelegate>
+
+@interface HomeViewController ()
 @property (nonatomic, strong) MarqueeLabel *reminderLabel;
 
 @end

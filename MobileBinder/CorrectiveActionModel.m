@@ -1,16 +1,20 @@
 #import "CorrectiveActionModel.h"
 #import "EmployeeRecord.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 #define TEMPLATE_FILE_NAME @"Corrective Action Notice Template"
 #define TEMPLATE_FILE_TYPE @"rtf"
 
+#define CORRECTIVE_ACTION_DOCUMENT_FILE_NAME @"Corrective Action Form.rtf"
+
 @implementation CorrectiveActionModel
 
-- (void) generateCorrectiveActionDocumentFor: (EmployeeRecord *) employee forBehavior: (Behavior) behavior level: (int) level
+- (MFMailComposeViewController *) generateCorrectiveActionDocumentFor: (EmployeeRecord *) employee forBehavior: (Behavior) behavior level: (int) level
 {
     NSString *templateContents = [self getTemplateContents];
     [self writeCorrectiveActionDocumentFor:employee forBehavior:behavior level:level usingTemplate:templateContents];
-    
+    return [self createMailViewControllerForEmployee:employee];
 }
 
 - (NSString *) getTemplateContents
@@ -28,8 +32,8 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains
     (NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/discipline1.rtf",
-                         documentsDirectory];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",
+                         documentsDirectory,CORRECTIVE_ACTION_DOCUMENT_FILE_NAME];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateStyle = NSDateFormatterLongStyle;
@@ -38,97 +42,67 @@
     NSString *finalWarning = (level == LEVEL_2_ID) ? @"X" : @"";
     NSString *termination = (level == LEVEL_3_ID) ? @"X" : @"";
     NSString *employeeName = [NSString stringWithFormat:@"%@ %@",employee.firstName,employee.lastName];
-    NSString *department = employee.depar;
-    NSString *violations = @"Absent 7 times during the current 12-month rolling calendar";
-    NSString *expectedBehavior = @"Arrive promptly to your post during your designated shifts";
-    NSString *futureActions = @"Further corrective actions up to and including termination";
+    NSString *department = @"Human Resources";//employee.department;
+    NSString *violations = [self violationForBehavior:behavior andEmployee:employee];
+    NSString *expectedBehavior = [self expectedBehaviorForBehavior:behavior];
+    NSString *futureActions = [self futureActionsForLevel:level];
     
-    NSString *contents = [NSString stringWithFormat:contentsTemplate,warning,finalWarning,termination,date,employee,department,violations,expectedBehavior,futureActions];
+    NSString *contents = [NSString stringWithFormat:template,warning,finalWarning,termination,date,employeeName,department,violations,expectedBehavior,futureActions];
     
-    
-    [[contents dataUsingEncoding:NSUTF8StringEncoding] writeToFile:fileName atomically:YES];
-
+    [[contents dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
 }
 
+- (NSString *) violationForBehavior: (Behavior) behavior andEmployee: (EmployeeRecord *) employee
+{
+    if(behavior == Absence)
+    {
+        return [NSString stringWithFormat:@"Absent %d times during the current 12-month rolling calendar",[employee getNumberOfAbsencesInPastYear]];
+    }
+    else if(behavior == Tardy)
+    {
+        return [NSString stringWithFormat:@"Tard %d times during the current 12-month rolling calendar",[employee getNumberOfTardiesInPastYear]];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"Missed %d swipes during the current 12-month rolling calendar",[employee getNumberOfMissedSwipesInPastYear]];
+    }
+}
 
-//Method retrieves content from documents directory and
-//displays it in an alert
--(void) sendContent
+- (NSString *) expectedBehaviorForBehavior: (Behavior) behavior
+{
+    if(behavior == Absence) return @"Arrive at your post during all of your designated shifts";
+    else if(behavior == Tardy) return @"Arrive promptly at the beginning of your shifts and leave only at the designated times";
+    else return @"Ensure that you swipe in at the beginning of your shift and swipe out at the end of your shift";
+}
+
+- (NSString *)futureActionsForLevel: (int) level
+{
+    if(level == LEVEL_1_ID) return @"Further corrective actions up to and including termination";
+    else if(level == LEVEL_2_ID) return @"Termination";
+    else return @"";
+}
+
+-(MFMailComposeViewController *) createMailViewControllerForEmployee: (EmployeeRecord *) employee
 {
     //get the documents directory:
     NSArray *paths = NSSearchPathForDirectoriesInDomains
     (NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:CORRECTIVE_ACTION_DOCUMENT_FILE_NAME];
+        
+    NSData *myData = [NSData dataWithContentsOfFile:filePath];
+        
+    MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
     
-    if ([MFMailComposeViewController canSendMail])
-    {
-        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"discipline1.rtf"];
-        
-        NSData *myData = [NSData dataWithContentsOfFile:filePath];
-        
-        MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-        
-        mailer.mailComposeDelegate = self;
-        
-        [mailer setSubject:@"Vehicle Expenses from myConsultant"];
-        [mailer setToRecipients:[NSArray arrayWithObject:@"arp25@duke.edu"]];
-        
-        [mailer addAttachmentData:myData mimeType:@"application/msword" fileName:@"Discipline"];
-        
-        [self presentModalViewController:mailer animated:YES];
-        
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failure"
-                                                        message:@"Your device doesn't support the composer sheet"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
+    NSString *subject = [NSString stringWithFormat:@"%@ Corrective Action Form",employee.lastName];
+    mailer.subject = subject;
+    NSString *messageBody = [NSString stringWithFormat:@"This corrective action notice has been auto-generated for your convenience.  Please ensure that %@ %@ recieves this in a timely fashion.",employee.firstName, employee.lastName];
+    [mailer setMessageBody:messageBody isHTML:NO];
+    [mailer setToRecipients:[NSArray arrayWithObject:@"arp25@duke.edu"]];
+    [mailer addAttachmentData:myData mimeType:@"application/msword" fileName:subject];
+    return mailer;
 }
 
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
-{
-    
-    
-    switch (result)
-    {
-        case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled: you cancelled the operation and no email message was queued.");
-            break;
-        case MFMailComposeResultSaved:
-            NSLog(@"Mail saved: you saved the email message in the drafts folder.");
-            break;
-        case MFMailComposeResultSent:
-            NSLog(@"Mail send: the email message is queued in the outbox. It is ready to send.");
-            break;
-        case MFMailComposeResultFailed:
-            NSLog(@"Mail failed: the email message was not saved or queued, possibly due to an error.");
-            break;
-        default:
-            NSLog(@"Mail not sent.");
-            break;
-    }
-    
-    // Remove the mail view
-    [self dismissModalViewControllerAnimated:NO];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains
-    (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"discipline1.rtf"];
-    
-    
-    NSURL *rtfUrl = [NSURL URLWithString:[filePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:rtfUrl];
-    NSLog(@"%@",request);
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:webView];
-    [webView loadRequest:request];
-}
 
 
 @end

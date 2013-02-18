@@ -19,13 +19,14 @@
 #define LEVEL_2_ALERT_TAG 3
 #define LEVEL_3_ALERT_TAG 4
 
-@interface IncidentViewController () <UITextFieldDelegate, WebviewViewControllerDelegate, UIAlertViewDelegate>
+@interface IncidentViewController () <UITextFieldDelegate, WebviewViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *employeeNameField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *incidentTypeControl;
 @property (weak, nonatomic) IBOutlet UITextField *incidentDateField;
 @property (nonatomic, strong) NSDate *incidentDate;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (nonatomic, strong) CorrectiveActionModel *myModel;
+@property (nonatomic, weak) MFMailComposeViewController *mailer;
 @end
 
 @implementation IncidentViewController
@@ -98,7 +99,10 @@
     {
         if(changeOfLevel == 1 || changeOfLevel == 2)
         {
-            [self.myModel generateCorrectiveActionDocumentFor:self.employeeRecord forBehavior:behavior level:changeOfLevel];
+            self.mailer = [self.myModel generateCorrectiveActionDocumentFor:self.employeeRecord forBehavior:behavior level:changeOfLevel];
+            self.mailer.mailComposeDelegate = self;
+            [self presentModalViewController:self.mailer animated:YES];
+            return;
         }
         else if(changeOfLevel == LEVEL_3_ID)
         {
@@ -109,6 +113,13 @@
         }
     }
     [self.navigationController popViewControllerAnimated:YES]; 
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self.mailer dismissViewControllerAnimated:YES completion:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

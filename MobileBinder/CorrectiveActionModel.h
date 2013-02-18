@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <MessageUI/MFMailComposeViewController.h>
 @class EmployeeRecord;
 
 @interface CorrectiveActionModel : NSObject
@@ -9,6 +10,6 @@ typedef enum {
     Missed_Swipe
 } Behavior;
 
-- (void) generateCorrectiveActionDocumentFor: (EmployeeRecord *) employee forBehavior: (Behavior) behavior level: (int) level;
+- (MFMailComposeViewController *) generateCorrectiveActionDocumentFor: (EmployeeRecord *) employee forBehavior: (Behavior) behavior level: (int) level;
 
 @end
