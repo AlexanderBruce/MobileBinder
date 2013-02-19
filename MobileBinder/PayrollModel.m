@@ -10,6 +10,11 @@
 
 @implementation PayrollModel
 
+- (void) addRemindersForTypeIDs: (NSArray *) toAdd andCancelRemindersForTypeIDs: (NSArray *) toCancel
+{
+    
+}
+
 - (NSArray *) getDatesForTypeID: (int) typeID
 {
     return [self.typeIDToDateArray objectForKey:[NSNumber numberWithInt:typeID]];
