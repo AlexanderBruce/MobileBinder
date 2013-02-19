@@ -14,7 +14,14 @@
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender
 {
-    if(self.firstNameField.text.length > 0 && self.lastNameField.text.length > 0)
+    if(self.myRecord)
+    {
+        self.myRecord.firstName = self.firstNameField.text;
+        self.myRecord.lastName = self.lastNameField.text;
+        self.myRecord.department = self.departmentField.text;
+        self.myRecord.unit = self.unitField.text;
+    }
+    else if(self.firstNameField.text.length > 0 && self.lastNameField.text.length > 0)
     {
         EmployeeRecord *record = [[EmployeeRecord alloc] init];
         record.firstName = self.firstNameField.text;
@@ -22,7 +29,7 @@
         record.department = self.departmentField.text;
         record.unit = self.unitField.text;
         if(!record.unit) record.unit = @"";
-        if(!record.department) record.unit = @"";
+        if(!record.department) record.department = @"";
         
         [self.delegate addedNewEmployeeRecord:record];
     }
@@ -48,6 +55,12 @@
     self.unitField.delegate = self;
     self.firstResponderIsActive = NO;
     self.myScrollView.scrollEnabled = YES;
+    if(self.myRecord){
+        self.firstNameField.text = self.myRecord.firstName;
+        self.lastNameField.text = self.myRecord.lastName;
+        self.departmentField.text = self.myRecord.department;
+        self.unitField.text = self.myRecord.unit;
+    }
 }
 
 
@@ -93,4 +106,5 @@
     );
 
 }
+
 @end
