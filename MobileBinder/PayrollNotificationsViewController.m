@@ -60,13 +60,8 @@
             }
             else if((oldSetting == NO) && (newSetting == YES)) //Add new reminders
             {
-//                NSArray *datesToAdd = [self.model getDatesForTypeID:[[self.jStringToTypeID objectForKey:jString] intValue]];
-//                for (NSDate *date in datesToAdd)
-//                {
-//                    Reminder *reminder = [[Reminder alloc] initWithText:[self.jStringToReminderText objectForKey:jString] eventDate:date fireDate:date typeID:[[self.jStringToTypeID objectForKey:jString] intValue]];
-//                    [remindersToAdd addObject:reminder];
-//                }
-
+                [typeIDsToAdd addObject:[self.payrollNotificationToArrayofTypeIDs objectForKey:notificationLabel]];
+                NSLog(@"ADD %@ \n",notificationLabel);
             }
             [self.notificationUserSettings setBool:[swtch isOn] forKey:notificationLabel];
         }
