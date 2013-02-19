@@ -49,6 +49,9 @@
 		F79A34EC16BDAB4600ACAABB /* EmployeeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB416B8639300F16ED6 /* EmployeeRecord.m */; };
 		F79A34ED16BDABE500ACAABB /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */; };
 		F79A34F616BDAFDC00ACAABB /* EmployeeRecordManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F79A34F516BDAFDC00ACAABB /* EmployeeRecordManagedObject.m */; };
+		F7A843A016D40CB8009F09DD /* Logo small.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A8439E16D40CB8009F09DD /* Logo small.png */; };
+		F7A843A116D40CB8009F09DD /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A8439F16D40CB8009F09DD /* Logo.png */; };
+		F7A843A516D40ECB009F09DD /* Banner copy.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A843A416D40ECB009F09DD /* Banner copy.png */; };
 		F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */; };
 		FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA2F1BA16B8AA80009466A1 /* testNotification.m */; };
 /* End PBXBuildFile section */
@@ -126,6 +129,9 @@
 		F79A34E816BD8FAE00ACAABB /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		F79A34F416BDAFDC00ACAABB /* EmployeeRecordManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRecordManagedObject.h; sourceTree = "<group>"; };
 		F79A34F516BDAFDC00ACAABB /* EmployeeRecordManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRecordManagedObject.m; sourceTree = "<group>"; };
+		F7A8439E16D40CB8009F09DD /* Logo small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo small.png"; sourceTree = "<group>"; };
+		F7A8439F16D40CB8009F09DD /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
+		F7A843A416D40ECB009F09DD /* Banner copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Banner copy.png"; path = "../Banner copy.png"; sourceTree = "<group>"; };
 		F7EFBFE116B9CCAD00C46D04 /* PayrollPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollPeriodViewController.h; sourceTree = "<group>"; };
 		F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollPeriodViewController.m; sourceTree = "<group>"; };
 		FAA2F1B916B8AA80009466A1 /* testNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testNotification.h; sourceTree = "<group>"; };
@@ -230,6 +236,9 @@
 		494D0E3916B84BAB00354964 /* MobileBinder */ = {
 			isa = PBXGroup;
 			children = (
+				F7A843A416D40ECB009F09DD /* Banner copy.png */,
+				F7A8439E16D40CB8009F09DD /* Logo small.png */,
+				F7A8439F16D40CB8009F09DD /* Logo.png */,
 				49FB670016C2CA21004F576F /* Attendance */,
 				499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */,
 				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
@@ -371,6 +380,9 @@
 				49AB41FF16C2C93D007AA467 /* iPhone.storyboard in Resources */,
 				496DFF5616C6D70D00111136 /* PayrollData in Resources */,
 				499C4CF216D2B9D800ED6E76 /* Corrective Action Notice Template.rtf in Resources */,
+				F7A843A016D40CB8009F09DD /* Logo small.png in Resources */,
+				F7A843A116D40CB8009F09DD /* Logo.png in Resources */,
+				F7A843A516D40ECB009F09DD /* Banner copy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
