@@ -22,7 +22,7 @@
         record.department = self.departmentField.text;
         record.unit = self.unitField.text;
         if(!record.unit) record.unit = @"";
-        if(!record.department) record.unit = @"";
+        if(!record.department) record.department = @"";
         
         [self.delegate addedNewEmployeeRecord:record];
     }

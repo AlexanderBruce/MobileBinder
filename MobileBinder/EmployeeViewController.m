@@ -92,6 +92,13 @@
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
         cell.textLabel.text = @"Report an incident";
     }
+    
+    else if (indexPath.section == EDIT_EMPLOYEE_SECTION)
+    {
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+        cell.textLabel.text = @"Edit Employee Information";
+    }
     return cell;
 }
 
@@ -131,7 +138,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
