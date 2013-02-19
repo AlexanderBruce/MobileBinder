@@ -33,4 +33,6 @@
 #define MONTHLY_TIME_CLOSING_PTO_FORMS_TYPEID 15
 #define MONTHLY_PAY_DATE_TYPEID 16
 
+#define MANAGER_EMAIL_KEY @"managerEmailKey"
+
 @end

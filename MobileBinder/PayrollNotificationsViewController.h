@@ -1,13 +1,8 @@
-//
-//  payrollNotificationsViewController.h
-//  MobileBinder
-//
-//  Created by Samuel Rang on 1/29/13.
-//  Copyright (c) 2013 Duke University. All rights reserved.
-//
-// Test
 #import <UIKit/UIKit.h>
+#import "SettingsProtocol.h"
 
-@interface PayrollNotificationsViewController : UITableViewController
+@interface PayrollNotificationsViewController : UITableViewController <SettingsViewController>
+
+@property (nonatomic, weak) id<SettingsDelegate> delegate;
 
 @end

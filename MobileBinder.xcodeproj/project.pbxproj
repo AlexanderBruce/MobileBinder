@@ -33,9 +33,10 @@
 		4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC316B8759600F16ED6 /* IncidentViewController.m */; };
 		4968BB6016C43D40002600AF /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968BB5F16C43CD3002600AF /* CustomAlert.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		496DFF5616C6D70D00111136 /* PayrollData in Resources */ = {isa = PBXBuildFile; fileRef = 496DFF5516C6D70D00111136 /* PayrollData */; };
-		496DFF5716C6D82D00111136 /* PayrollData in Sources */ = {isa = PBXBuildFile; fileRef = 496DFF5516C6D70D00111136 /* PayrollData */; };
 		499C4CF216D2B9D800ED6E76 /* Corrective Action Notice Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */; };
 		499C4CF516D2D9E300ED6E76 /* CorrectiveActionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CF416D2D9E300ED6E76 /* CorrectiveActionModel.m */; };
+		499C4CF916D2E7A400ED6E76 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CF816D2E7A400ED6E76 /* WelcomeViewController.m */; };
+		499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */; };
 		49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F216C1E39E007AA467 /* RemindersViewController.m */; };
 		49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */; };
 		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
@@ -103,6 +104,11 @@
 		499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Corrective Action Notice Template.rtf"; sourceTree = "<group>"; };
 		499C4CF316D2D9E300ED6E76 /* CorrectiveActionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CorrectiveActionModel.h; sourceTree = "<group>"; };
 		499C4CF416D2D9E300ED6E76 /* CorrectiveActionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CorrectiveActionModel.m; sourceTree = "<group>"; };
+		499C4CF716D2E7A300ED6E76 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		499C4CF816D2E7A400ED6E76 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		499C4CFA16D2F4DC00ED6E76 /* SettingsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsProtocol.h; sourceTree = "<group>"; };
+		499C4CFB16D30AF700ED6E76 /* ManagerSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerSettingsViewController.h; sourceTree = "<group>"; };
+		499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagerSettingsViewController.m; sourceTree = "<group>"; };
 		49AB41F116C1E39E007AA467 /* RemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindersViewController.h; sourceTree = "<group>"; };
 		49AB41F216C1E39E007AA467 /* RemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindersViewController.m; sourceTree = "<group>"; };
 		49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
@@ -242,6 +248,9 @@
 				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
 				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
 				499C4CF616D2E77400ED6E76 /* Welcome */,
+				499C4CFA16D2F4DC00ED6E76 /* SettingsProtocol.h */,
+				499C4CFB16D30AF700ED6E76 /* ManagerSettingsViewController.h */,
+				499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */,
 			);
 			path = MobileBinder;
 			sourceTree = "<group>";
@@ -249,6 +258,8 @@
 		499C4CF616D2E77400ED6E76 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				499C4CF716D2E7A300ED6E76 /* WelcomeViewController.h */,
+				499C4CF816D2E7A400ED6E76 /* WelcomeViewController.m */,
 			);
 			name = Welcome;
 			sourceTree = "<group>";
@@ -370,7 +381,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				496DFF5716C6D82D00111136 /* PayrollData in Sources */,
 				4968BB6016C43D40002600AF /* CustomAlert.m in Sources */,
 				F79A34ED16BDABE500ACAABB /* Data.xcdatamodeld in Sources */,
 				F79A34EC16BDAB4600ACAABB /* EmployeeRecord.m in Sources */,
@@ -398,6 +408,8 @@
 				49FB66FF16C2CA0D004F576F /* PayrollModel.m in Sources */,
 				4939165B16C2D86C00F9365D /* MBProgressHUD.m in Sources */,
 				499C4CF516D2D9E300ED6E76 /* CorrectiveActionModel.m in Sources */,
+				499C4CF916D2E7A400ED6E76 /* WelcomeViewController.m in Sources */,
+				499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

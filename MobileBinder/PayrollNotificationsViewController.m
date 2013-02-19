@@ -76,6 +76,7 @@
         [center addReminders:typeIDsToAdd completion:^{
             self.view.userInteractionEnabled = YES;
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self.delegate savedSettingsForViewController:self];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];

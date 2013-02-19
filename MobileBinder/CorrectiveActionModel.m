@@ -2,6 +2,7 @@
 #import "EmployeeRecord.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "Constants.h"
 
 #define TEMPLATE_FILE_NAME @"Corrective Action Notice Template"
 #define TEMPLATE_FILE_TYPE @"rtf"
@@ -98,7 +99,11 @@
     mailer.subject = subject;
     NSString *messageBody = [NSString stringWithFormat:@"This corrective action notice has been auto-generated for your convenience.  Please ensure that %@ %@ recieves this in a timely fashion.",employee.firstName, employee.lastName];
     [mailer setMessageBody:messageBody isHTML:NO];
-    [mailer setToRecipients:[NSArray arrayWithObject:@"arp25@duke.edu"]];
+    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_EMAIL_KEY];
+    if(email)
+    {
+        [mailer setToRecipients:[NSArray arrayWithObject:email]];
+    }
     [mailer addAttachmentData:myData mimeType:@"application/msword" fileName:subject];
     return mailer;
 }
