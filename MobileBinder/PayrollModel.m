@@ -1,4 +1,6 @@
 #import "PayrollModel.h"
+#import "ReminderCenter.h"
+#import "Reminder.h"
 
 #define PAYROLL_DATA_FILE @"PayrollData"
 
@@ -6,18 +8,40 @@
 
 @interface PayrollModel()
 @property (nonatomic,strong) NSMutableDictionary *typeIDToDateArray;
+@property (nonatomic, strong) NSMutableDictionary *typeIDToText;
 @end
 
 @implementation PayrollModel
 
-- (void) addRemindersForTypeIDs: (NSArray *) toAdd andCancelRemindersForTypeIDs: (NSArray *) toCancel
+- (void) addRemindersForTypeIDs: (NSArray *) toAdd andCancelRemindersForTypeIDs: (NSArray *) toCancel completion: (void (^) (void)) block
 {
-    
+    ReminderCenter *center = [ReminderCenter getInstance];
+    [center cancelRemindersWithTypeIDs:toCancel completion:^{
+        NSMutableArray *remindersToAdd = [[NSMutableArray alloc] init];
+        for (NSNumber *typeID in toAdd)
+        {
+            NSArray *dates = [self getDatesForTypeID:[typeID intValue]];
+            for (NSDate *currentDate in dates)
+            {
+                Reminder *reminder = [[Reminder alloc] initWithText:[self getTextForTypeID:[typeID intValue]] eventDate:currentDate fireDate:currentDate typeID:[typeID intValue]];
+                [remindersToAdd addObject:reminder];
+            }
+        }
+        [center addReminders:remindersToAdd completion:^{
+            block();
+        }];
+    }];
 }
 
 - (NSArray *) getDatesForTypeID: (int) typeID
 {
     return [self.typeIDToDateArray objectForKey:[NSNumber numberWithInt:typeID]];
+}
+
+- (NSString *) getTextForTypeID: (int) typeID
+{
+    NSString *text = [self.typeIDToText objectForKey:[NSNumber numberWithInt:typeID]];
+    return text ? text : @"";
 }
 
 
@@ -41,6 +65,7 @@
         {
             NSArray *headerArray = [line componentsSeparatedByString:@"##"];
             if(headerArray.count != 4) [NSException raise:NSInvalidArgumentException format:@"Each header must have the form ##Description##typeID##"];
+            NSLog(@"%@ %@ %@",[)
             int currentTypeID = [[headerArray objectAtIndex:2] intValue];
             datesForTypeID = [[NSMutableArray alloc] init];
             [self.typeIDToDateArray setObject:datesForTypeID forKey:[NSNumber numberWithInt:currentTypeID]];

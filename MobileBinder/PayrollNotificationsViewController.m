@@ -60,26 +60,26 @@
             }
             else if((oldSetting == NO) && (newSetting == YES)) //Add new reminders
             {
-                [typeIDsToAdd addObject:[self.payrollNotificationToArrayofTypeIDs objectForKey:notificationLabel]];
+                NSArray *typeIDs = [self.payrollNotificationToArrayofTypeIDs objectForKey:notificationLabel];
+                [typeIDsToAdd addObjectsFromArray:typeIDs];
                 NSLog(@"ADD %@ \n",notificationLabel);
             }
             [self.notificationUserSettings setBool:[swtch isOn] forKey:notificationLabel];
         }
     }
     
-    [self.model addRemindersForTypeIDs:typeIDsToAdd andCancelRemindersForTypeIDs:typeIDsToRemove];
+    __weak UIView *view = self.view;
+    __weak id<SettingsDelegate> delegate = self.delegate;
+    __weak UIViewController *viewController = self;
+    [self.model addRemindersForTypeIDs:typeIDsToAdd andCancelRemindersForTypeIDs:typeIDsToRemove completion:^{
+        view.userInteractionEnabled = YES;
+        [MBProgressHUD hideAllHUDsForView:view animated:YES];
+        [delegate savedSettingsForViewController:viewController];
+        [viewController.navigationController popViewControllerAnimated:YES];
+    }];
     
     [self.notificationUserSettings synchronize];
-    
-    ReminderCenter *center = [ReminderCenter getInstance];
-    [center cancelRemindersWithTypeIDs:typeIDsToRemove completion:^{
-        [center addReminders:typeIDsToAdd completion:^{
-            self.view.userInteractionEnabled = YES;
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self.delegate savedSettingsForViewController:self];
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-    }];
+
 }
 
 - (void)viewDidLoad

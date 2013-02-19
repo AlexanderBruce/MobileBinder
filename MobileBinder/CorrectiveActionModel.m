@@ -43,7 +43,7 @@
     NSString *finalWarning = (level == LEVEL_2_ID) ? @"X" : @"";
     NSString *termination = (level == LEVEL_3_ID) ? @"X" : @"";
     NSString *employeeName = [NSString stringWithFormat:@"%@ %@",employee.firstName,employee.lastName];
-    NSString *department = @"Human Resources";//employee.department;
+    NSString *department = employee.department;
     NSString *violations = [self violationForBehavior:behavior andEmployee:employee];
     NSString *expectedBehavior = [self expectedBehaviorForBehavior:behavior];
     NSString *futureActions = [self futureActionsForLevel:level];
