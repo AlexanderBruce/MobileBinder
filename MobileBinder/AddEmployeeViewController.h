@@ -12,4 +12,5 @@
 
 @interface AddEmployeeViewController : UIViewController
 @property (nonatomic, weak) id<AddEmployeeDelegate> delegate;
+@property (nonatomic, strong) EmployeeRecord *myRecord;
 @end
