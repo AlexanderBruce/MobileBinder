@@ -53,6 +53,7 @@
 		F7A843A116D40CB8009F09DD /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A8439F16D40CB8009F09DD /* Logo.png */; };
 		F7A843A516D40ECB009F09DD /* Banner copy.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A843A416D40ECB009F09DD /* Banner copy.png */; };
 		F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */; };
+		FA87F32716D42FD200E574E6 /* EditEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */; };
 		FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA2F1BA16B8AA80009466A1 /* testNotification.m */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +135,8 @@
 		F7A843A416D40ECB009F09DD /* Banner copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Banner copy.png"; path = "../Banner copy.png"; sourceTree = "<group>"; };
 		F7EFBFE116B9CCAD00C46D04 /* PayrollPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollPeriodViewController.h; sourceTree = "<group>"; };
 		F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollPeriodViewController.m; sourceTree = "<group>"; };
+		FA87F32516D42FD200E574E6 /* EditEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEmployeeViewController.h; sourceTree = "<group>"; };
+		FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEmployeeViewController.m; sourceTree = "<group>"; };
 		FAA2F1B916B8AA80009466A1 /* testNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testNotification.h; sourceTree = "<group>"; };
 		FAA2F1BA16B8AA80009466A1 /* testNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testNotification.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -302,6 +305,8 @@
 				4960AFC316B8759600F16ED6 /* IncidentViewController.m */,
 				499C4CF316D2D9E300ED6E76 /* CorrectiveActionModel.h */,
 				499C4CF416D2D9E300ED6E76 /* CorrectiveActionModel.m */,
+				FA87F32516D42FD200E574E6 /* EditEmployeeViewController.h */,
+				FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */,
 			);
 			name = Attendance;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 				499C4CF516D2D9E300ED6E76 /* CorrectiveActionModel.m in Sources */,
 				499C4CF916D2E7A400ED6E76 /* WelcomeViewController.m in Sources */,
 				499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */,
+				FA87F32716D42FD200E574E6 /* EditEmployeeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

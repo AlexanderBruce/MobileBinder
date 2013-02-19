@@ -16,5 +16,7 @@
 @dynamic lastName;
 @dynamic tardies;
 @dynamic missedSwipes;
+@dynamic department;
+@dynamic unit;
 
 @end

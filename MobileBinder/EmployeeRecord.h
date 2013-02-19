@@ -26,6 +26,8 @@
 @interface EmployeeRecord : NSObject
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *department;
+@property (nonatomic, strong) NSString *unit;
 @property (nonatomic, strong, readonly) NSArray *absences;
 @property (nonatomic, strong, readonly) NSArray *tardies;
 @property (nonatomic, strong, readonly) NSArray *missedSwipes;

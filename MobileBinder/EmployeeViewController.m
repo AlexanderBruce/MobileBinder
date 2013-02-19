@@ -2,6 +2,7 @@
 #import "EmployeeRecord.h"
 #import "Database.h"
 #import "IncidentViewController.h"
+#import "AddEmployeeViewController.h"
 
 
 #define ABSENCES_SECTION 0
@@ -15,6 +16,9 @@
 
 #define INCIDENT_SECTION 3
 #define INCIDENT_SEGUE @"reportIncidentSegue"
+
+#define EDIT_EMPLOYEE_SECTION 4
+#define EDIT_EMPLOYEE_SEGUE @"EditEmployeeSegue"
 
 #define DEFAULT_CELL_HEIGHT 38
 #define INCIDENT_CELL_HEIGHT 42
@@ -32,6 +36,11 @@
     {
         IncidentViewController *dest = segue.destinationViewController;
         dest.employeeRecord = self.employeeRecord;
+    }
+    else if([segue.destinationViewController isKindOfClass:[AddEmployeeViewController class]])
+    {
+        AddEmployeeViewController *dest = segue.destinationViewController;
+        dest.myRecord = self.employeeRecord;
     }
 }
 
@@ -89,6 +98,13 @@
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
         cell.textLabel.text = @"Report an incident";
     }
+    
+    else if (indexPath.section == EDIT_EMPLOYEE_SECTION)
+    {
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+        cell.textLabel.text = @"Edit Employee Information";
+    }
     return cell;
 }
 
@@ -128,7 +144,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,6 +158,13 @@
     if(indexPath.section == INCIDENT_SECTION)
     {
         [self performSegueWithIdentifier:INCIDENT_SEGUE sender:self];
+    }
+    
+    else if (indexPath.section == EDIT_EMPLOYEE_SECTION)
+    {
+        
+        [self performSegueWithIdentifier:EDIT_EMPLOYEE_SEGUE sender:self];
+        
     }
 }
 
