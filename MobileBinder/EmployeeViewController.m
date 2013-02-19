@@ -23,7 +23,7 @@
 #define DEFAULT_CELL_HEIGHT 38
 #define INCIDENT_CELL_HEIGHT 42
 
-@interface EmployeeViewController() <UITableViewDataSource, UITableViewDelegate>
+@interface EmployeeViewController() <UITableViewDataSource, UITableViewDelegate, AddEmployeeDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @end
@@ -41,6 +41,7 @@
     {
         AddEmployeeViewController *dest = segue.destinationViewController;
         dest.myRecord = self.employeeRecord;
+        dest.delegate = self;
     }
 }
 
@@ -247,4 +248,19 @@
     [self setEditButton:nil];
     [super viewDidUnload];
 }
+
+- (void) editedEmployeedRecord
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.title = self.employeeRecord.lastName;
+}
+
+-(void) canceledAddEmployeeViewController
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.title = self.employeeRecord.lastName;
+
+}
+
+
 @end
