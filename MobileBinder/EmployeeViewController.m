@@ -5,25 +5,25 @@
 #import "AddEmployeeViewController.h"
 
 
-#define ABSENCES_SECTION 0
+#define ABSENCES_SECTION 1
 #define ABSENCES_HEADER @"Unscheduled Absences"
 
-#define TARDIES_SECTION 1
+#define TARDIES_SECTION 2
 #define TARDIES_HEADER @"Tardies"
 
-#define SWIPES_SECTION 2
+#define SWIPES_SECTION 3
 #define SWIPES_HEADER @"Missed Swipes"
 
-#define INCIDENT_SECTION 3
+#define INCIDENT_SECTION 4
 #define INCIDENT_SEGUE @"reportIncidentSegue"
 
-#define EDIT_EMPLOYEE_SECTION 4
+#define EDIT_EMPLOYEE_SECTION 5
 #define EDIT_EMPLOYEE_SEGUE @"EditEmployeeSegue"
 
 #define DEFAULT_CELL_HEIGHT 38
 #define INCIDENT_CELL_HEIGHT 42
 
-@interface EmployeeViewController() <UITableViewDataSource, UITableViewDelegate>
+@interface EmployeeViewController() <UITableViewDataSource, UITableViewDelegate, AddEmployeeDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @end
@@ -41,6 +41,7 @@
     {
         AddEmployeeViewController *dest = segue.destinationViewController;
         dest.myRecord = self.employeeRecord;
+        dest.delegate = self;
     }
 }
 
@@ -53,6 +54,8 @@
     formatter.dateStyle = NSDateFormatterLongStyle;
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
+    
+    
     if(indexPath.section == ABSENCES_SECTION)
     {
         NSArray *absences = self.employeeRecord.absences;
@@ -96,15 +99,18 @@
     {
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
-        cell.textLabel.text = @"Report an incident";
+        if(indexPath.row == 0)
+        {
+            cell.textLabel.text = @"Report an incident";
+        }
+        else
+        {
+            cell.textLabel.text = @"Change Employee Information";
+        }
+
+       
     }
-    
-    else if (indexPath.section == EDIT_EMPLOYEE_SECTION)
-    {
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
-        cell.textLabel.text = @"Edit Employee Information";
-    }
+
     return cell;
 }
 
@@ -125,6 +131,12 @@
     else return @"";
 }
 
+- (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if(section == 0) return @"Swipe row to delete";
+    else return @"";
+}
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section == ABSENCES_SECTION)
@@ -139,6 +151,7 @@
     {
         return MAX([self.employeeRecord getNumberOfMissedSwipesInPastYear], 1);
     }
+    else if(section == 0) return 0;
     else return 1;
 }
 
@@ -247,4 +260,19 @@
     [self setEditButton:nil];
     [super viewDidUnload];
 }
+
+- (void) editedEmployeedRecord
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.title = self.employeeRecord.lastName;
+}
+
+-(void) canceledAddEmployeeViewController
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.title = self.employeeRecord.lastName;
+
+}
+
+
 @end
