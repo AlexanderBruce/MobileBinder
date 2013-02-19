@@ -11,17 +11,18 @@
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
 
+
 @interface PayrollPeriodViewController () <UITextFieldDelegate> 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *periodTypeSegmented;
 @property (weak, nonatomic) IBOutlet UITextField *periodSelection;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (weak, nonatomic) IBOutlet UITableView *payPeriodContent;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 
 @property(strong,nonatomic) NSMutableArray *monthlyPayPeriods;
 @property(strong,nonatomic) NSMutableArray *biweeklyPayPeriods;
 @property(strong,nonatomic) UIPickerView *myPicker;
 @property(strong,nonatomic) NSString *selectedPayPeriod;
+@property(strong,nonatomic) UITableView *payPeriodContent;
 
 @end
 
@@ -30,10 +31,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.monthlyPayPeriods = [[NSMutableArray alloc]initWithObjects:@"January",@"February",@"March", @"April", nil];
-    self.biweeklyPayPeriods = [[NSMutableArray alloc]initWithObjects:@"Payperiod 1", @"Payperiod 2", @"Payperiod 3", nil];
+    self.monthlyPayPeriods = [[NSMutableArray alloc]initWithObjects:
+                              @"January",@"February",@"March", @"April",
+                              @"May", @"June", @"July", @"August",
+                              @"September", @"October", @"November", @"December",nil];
+    self.biweeklyPayPeriods = [[NSMutableArray alloc]initWithObjects:
+                               @"01-1", @"01-2", @"02-1", @"02-2", @"03-1", @"03-2", @"04-1", @"04-2",
+                               @"05-1", @"05-2", @"06-1", @"06-2", @"07-1", @"07-2", @"08-1", @"08-2",
+                               @"09-1", @"09-2", @"10-1", @"10-2", @"11-1", @"11-2", @"12-1", @"12-2", nil];
     self.periodSelection.inputView = [self createPeriodPicker];
-    self.periodTypeSegmented.selectedSegmentIndex = -1;
+    self.periodTypeSegmented.selectedSegmentIndex = 1;
     self.periodSelection.delegate = self;
 }
 
@@ -47,23 +54,21 @@
     return self.myPicker;
 }
 - (IBAction)storePayPeriodSelection:(id)sender {
-    if ([self.myPicker isEqual:nil]) {
-    }
-    else if (self.periodTypeSegmented.selectedSegmentIndex == -1){
-    }
-    else{
         [self.periodSelection resignFirstResponder];
-    }
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
     [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+    [self.myPicker reloadAllComponents];
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
-    [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];    
+    [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    self.payPeriodContent = [[UITableView alloc]init];
+    [self populatePayPeriodDates];
+    
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
@@ -89,7 +94,7 @@
     return ret;
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component;
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     NSString *result = nil;
     if([pickerView isEqual:self.myPicker])
@@ -105,11 +110,15 @@
     return result;
 }
 
+-(void)populatePayPeriodDates;
+{
+    
+}
+
 - (void)viewDidUnload {
     [self setPeriodTypeSegmented:nil];
     [self setPeriodSelection:nil];
     [self setMyScrollView:nil];
-    [self setPayPeriodContent:nil];
     [self setDoneButton:nil];
     [super viewDidUnload];
 }
