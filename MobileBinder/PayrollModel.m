@@ -65,7 +65,6 @@
         {
             NSArray *headerArray = [line componentsSeparatedByString:@"##"];
             if(headerArray.count != 4) [NSException raise:NSInvalidArgumentException format:@"Each header must have the form ##Description##typeID##"];
-            NSLog(@"%@ %@ %@",[)
             int currentTypeID = [[headerArray objectAtIndex:2] intValue];
             datesForTypeID = [[NSMutableArray alloc] init];
             [self.typeIDToDateArray setObject:datesForTypeID forKey:[NSNumber numberWithInt:currentTypeID]];
