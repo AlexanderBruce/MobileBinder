@@ -1,6 +1,6 @@
 #import "AttendanceViewController.h"
 #import "AttendanceCell.h"
-#import "EmployeesModel.h"
+#import "AttendanceModel.h"
 #import "AddEmployeeViewController.h"
 #import "EmployeeRecord.h"
 #import "EmployeeViewController.h"
@@ -12,9 +12,9 @@
 
 
 
-@interface AttendanceViewController () <UITableViewDataSource, UITableViewDelegate, EmployeesModelDelegate,AddEmployeeDelegate, UISearchBarDelegate, UIActionSheetDelegate>
+@interface AttendanceViewController () <UITableViewDataSource, UITableViewDelegate, AttendanceModelDelegate,AddEmployeeDelegate, UISearchBarDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
-@property (nonatomic, strong) EmployeesModel *myModel;
+@property (nonatomic, strong) AttendanceModel *myModel;
 @property (nonatomic, strong) EmployeeRecord *selectedEmployeeRecord;
 @property (weak, nonatomic) IBOutlet UISearchBar *mySearchBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
@@ -166,7 +166,7 @@
     self.addButton.enabled = NO;
     UINib* customCellNib = [UINib nibWithNibName:CUSTOM_CELL_NIB bundle:nil];
     [self.myTableView registerNib: customCellNib forCellReuseIdentifier:CUSTOM_CELL_IDENTIFIER];
-    self.myModel = [[EmployeesModel alloc] init];
+    self.myModel = [[AttendanceModel alloc] init];
     self.myModel.delegate = self;
     [self.myModel fetchEmployeeRecordsForFutureUse];
     self.mySearchBar.delegate = self;

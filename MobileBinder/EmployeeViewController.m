@@ -3,7 +3,7 @@
 #import "Database.h"
 #import "IncidentViewController.h"
 #import "AddEmployeeViewController.h"
-#import "EmployeesModel.h"
+#import "AttendanceModel.h"
 
 #define ABSENCES_SECTION 0
 #define ABSENCES_HEADER @"Unscheduled Absences"
