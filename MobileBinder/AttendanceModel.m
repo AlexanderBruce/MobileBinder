@@ -70,7 +70,9 @@
         {
             NSRange firstRange = [currentRecord.firstName rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
             NSRange lastRange = [currentRecord.lastName rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
-            if(firstRange.location == NSNotFound && lastRange.location == NSNotFound)
+            NSRange departmentRange = [currentRecord.department rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
+            NSRange unitRange = [currentRecord.unit rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
+            if(firstRange.location == NSNotFound && lastRange.location == NSNotFound && departmentRange.location == NSNotFound && unitRange.location == NSNotFound)
             {
                 matchesFilter = NO;
                 break;

@@ -33,10 +33,6 @@
     self.myManagedObject.unit = _unit;
 }
 
-
-
-
-
 - (NSArray *) absences
 {
     return [self.mutableAbsences copy];

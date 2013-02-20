@@ -23,8 +23,6 @@
         self.myRecord.unit = self.unitField.text;
         [Database saveDatabase];
         [self.delegate editedEmployeedRecord];
-        
-        
     }
     else if(self.firstNameField.text.length > 0 && self.lastNameField.text.length > 0)
     {
@@ -35,6 +33,7 @@
         record.unit = self.unitField.text;
         if(!record.unit) record.unit = @"";
         if(!record.department) record.department = @"";
+        NSLog(@"Record.department = %@",record.department);
         
         [self.delegate addedNewEmployeeRecord:record];
     }

@@ -5,6 +5,7 @@
 @interface PayrollModel : NSObject
 
 - (void) addRemindersForTypeIDs: (NSArray *) toAdd andCancelRemindersForTypeIDs: (NSArray *) toCancel completion: (void (^) (void)) block;
+
 - (NSArray*) datesForPayPeriod: (NSString *) payPeriod;
 
 
