@@ -10,6 +10,7 @@
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
+#import "PayrollModel.h"
 
 
 @interface PayrollPeriodViewController () <UITextFieldDelegate> 
@@ -23,6 +24,8 @@
 @property(strong,nonatomic) UIPickerView *myPicker;
 @property(strong,nonatomic) NSString *selectedPayPeriod;
 @property(strong,nonatomic) UITableView *payPeriodContent;
+@property(strong,nonatomic) PayrollModel *myModel;
+@property(strong,nonatomic) NSMutableDictionary *payrollStringsToPayrollModel;
 
 @end
 
@@ -31,6 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.payrollStringsToPayrollModel = [NSMutableDictionary dictionary];
     self.monthlyPayPeriods = [[NSMutableArray alloc]initWithObjects:
                               @"January",@"February",@"March", @"April",
                               @"May", @"June", @"July", @"August",
@@ -39,6 +43,14 @@
                                @"01-1", @"01-2", @"02-1", @"02-2", @"03-1", @"03-2", @"04-1", @"04-2",
                                @"05-1", @"05-2", @"06-1", @"06-2", @"07-1", @"07-2", @"08-1", @"08-2",
                                @"09-1", @"09-2", @"10-1", @"10-2", @"11-1", @"11-2", @"12-1", @"12-2", nil];
+    for(int i = 0; i < [self.monthlyPayPeriods count]; i++)
+    {
+        [self.payrollStringsToPayrollModel setValue:[[self.monthlyPayPeriods objectAtIndex:i]substringToIndex:3] forKey:[self.monthlyPayPeriods objectAtIndex:i]];
+    }
+    for(int i = 0; i < [self.biweeklyPayPeriods count]; i++)
+    {
+        [self.payrollStringsToPayrollModel setValue:[NSString stringWithFormat:@"%d", (i+1)] forKey:[self.biweeklyPayPeriods objectAtIndex:i]];
+    }
     self.periodSelection.inputView = [self createPeriodPicker];
     self.periodTypeSegmented.selectedSegmentIndex = 1;
     self.periodSelection.delegate = self;
@@ -112,7 +124,9 @@
 
 -(void)populatePayPeriodDates;
 {
-    
+    NSLog([self.payrollStringsToPayrollModel objectForKey:self.selectedPayPeriod]);
+    NSArray *dates = [self.myModel datesForPayPeriod:[self.payrollStringsToPayrollModel objectForKey:self.selectedPayPeriod]];
+    NSLog(@"Here %@",dates);
 }
 
 - (void)viewDidUnload {
