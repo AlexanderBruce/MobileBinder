@@ -16,11 +16,11 @@
 
 @implementation AttendanceCell
 
-- (void) updateFirstName: (NSString *) first lastName: (NSString *) last department: (NSString *) dep
+- (void) updateFirstName: (NSString *) first lastName: (NSString *) last department: (NSString *) department
 {
     self.firstNameLabel.text = first;
     self.lastNameLabel.text = last;
-    self.depLabel.text = dep;
+    self.depLabel.text = department;
 }
 
 - (void) updateAbsenceProgress:(float)absenceProgress withLevel:(int)level

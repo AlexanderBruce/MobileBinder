@@ -1,6 +1,6 @@
 #import "Database.h"
 
-#define DATABASE_PATH @"Database27"
+#define DATABASE_PATH @"Database28"
 
 @interface Database()
 @end
@@ -52,6 +52,7 @@ static UIManagedDocument *database;
 + (void) saveDatabase
 {
     [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+        NSLog(@"Done saving database %d",success);
     }];
 
 }

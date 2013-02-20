@@ -34,7 +34,6 @@
         if(!record.unit) record.unit = @"";
         if(!record.department) record.department = @"";
         NSLog(@"Record.department = %@",record.department);
-        
         [self.delegate addedNewEmployeeRecord:record];
     }
     else

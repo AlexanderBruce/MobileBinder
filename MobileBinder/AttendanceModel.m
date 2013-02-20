@@ -52,6 +52,8 @@
     EmployeeRecordManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([EmployeeRecordManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
     managedObject.firstName = record.firstName;
     managedObject.lastName = record.lastName;
+    managedObject.department = record.department;
+    managedObject.unit = record.unit;
     record.myManagedObject = managedObject;
     [self sortEmployeeRecords];
     [Database saveDatabase];
