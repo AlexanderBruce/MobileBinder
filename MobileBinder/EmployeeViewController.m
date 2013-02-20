@@ -5,19 +5,19 @@
 #import "AddEmployeeViewController.h"
 
 
-#define ABSENCES_SECTION 1
+#define ABSENCES_SECTION 0
 #define ABSENCES_HEADER @"Unscheduled Absences"
 
-#define TARDIES_SECTION 2
+#define TARDIES_SECTION 1
 #define TARDIES_HEADER @"Tardies"
 
-#define SWIPES_SECTION 3
+#define SWIPES_SECTION 2
 #define SWIPES_HEADER @"Missed Swipes"
 
-#define INCIDENT_SECTION 4
+#define INCIDENT_SECTION 3
 #define INCIDENT_SEGUE @"reportIncidentSegue"
 
-#define EDIT_EMPLOYEE_SECTION 5
+#define EDIT_EMPLOYEE_SECTION 4
 #define EDIT_EMPLOYEE_SEGUE @"EditEmployeeSegue"
 
 #define DEFAULT_CELL_HEIGHT 38
@@ -131,11 +131,6 @@
     else return @"";
 }
 
-- (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-    if(section == 0) return @"Swipe row to delete";
-    else return @"";
-}
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -151,13 +146,12 @@
     {
         return MAX([self.employeeRecord getNumberOfMissedSwipesInPastYear], 1);
     }
-    else if(section == 0) return 0;
-    else return 1;
+    else return 2;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 4;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -170,15 +164,13 @@
 {
     if(indexPath.section == INCIDENT_SECTION)
     {
-        [self performSegueWithIdentifier:INCIDENT_SEGUE sender:self];
-    }
-    
-    else if (indexPath.section == EDIT_EMPLOYEE_SECTION)
-    {
-        
-        [self performSegueWithIdentifier:EDIT_EMPLOYEE_SEGUE sender:self];
+        if (indexPath.row==0) {
+            [self performSegueWithIdentifier:INCIDENT_SEGUE sender:self];
+        }
+        else [self performSegueWithIdentifier:EDIT_EMPLOYEE_SEGUE sender:self];
         
     }
+
 }
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
