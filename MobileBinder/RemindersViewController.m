@@ -16,6 +16,8 @@
 
 #define FIRST_DAY_IN_TABLE -7
 #define NUMBER_OF_DAYS_IN_FETCH 14
+#define MIN_SIZE_UNTIL_FETCH_COMPLETE 12
+#define MAX_NUMBER_OF_FETCHES 12
 
 @interface RemindersViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -80,19 +82,25 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-//    [self createTestReminders];
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         int64_t delayInSeconds = 2.0; //These two seconds are necessary...who knows why
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        __block int numberRetrieved = 0;
+        __block int numberOfFetches = 0;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self addNewDataToTableView];
+            
+            while (numberRetrieved < MIN_SIZE_UNTIL_FETCH_COMPLETE && numberOfFetches < MAX_NUMBER_OF_FETCHES)
+            {
+                numberRetrieved = [self addNewDataToTableView];
+                numberOfFetches ++;
+            }
             [self.tableView.infiniteScrollingView stopAnimating];
         });
 
     }];
 }
 
-- (void) addNewDataToTableView
+- (int) addNewDataToTableView
 {
     ReminderCenter *center = [ReminderCenter getInstance];
     NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
@@ -133,52 +141,13 @@
     
     [self.tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.tableView endUpdates];
+    return newIndexPaths.count;
 
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
     [self.tableView triggerInfiniteScrolling];
-}
-
-- (void) createTestReminders
-{
-    ReminderCenter *center = [ReminderCenter getInstance];
-    NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
-    dayComponent.day = 0;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSMutableArray *remindersToAdd = [[NSMutableArray alloc] init];
-    
-    for(int i = 0; i < 1000; i ++)
-    {
-        Reminder *r1 = [[Reminder alloc] initWithText:@"Time Card Due" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [remindersToAdd addObject:r1];
-        dayComponent.day = dayComponent.day + 1;
-
-        Reminder *r2 = [[Reminder alloc] initWithText:@"Pay check issued" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [remindersToAdd addObject:r2];
-
-        Reminder *r3 = [[Reminder alloc] initWithText:@"Employee Attendance sheet filing date" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [remindersToAdd addObject:r3];
-        dayComponent.day = dayComponent.day + 1;
-
-        Reminder *r4 = [[Reminder alloc] initWithText:@"2 weeks until pay day" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [remindersToAdd addObject:r4];
-
-        Reminder *r5 = [[Reminder alloc] initWithText:@"New Employee Orientation" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [remindersToAdd addObject:r5];
-
-        Reminder *r6 = [[Reminder alloc] initWithText:@"Company Picnic" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [remindersToAdd addObject:r6];
-
-        Reminder *r7 = [[Reminder alloc] initWithText:@"Nuclear Weapon Testing" eventDate:[NSDate date] fireDate:[calendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0]  typeID:nil];
-        [remindersToAdd addObject:r7];
-        dayComponent.day = dayComponent.day + 1;
-        
-        [center addReminders:remindersToAdd completion:^{
-           [self.tableView triggerInfiniteScrolling]; 
-        }];
-    }
 }
 
 - (void)viewDidUnload

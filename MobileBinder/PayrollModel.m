@@ -9,6 +9,7 @@
 @interface PayrollModel()
 @property (nonatomic,strong) NSMutableDictionary *typeIDToDateArray;
 @property (nonatomic, strong) NSMutableDictionary *typeIDToText;
+@property (nonatomic, strong) NSString *year;
 @end
 
 @implementation PayrollModel
@@ -24,6 +25,7 @@
             for (NSDate *currentDate in dates)
             {
                 Reminder *reminder = [[Reminder alloc] initWithText:[self getTextForTypeID:[typeID intValue]] eventDate:currentDate fireDate:currentDate typeID:[typeID intValue]];
+                NSLog(@"Reminder = %@ %@ %d",reminder.text,reminder.fireDate,reminder.typeID);
                 [remindersToAdd addObject:reminder];
             }
         }
@@ -68,12 +70,17 @@
             int currentTypeID = [[headerArray objectAtIndex:2] intValue];
             datesForTypeID = [[NSMutableArray alloc] init];
             [self.typeIDToDateArray setObject:datesForTypeID forKey:[NSNumber numberWithInt:currentTypeID]];
+            [self.typeIDToText setObject:[headerArray objectAtIndex:1] forKey:[NSNumber numberWithInt:currentTypeID]];
         }
         else
         {
             NSDate *date = [formatter dateFromString:line];
             if(date)
             {
+                NSCalendar *calendar = [NSCalendar currentCalendar];
+                NSDateComponents *components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:date];
+                components.year = 2013;
+                date = [calendar dateFromComponents:components];
                 [datesForTypeID addObject:date];
             }
         }
@@ -85,6 +92,7 @@
     if(self = [super init])
     {
         self.typeIDToDateArray = [[NSMutableDictionary alloc] init];
+        self.typeIDToText = [[NSMutableDictionary alloc] init];
         [self parseData];
     }
     return self;
