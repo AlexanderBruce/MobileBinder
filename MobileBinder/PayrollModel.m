@@ -9,6 +9,8 @@
 @interface PayrollModel()
 @property (nonatomic,strong) NSMutableDictionary *typeIDToDateArray;
 @property (nonatomic, strong) NSMutableDictionary *typeIDToText;
+@property (nonatomic, strong) NSMutableDictionary *periodToDates;
+@property (nonatomic, strong) NSString *year;
 @end
 
 @implementation PayrollModel
@@ -31,6 +33,11 @@
             block();
         }];
     }];
+}
+
+- (NSArray*) datesForPayPeriod: (NSString *) payPeriod
+{
+    return [self.periodToDates objectForKey:payPeriod];
 }
 
 - (NSArray *) getDatesForTypeID: (int) typeID
@@ -68,13 +75,27 @@
             int currentTypeID = [[headerArray objectAtIndex:2] intValue];
             datesForTypeID = [[NSMutableArray alloc] init];
             [self.typeIDToDateArray setObject:datesForTypeID forKey:[NSNumber numberWithInt:currentTypeID]];
+            [self.typeIDToText setObject:[headerArray objectAtIndex:1] forKey:[NSNumber numberWithInt:currentTypeID]];
         }
         else
         {
-            NSDate *date = [formatter dateFromString:line];
+            if(line.length < 4) continue;
+            int delimiterLocation = [line rangeOfString:@":"].location;
+            NSString *period = [line substringToIndex:delimiterLocation];
+            NSString *dateString = [line substringFromIndex:delimiterLocation + 1];
+            NSDate *date = [formatter dateFromString:dateString];
             if(date)
             {
+                NSCalendar *calendar = [NSCalendar currentCalendar];
+                NSDateComponents *components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:date];
+                components.year = 2013; //FIX ME
+                date = [calendar dateFromComponents:components];
                 [datesForTypeID addObject:date];
+                
+                NSMutableArray *datesForPeriod = [self.periodToDates objectForKey:period];
+                if(!datesForPeriod) datesForPeriod = [[NSMutableArray alloc] init];
+                [datesForPeriod addObject:date];
+                [self.periodToDates setObject:datesForPeriod forKey:period];
             }
         }
     }
@@ -85,6 +106,8 @@
     if(self = [super init])
     {
         self.typeIDToDateArray = [[NSMutableDictionary alloc] init];
+        self.typeIDToText = [[NSMutableDictionary alloc] init];
+        self.periodToDates = [[NSMutableDictionary alloc] init];
         [self parseData];
     }
     return self;

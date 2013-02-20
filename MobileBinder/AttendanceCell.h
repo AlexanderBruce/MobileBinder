@@ -9,6 +9,6 @@
 
 - (void) updateMissedSwipesProgress: (float) missedSwipesProgress withLevel: (int) level;
 
-- (void) updateFirstName: (NSString *) first lastName: (NSString *) last;
+- (void) updateFirstName: (NSString *) first lastName: (NSString *) last department: (NSString *) dep;
 
 @end

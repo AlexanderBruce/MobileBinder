@@ -3,7 +3,7 @@
 #import "Database.h"
 #import "IncidentViewController.h"
 #import "AddEmployeeViewController.h"
-
+#import "EmployeesModel.h"
 
 #define ABSENCES_SECTION 0
 #define ABSENCES_HEADER @"Unscheduled Absences"
@@ -105,7 +105,7 @@
         }
         else
         {
-            cell.textLabel.text = @"Change Employee Information";
+            cell.textLabel.text = @"Change Employee Info";
         }
 
        
@@ -259,11 +259,18 @@
     self.title = self.employeeRecord.lastName;
 }
 
--(void) canceledAddEmployeeViewController
+- (void) canceledAddEmployeeViewController
 {
     [self dismissModalViewControllerAnimated:YES];
     self.title = self.employeeRecord.lastName;
+}
 
+- (void) deleteEmployeeRecord:(EmployeeRecord *)record
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.myModel deleteEmployeeRecord:record];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 

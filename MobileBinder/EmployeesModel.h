@@ -1,16 +1,18 @@
 #import <Foundation/Foundation.h>
 @class EmployeeRecord;
 
-@protocol AttendanceModelDelegate <NSObject>
+@protocol EmployeesModelDelegate <NSObject>
 
 - (void) doneRetrievingEmployeeRecords;
 
 @end
 
-@interface AttendanceModel : NSObject
-@property (nonatomic, weak) id<AttendanceModelDelegate> delegate;
+@interface EmployeesModel : NSObject
+@property (nonatomic, weak) id<EmployeesModelDelegate> delegate;
 
 - (void) addEmployeeRecord: (EmployeeRecord *) record;
+
+- (void) deleteEmployeeRecord: (EmployeeRecord *) record;
 
 - (void) fetchEmployeeRecordsForFutureUse;
 
