@@ -67,7 +67,7 @@
 
     NSArray *employeeRecords = [self.myModel getEmployeeRecords];
     EmployeeRecord *recordForRow = [employeeRecords objectAtIndex:indexPath.row];
-    [cell updateFirstName:recordForRow.firstName lastName:recordForRow.lastName];
+    [cell updateFirstName:recordForRow.firstName lastName:recordForRow.lastName department: recordForRow.department];
     
     int absenceLevel = [recordForRow getNextAbsenceLevel];
     [cell updateAbsenceProgress:[recordForRow getNumberOfAbsencesInPastYear] / MAX_ABSENCES withLevel:absenceLevel];
