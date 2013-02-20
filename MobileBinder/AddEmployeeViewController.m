@@ -1,5 +1,6 @@
 #import "AddEmployeeViewController.h"
 #import "EmployeeRecord.h"
+#import "Database.h"
 
 @interface AddEmployeeViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
@@ -20,6 +21,10 @@
         self.myRecord.lastName = self.lastNameField.text;
         self.myRecord.department = self.departmentField.text;
         self.myRecord.unit = self.unitField.text;
+        [Database saveDatabase];
+        [self.delegate editedEmployeedRecord];
+        
+        
     }
     else if(self.firstNameField.text.length > 0 && self.lastNameField.text.length > 0)
     {

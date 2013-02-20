@@ -23,7 +23,7 @@
 #define DEFAULT_CELL_HEIGHT 38
 #define INCIDENT_CELL_HEIGHT 42
 
-@interface EmployeeViewController() <UITableViewDataSource, UITableViewDelegate>
+@interface EmployeeViewController() <UITableViewDataSource, UITableViewDelegate, AddEmployeeDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @end
@@ -41,6 +41,7 @@
     {
         AddEmployeeViewController *dest = segue.destinationViewController;
         dest.myRecord = self.employeeRecord;
+        dest.delegate = self;
     }
 }
 
@@ -53,6 +54,8 @@
     formatter.dateStyle = NSDateFormatterLongStyle;
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
+    
+    
     if(indexPath.section == ABSENCES_SECTION)
     {
         NSArray *absences = self.employeeRecord.absences;
@@ -96,15 +99,18 @@
     {
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
-        cell.textLabel.text = @"Report an incident";
+        if(indexPath.row == 0)
+        {
+            cell.textLabel.text = @"Report an incident";
+        }
+        else
+        {
+            cell.textLabel.text = @"Change Employee Information";
+        }
+
+       
     }
-    
-    else if (indexPath.section == EDIT_EMPLOYEE_SECTION)
-    {
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
-        cell.textLabel.text = @"Edit Employee Information";
-    }
+
     return cell;
 }
 
@@ -125,6 +131,7 @@
     else return @"";
 }
 
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section == ABSENCES_SECTION)
@@ -139,12 +146,12 @@
     {
         return MAX([self.employeeRecord getNumberOfMissedSwipesInPastYear], 1);
     }
-    else return 1;
+    else return 2;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 4;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -157,15 +164,13 @@
 {
     if(indexPath.section == INCIDENT_SECTION)
     {
-        [self performSegueWithIdentifier:INCIDENT_SEGUE sender:self];
-    }
-    
-    else if (indexPath.section == EDIT_EMPLOYEE_SECTION)
-    {
-        
-        [self performSegueWithIdentifier:EDIT_EMPLOYEE_SEGUE sender:self];
+        if (indexPath.row==0) {
+            [self performSegueWithIdentifier:INCIDENT_SEGUE sender:self];
+        }
+        else [self performSegueWithIdentifier:EDIT_EMPLOYEE_SEGUE sender:self];
         
     }
+
 }
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -247,4 +252,19 @@
     [self setEditButton:nil];
     [super viewDidUnload];
 }
+
+- (void) editedEmployeedRecord
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.title = self.employeeRecord.lastName;
+}
+
+-(void) canceledAddEmployeeViewController
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.title = self.employeeRecord.lastName;
+
+}
+
+
 @end

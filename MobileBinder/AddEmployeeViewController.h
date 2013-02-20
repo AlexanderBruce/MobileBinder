@@ -3,10 +3,12 @@
 @class EmployeeRecord;
 
 @protocol AddEmployeeDelegate <NSObject>
-
+@optional
 - (void) canceledAddEmployeeViewController;
 
 - (void) addedNewEmployeeRecord: (EmployeeRecord *) record;
+
+- (void) editedEmployeedRecord;
 
 @end
 

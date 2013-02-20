@@ -736,7 +736,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="4O2-Sk-Po1">
-                                        <rect key="frame" x="112" y="80" width="179" height="30"/>
+                                        <rect key="frame" x="112" y="80" width="146" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -773,11 +773,6 @@
                                     </button>
                                 </subviews>
                             </scrollView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OQe-gH-AWp">
-                                <rect key="frame" x="0.0" y="138" width="320" height="278"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -792,7 +787,6 @@
                         <outlet property="PeriodTypeSegmented" destination="u2a-tv-4Pb" id="siX-dG-IjM"/>
                         <outlet property="doneButton" destination="j2S-xy-5v9" id="bNp-1j-I9v"/>
                         <outlet property="myScrollView" destination="cWq-Ob-mkG" id="X84-ej-Xwf"/>
-                        <outlet property="payPeriodContent" destination="OQe-gH-AWp" id="G5S-wE-Ubp"/>
                         <outlet property="periodSelection" destination="4O2-Sk-Po1" id="FQM-Ex-a1k"/>
                         <outlet property="periodTypeSegmented" destination="u2a-tv-4Pb" id="Cqy-wC-nHc"/>
                     </connections>
