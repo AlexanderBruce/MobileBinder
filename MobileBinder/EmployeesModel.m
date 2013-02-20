@@ -1,17 +1,17 @@
-#import "AttendanceModel.h"
+#import "EmployeesModel.h"
 #import "EmployeeRecord.h"
 #import "EmployeeRecordManagedObject.h"
 #import "Database.h"
 
 
-@interface AttendanceModel() <DatabaseDelegate>
+@interface EmployeesModel() <DatabaseDelegate>
 @property (nonatomic, strong) UIManagedDocument *database;
 @property (nonatomic, strong) NSMutableArray *employeeRecords;
 @property (nonatomic, strong) NSMutableArray *filteredRecords;
 @property (nonatomic) BOOL usingFilter;
 @end
 
-@implementation AttendanceModel
+@implementation EmployeesModel
 
 - (void) fetchEmployeeRecordsFromDatabase
 {
@@ -57,6 +57,13 @@
     record.myManagedObject = managedObject;
     [self sortEmployeeRecords];
     [Database saveDatabase];
+}
+
+- (void) deleteEmployeeRecord: (EmployeeRecord *) record
+{
+    [record deleteFromDatabase:[Database getInstance]];
+    [self.employeeRecords removeObject:record];
+    [self.filteredRecords removeObject:record];
 }
 
 - (void) filterEmployeesByString: (NSString *) filterString

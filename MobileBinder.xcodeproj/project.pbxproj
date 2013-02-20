@@ -26,7 +26,7 @@
 		494D0E5F16B84F7300354964 /* AttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E5E16B84F7300354964 /* AttendanceViewController.m */; };
 		494D0E6216B84FE900354964 /* AttendanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E6116B84FE900354964 /* AttendanceCell.m */; };
 		494D0E6416B8509300354964 /* AttendanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E6316B8509300354964 /* AttendanceCell.xib */; };
-		4960AFA116B8590900F16ED6 /* AttendanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA016B8590900F16ED6 /* AttendanceModel.m */; };
+		4960AFA116B8590900F16ED6 /* EmployeesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA016B8590900F16ED6 /* EmployeesModel.m */; };
 		4960AFAA16B85CF400F16ED6 /* AddEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA916B85CF400F16ED6 /* AddEmployeeViewController.m */; };
 		4960AFB216B8633600F16ED6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4960AFB116B8633600F16ED6 /* CoreData.framework */; };
 		4960AFB816B8707D00F16ED6 /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */; };
@@ -54,7 +54,6 @@
 		F7A843A516D40ECB009F09DD /* Banner copy.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A843A416D40ECB009F09DD /* Banner copy.png */; };
 		F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */; };
 		FA87F32716D42FD200E574E6 /* EditEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */; };
-		FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA2F1BA16B8AA80009466A1 /* testNotification.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,8 +89,8 @@
 		494D0E6016B84FE900354964 /* AttendanceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceCell.h; sourceTree = "<group>"; };
 		494D0E6116B84FE900354964 /* AttendanceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceCell.m; sourceTree = "<group>"; };
 		494D0E6316B8509300354964 /* AttendanceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttendanceCell.xib; sourceTree = "<group>"; };
-		4960AF9F16B8590900F16ED6 /* AttendanceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceModel.h; sourceTree = "<group>"; };
-		4960AFA016B8590900F16ED6 /* AttendanceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceModel.m; sourceTree = "<group>"; };
+		4960AF9F16B8590900F16ED6 /* EmployeesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeesModel.h; sourceTree = "<group>"; };
+		4960AFA016B8590900F16ED6 /* EmployeesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeesModel.m; sourceTree = "<group>"; };
 		4960AFA616B85B5400F16ED6 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
 		4960AFA816B85CF400F16ED6 /* AddEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEmployeeViewController.h; sourceTree = "<group>"; };
 		4960AFA916B85CF400F16ED6 /* AddEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEmployeeViewController.m; sourceTree = "<group>"; };
@@ -137,8 +136,6 @@
 		F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollPeriodViewController.m; sourceTree = "<group>"; };
 		FA87F32516D42FD200E574E6 /* EditEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEmployeeViewController.h; sourceTree = "<group>"; };
 		FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEmployeeViewController.m; sourceTree = "<group>"; };
-		FAA2F1B916B8AA80009466A1 /* testNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testNotification.h; sourceTree = "<group>"; };
-		FAA2F1BA16B8AA80009466A1 /* testNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testNotification.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,8 +252,6 @@
 				49FB670116C2CA50004F576F /* Payroll */,
 				490A5B0A16C1DD1F0062F36F /* Reminders */,
 				4939165816C2CADD00F9365D /* Supporting_Files */,
-				FAA2F1B916B8AA80009466A1 /* testNotification.h */,
-				FAA2F1BA16B8AA80009466A1 /* testNotification.m */,
 				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
 				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
 				499C4CF616D2E77400ED6E76 /* Welcome */,
@@ -291,8 +286,8 @@
 				494D0E6016B84FE900354964 /* AttendanceCell.h */,
 				494D0E6116B84FE900354964 /* AttendanceCell.m */,
 				494D0E6316B8509300354964 /* AttendanceCell.xib */,
-				4960AF9F16B8590900F16ED6 /* AttendanceModel.h */,
-				4960AFA016B8590900F16ED6 /* AttendanceModel.m */,
+				4960AF9F16B8590900F16ED6 /* EmployeesModel.h */,
+				4960AFA016B8590900F16ED6 /* EmployeesModel.m */,
 				494D0E5D16B84F7300354964 /* AttendanceViewController.h */,
 				494D0E5E16B84F7300354964 /* AttendanceViewController.m */,
 				4960AFB316B8639300F16ED6 /* EmployeeRecord.h */,
@@ -405,12 +400,11 @@
 				494D0E4416B84BAB00354964 /* AppDelegate.m in Sources */,
 				494D0E5F16B84F7300354964 /* AttendanceViewController.m in Sources */,
 				494D0E6216B84FE900354964 /* AttendanceCell.m in Sources */,
-				4960AFA116B8590900F16ED6 /* AttendanceModel.m in Sources */,
+				4960AFA116B8590900F16ED6 /* EmployeesModel.m in Sources */,
 				4960AFAA16B85CF400F16ED6 /* AddEmployeeViewController.m in Sources */,
 				4960AFB816B8707D00F16ED6 /* EmployeeViewController.m in Sources */,
 				4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */,
 				F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */,
-				FAA2F1BB16B8AA80009466A1 /* testNotification.m in Sources */,
 				F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */,
 				F79A34E916BD8FAE00ACAABB /* Database.m in Sources */,
 				F79A34F616BDAFDC00ACAABB /* EmployeeRecordManagedObject.m in Sources */,

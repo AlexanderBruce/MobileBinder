@@ -26,7 +26,6 @@
             for (NSDate *currentDate in dates)
             {
                 Reminder *reminder = [[Reminder alloc] initWithText:[self getTextForTypeID:[typeID intValue]] eventDate:currentDate fireDate:currentDate typeID:[typeID intValue]];
-                NSLog(@"Reminder = %@ %@ %d",reminder.text,reminder.fireDate,reminder.typeID);
                 [remindersToAdd addObject:reminder];
             }
         }
@@ -100,7 +99,6 @@
             }
         }
     }
-    NSLog(@"%@",self.periodToDates);
 }
 
 - (id) init

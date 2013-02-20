@@ -157,6 +157,14 @@
     else return @"";
 }
 
+- (void) deleteFromDatabase: (UIManagedDocument *) database
+{
+    if(!self.myManagedObject) return; //If not saved to disk, then don't need to do anything
+    [database.managedObjectContext deleteObject:self.myManagedObject];
+    self.myManagedObject = nil;
+    [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){}];
+}
+
 
 - (id) initWithManagedObject:(EmployeeRecordManagedObject *)managedObject
 {
@@ -173,6 +181,7 @@
     }
     return self;
 }
+
 
 - (id) init
 {

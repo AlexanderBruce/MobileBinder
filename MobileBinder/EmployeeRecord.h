@@ -36,6 +36,8 @@
 
 - (id) initWithManagedObject:(EmployeeRecordManagedObject *) managedObject;
 
+- (void) deleteFromDatabase: (UIManagedDocument *) database;
+
 - (int) getNextAbsenceLevel;
 
 - (int) getNextTardyLevel;
