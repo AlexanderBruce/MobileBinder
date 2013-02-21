@@ -17,19 +17,6 @@
 
 @implementation AddEmployeeViewController
 
-- (IBAction)deletePressed:(UIButton *)sender
-{
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Are you sure you want to delete %@ %@",self.myRecord.firstName,self.myRecord.lastName] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil];
-    [sheet showInView:self.view];
-}
-
-- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == actionSheet.destructiveButtonIndex)
-    {
-        [self.delegate deleteEmployeeRecord:self.myRecord];
-    }
-}
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender
 {

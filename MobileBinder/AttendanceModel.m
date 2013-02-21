@@ -1,17 +1,17 @@
-#import "EmployeesModel.h"
+#import "AttendanceModel.h"
 #import "EmployeeRecord.h"
 #import "EmployeeRecordManagedObject.h"
 #import "Database.h"
 
 
-@interface EmployeesModel() <DatabaseDelegate>
+@interface AttendanceModel() <DatabaseDelegate>
 @property (nonatomic, strong) UIManagedDocument *database;
 @property (nonatomic, strong) NSMutableArray *employeeRecords;
 @property (nonatomic, strong) NSMutableArray *filteredRecords;
 @property (nonatomic) BOOL usingFilter;
 @end
 
-@implementation EmployeesModel
+@implementation AttendanceModel
 
 - (void) fetchEmployeeRecordsFromDatabase
 {

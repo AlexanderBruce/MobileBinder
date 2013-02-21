@@ -2,6 +2,7 @@
 #import "Reminder.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "ReminderCenter.h"
+#import "MarqueeCell.h"
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
@@ -51,15 +52,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Prototype Cell"];
+    MarqueeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Prototype Cell"];
     if(!cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Prototype Cell"];
+        cell = [[MarqueeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Prototype Cell"];
     }
     NSArray *arrayForSection = [self.rowsForSections objectForKey:[NSNumber numberWithInt:indexPath.section]];
     Reminder *reminder = [arrayForSection objectAtIndex:indexPath.row];
-    cell.textLabel.text = reminder.text;
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell setLabelText:reminder.text];
     return cell;
 }
 
@@ -91,7 +92,7 @@
             
             while (numberRetrieved < MIN_SIZE_UNTIL_FETCH_COMPLETE && numberOfFetches < MAX_NUMBER_OF_FETCHES)
             {
-                numberRetrieved = [self addNewDataToTableView];
+                numberRetrieved += [self addNewDataToTableView];
                 numberOfFetches ++;
             }
             [self.tableView.infiniteScrollingView stopAnimating];

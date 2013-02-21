@@ -4,7 +4,7 @@
 #define PROCEED_ALERT_TAG 2
 
 #define WELCOME_SECTION 0
-#define WELCOME_HEADER @"Welcome to the Mobile Binder! Before you begin, please take the time to customize these settings to best meet your needs."
+#define WELCOME_HEADER @"Welcome to the Mobile Binder! Before you begin, please customize these settings so this app can best serve your needs."
 
 
 @interface WelcomeViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -75,7 +75,6 @@
     if(section == WELCOME_SECTION) return WELCOME_HEADER;
     else return @"";
 }
-
 
 - (IBAction)proceedPressed:(id)sender
 {

@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 @class EmployeeRecord;
-@class EmployeesModel;
+@class AttendanceModel;
 
 @interface EmployeeViewController : UIViewController
 
 @property (nonatomic, strong) EmployeeRecord *employeeRecord;
 
-@property (nonatomic, strong) EmployeesModel *myModel;
+@property (nonatomic, strong) AttendanceModel *myModel;
 
 @end

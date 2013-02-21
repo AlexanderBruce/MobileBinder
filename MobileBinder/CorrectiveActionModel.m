@@ -55,9 +55,18 @@
 
 - (NSString *) violationForBehavior: (Behavior) behavior andEmployee: (EmployeeRecord *) employee
 {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterShortStyle;
     if(behavior == Absence)
     {
-        return [NSString stringWithFormat:@"Absent %d times during the current 12-month rolling calendar",[employee getNumberOfAbsencesInPastYear]];
+        NSArray *absences = employee.absences;
+        NSMutableString *datesString = [[NSMutableString alloc] init];
+        for (NSDate *date in absences)
+        {
+            if(datesString.length > 0) [datesString appendString:@", "];
+            [datesString appendFormat:@"%@",[formatter stringFromDate:date]];
+        }
+        return [NSString stringWithFormat:@"Absent %d times during the current 12-month rolling calendar: %@",[employee getNumberOfAbsencesInPastYear],datesString];
     }
     else if(behavior == Tardy)
     {
