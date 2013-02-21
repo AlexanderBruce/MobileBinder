@@ -10,6 +10,7 @@
 		4907612516D59D7000AC30DB /* Down_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612416D59D7000AC30DB /* Down_Arrow.png */; };
 		4907612716D5A48E00AC30DB /* Up_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612616D5A48E00AC30DB /* Up_Arrow.png */; };
 		4907612916D5CA6000AC30DB /* Delete Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612816D5CA6000AC30DB /* Delete Button.png */; };
+		4907612C16D5D77D00AC30DB /* MarqueeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907612B16D5D77D00AC30DB /* MarqueeCell.m */; };
 		490A5AF916C1D25F0062F36F /* WebviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5AF816C1D25F0062F36F /* WebviewViewController.m */; };
 		490A5AFE16C1D9730062F36F /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5AFD16C1D9730062F36F /* MarqueeLabel.m */; };
 		490A5B0116C1D9990062F36F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5B0016C1D9990062F36F /* HomeViewController.m */; };
@@ -63,6 +64,8 @@
 		4907612416D59D7000AC30DB /* Down_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Down_Arrow.png; sourceTree = "<group>"; };
 		4907612616D5A48E00AC30DB /* Up_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Up_Arrow.png; sourceTree = "<group>"; };
 		4907612816D5CA6000AC30DB /* Delete Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete Button.png"; sourceTree = "<group>"; };
+		4907612A16D5D77D00AC30DB /* MarqueeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeCell.h; sourceTree = "<group>"; };
+		4907612B16D5D77D00AC30DB /* MarqueeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeCell.m; sourceTree = "<group>"; };
 		490A5AF716C1D25F0062F36F /* WebviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebviewViewController.h; sourceTree = "<group>"; };
 		490A5AF816C1D25F0062F36F /* WebviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebviewViewController.m; sourceTree = "<group>"; };
 		490A5AFC16C1D9730062F36F /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */,
 				49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */,
 				4939165C16C2D8BA00F9365D /* Constants.h */,
+				4907612A16D5D77D00AC30DB /* MarqueeCell.h */,
+				4907612B16D5D77D00AC30DB /* MarqueeCell.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 				499C4CF916D2E7A400ED6E76 /* WelcomeViewController.m in Sources */,
 				499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */,
 				FA87F32716D42FD200E574E6 /* EditEmployeeViewController.m in Sources */,
+				4907612C16D5D77D00AC30DB /* MarqueeCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
