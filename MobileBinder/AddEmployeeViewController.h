@@ -9,9 +9,6 @@
 - (void) addedNewEmployeeRecord: (EmployeeRecord *) record;
 
 - (void) editedEmployeedRecord;
-
-- (void) deleteEmployeeRecord: (EmployeeRecord *) record;
-
 @end
 
 @interface AddEmployeeViewController : UIViewController
