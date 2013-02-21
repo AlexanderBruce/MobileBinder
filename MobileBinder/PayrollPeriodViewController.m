@@ -7,6 +7,8 @@
 //
 
 #import "PayrollPeriodViewController.h"
+#import <Foundation/NSDate.h>
+
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
@@ -23,10 +25,11 @@
 @property(strong,nonatomic) NSMutableArray *biweeklyPayPeriods;
 @property(strong,nonatomic) UIPickerView *myPicker;
 @property(strong,nonatomic) NSString *selectedPayPeriod;
-@property(strong,nonatomic) UITableView *payPeriodContent;
 @property(strong,nonatomic) PayrollModel *myModel;
 @property(strong,nonatomic) NSMutableDictionary *payrollStringsToPayrollModel;
-
+@property(strong,nonatomic) UITableView *payPeriodTableView;
+@property(strong,nonatomic) NSArray *modelData;
+@property(strong,nonatomic) NSArray *importantDateLabels;
 @end
 
 @implementation PayrollPeriodViewController
@@ -34,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.myModel = [[PayrollModel alloc] init];
     self.payrollStringsToPayrollModel = [NSMutableDictionary dictionary];
     self.monthlyPayPeriods = [[NSMutableArray alloc]initWithObjects:
                               @"January",@"February",@"March", @"April",
@@ -49,11 +53,10 @@
     }
     for(int i = 0; i < [self.biweeklyPayPeriods count]; i++)
     {
-        [self.payrollStringsToPayrollModel setValue:[NSString stringWithFormat:@"%d", (i+1)] forKey:[self.biweeklyPayPeriods objectAtIndex:i]];
+        [self.payrollStringsToPayrollModel setValue:[NSString stringWithFormat:@"%02d", (i+1)] forKey:[self.biweeklyPayPeriods objectAtIndex:i]];
     }
     self.periodSelection.inputView = [self createPeriodPicker];
     self.periodTypeSegmented.selectedSegmentIndex = 1;
-    self.periodSelection.delegate = self;
 }
 
 -(UIView *) createPeriodPicker
@@ -62,15 +65,18 @@
     self.myPicker.dataSource = self;
     self.myPicker.delegate = self;
     self.myPicker.showsSelectionIndicator = YES;
-    
     return self.myPicker;
 }
 - (IBAction)storePayPeriodSelection:(id)sender {
-        [self.periodSelection resignFirstResponder];
+    [self.periodSelection resignFirstResponder];
+    if(self.selectedPayPeriod){
+        [self createPayPeriodDataTable];
+    }
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
+
     [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
     [self.myPicker reloadAllComponents];
 }
@@ -78,9 +84,22 @@
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
     [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    self.payPeriodContent = [[UITableView alloc]init];
-    [self populatePayPeriodDates];
-    
+}
+
+- (void) createPayPeriodDataTable
+{
+    self.payPeriodTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,131,self.view.frame.size.width,self.view.frame.size.height-210)];
+    self.modelData = [self.myModel datesForPayPeriod:[self.payrollStringsToPayrollModel objectForKey:self.selectedPayPeriod]];
+    if (self.periodTypeSegmented.selectedSegmentIndex == 1) {
+        self.importantDateLabels = [[NSArray alloc]initWithObjects:@"Forms Due to Management Centers (except DRH)", @"Forms Due To DRH HR", @"Leave of Absence Forms Due to Corporate Payroll", @"Pay Exception Forms Due to Corporate Payroll", @"All Types of iForms", @"Time and Attendance Closing to Update PTO Balances", @"Pay Date", nil];
+    }
+    else
+    {
+        self.importantDateLabels = [[NSArray alloc]initWithObjects:@"Pay Period Begin Date",@"Pay Period End Date", @"Pay Date", @"Time/Attendance and Electronic Time Cards Employee Lock Down", @"Time/Attendance and Electronic Time Cards Supervisor Lock Down", @"Gross Adjustment Forms Due to Corporate Payroll", @"Forms Due to Management Centers", @"All Forms Due to DRH HR", @"All Types of iForms", nil];
+    }
+    self.payPeriodTableView.delegate = self;
+    self.payPeriodTableView.dataSource = self;
+    [self.view addSubview:self.payPeriodTableView];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
@@ -122,18 +141,59 @@
     return result;
 }
 
--(void)populatePayPeriodDates;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog([self.payrollStringsToPayrollModel objectForKey:self.selectedPayPeriod]);
-    NSArray *dates = [self.myModel datesForPayPeriod:[self.payrollStringsToPayrollModel objectForKey:self.selectedPayPeriod]];
-    NSLog(@"Here %@",dates);
+    return self.importantDateLabels.count;
+//    NSInteger *result;
+//    if(self.periodTypeSegmented.selectedSegmentIndex == 1){
+//        result = self.modelData.count;
+//    }
+//    else if (self.periodTypeSegmented.selectedSegmentIndex == 0) {
+//        result = 
+//    }
+//
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+//    return self.modelData.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(!cell) cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellIdentifier];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    CGRect labelFrame = CGRectMake(20, 13, self.view.frame.size.width, 20);
+    UILabel *label = [[UILabel alloc]initWithFrame:labelFrame];
+    label.backgroundColor = [UIColor clearColor];
+    NSDate *date =[self.modelData objectAtIndex:indexPath.row];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSString *title = [dateFormatter stringFromDate:date];
+    NSLog(@"%@",title);
+    label.text = title;
+    label.backgroundColor = [UIColor clearColor];
+    [cell addSubview:label];
+    return cell;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [self.importantDateLabels objectAtIndex:section];
+}
+
 
 - (void)viewDidUnload {
     [self setPeriodTypeSegmented:nil];
     [self setPeriodSelection:nil];
     [self setMyScrollView:nil];
     [self setDoneButton:nil];
+    [self setPayPeriodTableView:nil];
+    [self setPayPeriodTableView:nil];
     [super viewDidUnload];
 }
 @end
