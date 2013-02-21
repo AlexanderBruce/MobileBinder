@@ -167,14 +167,12 @@
     if(!cell) cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    CGRect labelFrame = CGRectMake(20, 13, self.view.frame.size.width, 20);
-    UILabel *label = [[UILabel alloc]initWithFrame:labelFrame];
+    UILabel *label = cell.textLabel;
     label.backgroundColor = [UIColor clearColor];
     NSDate *date =[self.modelData objectAtIndex:indexPath.section];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-yyyy"];
     NSString *title = [dateFormatter stringFromDate:date];
-    NSLog(@"%@",title);
     label.text = title;
     label.backgroundColor = [UIColor clearColor];
     [cell addSubview:label];
