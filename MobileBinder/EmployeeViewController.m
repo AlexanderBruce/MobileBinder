@@ -51,6 +51,21 @@
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.section == DELETE_SECTION)
+    {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Delete Cell"];
+        if(!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Delete Cell"];
+        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[ [UIImage imageNamed:@"Delete Button.png"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
+        cell.backgroundView = backgroundImage;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.text = @"Delete Employee";
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrototypeCell"];
     if(!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PrototypeCell"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -59,7 +74,6 @@
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.accessoryView = nil;
-    cell.backgroundView = nil;
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -76,15 +90,7 @@
             cell.textLabel.text = @"Change Employee Info";
         }
     }
-    else if(indexPath.section == DELETE_SECTION)
-    {
-        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[ [UIImage imageNamed:@"Delete Button.png"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
-        cell.backgroundView = backgroundImage;
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.textLabel.text = @"Delete Employee";
-    }
+
     else
     {
         BOOL sectionIsExpanded = [self.expandedSections containsObject:[NSNumber numberWithInt:indexPath.section]];
