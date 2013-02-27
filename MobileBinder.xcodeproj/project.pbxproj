@@ -62,7 +62,7 @@
 		49FB66FF16C2CA0D004F576F /* PayrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FB66FE16C2CA0D004F576F /* PayrollModel.m */; };
 		F745C9A016D7E3F900F5138C /* new_Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = F745C99F16D7E3F900F5138C /* new_Banner.png */; };
 		F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */; };
-		F76662F416DAB3DF00193207 /* background.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F76662F316DAB3DF00193207 /* background.jpeg */; };
+		F790E91416DEBA6900CB288C /* background.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F790E91316DEBA6900CB288C /* background.jpeg */; };
 		F79A34E916BD8FAE00ACAABB /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = F79A34E816BD8FAE00ACAABB /* Database.m */; };
 		F79A34EC16BDAB4600ACAABB /* EmployeeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB416B8639300F16ED6 /* EmployeeRecord.m */; };
 		F79A34ED16BDABE500ACAABB /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */; };
@@ -170,7 +170,7 @@
 		F745C99F16D7E3F900F5138C /* new_Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = new_Banner.png; path = ../new_Banner.png; sourceTree = "<group>"; };
 		F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollNotificationsViewController.h; sourceTree = "<group>"; };
 		F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollNotificationsViewController.m; sourceTree = "<group>"; };
-		F76662F316DAB3DF00193207 /* background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpeg; path = ../background.jpeg; sourceTree = "<group>"; };
+		F790E91316DEBA6900CB288C /* background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpeg; sourceTree = "<group>"; };
 		F79A34E716BD8FAE00ACAABB /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		F79A34E816BD8FAE00ACAABB /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		F79A34F416BDAFDC00ACAABB /* EmployeeRecordManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRecordManagedObject.h; sourceTree = "<group>"; };
@@ -292,7 +292,6 @@
 		494D0E2416B84BAB00354964 = {
 			isa = PBXGroup;
 			children = (
-				F76662F316DAB3DF00193207 /* background.jpeg */,
 				494D0E3916B84BAB00354964 /* MobileBinder */,
 				494D0E3216B84BAB00354964 /* Frameworks */,
 				494D0E3016B84BAB00354964 /* Products */,
@@ -323,6 +322,7 @@
 		494D0E3916B84BAB00354964 /* MobileBinder */ = {
 			isa = PBXGroup;
 			children = (
+				F790E91316DEBA6900CB288C /* background.jpeg */,
 				F7A843A416D40ECB009F09DD /* Banner copy.png */,
 				F745C99F16D7E3F900F5138C /* new_Banner.png */,
 				F7A8439E16D40CB8009F09DD /* Logo small.png */,
@@ -488,10 +488,10 @@
 				4907612716D5A48E00AC30DB /* Up_Arrow.png in Resources */,
 				4907612916D5CA6000AC30DB /* Delete Button.png in Resources */,
 				F745C9A016D7E3F900F5138C /* new_Banner.png in Resources */,
-				F76662F416DAB3DF00193207 /* background.jpeg in Resources */,
 				49A2458316DDD6F800C4F855 /* 37x-Checkmark.png in Resources */,
 				49A2458416DDD6F800C4F855 /* 37x-Checkmark@2x.png in Resources */,
 				49125B1816DE7C9300103A08 /* Termination Notice Template.rtf in Resources */,
+				F790E91416DEBA6900CB288C /* background.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
