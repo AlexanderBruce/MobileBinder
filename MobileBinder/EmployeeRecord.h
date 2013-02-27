@@ -28,7 +28,7 @@
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *department;
 @property (nonatomic, strong) NSString *unit;
-@property (nonatomic, strong, readonly) NSArray *absences;
+@property (nonatomic, strong, readonly) NSArray *abzences;
 @property (nonatomic, strong, readonly) NSArray *tardies;
 @property (nonatomic, strong, readonly) NSArray *missedSwipes;
 
@@ -46,6 +46,7 @@
 
 - (NSString *) getTextForLevel: (int) level;
 
+
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
 - (int) addAbsenceForDate: (NSDate *) date;
 
@@ -54,6 +55,7 @@
 
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
 - (int) addMissedSwipeForDate: (NSDate *) date;
+
 
 - (void) removeAbsence: (NSDate *) date;
 
