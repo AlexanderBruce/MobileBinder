@@ -1279,7 +1279,6 @@
         <class className="RoundingDetailsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingDetailsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="addPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
