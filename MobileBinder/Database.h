@@ -16,4 +16,6 @@
 
 + (void) saveDatabase;
 
++ (void) saveDatabaseWithCompletion: (void (^) (void)) block;
+
 @end

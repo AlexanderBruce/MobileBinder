@@ -35,4 +35,8 @@
 
 #define MANAGER_EMAIL_KEY @"managerEmailKey"
 
+#define KEYBOARD_HEIGHT 216.0f
+#define TOOLBAR_HEIGHT 44
+
+
 @end

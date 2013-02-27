@@ -2,11 +2,8 @@
 #import "EmployeeRecord.h"
 #import "WebviewViewController.h"
 #import "Database.h"
-#import "CorrectiveActionModel.h"
+#import "DisciplinaryActionModel.h"
 #import "Constants.h"
-
-#define KEYBOARD_HEIGHT 216.0f
-#define TOOLBAR_HEIGHT 44
 
 #define ABSENCE_INDEX 0
 #define TARDY_INDEX 1
@@ -25,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *incidentDateField;
 @property (nonatomic, strong) NSDate *incidentDate;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (nonatomic, strong) CorrectiveActionModel *myModel;
+@property (nonatomic, strong) DisciplinaryActionModel *myModel;
 @property (nonatomic, weak) MFMailComposeViewController *mailer;
 @end
 
@@ -54,7 +51,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateStyle = NSDateFormatterLongStyle;
     self.incidentDateField.text = [formatter stringFromDate:[NSDate date]];
-    self.myModel = [[CorrectiveActionModel alloc] init];
+    self.myModel = [[DisciplinaryActionModel alloc] init];
 }
 
 #pragma mark - WebviewViewControllerDelegate
@@ -97,20 +94,10 @@
     
     if (changeOfLevel >= 0)
     {
-        if(changeOfLevel == 1 || changeOfLevel == 2)
-        {
-            self.mailer = [self.myModel generateCorrectiveActionDocumentFor:self.employeeRecord forBehavior:behavior level:changeOfLevel];
-            self.mailer.mailComposeDelegate = self;
-            [self presentModalViewController:self.mailer animated:YES];
-            return;
-        }
-        else if(changeOfLevel == LEVEL_3_ID)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Action Needed" message:@"Please prepare termination proposal and submit to Staff and Labor Relations for review" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-            alert.tag = LEVEL_3_ALERT_TAG;
-            [alert show];
-            return;
-        }
+        self.mailer = [self.myModel generateDisciplinaryActionDocumentFor:self.employeeRecord forBehavior:behavior level:changeOfLevel];
+        self.mailer.mailComposeDelegate = self;
+        [self presentModalViewController:self.mailer animated:YES];
+        return;
     }
     [self.navigationController popViewControllerAnimated:YES]; 
 }

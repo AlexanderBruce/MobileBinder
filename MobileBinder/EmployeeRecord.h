@@ -46,6 +46,7 @@
 
 - (NSString *) getTextForLevel: (int) level;
 
+
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
 - (int) addAbsenceForDate: (NSDate *) date;
 
@@ -54,6 +55,7 @@
 
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
 - (int) addMissedSwipeForDate: (NSDate *) date;
+
 
 - (void) removeAbsence: (NSDate *) date;
 
