@@ -16,7 +16,7 @@ static UIManagedDocument *database;
 
 + (void) getDatabaseWithDelegate: (id<DatabaseDelegate>) delegate
 {
-    NSLog(@"Getting database");
+    NSLog(@"Getting database %@",delegate);
     if(database)
     {
         [delegate obtainedDatabase:database];
