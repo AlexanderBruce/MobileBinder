@@ -104,29 +104,36 @@
     formatter.dateStyle = NSDateFormatterShortStyle;
     if(behavior == Absence)
     {
-        NSArray *absences = employee.absences;
+        NSArray *absences = [employee getAbsencesInPastYear];
         NSMutableString *datesString = [[NSMutableString alloc] init];
         for (NSDate *date in absences)
         {
             if(datesString.length > 0) [datesString appendString:@", "];
             [datesString appendFormat:@"%@",[formatter stringFromDate:date]];
         }
-        return [NSString stringWithFormat:@"Absent %d times during the current 12-month rolling calendar: %@",[employee getNumberOfAbsencesInPastYear],datesString];
+        return [NSString stringWithFormat:@"Absent %d times during the current 12-month rolling calendar: %@",[employee getAbsencesInPastYear].count,datesString];
     }
     else if(behavior == Tardy)
     {
-        return [NSString stringWithFormat:@"Tard %d times during the current 12-month rolling calendar",[employee getNumberOfTardiesInPastYear]];
+        NSArray *tardies = [employee getTardiesInPastYear];
+        NSMutableString *datesString = [[NSMutableString alloc] init];
+        for (NSDate *date in tardies)
+        {
+            if(datesString.length > 0) [datesString appendString:@", "];
+            [datesString appendFormat:@"%@",[formatter stringFromDate:date]];
+        }
+        return [NSString stringWithFormat:@"Tard %d times during the current 12-month rolling calendar: %@",[employee getTardiesInPastYear].count, datesString];
     }
     else
     {
-        NSArray *missedSwipes = employee.missedSwipes;
+        NSArray *missedSwipes = [employee getMissedSwipesInPastYear];
         NSMutableString *datesString = [[NSMutableString alloc] init];
         for (NSDate *date in missedSwipes)
         {
             if(datesString.length > 0) [datesString appendString:@", "];
             [datesString appendFormat:@"%@",[formatter stringFromDate:date]];
         }
-        return [NSString stringWithFormat:@"Missed %d swipes during the current 12-month rolling calendar: %@",[employee getNumberOfMissedSwipesInPastYear]];
+        return [NSString stringWithFormat:@"Missed %d swipes during the current 12-month rolling calendar: %@",[employee getMissedSwipesInPastYear].count, datesString];
     }
 }
 

@@ -98,7 +98,7 @@
 
         if(indexPath.section == ABSENCES_SECTION)
         {
-            NSArray *absences = self.employeeRecord.absences;
+            NSArray *absences = [self.employeeRecord getAbsencesInPastYear];
             numOfDataCellsInExpandedMode = absences.count;
             if(sectionIsExpanded && indexPath.row > 0)
             {
@@ -112,7 +112,7 @@
         }
         else if(indexPath.section == TARDIES_SECTION)
         {
-            NSArray *tardies = self.employeeRecord.tardies;
+            NSArray *tardies = [self.employeeRecord getTardiesInPastYear];
             numOfDataCellsInExpandedMode = tardies.count;
             if(sectionIsExpanded && indexPath.row > 0)
             {
@@ -126,7 +126,7 @@
         }
         else if(indexPath.section == SWIPES_SECTION)
         {
-            NSArray *swipes = self.employeeRecord.missedSwipes;
+            NSArray *swipes = [self.employeeRecord getMissedSwipesInPastYear];
             numOfDataCellsInExpandedMode = swipes.count;
             if(sectionIsExpanded && indexPath.row > 0)
             {
@@ -179,15 +179,18 @@
     BOOL sectionIsExpanded = [self.expandedSections containsObject:[NSNumber numberWithInt:section]];
     if(section == ABSENCES_SECTION)
     {
-        return (sectionIsExpanded) ? [self.employeeRecord getNumberOfAbsencesInPastYear] + 1 : 1;
+        int numAbsencesInPastYear = [self.employeeRecord getAbsencesInPastYear].count;
+        return (sectionIsExpanded) ? numAbsencesInPastYear + 1 : 1;
     }
     else if(section == TARDIES_SECTION)
     {
-        return (sectionIsExpanded) ? [self.employeeRecord getNumberOfTardiesInPastYear] + 1 : 1;
+        int numTardiesInPastYear = [self.employeeRecord getTardiesInPastYear].count;
+        return (sectionIsExpanded) ? numTardiesInPastYear + 1 : 1;
     }
     else if(section == SWIPES_SECTION)
     {
-        return (sectionIsExpanded) ? [self.employeeRecord getNumberOfMissedSwipesInPastYear] + 1: 1;
+        int numMissedSwipesInPastYear = [self.employeeRecord getMissedSwipesInPastYear].count;
+        return (sectionIsExpanded) ? numMissedSwipesInPastYear + 1: 1;
     }
     else if(section == INCIDENT_SECTION) return 2;
     else return 1;
@@ -223,9 +226,9 @@
     {
         BOOL sectionIsExpanded = [self.expandedSections containsObject:[NSNumber numberWithInt:indexPath.section]];
         int numOfDataCellsInExpandedMode = 0;
-        if(indexPath.section == ABSENCES_SECTION) numOfDataCellsInExpandedMode = [self.employeeRecord getNumberOfAbsencesInPastYear];
-        else if(indexPath.section == TARDIES_SECTION) numOfDataCellsInExpandedMode = [self.employeeRecord getNumberOfTardiesInPastYear];
-        else if(indexPath.section == SWIPES_SECTION) numOfDataCellsInExpandedMode = [self.employeeRecord getNumberOfMissedSwipesInPastYear];
+        if(indexPath.section == ABSENCES_SECTION) numOfDataCellsInExpandedMode = [self.employeeRecord getAbsencesInPastYear].count;
+        else if(indexPath.section == TARDIES_SECTION) numOfDataCellsInExpandedMode = [self.employeeRecord getTardiesInPastYear].count;
+        else if(indexPath.section == SWIPES_SECTION) numOfDataCellsInExpandedMode = [self.employeeRecord getMissedSwipesInPastYear].count;
         if(sectionIsExpanded)
         {
             if(indexPath.row == 0) //Tapped collapse cell
@@ -276,18 +279,18 @@
     {
         if(indexPath.section == ABSENCES_SECTION)
         {
-            [self.employeeRecord removeAbsence:[self.employeeRecord.absences objectAtIndex:indexPath.row - 1]];
-            if([self.employeeRecord getNumberOfAbsencesInPastYear] == 0) [self.expandedSections removeObject:[NSNumber numberWithInt:ABSENCES_SECTION]];
+            [self.employeeRecord removeAbsence:[[self.employeeRecord getAbsencesInPastYear] objectAtIndex:indexPath.row - 1]];
+            if([self.employeeRecord getAbsencesInPastYear].count == 0) [self.expandedSections removeObject:[NSNumber numberWithInt:ABSENCES_SECTION]];
         }
         else if(indexPath.section == TARDIES_SECTION)
         {
-            [self.employeeRecord removeTardy:[self.employeeRecord.tardies objectAtIndex:indexPath.row - 1]];
-            if([self.employeeRecord getNumberOfTardiesInPastYear] == 0) [self.expandedSections removeObject:[NSNumber numberWithInt:TARDIES_SECTION]];
+            [self.employeeRecord removeTardy:[[self.employeeRecord getTardiesInPastYear] objectAtIndex:indexPath.row - 1]];
+            if([self.employeeRecord getTardiesInPastYear].count == 0) [self.expandedSections removeObject:[NSNumber numberWithInt:TARDIES_SECTION]];
         }
         else if(indexPath.section == SWIPES_SECTION)
         {
-            [self.employeeRecord removeMissedSwipes:[self.employeeRecord.missedSwipes objectAtIndex:indexPath.row - 1]];
-            if([self.employeeRecord getNumberOfMissedSwipesInPastYear] == 0) [self.expandedSections removeObject:[NSNumber numberWithInt:SWIPES_SECTION]];
+            [self.employeeRecord removeAllMissedSwipes:[[self.employeeRecord getMissedSwipesInPastYear] objectAtIndex:indexPath.row - 1]];
+            if([self.employeeRecord getMissedSwipesInPastYear].count == 0) [self.expandedSections removeObject:[NSNumber numberWithInt:SWIPES_SECTION]];
         }
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
         [self checkEnablingOfEditButton];
@@ -321,7 +324,7 @@
 
 - (void) checkEnablingOfEditButton
 {
-    if(self.employeeRecord.absences.count > 0 || self.employeeRecord.tardies.count > 0 || self.employeeRecord.missedSwipes.count > 0)
+    if([self.employeeRecord getAbsencesInPastYear].count > 0 || [self.employeeRecord getTardiesInPastYear].count > 0 || [self.employeeRecord getMissedSwipesInPastYear].count > 0)
     {
         self.editButton.enabled = YES;
     }
