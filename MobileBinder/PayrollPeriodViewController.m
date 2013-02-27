@@ -1,4 +1,7 @@
 //
+//Bug - when switching between biweekly and monthly pickers while the picker view is up
+//
+//
 //  PayrollPeriodViewController.m
 //  MobileBinder
 //
@@ -56,7 +59,7 @@
         [self.payrollStringsToPayrollModel setValue:[NSString stringWithFormat:@"%02d", (i+1)] forKey:[self.biweeklyPayPeriods objectAtIndex:i]];
     }
     self.periodSelection.inputView = [self createPeriodPicker];
-    self.periodTypeSegmented.selectedSegmentIndex = 1;
+    self.periodTypeSegmented.selectedSegmentIndex = 0;
 }
 
 -(UIView *) createPeriodPicker
@@ -65,6 +68,8 @@
     self.myPicker.dataSource = self;
     self.myPicker.delegate = self;
     self.myPicker.showsSelectionIndicator = YES;
+    self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
+    [self.periodSelection setText:self.selectedPayPeriod];
     return self.myPicker;
 }
 - (IBAction)storePayPeriodSelection:(id)sender {
@@ -157,7 +162,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
-//    return self.modelData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -171,11 +175,18 @@
     label.backgroundColor = [UIColor clearColor];
     NSDate *date =[self.modelData objectAtIndex:indexPath.section];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    [dateFormatter setDateFormat:@"EE MMMM dd, yyyy"];
     NSString *title = [dateFormatter stringFromDate:date];
     label.text = title;
     label.backgroundColor = [UIColor clearColor];
-    [cell addSubview:label];
+    
+//    CGRect buttonFrame = CGRectMake(250, 0, 50, 22);
+//    UIButton *addReminderButton = [[UIButton alloc]initWithFrame:buttonFrame];
+//    UILabel *buttonLabel = [[UILabel alloc]initWithFrame:addReminderButton.frame];
+//    buttonLabel.text = @"Add Reminder";
+//    [addReminderButton addSubview:buttonLabel];
+//    
+//    [cell addSubview:addReminderButton];
     return cell;
 }
 
