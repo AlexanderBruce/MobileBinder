@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490120C516DEC94D00963226 /* HomeBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 490120C416DEC94D00963226 /* HomeBackground.png */; };
 		4907612516D59D7000AC30DB /* Down_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612416D59D7000AC30DB /* Down_Arrow.png */; };
 		4907612716D5A48E00AC30DB /* Up_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612616D5A48E00AC30DB /* Up_Arrow.png */; };
 		4907612916D5CA6000AC30DB /* Delete Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612816D5CA6000AC30DB /* Delete Button.png */; };
@@ -75,6 +76,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		490120C416DEC94D00963226 /* HomeBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeBackground.png; sourceTree = "<group>"; };
 		4907612416D59D7000AC30DB /* Down_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Down_Arrow.png; sourceTree = "<group>"; };
 		4907612616D5A48E00AC30DB /* Up_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Up_Arrow.png; sourceTree = "<group>"; };
 		4907612816D5CA6000AC30DB /* Delete Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete Button.png"; sourceTree = "<group>"; };
@@ -258,7 +260,7 @@
 		494CD9EF16DD42DC00112E3E /* Media */ = {
 			isa = PBXGroup;
 			children = (
-				F790E91D16DEC8B400CB288C /* HomeBackground.png */,
+				490120C416DEC94D00963226 /* HomeBackground.png */,
 				49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */,
 				49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */,
 				F7A8439E16D40CB8009F09DD /* Logo small.png */,

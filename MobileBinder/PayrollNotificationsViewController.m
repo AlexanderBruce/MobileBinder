@@ -56,13 +56,11 @@
             if((oldSetting == YES) && (newSetting == NO)) //Cancel reminders
             {
                 [typeIDsToRemove addObject:[self.payrollNotificationToArrayofTypeIDs objectForKey:notificationLabel]];
-                NSLog(@"Cancel %@\n",notificationLabel);
             }
             else if((oldSetting == NO) && (newSetting == YES)) //Add new reminders
             {
                 NSArray *typeIDs = [self.payrollNotificationToArrayofTypeIDs objectForKey:notificationLabel];
                 [typeIDsToAdd addObjectsFromArray:typeIDs];
-                NSLog(@"ADD %@ \n",notificationLabel);
             }
             [self.notificationUserSettings setBool:[swtch isOn] forKey:notificationLabel];
         }
