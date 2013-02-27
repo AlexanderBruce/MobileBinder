@@ -5,9 +5,6 @@
 #import "CorrectiveActionModel.h"
 #import "Constants.h"
 
-#define KEYBOARD_HEIGHT 216.0f
-#define TOOLBAR_HEIGHT 44
-
 #define ABSENCE_INDEX 0
 #define TARDY_INDEX 1
 #define TIMECARD_INDEX 2

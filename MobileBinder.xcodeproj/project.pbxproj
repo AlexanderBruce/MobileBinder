@@ -18,6 +18,8 @@
 		490A5B0616C1DC390062F36F /* ReminderCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5B0516C1DC390062F36F /* ReminderCenter.m */; };
 		490A5B0916C1DD170062F36F /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5B0816C1DD170062F36F /* Reminder.m */; };
 		4939165B16C2D86C00F9365D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4939165A16C2D86C00F9365D /* MBProgressHUD.m */; };
+		494CD9F316DD437100112E3E /* RoundingOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */; };
+		494CDA2A16DD4C7B00112E3E /* RoundingDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */; };
 		494D0E3416B84BAB00354964 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3316B84BAB00354964 /* UIKit.framework */; };
 		494D0E3616B84BAB00354964 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3516B84BAB00354964 /* Foundation.framework */; };
 		494D0E3816B84BAB00354964 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3716B84BAB00354964 /* CoreGraphics.framework */; };
@@ -35,12 +37,18 @@
 		4960AFB216B8633600F16ED6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4960AFB116B8633600F16ED6 /* CoreData.framework */; };
 		4960AFB816B8707D00F16ED6 /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */; };
 		4960AFC416B8759600F16ED6 /* IncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFC316B8759600F16ED6 /* IncidentViewController.m */; };
+		4961F83F16DD525000B5EBC8 /* UITextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4961F83E16DD525000B5EBC8 /* UITextViewCell.m */; };
 		4968BB6016C43D40002600AF /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968BB5F16C43CD3002600AF /* CustomAlert.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		496DFF5616C6D70D00111136 /* PayrollData in Resources */ = {isa = PBXBuildFile; fileRef = 496DFF5516C6D70D00111136 /* PayrollData */; };
+		498F86C516DD6387005118C1 /* UITextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498F86C416DD6387005118C1 /* UITextFieldCell.m */; };
 		499C4CF216D2B9D800ED6E76 /* Corrective Action Notice Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */; };
 		499C4CF516D2D9E300ED6E76 /* CorrectiveActionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CF416D2D9E300ED6E76 /* CorrectiveActionModel.m */; };
 		499C4CF916D2E7A400ED6E76 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CF816D2E7A400ED6E76 /* WelcomeViewController.m */; };
 		499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */; };
+		49A2457216DD757F00C4F855 /* RoundingLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457116DD757F00C4F855 /* RoundingLog.m */; };
+		49A2457716DDA19C00C4F855 /* RoundingLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457616DDA19C00C4F855 /* RoundingLoadViewController.m */; };
+		49A2457A16DDA44C00C4F855 /* RoundingLogManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */; };
+		49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457C16DDA86000C4F855 /* RoundingModel.m */; };
 		49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F216C1E39E007AA467 /* RemindersViewController.m */; };
 		49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */; };
 		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
@@ -80,6 +88,10 @@
 		4939165916C2D86C00F9365D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		4939165A16C2D86C00F9365D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		4939165C16C2D8BA00F9365D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		494CD9F116DD437100112E3E /* RoundingOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingOverviewViewController.h; sourceTree = "<group>"; };
+		494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingOverviewViewController.m; sourceTree = "<group>"; };
+		494CDA2816DD4C7B00112E3E /* RoundingDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingDetailsViewController.h; sourceTree = "<group>"; };
+		494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingDetailsViewController.m; sourceTree = "<group>"; };
 		494D0E2F16B84BAB00354964 /* MobileBinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileBinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		494D0E3316B84BAB00354964 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		494D0E3516B84BAB00354964 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -110,9 +122,13 @@
 		4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
 		4960AFC216B8759600F16ED6 /* IncidentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentViewController.h; sourceTree = "<group>"; };
 		4960AFC316B8759600F16ED6 /* IncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentViewController.m; sourceTree = "<group>"; };
+		4961F83D16DD525000B5EBC8 /* UITextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextViewCell.h; sourceTree = "<group>"; };
+		4961F83E16DD525000B5EBC8 /* UITextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextViewCell.m; sourceTree = "<group>"; };
 		4968BB5E16C43CD3002600AF /* CustomAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
 		4968BB5F16C43CD3002600AF /* CustomAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAlert.m; sourceTree = "<group>"; };
 		496DFF5516C6D70D00111136 /* PayrollData */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PayrollData; sourceTree = "<group>"; };
+		498F86C316DD6387005118C1 /* UITextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldCell.h; sourceTree = "<group>"; };
+		498F86C416DD6387005118C1 /* UITextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldCell.m; sourceTree = "<group>"; };
 		499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Corrective Action Notice Template.rtf"; sourceTree = "<group>"; };
 		499C4CF316D2D9E300ED6E76 /* CorrectiveActionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CorrectiveActionModel.h; sourceTree = "<group>"; };
 		499C4CF416D2D9E300ED6E76 /* CorrectiveActionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CorrectiveActionModel.m; sourceTree = "<group>"; };
@@ -121,6 +137,14 @@
 		499C4CFA16D2F4DC00ED6E76 /* SettingsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsProtocol.h; sourceTree = "<group>"; };
 		499C4CFB16D30AF700ED6E76 /* ManagerSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerSettingsViewController.h; sourceTree = "<group>"; };
 		499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagerSettingsViewController.m; sourceTree = "<group>"; };
+		49A2457016DD757F00C4F855 /* RoundingLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingLog.h; sourceTree = "<group>"; };
+		49A2457116DD757F00C4F855 /* RoundingLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingLog.m; sourceTree = "<group>"; };
+		49A2457516DDA19B00C4F855 /* RoundingLoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingLoadViewController.h; sourceTree = "<group>"; };
+		49A2457616DDA19C00C4F855 /* RoundingLoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingLoadViewController.m; sourceTree = "<group>"; };
+		49A2457816DDA44C00C4F855 /* RoundingLogManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingLogManagedObject.h; sourceTree = "<group>"; };
+		49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingLogManagedObject.m; sourceTree = "<group>"; };
+		49A2457B16DDA86000C4F855 /* RoundingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingModel.h; sourceTree = "<group>"; };
+		49A2457C16DDA86000C4F855 /* RoundingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingModel.m; sourceTree = "<group>"; };
 		49AB41F116C1E39E007AA467 /* RemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindersViewController.h; sourceTree = "<group>"; };
 		49AB41F216C1E39E007AA467 /* RemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindersViewController.m; sourceTree = "<group>"; };
 		49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
@@ -167,21 +191,22 @@
 		490A5AFA16C1D95A0062F36F /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				4907612816D5CA6000AC30DB /* Delete Button.png */,
-				4907612616D5A48E00AC30DB /* Up_Arrow.png */,
-				4907612416D59D7000AC30DB /* Down_Arrow.png */,
-				49D9B06716CACAA300CCD463 /* Framework */,
+				4939165C16C2D8BA00F9365D /* Constants.h */,
 				4968BB5E16C43CD3002600AF /* CustomAlert.h */,
 				4968BB5F16C43CD3002600AF /* CustomAlert.m */,
-				4939165916C2D86C00F9365D /* MBProgressHUD.h */,
-				4939165A16C2D86C00F9365D /* MBProgressHUD.m */,
-				490A5AFC16C1D9730062F36F /* MarqueeLabel.h */,
-				490A5AFD16C1D9730062F36F /* MarqueeLabel.m */,
-				49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */,
-				49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */,
-				4939165C16C2D8BA00F9365D /* Constants.h */,
 				4907612A16D5D77D00AC30DB /* MarqueeCell.h */,
 				4907612B16D5D77D00AC30DB /* MarqueeCell.m */,
+				490A5AFC16C1D9730062F36F /* MarqueeLabel.h */,
+				490A5AFD16C1D9730062F36F /* MarqueeLabel.m */,
+				4939165916C2D86C00F9365D /* MBProgressHUD.h */,
+				4939165A16C2D86C00F9365D /* MBProgressHUD.m */,
+				494CD9EF16DD42DC00112E3E /* Media */,
+				49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */,
+				49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */,
+				498F86C316DD6387005118C1 /* UITextFieldCell.h */,
+				498F86C416DD6387005118C1 /* UITextFieldCell.m */,
+				4961F83D16DD525000B5EBC8 /* UITextViewCell.h */,
+				4961F83E16DD525000B5EBC8 /* UITextViewCell.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -217,6 +242,38 @@
 			name = Supporting_Files;
 			sourceTree = "<group>";
 		};
+		494CD9EF16DD42DC00112E3E /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				F7A8439E16D40CB8009F09DD /* Logo small.png */,
+				F7A8439F16D40CB8009F09DD /* Logo.png */,
+				F7A843A416D40ECB009F09DD /* Banner copy.png */,
+				4907612816D5CA6000AC30DB /* Delete Button.png */,
+				4907612616D5A48E00AC30DB /* Up_Arrow.png */,
+				4907612416D59D7000AC30DB /* Down_Arrow.png */,
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
+		494CD9F016DD431100112E3E /* Rounding */ = {
+			isa = PBXGroup;
+			children = (
+				494CD9F116DD437100112E3E /* RoundingOverviewViewController.h */,
+				494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */,
+				494CDA2816DD4C7B00112E3E /* RoundingDetailsViewController.h */,
+				494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */,
+				49A2457516DDA19B00C4F855 /* RoundingLoadViewController.h */,
+				49A2457616DDA19C00C4F855 /* RoundingLoadViewController.m */,
+				49A2457016DD757F00C4F855 /* RoundingLog.h */,
+				49A2457116DD757F00C4F855 /* RoundingLog.m */,
+				49A2457816DDA44C00C4F855 /* RoundingLogManagedObject.h */,
+				49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */,
+				49A2457B16DDA86000C4F855 /* RoundingModel.h */,
+				49A2457C16DDA86000C4F855 /* RoundingModel.m */,
+			);
+			name = Rounding;
+			sourceTree = "<group>";
+		};
 		494D0E2416B84BAB00354964 = {
 			isa = PBXGroup;
 			children = (
@@ -250,14 +307,12 @@
 		494D0E3916B84BAB00354964 /* MobileBinder */ = {
 			isa = PBXGroup;
 			children = (
-				F7A843A416D40ECB009F09DD /* Banner copy.png */,
-				F7A8439E16D40CB8009F09DD /* Logo small.png */,
-				F7A8439F16D40CB8009F09DD /* Logo.png */,
 				49FB670016C2CA21004F576F /* Attendance */,
 				499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */,
 				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
 				F79A34E716BD8FAE00ACAABB /* Database.h */,
 				F79A34E816BD8FAE00ACAABB /* Database.m */,
+				49A2457416DD75E500C4F855 /* Extras */,
 				490A5AFF16C1D9990062F36F /* HomeViewController.h */,
 				490A5B0016C1D9990062F36F /* HomeViewController.m */,
 				49AB41FA16C2C93D007AA467 /* iPad.storyboard */,
@@ -265,13 +320,10 @@
 				490A5AFA16C1D95A0062F36F /* Library */,
 				49FB670116C2CA50004F576F /* Payroll */,
 				490A5B0A16C1DD1F0062F36F /* Reminders */,
+				494CD9F016DD431100112E3E /* Rounding */,
+				49A2457316DD75CD00C4F855 /* Settings */,
 				4939165816C2CADD00F9365D /* Supporting_Files */,
-				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
-				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
 				499C4CF616D2E77400ED6E76 /* Welcome */,
-				499C4CFA16D2F4DC00ED6E76 /* SettingsProtocol.h */,
-				499C4CFB16D30AF700ED6E76 /* ManagerSettingsViewController.h */,
-				499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */,
 			);
 			path = MobileBinder;
 			sourceTree = "<group>";
@@ -285,11 +337,23 @@
 			name = Welcome;
 			sourceTree = "<group>";
 		};
-		49D9B06716CACAA300CCD463 /* Framework */ = {
+		49A2457316DD75CD00C4F855 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				499C4CFB16D30AF700ED6E76 /* ManagerSettingsViewController.h */,
+				499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */,
+				499C4CFA16D2F4DC00ED6E76 /* SettingsProtocol.h */,
 			);
-			name = Framework;
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		49A2457416DD75E500C4F855 /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
+				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
+			);
+			name = Extras;
 			sourceTree = "<group>";
 		};
 		49FB670016C2CA21004F576F /* Attendance */ = {
@@ -440,6 +504,14 @@
 				499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */,
 				FA87F32716D42FD200E574E6 /* EditEmployeeViewController.m in Sources */,
 				4907612C16D5D77D00AC30DB /* MarqueeCell.m in Sources */,
+				494CD9F316DD437100112E3E /* RoundingOverviewViewController.m in Sources */,
+				494CDA2A16DD4C7B00112E3E /* RoundingDetailsViewController.m in Sources */,
+				4961F83F16DD525000B5EBC8 /* UITextViewCell.m in Sources */,
+				498F86C516DD6387005118C1 /* UITextFieldCell.m in Sources */,
+				49A2457216DD757F00C4F855 /* RoundingLog.m in Sources */,
+				49A2457716DDA19C00C4F855 /* RoundingLoadViewController.m in Sources */,
+				49A2457A16DDA44C00C4F855 /* RoundingLogManagedObject.m in Sources */,
+				49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
