@@ -68,8 +68,6 @@
     self.myPicker.dataSource = self;
     self.myPicker.delegate = self;
     self.myPicker.showsSelectionIndicator = YES;
-    self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
-    [self.periodSelection setText:self.selectedPayPeriod];
     return self.myPicker;
 }
 - (IBAction)storePayPeriodSelection:(id)sender {
@@ -81,7 +79,12 @@
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+    if(![self.periodTypeSegmented isEqual: @-1])
+    {
+        [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+        self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
+        [self.periodSelection setText:self.selectedPayPeriod];
+    }
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
