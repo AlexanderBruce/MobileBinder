@@ -327,6 +327,7 @@
 				F745C99F16D7E3F900F5138C /* new_Banner.png */,
 				F7A8439E16D40CB8009F09DD /* Logo small.png */,
 				F7A8439F16D40CB8009F09DD /* Logo.png */,
+				49125B1716DE7C9300103A08 /* Termination Notice Template.rtf */,
 				49FB670016C2CA21004F576F /* Attendance */,
 				499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */,
 				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
@@ -488,6 +489,9 @@
 				4907612916D5CA6000AC30DB /* Delete Button.png in Resources */,
 				F745C9A016D7E3F900F5138C /* new_Banner.png in Resources */,
 				F76662F416DAB3DF00193207 /* background.jpeg in Resources */,
+				49A2458316DDD6F800C4F855 /* 37x-Checkmark.png in Resources */,
+				49A2458416DDD6F800C4F855 /* 37x-Checkmark@2x.png in Resources */,
+				49125B1816DE7C9300103A08 /* Termination Notice Template.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
