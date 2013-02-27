@@ -129,9 +129,6 @@
     NSDate *yearAgo = [calendar dateFromComponents:comps];
     
     yearAgo = [calendar dateByAddingComponents:dayComponent toDate:yearAgo options:0];
-    NSLog(@"Year ago = %@",yearAgo);
-    
-    
     return ([yearAgo compare:date] == NSOrderedAscending);
 }
 
