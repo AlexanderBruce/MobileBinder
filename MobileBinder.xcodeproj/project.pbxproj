@@ -49,6 +49,9 @@
 		49A2457716DDA19C00C4F855 /* RoundingLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457616DDA19C00C4F855 /* RoundingLoadViewController.m */; };
 		49A2457A16DDA44C00C4F855 /* RoundingLogManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */; };
 		49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457C16DDA86000C4F855 /* RoundingModel.m */; };
+		49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */; };
+		49A2458316DDD6F800C4F855 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */; };
+		49A2458416DDD6F800C4F855 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */; };
 		49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F216C1E39E007AA467 /* RemindersViewController.m */; };
 		49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */; };
 		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
@@ -145,6 +148,10 @@
 		49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingLogManagedObject.m; sourceTree = "<group>"; };
 		49A2457B16DDA86000C4F855 /* RoundingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingModel.h; sourceTree = "<group>"; };
 		49A2457C16DDA86000C4F855 /* RoundingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingModel.m; sourceTree = "<group>"; };
+		49A2457E16DDCA1A00C4F855 /* ResetSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetSettingsViewController.h; sourceTree = "<group>"; };
+		49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetSettingsViewController.m; sourceTree = "<group>"; };
+		49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		49AB41F116C1E39E007AA467 /* RemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindersViewController.h; sourceTree = "<group>"; };
 		49AB41F216C1E39E007AA467 /* RemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindersViewController.m; sourceTree = "<group>"; };
 		49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
@@ -245,6 +252,8 @@
 		494CD9EF16DD42DC00112E3E /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */,
+				49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */,
 				F7A8439E16D40CB8009F09DD /* Logo small.png */,
 				F7A8439F16D40CB8009F09DD /* Logo.png */,
 				F7A843A416D40ECB009F09DD /* Banner copy.png */,
@@ -343,6 +352,8 @@
 				499C4CFB16D30AF700ED6E76 /* ManagerSettingsViewController.h */,
 				499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */,
 				499C4CFA16D2F4DC00ED6E76 /* SettingsProtocol.h */,
+				49A2457E16DDCA1A00C4F855 /* ResetSettingsViewController.h */,
+				49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -464,6 +475,8 @@
 				4907612516D59D7000AC30DB /* Down_Arrow.png in Resources */,
 				4907612716D5A48E00AC30DB /* Up_Arrow.png in Resources */,
 				4907612916D5CA6000AC30DB /* Delete Button.png in Resources */,
+				49A2458316DDD6F800C4F855 /* 37x-Checkmark.png in Resources */,
+				49A2458416DDD6F800C4F855 /* 37x-Checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +525,7 @@
 				49A2457716DDA19C00C4F855 /* RoundingLoadViewController.m in Sources */,
 				49A2457A16DDA44C00C4F855 /* RoundingLogManagedObject.m in Sources */,
 				49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */,
+				49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
