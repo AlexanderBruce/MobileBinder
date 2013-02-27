@@ -59,7 +59,7 @@
         [self.payrollStringsToPayrollModel setValue:[NSString stringWithFormat:@"%02d", (i+1)] forKey:[self.biweeklyPayPeriods objectAtIndex:i]];
     }
     self.periodSelection.inputView = [self createPeriodPicker];
-    self.periodTypeSegmented.selectedSegmentIndex = -1;
+    self.periodTypeSegmented.selectedSegmentIndex = 1;
 }
 
 -(UIView *) createPeriodPicker
@@ -79,20 +79,20 @@
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    if(![self.periodTypeSegmented isEqual: @-1])
-    {
         [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
         self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
         [self.periodSelection setText:self.selectedPayPeriod];
-    }
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
     [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
+
 - (IBAction)segmentedValueChanged:(id)sender {
-        [self.myPicker reloadAllComponents];
+    [self.myPicker reloadAllComponents];
+    self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
+    [self.periodSelection setText:self.selectedPayPeriod];
 }
 
 - (void) createPayPeriodDataTable
