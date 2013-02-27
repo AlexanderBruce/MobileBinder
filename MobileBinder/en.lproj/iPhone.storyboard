@@ -1050,6 +1050,9 @@
                                             <segment title="Biweekly"/>
                                             <segment title="Monthly"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="segmentedValueChanged:" destination="lSA-7O-ggg" eventType="valueChanged" id="6oL-Po-eQz"/>
+                                        </connections>
                                     </segmentedControl>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pay Period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IDZ-I1-Ggv">
                                         <rect key="frame" x="20" y="84" width="84" height="21"/>
@@ -1318,6 +1321,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="F4p-L4-lc2"/>
+        <segue reference="c0m-6Q-dov"/>
     </inferredMetricsTieBreakers>
 </document>
