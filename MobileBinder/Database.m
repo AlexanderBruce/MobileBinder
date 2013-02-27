@@ -1,6 +1,6 @@
 #import "Database.h"
 
-#define DATABASE_PATH @"Database60"
+#define DATABASE_PATH @"Database62"
 
 @interface Database()
 @end
@@ -16,7 +16,6 @@ static UIManagedDocument *database;
 
 + (void) getDatabaseWithDelegate: (id<DatabaseDelegate>) delegate
 {
-    NSLog(@"Getting database %@",delegate);
     if(database)
     {
         [delegate obtainedDatabase:database];
@@ -48,7 +47,6 @@ static UIManagedDocument *database;
     {
         [delegate obtainedDatabase:database];
     }
-    NSLog(@"Done getting database");
 }
 
 + (void) saveDatabase
