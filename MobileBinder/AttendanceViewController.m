@@ -70,13 +70,16 @@
     [cell updateFirstName:recordForRow.firstName lastName:recordForRow.lastName department: recordForRow.department];
     
     int absenceLevel = [recordForRow getNextAbsenceLevel];
-    [cell updateAbsenceProgress:[recordForRow getNumberOfAbsencesInPastYear] / MAX_ABSENCES withLevel:absenceLevel];
+    int numAbsencesInPastYear = [recordForRow getAbsencesInPastYear].count;
+    [cell updateAbsenceProgress:(numAbsencesInPastYear / MAX_ABSENCES) withLevel:absenceLevel];
     
     int tardyLevel = [recordForRow getNextTardyLevel];
-    [cell updateTardyProgress:([recordForRow getNumberOfTardiesInPastYear]) / MAX_TARDIES withLevel:tardyLevel];
+    int numTardiesInPastYear = [recordForRow getTardiesInPastYear].count;
+    [cell updateTardyProgress:(numTardiesInPastYear / MAX_TARDIES) withLevel:tardyLevel];
     
     int missedSwipeLevel = [recordForRow getNextMissedSwipeLevel];
-    [cell updateMissedSwipesProgress:([recordForRow getNumberOfMissedSwipesInPastYear]) / MAX_MISSED_SWIPES withLevel:missedSwipeLevel];
+    int numMissedSwipesInPastYear = [recordForRow getMissedSwipesInPastYear].count;
+    [cell updateMissedSwipesProgress:(numMissedSwipesInPastYear / MAX_MISSED_SWIPES) withLevel:missedSwipeLevel];
     
     return cell;
 }

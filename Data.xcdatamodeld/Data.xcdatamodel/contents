@@ -24,8 +24,8 @@
         <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="EmployeeRecordManagedObject" positionX="0" positionY="0" width="128" height="150"/>
-        <element name="ReminderManagedObject" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="RoundingLogManagedObject" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="EmployeeRecordManagedObject" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ReminderManagedObject" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="RoundingLogManagedObject" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

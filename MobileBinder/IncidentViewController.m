@@ -75,17 +75,17 @@
     if(self.incidentTypeControl.selectedSegmentIndex == ABSENCE_INDEX)
     {
         behavior = Absence;
-        changeOfLevel = [self.employeeRecord addAbsenceForDate:self.incidentDate];
+        changeOfLevel = [self.employeeRecord addAbsence:self.incidentDate];
     }
     else if(self.incidentTypeControl.selectedSegmentIndex == TARDY_INDEX)
     {
         behavior = Tardy;
-        changeOfLevel = [self.employeeRecord addTardyForDate:self.incidentDate];
+        changeOfLevel = [self.employeeRecord addTardy:self.incidentDate];
     }
     else if(self.incidentTypeControl.selectedSegmentIndex == TIMECARD_INDEX)
     {
         behavior = Missed_Swipe;
-        changeOfLevel =[self.employeeRecord addMissedSwipeForDate:self.incidentDate];
+        changeOfLevel =[self.employeeRecord addMissedSwipe:self.incidentDate];
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

@@ -28,9 +28,6 @@
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *department;
 @property (nonatomic, strong) NSString *unit;
-@property (nonatomic, strong, readonly) NSArray *absences;
-@property (nonatomic, strong, readonly) NSArray *tardies;
-@property (nonatomic, strong, readonly) NSArray *missedSwipes;
 
 @property (nonatomic, strong) EmployeeRecordManagedObject *myManagedObject;
 
@@ -44,29 +41,28 @@
 
 - (int) getNextMissedSwipeLevel;
 
-- (NSString *) getTextForLevel: (int) level;
-
 
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
-- (int) addAbsenceForDate: (NSDate *) date;
+- (int) addAbsence: (NSDate *) date;
 
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
-- (int) addTardyForDate: (NSDate *) date;
+- (int) addTardy: (NSDate *) date;
 
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
-- (int) addMissedSwipeForDate: (NSDate *) date;
+- (int) addMissedSwipe: (NSDate *) date;
 
 
 - (void) removeAbsence: (NSDate *) date;
 
 - (void) removeTardy: (NSDate *) date;
 
-- (void) removeMissedSwipes: (NSDate *) date;
+- (void) removeAllMissedSwipes: (NSDate *) date;
 
-- (int) getNumberOfAbsencesInPastYear;
+- (NSArray *) getAbsencesInPastYear;
 
-- (int) getNumberOfTardiesInPastYear;
+- (NSArray *) getTardiesInPastYear;
 
-- (int) getNumberOfMissedSwipesInPastYear;
+- (NSArray *) getMissedSwipesInPastYear;
+
 
 @end
