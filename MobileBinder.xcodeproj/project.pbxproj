@@ -256,6 +256,7 @@
 		494CD9EF16DD42DC00112E3E /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				F790E91D16DEC8B400CB288C /* HomeBackground.png */,
 				49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */,
 				49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */,
 				F7A8439E16D40CB8009F09DD /* Logo small.png */,
@@ -490,6 +491,7 @@
 				49A2458416DDD6F800C4F855 /* 37x-Checkmark@2x.png in Resources */,
 				49125B1816DE7C9300103A08 /* Termination Notice Template.rtf in Resources */,
 				F790E91C16DEC7CB00CB288C /* back.png in Resources */,
+				F790E91E16DEC8B400CB288C /* HomeBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
