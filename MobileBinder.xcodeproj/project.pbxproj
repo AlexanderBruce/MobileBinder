@@ -290,6 +290,7 @@
 		494D0E2416B84BAB00354964 = {
 			isa = PBXGroup;
 			children = (
+				F790E91716DEBFF100CB288C /* backdrop.jpeg */,
 				494D0E3916B84BAB00354964 /* MobileBinder */,
 				494D0E3216B84BAB00354964 /* Frameworks */,
 				494D0E3016B84BAB00354964 /* Products */,
@@ -320,7 +321,6 @@
 		494D0E3916B84BAB00354964 /* MobileBinder */ = {
 			isa = PBXGroup;
 			children = (
-				F790E91516DEBF5900CB288C /* background.jpeg */,
 				F7A843A416D40ECB009F09DD /* Banner copy.png */,
 				F745C99F16D7E3F900F5138C /* new_Banner.png */,
 				F7A8439E16D40CB8009F09DD /* Logo small.png */,
@@ -489,7 +489,7 @@
 				49A2458316DDD6F800C4F855 /* 37x-Checkmark.png in Resources */,
 				49A2458416DDD6F800C4F855 /* 37x-Checkmark@2x.png in Resources */,
 				49125B1816DE7C9300103A08 /* Termination Notice Template.rtf in Resources */,
-				F790E91616DEBF5900CB288C /* background.jpeg in Resources */,
+				F790E91816DEBFF100CB288C /* backdrop.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

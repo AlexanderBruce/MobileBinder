@@ -853,7 +853,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.60000000000000009" contentMode="scaleToFill" image="background.jpeg" id="3WJ-hz-YlP">
+                            <imageView userInteractionEnabled="NO" alpha="0.60000000000000009" contentMode="scaleToFill" image="backdrop.jpeg" id="3WJ-hz-YlP">
                                 <rect key="frame" x="-2" y="64" width="322" height="466"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -1204,7 +1204,7 @@
     </scenes>
     <resources>
         <image name="Banner copy.png" width="719" height="116"/>
-        <image name="background.jpeg" width="297" height="422"/>
+        <image name="backdrop.jpeg" width="297" height="422"/>
     </resources>
     <classes>
         <class className="AddEmployeeViewController" superclassName="UIViewController">
