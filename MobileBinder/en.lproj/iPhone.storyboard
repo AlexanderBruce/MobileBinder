@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3006" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8tJ-h4-1Ol">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8tJ-h4-1Ol">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -1204,7 +1204,7 @@
     </scenes>
     <resources>
         <image name="Banner copy.png" width="719" height="116"/>
-        <image name="HomeBackground.png" width="297" height="422"/>
+        <image name="Logo small.png" width="57" height="57"/>
     </resources>
     <classes>
         <class className="AddEmployeeViewController" superclassName="UIViewController">
