@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		490120C516DEC94D00963226 /* HomeBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 490120C416DEC94D00963226 /* HomeBackground.png */; };
 		4907612516D59D7000AC30DB /* Down_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612416D59D7000AC30DB /* Down_Arrow.png */; };
 		4907612716D5A48E00AC30DB /* Up_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612616D5A48E00AC30DB /* Up_Arrow.png */; };
 		4907612916D5CA6000AC30DB /* Delete Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612816D5CA6000AC30DB /* Delete Button.png */; };
@@ -76,7 +75,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		490120C416DEC94D00963226 /* HomeBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeBackground.png; sourceTree = "<group>"; };
 		4907612416D59D7000AC30DB /* Down_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Down_Arrow.png; sourceTree = "<group>"; };
 		4907612616D5A48E00AC30DB /* Up_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Up_Arrow.png; sourceTree = "<group>"; };
 		4907612816D5CA6000AC30DB /* Delete Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete Button.png"; sourceTree = "<group>"; };
@@ -260,7 +258,6 @@
 		494CD9EF16DD42DC00112E3E /* Media */ = {
 			isa = PBXGroup;
 			children = (
-				490120C416DEC94D00963226 /* HomeBackground.png */,
 				49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */,
 				49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */,
 				F7A8439E16D40CB8009F09DD /* Logo small.png */,
@@ -631,13 +628,13 @@
 		494D0E5716B84BAB00354964 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Patterson (NNKDJN5V6E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Rang (6LVTH56BGF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileBinder/MobileBinder-Prefix.pch";
 				INFOPLIST_FILE = "MobileBinder/MobileBinder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0BF17D52-BC5E-4D9B-8787-0ABA7D0FB6D5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
