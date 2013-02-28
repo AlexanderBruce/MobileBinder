@@ -10,6 +10,21 @@
 
 @implementation RoundingModel
 
+- (RoundingLog *) addNewRoundingLog
+{
+    UIManagedDocument *database = [Database getInstance];
+    RoundingLogManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([RoundingLogManagedObject class]) inManagedObjectContext:database.managedObjectContext];
+    RoundingLog *log = [[RoundingLog alloc] initWithManagedObject:managedObject];
+    [self.roundingLogs addObject:log];
+    return log;
+}
+
+- (void) deleteRoundingLog:(RoundingLog *)log
+{
+    [log deleteFromDatabase:[Database getInstance]];
+    [self.roundingLogs removeObject:log];
+}
+
 - (NSArray *) getRoundingLogs
 {
     return [self.roundingLogs copy];

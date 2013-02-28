@@ -3,6 +3,7 @@
 #import "RoundingLog.h"
 #import "Database.h"
 #import "UITextFieldCell.h"
+#import "Constants.h"
 
 #define EMPLOYEE_SECTION 0
 #define EMPLOYEE_SECTION_HEIGHT 40
@@ -13,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 @property (nonatomic) int currentRow;
 @property (nonatomic, strong) UITextField *employeeNameField;
-@property (nonatomic, weak) UIBarButtonItem *addEmployeeDoneButton;
+@property (nonatomic, strong) UIView *employeePickerView;
 @property (nonatomic, strong) UIPickerView *employeePicker;
 @end
 
@@ -21,6 +22,7 @@
 
 - (IBAction)addPressed:(UIBarButtonItem *)sender
 {
+    self.currentRow++;
     [Database saveDatabase];
     self.addingNewEmployee = YES;
     self.addButton.enabled = NO;
@@ -67,59 +69,20 @@
         {
             cell = [[UITextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"EmployeeCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
-        if(!self.addingNewEmployee)
-        {
-            UIPickerView *picker = [[UIPickerView alloc] init];
-            picker.delegate = self;
-            picker.dataSource = self;
-            picker.showsSelectionIndicator = YES;
-            cell.textField.inputView = picker;
-            cell.textField.delegate = self;
-            cell.textField.text = [self.log contentsForRow:self.currentRow column:indexPath.row];
-            
-            UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                           style:UIBarButtonItemStyleDone target:cell.textField
-                                                                          action:@selector(resignFirstResponder)];
-            UIToolbar* toolBar = [[UIToolbar alloc] init];
-            toolBar.barStyle = UIBarStyleBlackTranslucent;
-            toolBar.translucent = YES;
-            toolBar.tintColor = nil;
-            [toolBar sizeToFit];
-            [toolBar setItems:[NSArray arrayWithObjects:flexibleSpace, doneButton, nil]];
-            cell.textField.inputAccessoryView = toolBar;
+        cell.textField.delegate = self;
+        cell.textField.text = [self.log contentsForRow:self.currentRow column:indexPath.row];
+        self.employeeNameField = cell.textField;
 
-            self.employeePicker = picker;
+        if(self.addingNewEmployee)
+        {
+            [self.employeeNameField becomeFirstResponder];
         }
         else
         {
-            cell.textField.inputView = nil;
-            
-            
-            UIToolbar* toolBar = [[UIToolbar alloc] init];
-            toolBar.barStyle = UIBarStyleBlackTranslucent;
-            toolBar.translucent = YES;
-            toolBar.tintColor = nil;
-            [toolBar sizeToFit];
-            
-            UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                             style:UIBarButtonItemStyleBordered target:self
-                                                                            action:@selector(canceledAddingEmployeeName)];
-            if([self.log allContentsForColumn:EMPLOYEE_SECTION].count == 0) cancelButton.enabled = NO;
-            UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                           style:UIBarButtonItemStyleDone target:self
-                                                                          action:@selector(doneAddingEmployeeName)];
-            self.addEmployeeDoneButton = doneButton;
-            self.addEmployeeDoneButton.enabled = NO;
-            
-            [toolBar setItems:[NSArray arrayWithObjects:cancelButton, flexibleSpace, doneButton, nil]];
-            cell.textField.inputAccessoryView = toolBar;
-            cell.textField.delegate = self;
-            [self.employeeNameField becomeFirstResponder];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-        self.employeeNameField = cell.textField;
         return cell;
     }
     UITextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITextViewCell"];
@@ -164,40 +127,43 @@
     [self.tableView reloadData];
 }
 
-- (void) doneAddingEmployeeName
-{
-    self.currentRow++;
-    [self.log storeContents:self.employeeNameField.text forRow:self.currentRow column:EMPLOYEE_SECTION];
-    self.employeeNameField.text = @"";
-    [self turnOffAddingEmployeeMode];
-}
-
-- (void) canceledAddingEmployeeName
-{
-    [self turnOffAddingEmployeeMode];
-}
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    if(textField == self.employeeNameField)
+    if(textField == self.employeeNameField && !self.addingNewEmployee)
     {
         [self.employeePicker selectRow:self.currentRow inComponent:0 animated:YES];
         [Database saveDatabase];
     }
 }
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
-    NSRange textFieldRange = NSMakeRange(0, [textField.text length]);
-    if (NSEqualRanges(range, textFieldRange) && [string length] == 0)
-    {
-        self.addEmployeeDoneButton.enabled = NO;
-    }
+    if(self.addingNewEmployee) return YES;
     else
     {
-        self.addEmployeeDoneButton.enabled = YES;
+        [self.employeePicker reloadAllComponents];
+        [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+             float y = self.view.frame.size.height - self.employeePickerView.frame.size.height;
+             self.employeePickerView.frame = CGRectMake(0, y, self.employeePickerView.frame.size.width, self.employeePickerView.frame.size.height);
+         } completion:^(BOOL finished) {}];
+        return NO;
     }
-    return YES;
+}
+
+- (void) textFieldDidEndEditing:(UITextField *)textField
+{
+    if(textField == self.employeeNameField)
+    {
+        [self.log storeContents:textField.text forRow:self.currentRow column:EMPLOYEE_SECTION];
+        self.addingNewEmployee = NO;
+        self.addButton.enabled = YES;
+        NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, self.log.columnTitles.count - 1)];
+        [self.tableView beginUpdates];
+        [self.tableView insertSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+    }
 }
 
 - (void) textViewDidEndEditing:(UITextView *)textView
@@ -206,15 +172,10 @@
     [self.log storeContents:textView.text forRow:self.currentRow column:column];
 }
 
-- (void) turnOffAddingEmployeeMode
+- (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    self.addingNewEmployee = NO;
-    self.addButton.enabled = YES;
-    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, self.log.columnTitles.count - 1)];
-    [self.tableView beginUpdates];
-    [self.tableView insertSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void) viewDidLoad
@@ -224,7 +185,61 @@
     self.tableView.dataSource = self;
     self.addingNewEmployee = YES;
     self.addButton.enabled = NO;
-    self.currentRow = -1;
+    self.currentRow = 0;
+    [self createPicker];
+}
+
+- (void) createPicker
+{
+    UIView *pickerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, TOOLBAR_HEIGHT + KEYBOARD_HEIGHT)];
+    
+    UIPickerView *picker = [[UIPickerView alloc] init];
+    picker.delegate = self;
+    picker.dataSource = self;
+    picker.showsSelectionIndicator = YES;
+    [picker sizeToFit];
+    picker.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    [pickerView addSubview:picker];
+    self.employeePicker = picker;
+    
+    // Create done button
+    UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
+                                                             style:UIBarButtonItemStyleBordered target:self
+                                                            action:@selector(editEmployee)];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                   style:UIBarButtonItemStyleDone target:self
+                                                                  action:@selector(doneWithPickerView)];
+    UIToolbar* toolBar = [[UIToolbar alloc] init];
+    toolBar.barStyle = UIBarStyleBlackTranslucent;
+    toolBar.translucent = YES;
+    toolBar.tintColor = nil;
+    [toolBar sizeToFit];
+    [toolBar setItems:[NSArray arrayWithObjects:edit,flexibleSpace, doneButton, nil]];
+
+    [pickerView addSubview:toolBar];
+    picker.frame = CGRectMake(0, toolBar.frame.size.height, self.view.frame.size.width, pickerView.frame.size.height - TOOLBAR_HEIGHT);
+    toolBar.frame = CGRectMake(0, 0, self.view.frame.size.width, TOOLBAR_HEIGHT);
+    self.employeePickerView = pickerView;
+    [self.view addSubview: pickerView];
+}
+
+- (void) editEmployee
+{
+    self.addingNewEmployee = YES;
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.employeePickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, TOOLBAR_HEIGHT + KEYBOARD_HEIGHT);
+    } completion:^(BOOL finished) {
+        [self.employeeNameField becomeFirstResponder];
+    }];
+    
+}
+
+- (void) doneWithPickerView
+{
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.employeePickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, TOOLBAR_HEIGHT + KEYBOARD_HEIGHT);
+    } completion:^(BOOL finished) {}];
 }
 
 - (void) viewDidDisappear:(BOOL)animated

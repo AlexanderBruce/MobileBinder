@@ -11,7 +11,7 @@
 
 - (NSArray *) columnTitles
 {
-    if (!_columnTitles) _columnTitles = [NSArray arrayWithObjects:@"Employee Name",@"Personal Connection",@"Working Well?",@"Recognition for Others",@"Process Opprtunities",@"Tools & Equipment",@"Follow-up Actions",nil];
+    if (!_columnTitles) _columnTitles = [NSArray arrayWithObjects: @"Employee Name",@"Personal Connection",@"Working Well?",@"Recognition for Others",@"Process Opprtunities",@"Tools & Equipment",@"Follow-up Actions",nil];
     return _columnTitles;
 }
 
@@ -49,7 +49,7 @@
 {
     if(rowNumber > self.rows.count)
     {
-        [NSException raise:@"Invalid row number" format:@"You have tried to store contents in a row that is strictly greater than the current number of rows"];
+        [NSException raise:@"Invalid row number" format:@"You have tried to store contents in a row (%d) that is strictly greater than the current number of rows",rowNumber];
     }
     if(rowNumber == self.rows.count)
     {
@@ -69,7 +69,6 @@
     return columnContents;
 }
 
-
 - (NSArray *) allContentsForColumn: (int) columnNumber
 {
     NSMutableArray *result = [[NSMutableArray alloc] init];
@@ -80,6 +79,15 @@
     }
     return result;
 }
+
+- (void) deleteFromDatabase: (UIManagedDocument *) database
+{
+    if(!self.managedObject) return; //If not saved to disk, then don't need to do anything
+    [database.managedObjectContext deleteObject:self.managedObject];
+    self.managedObject = nil;
+    [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){}];
+}
+
 
 - (id) initWithManagedObject: (RoundingLogManagedObject *) managedObject
 {
@@ -97,17 +105,4 @@
     }
     return self;
 }
-
-- (id) init
-{
-    if(self = [super init])
-    {
-        self.rows = [[NSMutableArray alloc] init];
-        
-        UIManagedDocument *database = [Database getInstance];
-        self.managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([RoundingLogManagedObject class]) inManagedObjectContext:database.managedObjectContext];
-    }
-    return self;
-}
-
 @end

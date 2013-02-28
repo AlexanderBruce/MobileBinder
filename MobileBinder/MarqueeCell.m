@@ -12,7 +12,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        self.label = [[MarqueeLabel alloc] initWithFrame:self.textLabel.frame rate:50 andFadeLength:0.15];
+        self.label = [[MarqueeLabel alloc] initWithFrame:self.textLabel.frame rate:60 andFadeLength:0.07];
         self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
         float xOrigin = 10;
         float yOrigin = 0;

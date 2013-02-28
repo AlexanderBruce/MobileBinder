@@ -60,14 +60,13 @@
     self.departmentField.delegate = self;
     self.unitField.delegate = self;
     self.firstResponderIsActive = NO;
-    self.myScrollView.scrollEnabled = YES;
     if(self.myRecord){
         self.firstNameField.text = self.myRecord.firstName;
         self.lastNameField.text = self.myRecord.lastName;
         self.departmentField.text = self.myRecord.department;
         self.unitField.text = self.myRecord.unit;
     }
-    [self.myScrollView setContentSize:CGSizeMake(self.myScrollView.frame.size.width, self.myScrollView.frame.size.height)];
+//    [self.myScrollView setContentSize:CGSizeMake(self.myScrollView.frame.size.width, self.myScrollView.frame.size.height)];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden)
                                                  name:UIKeyboardWillHideNotification object:nil];

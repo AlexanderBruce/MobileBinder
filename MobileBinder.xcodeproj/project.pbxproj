@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		490120C616DED1CB00963226 /* HomeBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 490120C416DEC94D00963226 /* HomeBackground.png */; };
+		490120C616DED1CB00963226 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		4907612516D59D7000AC30DB /* Down_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612416D59D7000AC30DB /* Down_Arrow.png */; };
 		4907612716D5A48E00AC30DB /* Up_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612616D5A48E00AC30DB /* Up_Arrow.png */; };
 		4907612916D5CA6000AC30DB /* Delete Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612816D5CA6000AC30DB /* Delete Button.png */; };
@@ -48,7 +48,7 @@
 		499C4CF916D2E7A400ED6E76 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CF816D2E7A400ED6E76 /* WelcomeViewController.m */; };
 		499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */; };
 		49A2457216DD757F00C4F855 /* RoundingLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457116DD757F00C4F855 /* RoundingLog.m */; };
-		49A2457716DDA19C00C4F855 /* RoundingLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457616DDA19C00C4F855 /* RoundingLoadViewController.m */; };
+		49A2457716DDA19C00C4F855 /* RoundingAllLogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457616DDA19C00C4F855 /* RoundingAllLogsViewController.m */; };
 		49A2457A16DDA44C00C4F855 /* RoundingLogManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */; };
 		49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457C16DDA86000C4F855 /* RoundingModel.m */; };
 		49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */; };
@@ -146,8 +146,8 @@
 		499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagerSettingsViewController.m; sourceTree = "<group>"; };
 		49A2457016DD757F00C4F855 /* RoundingLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingLog.h; sourceTree = "<group>"; };
 		49A2457116DD757F00C4F855 /* RoundingLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingLog.m; sourceTree = "<group>"; };
-		49A2457516DDA19B00C4F855 /* RoundingLoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingLoadViewController.h; sourceTree = "<group>"; };
-		49A2457616DDA19C00C4F855 /* RoundingLoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingLoadViewController.m; sourceTree = "<group>"; };
+		49A2457516DDA19B00C4F855 /* RoundingAllLogsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingAllLogsViewController.h; sourceTree = "<group>"; };
+		49A2457616DDA19C00C4F855 /* RoundingAllLogsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingAllLogsViewController.m; sourceTree = "<group>"; };
 		49A2457816DDA44C00C4F855 /* RoundingLogManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingLogManagedObject.h; sourceTree = "<group>"; };
 		49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingLogManagedObject.m; sourceTree = "<group>"; };
 		49A2457B16DDA86000C4F855 /* RoundingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingModel.h; sourceTree = "<group>"; };
@@ -272,18 +272,18 @@
 		494CD9F016DD431100112E3E /* Rounding */ = {
 			isa = PBXGroup;
 			children = (
-				494CD9F116DD437100112E3E /* RoundingOverviewViewController.h */,
-				494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */,
+				49A2457516DDA19B00C4F855 /* RoundingAllLogsViewController.h */,
+				49A2457616DDA19C00C4F855 /* RoundingAllLogsViewController.m */,
 				494CDA2816DD4C7B00112E3E /* RoundingDetailsViewController.h */,
 				494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */,
-				49A2457516DDA19B00C4F855 /* RoundingLoadViewController.h */,
-				49A2457616DDA19C00C4F855 /* RoundingLoadViewController.m */,
 				49A2457016DD757F00C4F855 /* RoundingLog.h */,
 				49A2457116DD757F00C4F855 /* RoundingLog.m */,
 				49A2457816DDA44C00C4F855 /* RoundingLogManagedObject.h */,
 				49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */,
 				49A2457B16DDA86000C4F855 /* RoundingModel.h */,
 				49A2457C16DDA86000C4F855 /* RoundingModel.m */,
+				494CD9F116DD437100112E3E /* RoundingOverviewViewController.h */,
+				494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */,
 			);
 			name = Rounding;
 			sourceTree = "<group>";
@@ -470,7 +470,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				490120C616DED1CB00963226 /* HomeBackground.png in Resources */,
+				490120C616DED1CB00963226 /* (null) in Resources */,
 				494D0E3E16B84BAB00354964 /* InfoPlist.strings in Resources */,
 				494D0E4616B84BAB00354964 /* Default.png in Resources */,
 				494D0E4816B84BAB00354964 /* Default@2x.png in Resources */,
@@ -535,7 +535,7 @@
 				4961F83F16DD525000B5EBC8 /* UITextViewCell.m in Sources */,
 				498F86C516DD6387005118C1 /* UITextFieldCell.m in Sources */,
 				49A2457216DD757F00C4F855 /* RoundingLog.m in Sources */,
-				49A2457716DDA19C00C4F855 /* RoundingLoadViewController.m in Sources */,
+				49A2457716DDA19C00C4F855 /* RoundingAllLogsViewController.m in Sources */,
 				49A2457A16DDA44C00C4F855 /* RoundingLogManagedObject.m in Sources */,
 				49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */,
 				49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */,
@@ -627,13 +627,13 @@
 		494D0E5716B84BAB00354964 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Rang (6LVTH56BGF)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Patterson (NNKDJN5V6E)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileBinder/MobileBinder-Prefix.pch";
 				INFOPLIST_FILE = "MobileBinder/MobileBinder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0BF17D52-BC5E-4D9B-8787-0ABA7D0FB6D5";
+				PROVISIONING_PROFILE = "FDEDAE48-2AAD-4154-A887-56FA38483C2E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
