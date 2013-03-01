@@ -11,19 +11,19 @@
 
 #import "PayrollPeriodViewController.h"
 #import <Foundation/NSDate.h>
-
+#import "PayrollModel.h"
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
-#import "PayrollModel.h"
+
 
 
 @interface PayrollPeriodViewController () <UITextFieldDelegate> 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *periodTypeSegmented;
 @property (weak, nonatomic) IBOutlet UITextField *periodSelection;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 
+@property(strong,nonatomic) UIBarButtonItem *doneButton;
 @property(strong,nonatomic) NSMutableArray *monthlyPayPeriods;
 @property(strong,nonatomic) NSMutableArray *biweeklyPayPeriods;
 @property(strong,nonatomic) UIPickerView *myPicker;
@@ -47,9 +47,9 @@
                               @"May", @"June", @"July", @"August",
                               @"September", @"October", @"November", @"December",nil];
     self.biweeklyPayPeriods = [[NSMutableArray alloc]initWithObjects:
-                               @"01-1", @"01-2", @"02-1", @"02-2", @"03-1", @"03-2", @"04-1", @"04-2",
-                               @"05-1", @"05-2", @"06-1", @"06-2", @"07-1", @"07-2", @"08-1", @"08-2",
-                               @"09-1", @"09-2", @"10-1", @"10-2", @"11-1", @"11-2", @"12-1", @"12-2", nil];
+                               @"Jan-1", @"Jan-2", @"Feb-1", @"Feb-2", @"Mar-1", @"Mar-2", @"Apr-1", @"Apr-2",
+                               @"May-1", @"May-2", @"Jun-1", @"Jun-2", @"Jul-1", @"Jul-2", @"Aug-1", @"Aug-2",
+                               @"Sep-1", @"Sep-2", @"Oct-1", @"Oct-2", @"Nov-1", @"Nov-2", @"Dec-1", @"Dec-2", nil];
     for(int i = 0; i < [self.monthlyPayPeriods count]; i++)
     {
         [self.payrollStringsToPayrollModel setValue:[[self.monthlyPayPeriods objectAtIndex:i]substringToIndex:3] forKey:[self.monthlyPayPeriods objectAtIndex:i]];
@@ -64,15 +64,27 @@
 
 -(UIView *) createPeriodPicker
 {
-    self.myPicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, KEYBOARD_HEIGHT+TOOLBAR_HEIGHT)];
+    UIView *pickerView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, KEYBOARD_HEIGHT+TOOLBAR_HEIGHT)];
+    
+    self.myPicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0, TOOLBAR_HEIGHT, self.view.frame.size.width, KEYBOARD_HEIGHT)];
     self.myPicker.dataSource = self;
     self.myPicker.delegate = self;
     self.myPicker.showsSelectionIndicator = YES;
-    self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
     [self.periodSelection setText:self.selectedPayPeriod];
-    return self.myPicker;
+    
+    UIToolbar *toolBar = [[UIToolbar alloc]init];
+    [toolBar sizeToFit];
+    self.doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(storePayPeriodSelection)];
+    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [toolBar setItems:[NSArray arrayWithObjects: flexible, self.doneButton, nil]];
+    
+
+    [pickerView addSubview:self.myPicker];
+    [pickerView addSubview:toolBar];
+    
+    return pickerView;
 }
-- (IBAction)storePayPeriodSelection:(id)sender {
+- (void)storePayPeriodSelection {
     [self.periodSelection resignFirstResponder];
     if(self.selectedPayPeriod){
         [self createPayPeriodDataTable];
@@ -81,9 +93,9 @@
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-        [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
-        self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
-        [self.periodSelection setText:self.selectedPayPeriod];
+    [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+    self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:[self.myPicker selectedRowInComponent:0] forComponent:0];
+    [self.periodSelection setText:self.selectedPayPeriod];
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
@@ -93,8 +105,11 @@
 
 - (IBAction)segmentedValueChanged:(id)sender {
     [self.myPicker reloadAllComponents];
-    self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
-    [self.periodSelection setText:self.selectedPayPeriod];
+    [self.myPicker selectRow:0 inComponent:0 animated:YES];
+    if (![self.myPicker isHidden]) {
+        self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
+        [self.periodSelection setText:self.selectedPayPeriod];
+    }
 }
 
 - (void) createPayPeriodDataTable
@@ -206,7 +221,6 @@
     [self setPeriodTypeSegmented:nil];
     [self setPeriodSelection:nil];
     [self setMyScrollView:nil];
-    [self setDoneButton:nil];
     [self setPayPeriodTableView:nil];
     [self setPayPeriodTableView:nil];
     [super viewDidUnload];
