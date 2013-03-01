@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8tJ-h4-1Ol">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3006" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8tJ-h4-1Ol">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -20,32 +20,66 @@
             </objects>
             <point key="canvasLocation" x="-936" y="169"/>
         </scene>
-        <!--Rounding Load View Controller - Load-->
+        <!--Rounding All Logs View Controller - All Logs-->
         <scene sceneID="cCV-0U-Nak">
             <objects>
-                <viewController id="C85-t0-3Ll" customClass="RoundingLoadViewController" sceneMemberID="viewController">
+                <viewController id="C85-t0-3Ll" customClass="RoundingAllLogsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g84-4p-Q3X">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ace-Ng-bUe">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" id="ace-Ng-bUe">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PrototypeCell" textLabel="1xA-Ya-4AW" detailTextLabel="625-4e-Khv" rowHeight="55" style="IBUITableViewCellStyleSubtitle" id="L5g-h9-Pfy">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="54"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="11/15/13" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1xA-Ya-4AW">
+                                                    <rect key="frame" x="10" y="7" width="71" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Work on teamwork and solution management" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="625-4e-Khv">
+                                                    <rect key="frame" x="10" y="29" width="280" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Load" id="Ae3-AJ-3Xw"/>
+                    <navigationItem key="navigationItem" title="All Logs" id="Ae3-AJ-3Xw">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="rHQ-m4-84h">
+                            <connections>
+                                <action selector="addLogPressed:" destination="C85-t0-3Ll" id="iNA-5K-xg3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ace-Ng-bUe" id="Pq9-18-JGW"/>
+                        <segue destination="Vti-SD-kIL" kind="push" identifier="roundingLogOverviewSegue" id="Yfs-NB-CNt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0o-bz-G2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-472" y="-1020"/>
+            <point key="canvasLocation" x="-472" y="-418"/>
         </scene>
-        <!--Rounding Overview View Controller - Log-->
+        <!--Rounding Overview View Controller - Overview-->
         <scene sceneID="YFB-Ag-Ae0">
             <objects>
                 <viewController id="Vti-SD-kIL" customClass="RoundingOverviewViewController" sceneMemberID="viewController">
@@ -55,7 +89,7 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="U8B-ng-nYQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Kxz-1P-q90">
                                         <rect key="frame" x="20" y="227" width="280" height="30"/>
@@ -122,30 +156,15 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xwg-3G-v7e">
-                                        <rect key="frame" x="157" y="358" width="143" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                        <state key="normal" title="Continue">
-                                            <color key="titleColor" red="0.14509804549999999" green="0.2078431547" blue="0.36470589040000001" alpha="1" colorSpace="deviceRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="continuePressed:" destination="Vti-SD-kIL" eventType="touchUpInside" id="7SQ-F7-mwQ"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Log" id="Vsr-AG-kvj">
-                        <barButtonItem key="rightBarButtonItem" title="Load" id="E1I-b5-aP6">
+                    <navigationItem key="navigationItem" title="Overview" id="Vsr-AG-kvj">
+                        <barButtonItem key="rightBarButtonItem" title="Next" style="done" id="sMi-g0-aCs">
                             <connections>
-                                <action selector="loadPressed:" destination="Vti-SD-kIL" id="NbC-cT-ylx"/>
+                                <action selector="nextPressed:" destination="Vti-SD-kIL" id="W8O-ht-KTy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -157,14 +176,13 @@
                         <outlet property="myScrollView" destination="U8B-ng-nYQ" id="4Vz-NC-T1E"/>
                         <outlet property="unitField" destination="Cgv-GA-Fbm" id="SY7-eU-n05"/>
                         <segue destination="faZ-56-Z2Z" kind="push" identifier="roundingDetailsSegue" id="DrN-Ib-9xp"/>
-                        <segue destination="C85-t0-3Ll" kind="push" identifier="loadSegue" id="ZAZ-IA-0bn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QD4-xz-yPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-472" y="-433"/>
+            <point key="canvasLocation" x="48" y="-423"/>
         </scene>
-        <!--Rounding Details View Controller - Rounding-->
+        <!--Rounding Details View Controller - Details-->
         <scene sceneID="ngH-Ut-Kd9">
             <objects>
                 <viewController id="faZ-56-Z2Z" customClass="RoundingDetailsViewController" sceneMemberID="viewController">
@@ -180,7 +198,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Rounding" id="oOE-qB-a1S">
+                    <navigationItem key="navigationItem" title="Details" id="oOE-qB-a1S">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="2KD-NH-7wp">
                             <connections>
                                 <action selector="addPressed:" destination="faZ-56-Z2Z" id="lks-ca-gYs"/>
@@ -194,7 +212,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRD-X1-01N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="-418"/>
+            <point key="canvasLocation" x="473" y="-430"/>
         </scene>
         <!--Add Employee View Controller-->
         <scene sceneID="hRY-xI-mWg">
@@ -293,7 +311,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4n-Ah-mJu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="-405"/>
+            <point key="canvasLocation" x="875" y="-409"/>
         </scene>
         <!--Employee View Controller-->
         <scene sceneID="iV3-Wj-jGA">
@@ -938,7 +956,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Vti-SD-kIL" kind="push" id="lrh-7f-mkg"/>
+                                    <segue destination="C85-t0-3Ll" kind="push" id="LEl-wJ-fFl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1196,7 +1214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7A3-4m-j1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="-393"/>
+            <point key="canvasLocation" x="1271" y="-393"/>
         </scene>
     </scenes>
     <resources>
@@ -1274,17 +1292,19 @@
                 <relationship kind="outlet" name="resetSettingsCell" candidateClass="UITableViewCell"/>
             </relationships>
         </class>
-        <class className="RoundingDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingDetailsViewController.h"/>
+        <class className="RoundingAllLogsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingAllLogsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="addPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="RoundingLoadViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingLoadViewController.h"/>
+        <class className="RoundingDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingDetailsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>

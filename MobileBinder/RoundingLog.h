@@ -20,4 +20,6 @@
 
 - (id) initWithManagedObject: (RoundingLogManagedObject *) managedObject;
 
+- (void) deleteFromDatabase: (UIManagedDocument *) database;
+
 @end
