@@ -11,6 +11,8 @@
 
 @property (nonatomic, strong) NSArray *columnTitles;
 
+//Returns the row number for the row that was just added
+- (int) addRow;
 
 - (NSString *) contentsForRow: (int) rowNumber column: (int) columnNumber;
 

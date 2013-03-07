@@ -19,6 +19,7 @@
 		490A5B0616C1DC390062F36F /* ReminderCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5B0516C1DC390062F36F /* ReminderCenter.m */; };
 		490A5B0916C1DD170062F36F /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 490A5B0816C1DD170062F36F /* Reminder.m */; };
 		49125B1816DE7C9300103A08 /* Termination Notice Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 49125B1716DE7C9300103A08 /* Termination Notice Template.rtf */; };
+		49174A6C16E036EA007497A9 /* UIButton+Disable.m in Sources */ = {isa = PBXBuildFile; fileRef = 49174A6B16E036EA007497A9 /* UIButton+Disable.m */; };
 		4939165B16C2D86C00F9365D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4939165A16C2D86C00F9365D /* MBProgressHUD.m */; };
 		494CD9F316DD437100112E3E /* RoundingOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */; };
 		494CDA2A16DD4C7B00112E3E /* RoundingDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */; };
@@ -92,6 +93,8 @@
 		490A5B0716C1DD170062F36F /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
 		490A5B0816C1DD170062F36F /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
 		49125B1716DE7C9300103A08 /* Termination Notice Template.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Termination Notice Template.rtf"; sourceTree = "<group>"; };
+		49174A6A16E036EA007497A9 /* UIButton+Disable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Disable.h"; sourceTree = "<group>"; };
+		49174A6B16E036EA007497A9 /* UIButton+Disable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Disable.m"; sourceTree = "<group>"; };
 		4939165916C2D86C00F9365D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		4939165A16C2D86C00F9365D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		4939165C16C2D8BA00F9365D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 				490A5AFD16C1D9730062F36F /* MarqueeLabel.m */,
 				4939165916C2D86C00F9365D /* MBProgressHUD.h */,
 				4939165A16C2D86C00F9365D /* MBProgressHUD.m */,
+				49174A6A16E036EA007497A9 /* UIButton+Disable.h */,
+				49174A6B16E036EA007497A9 /* UIButton+Disable.m */,
 				494CD9EF16DD42DC00112E3E /* Media */,
 				49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */,
 				49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */,
@@ -539,6 +544,7 @@
 				49A2457A16DDA44C00C4F855 /* RoundingLogManagedObject.m in Sources */,
 				49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */,
 				49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */,
+				49174A6C16E036EA007497A9 /* UIButton+Disable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

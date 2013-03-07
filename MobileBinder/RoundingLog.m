@@ -45,6 +45,12 @@
     self.managedObject.keyReminders = keyReminders;
 }
 
+- (int) addRow
+{
+    [self.rows addObject:[[NSMutableDictionary alloc] init]];
+    return self.rows.count - 1;
+}
+
 - (void) storeContents: (NSString *) contents forRow: (int) rowNumber column: (int) columnNumber
 {
     if(rowNumber > self.rows.count)
@@ -76,6 +82,7 @@
     {
         NSString *contents = [currentRow objectForKey:[NSNumber numberWithInt:columnNumber]];
         if(contents) [result addObject:contents];
+        else [result addObject: @""];
     }
     return result;
 }

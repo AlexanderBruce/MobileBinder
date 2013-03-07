@@ -3,40 +3,43 @@
 #import "RoundingLog.h"
 #import "Database.h"
 #import "UITextFieldCell.h"
+#import "UIButton+Disable.h"
 #import "Constants.h"
 
 #define EMPLOYEE_SECTION 0
-#define EMPLOYEE_SECTION_HEIGHT 40
+#define EMPLOYEE_SECTION_HEIGHT 35
 
-@interface RoundingDetailsViewController () <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UITextFieldDelegate>
+@interface RoundingDetailsViewController () <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic) BOOL addingNewEmployee;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 @property (nonatomic) int currentRow;
 @property (nonatomic, strong) UITextField *employeeNameField;
 @property (nonatomic, strong) UIView *employeePickerView;
 @property (nonatomic, strong) UIPickerView *employeePicker;
+@property (nonatomic) BOOL pickerIsVisible;
+@property (nonatomic, weak) UIButton *switchButton;
 @end
 
 @implementation RoundingDetailsViewController
 
 - (IBAction)addPressed:(UIBarButtonItem *)sender
 {
-    self.currentRow++;
+    [self.tableView endEditing:YES];
+    self.currentRow = [self.log addRow];
+    if([self.log allContentsForColumn:EMPLOYEE_SECTION].count >= 2) [self.switchButton enableButton];
+    else [self.switchButton disableButton];
     [Database saveDatabase];
-    self.addingNewEmployee = YES;
-    self.addButton.enabled = NO;
-    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, self.log.columnTitles.count - 1)];
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.log.columnTitles.count - 1)];
     [self.tableView beginUpdates];
-    [self.tableView deleteSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.tableView endUpdates];
     [self.employeeNameField becomeFirstResponder];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [[self.log allContentsForColumn:EMPLOYEE_SECTION] objectAtIndex:row];
+    NSString *employeeAtRow = [[self.log allContentsForColumn:EMPLOYEE_SECTION] objectAtIndex:row];
+    if(employeeAtRow.length > 0) return employeeAtRow;
+    else return [NSString stringWithFormat:@"Entry %d",row + 1];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -65,26 +68,25 @@
     if(indexPath.section == EMPLOYEE_SECTION)
     {
         UITextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmployeeCell"];
+
         if(!cell)
         {
             cell = [[UITextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"EmployeeCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textField.delegate = self;
+            [cell.switchButton addTarget:self action:@selector(showPicker) forControlEvents:UIControlEventTouchUpInside];
         }
-        cell.textField.delegate = self;
+
         cell.textField.text = [self.log contentsForRow:self.currentRow column:indexPath.row];
         self.employeeNameField = cell.textField;
-
-        if(self.addingNewEmployee)
-        {
-            [self.employeeNameField becomeFirstResponder];
-        }
-        else
-        {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
+        self.switchButton = cell.switchButton;
+        if([self.log allContentsForColumn:EMPLOYEE_SECTION].count >= 2) [self.switchButton enableButton];
+        else [self.switchButton disableButton];
+        
         return cell;
     }
+    
     UITextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITextViewCell"];
     if(!cell)
     {
@@ -95,6 +97,8 @@
     cell.textView.tag = indexPath.section; //Use textView's tag to store the section of the tableview that it is in
     cell.textView.text = [self.log contentsForRow:self.currentRow column:indexPath.section];
     cell.textView.font = [UIFont systemFontOfSize:17];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textView.tag = indexPath.section;  //Store section in textviewTag
     return cell;
 }
 
@@ -110,7 +114,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(self.addingNewEmployee) return 1;
     return self.log.columnTitles.count;
 }
 
@@ -127,43 +130,42 @@
     [self.tableView reloadData];
 }
 
+- (void) showPicker
+{
+    if(self.pickerIsVisible) return;
+    self.pickerIsVisible = YES;
+    [self.tableView endEditing:YES];
+    [self.employeePicker reloadAllComponents];
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        float y = self.view.frame.size.height - self.employeePickerView.frame.size.height;
+        self.employeePickerView.frame = CGRectMake(0, y, self.employeePickerView.frame.size.width, self.employeePickerView.frame.size.height);
+    } completion:^(BOOL finished) {}];
+}
+
+- (void) hidePicker
+{
+    if(!self.pickerIsVisible) return;
+    self.pickerIsVisible = NO;
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.employeePickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, TOOLBAR_HEIGHT + KEYBOARD_HEIGHT);
+    } completion:^(BOOL finished) {}];
+}
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    if(textField == self.employeeNameField && !self.addingNewEmployee)
-    {
-        [self.employeePicker selectRow:self.currentRow inComponent:0 animated:YES];
-        [Database saveDatabase];
-    }
+    [self hidePicker];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:EMPLOYEE_SECTION] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
-- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+- (void) textViewDidBeginEditing:(UITextView *)textView
 {
-    if(self.addingNewEmployee) return YES;
-    else
-    {
-        [self.employeePicker reloadAllComponents];
-        [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-             float y = self.view.frame.size.height - self.employeePickerView.frame.size.height;
-             self.employeePickerView.frame = CGRectMake(0, y, self.employeePickerView.frame.size.width, self.employeePickerView.frame.size.height);
-         } completion:^(BOOL finished) {}];
-        return NO;
-    }
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:textView.tag] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self hidePicker];
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
-    if(textField == self.employeeNameField)
-    {
-        [self.log storeContents:textField.text forRow:self.currentRow column:EMPLOYEE_SECTION];
-        self.addingNewEmployee = NO;
-        self.addButton.enabled = YES;
-        NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, self.log.columnTitles.count - 1)];
-        [self.tableView beginUpdates];
-        [self.tableView insertSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView endUpdates];
-    }
+    [self.log storeContents:textField.text forRow:self.currentRow column:EMPLOYEE_SECTION];
 }
 
 - (void) textViewDidEndEditing:(UITextView *)textView
@@ -183,10 +185,40 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.addingNewEmployee = YES;
-    self.addButton.enabled = NO;
     self.currentRow = 0;
+    self.pickerIsVisible = NO;
+    self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, 5000);
     [self createPicker];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:self.view.window];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.delegate = self;
+    [self.tableView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void) hideKeyboard
+{
+    [self.tableView endEditing:YES];
+}
+
+- (void) keyboardWillShow
+{
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height - KEYBOARD_HEIGHT);} completion:^(BOOL finished) {}];
+}
+
+- (void) keyboardWillHide
+{
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
+        self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height + KEYBOARD_HEIGHT);} completion:^(BOOL finished) {}];
 }
 
 - (void) createPicker
@@ -202,20 +234,17 @@
     [pickerView addSubview:picker];
     self.employeePicker = picker;
     
-    // Create done button
-    UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
-                                                             style:UIBarButtonItemStyleBordered target:self
-                                                            action:@selector(editEmployee)];
+
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                    style:UIBarButtonItemStyleDone target:self
-                                                                  action:@selector(doneWithPickerView)];
+                                                                  action:@selector(hidePicker)];
     UIToolbar* toolBar = [[UIToolbar alloc] init];
     toolBar.barStyle = UIBarStyleBlackTranslucent;
     toolBar.translucent = YES;
     toolBar.tintColor = nil;
     [toolBar sizeToFit];
-    [toolBar setItems:[NSArray arrayWithObjects:edit,flexibleSpace, doneButton, nil]];
+    [toolBar setItems:[NSArray arrayWithObjects:flexibleSpace, doneButton, nil]];
 
     [pickerView addSubview:toolBar];
     picker.frame = CGRectMake(0, toolBar.frame.size.height, self.view.frame.size.width, pickerView.frame.size.height - TOOLBAR_HEIGHT);
@@ -224,22 +253,33 @@
     [self.view addSubview: pickerView];
 }
 
-- (void) editEmployee
+- (void)viewDidUnload
 {
-    self.addingNewEmployee = YES;
-    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.employeePickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, TOOLBAR_HEIGHT + KEYBOARD_HEIGHT);
-    } completion:^(BOOL finished) {
-        [self.employeeNameField becomeFirstResponder];
-    }];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
 }
 
-- (void) doneWithPickerView
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.employeePickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, TOOLBAR_HEIGHT + KEYBOARD_HEIGHT);
-    } completion:^(BOOL finished) {}];
+    NSLog(@"%@ %@",[gestureRecognizer.view class],[otherGestureRecognizer.view class]); //cancel touches in view
+    return (gestureRecognizer.view == self.switchButton || otherGestureRecognizer.view == self.switchButton);
+}
+
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+    [self setTableView:nil];
+    [super viewDidUnload];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -247,10 +287,4 @@
     [Database saveDatabase];
 }
 
-- (void)viewDidUnload
-{
-    [self setTableView:nil];
-    [self setAddButton:nil];
-    [super viewDidUnload];
-}
 @end
