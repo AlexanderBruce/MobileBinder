@@ -114,7 +114,9 @@
 
 - (void) createPayPeriodDataTable
 {
-    self.payPeriodTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,131,self.view.frame.size.width,295)];
+//    self.payPeriodTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,131,self.view.frame.size.width,295)]
+    self.payPeriodTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.view.frame.size.height - 295,self.view.frame.size.width,295)];
+    self.payPeriodTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
     self.modelData = [self.myModel datesForPayPeriod:[self.payrollStringsToPayrollModel objectForKey:self.selectedPayPeriod]];
     if (self.periodTypeSegmented.selectedSegmentIndex == 1) {
         self.importantDateLabels = [[NSArray alloc]initWithObjects:@"Forms Due to Management Centers (except DRH)", @"Forms Due To DRH HR", @"Leave of Absence Forms Due to Corporate Payroll", @"Pay Exception Forms Due to Corporate Payroll", @"All Types of iForms", @"Time and Attendance Closing to Update PTO Balances", @"Pay Date", nil];

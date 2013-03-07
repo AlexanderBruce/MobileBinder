@@ -10,9 +10,13 @@
 @property (nonatomic, strong) NSString *keyReminders;
 
 @property (nonatomic, strong) NSArray *columnTitles;
+@property (nonatomic, readonly) int numberOfColumns;
+@property (nonatomic, readonly) int numberOfRows;
 
 //Returns the row number for the row that was just added
 - (int) addRow;
+
+- (void) deleteRow: (int) rowNumber;
 
 - (NSString *) contentsForRow: (int) rowNumber column: (int) columnNumber;
 

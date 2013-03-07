@@ -43,6 +43,7 @@
 		4961F83F16DD525000B5EBC8 /* UITextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4961F83E16DD525000B5EBC8 /* UITextViewCell.m */; };
 		4968BB6016C43D40002600AF /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968BB5F16C43CD3002600AF /* CustomAlert.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		496DFF5616C6D70D00111136 /* PayrollData in Resources */ = {isa = PBXBuildFile; fileRef = 496DFF5516C6D70D00111136 /* PayrollData */; };
+		49885D9916E901DC000BE747 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49885D9816E901DC000BE747 /* GradientButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		498F86C516DD6387005118C1 /* UITextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498F86C416DD6387005118C1 /* UITextFieldCell.m */; };
 		499C4CF216D2B9D800ED6E76 /* Corrective Action Notice Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */; };
 		499C4CF516D2D9E300ED6E76 /* DisciplinaryActionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CF416D2D9E300ED6E76 /* DisciplinaryActionModel.m */; };
@@ -139,6 +140,8 @@
 		4968BB5E16C43CD3002600AF /* CustomAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
 		4968BB5F16C43CD3002600AF /* CustomAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAlert.m; sourceTree = "<group>"; };
 		496DFF5516C6D70D00111136 /* PayrollData */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PayrollData; sourceTree = "<group>"; };
+		49885D9716E901DC000BE747 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
+		49885D9816E901DC000BE747 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		498F86C316DD6387005118C1 /* UITextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldCell.h; sourceTree = "<group>"; };
 		498F86C416DD6387005118C1 /* UITextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldCell.m; sourceTree = "<group>"; };
 		499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Corrective Action Notice Template.rtf"; sourceTree = "<group>"; };
@@ -210,6 +213,8 @@
 		490A5AFA16C1D95A0062F36F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				49885D9716E901DC000BE747 /* GradientButton.h */,
+				49885D9816E901DC000BE747 /* GradientButton.m */,
 				4939165C16C2D8BA00F9365D /* Constants.h */,
 				4968BB5E16C43CD3002600AF /* CustomAlert.h */,
 				4968BB5F16C43CD3002600AF /* CustomAlert.m */,
@@ -553,6 +558,7 @@
 				49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */,
 				49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */,
 				49174A6C16E036EA007497A9 /* UIButton+Disable.m in Sources */,
+				49885D9916E901DC000BE747 /* GradientButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

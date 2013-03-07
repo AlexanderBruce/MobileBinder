@@ -5,5 +5,6 @@
 @interface RoundingOverviewViewController : UIViewController
 
 @property (nonatomic, strong) RoundingLog *log;
+@property (nonatomic, strong) RoundingModel *model;
 
 @end

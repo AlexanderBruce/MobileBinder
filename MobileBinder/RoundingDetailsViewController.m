@@ -9,7 +9,11 @@
 #define EMPLOYEE_SECTION 0
 #define EMPLOYEE_SECTION_HEIGHT 35
 
-@interface RoundingDetailsViewController () <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate>
+#define TEXTVIEW_CELL_HEIGHT 150
+
+#define DELETE_SECTION_HEIGHT 35
+
+@interface RoundingDetailsViewController () <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) int currentRow;
 @property (nonatomic, strong) UITextField *employeeNameField;
@@ -25,11 +29,12 @@
 {
     [self.tableView endEditing:YES];
     self.currentRow = [self.log addRow];
-    if([self.log allContentsForColumn:EMPLOYEE_SECTION].count >= 2) [self.switchButton enableButton];
+    if(self.log.numberOfRows >= 2) [self.switchButton enableButton];
     else [self.switchButton disableButton];
     [Database saveDatabase];
-    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.log.columnTitles.count - 1)];
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.log.numberOfColumns - 1)];
     [self.tableView beginUpdates];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:EMPLOYEE_SECTION] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.tableView endUpdates];
     [self.employeeNameField becomeFirstResponder];
@@ -39,7 +44,7 @@
 {
     NSString *employeeAtRow = [[self.log allContentsForColumn:EMPLOYEE_SECTION] objectAtIndex:row];
     if(employeeAtRow.length > 0) return employeeAtRow;
-    else return [NSString stringWithFormat:@"Entry %d",row + 1];
+    else return [NSString stringWithFormat:@"Employee %d",row + 1];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -54,13 +59,28 @@
 
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.currentRow = row;
-    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, self.log.columnTitles.count - 1)];
+    [self loadNewCurrentRow:row];
+}
+
+- (void) loadNewCurrentRow: (int) newCurrentRow
+{
+    self.currentRow = newCurrentRow;
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, self.log.numberOfColumns - 1)];
     [self.tableView beginUpdates];
     [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     [self.tableView endUpdates];
     //Don't reload table for this row so picker doesn't go away
-    self.employeeNameField.text = [self.log contentsForRow:self.currentRow column:EMPLOYEE_SECTION];  
+    self.employeeNameField.text = [self.log contentsForRow:self.currentRow column:EMPLOYEE_SECTION];
+}
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == actionSheet.destructiveButtonIndex)
+    {
+        [self.log deleteRow:self.currentRow];
+        [self loadNewCurrentRow:MAX(0, self.currentRow - 1)];
+    }
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,20 +106,38 @@
         
         return cell;
     }
-    
-    UITextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITextViewCell"];
-    if(!cell)
+    if(indexPath.section < self.log.numberOfColumns)
     {
+        UITextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITextViewCell"];
+        if(!cell)
+        {
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell = [[UITextViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITextViewCell"];
+        }
+        cell.textView.delegate = self;
+        cell.textView.tag = indexPath.section; //Use textView's tag to store the section of the tableview that it is in
+        cell.textView.text = [self.log contentsForRow:self.currentRow column:indexPath.section];
+        cell.textView.font = [UIFont systemFontOfSize:17];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell = [[UITextViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITextViewCell"];
+        cell.textView.tag = indexPath.section;  //Store section in textviewTag
+        return cell;
     }
-    cell.textView.delegate = self;
-    cell.textView.tag = indexPath.section; //Use textView's tag to store the section of the tableview that it is in
-    cell.textView.text = [self.log contentsForRow:self.currentRow column:indexPath.section];
-    cell.textView.font = [UIFont systemFontOfSize:17];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textView.tag = indexPath.section;  //Store section in textviewTag
-    return cell;
+    else
+    {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Delete Cell"];
+        if(!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Delete Cell"];
+        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[ [UIImage imageNamed:@"Delete Button.png"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
+        cell.backgroundView = backgroundImage;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.text = @"Delete Employee";
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+    
+
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -109,18 +147,33 @@
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [self.log.columnTitles objectAtIndex:section];
+    if(section < self.log.columnTitles.count)
+    {
+        return [self.log.columnTitles objectAtIndex:section];
+    }
+    else return @"";
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section >= self.log.numberOfColumns) //Delete row
+    {
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Are you sure you want to delete the log data for this employee?"] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil];
+        [sheet showInView:self.view];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.log.columnTitles.count;
+    return self.log.numberOfColumns + 1;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if(indexPath.section == EMPLOYEE_SECTION) return EMPLOYEE_SECTION_HEIGHT;
-    else return 150;
+    else if(indexPath.section < self.log.numberOfColumns) return TEXTVIEW_CELL_HEIGHT;
+    else return DELETE_SECTION_HEIGHT;
 }
 
 
@@ -136,6 +189,7 @@
     self.pickerIsVisible = YES;
     [self.tableView endEditing:YES];
     [self.employeePicker reloadAllComponents];
+    [self.employeePicker selectRow:self.currentRow inComponent:0 animated:YES];
     [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         float y = self.view.frame.size.height - self.employeePickerView.frame.size.height;
         self.employeePickerView.frame = CGRectMake(0, y, self.employeePickerView.frame.size.width, self.employeePickerView.frame.size.height);
@@ -165,7 +219,10 @@
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
-    [self.log storeContents:textField.text forRow:self.currentRow column:EMPLOYEE_SECTION];
+    if(![textField.text isEqualToString:[self.log contentsForRow:self.currentRow column:EMPLOYEE_SECTION]])
+    {
+        [self.log storeContents:textField.text forRow:self.currentRow column:EMPLOYEE_SECTION];
+    }
 }
 
 - (void) textViewDidEndEditing:(UITextView *)textView
@@ -185,6 +242,7 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.allowsSelection = YES;
     self.currentRow = 0;
     self.pickerIsVisible = NO;
     self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, 5000);
@@ -201,7 +259,14 @@
                                                object:self.view.window];
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.delegate = self;
+    gestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if([self.log allContentsForColumn:EMPLOYEE_SECTION].count == 0) [self.employeeNameField becomeFirstResponder];
 }
 
 - (void) hideKeyboard
@@ -211,7 +276,7 @@
 
 - (void) keyboardWillShow
 {
-    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
         self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height - KEYBOARD_HEIGHT);} completion:^(BOOL finished) {}];
 }
 
@@ -265,7 +330,7 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    NSLog(@"%@ %@",[gestureRecognizer.view class],[otherGestureRecognizer.view class]); //cancel touches in view
+     // Might want to use cancel touches in view here
     return (gestureRecognizer.view == self.switchButton || otherGestureRecognizer.view == self.switchButton);
 }
 

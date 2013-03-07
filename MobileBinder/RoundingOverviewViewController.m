@@ -8,10 +8,10 @@
 
 #define ROUNDING_DETAILS_SEGUE @"roundingDetailsSegue"
 
-#define SCROLL_OFFSET IS_4_INCH_SCREEN ? 100 : 200
-#define CONTENT_SIZE IS_4_INCH_SCREEN ? 490: 590
+#define SCROLL_OFFSET IS_4_INCH_SCREEN ? 140 : 200
+#define CONTENT_SIZE IS_4_INCH_SCREEN ? 550: 590
 
-@interface RoundingOverviewViewController () <UITextFieldDelegate>
+@interface RoundingOverviewViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate,UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
 @property (weak, nonatomic) IBOutlet UITextField *unitField;
 @property (weak, nonatomic) IBOutlet UITextField *leaderField;
@@ -38,6 +38,21 @@
     [self performSegueWithIdentifier:ROUNDING_DETAILS_SEGUE sender:self];
 }
 
+- (IBAction)deletePressed:(id)sender
+{
+    [self.view endEditing:YES];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Are you sure you want to delete this rounding log?"] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil];
+    [sheet showInView:self.view];
+}
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == actionSheet.destructiveButtonIndex)
+    {
+        [self.model deleteRoundingLog: self.log];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 - (void) viewDidLoad
 {
@@ -72,6 +87,14 @@
     self.leaderField.text = self.log.leader;
     self.keyFocusField.text = self.log.keyFocus;
     self.keyRemindersField.text = self.log.keyReminders;
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:gestureRecognizer];
+}
+
+- (void) hideKeyboard
+{
+    [self.view endEditing:YES];
 }
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField

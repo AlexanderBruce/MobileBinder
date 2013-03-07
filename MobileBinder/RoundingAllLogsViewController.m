@@ -21,6 +21,7 @@
     {
         RoundingOverviewViewController *dest = segue.destinationViewController;
         dest.log = self.selectedLog;
+        dest.model = self.model;
     }
 }
 

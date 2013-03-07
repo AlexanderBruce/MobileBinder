@@ -15,6 +15,16 @@
     return _columnTitles;
 }
 
+- (int) numberOfColumns
+{
+    return self.columnTitles.count;
+}
+
+- (int) numberOfRows
+{
+    return self.rows.count;
+}
+
 - (void) setDate:(NSDate *)date
 {
     _date = date;
@@ -49,6 +59,14 @@
 {
     [self.rows addObject:[[NSMutableDictionary alloc] init]];
     return self.rows.count - 1;
+}
+
+- (void) deleteRow:(int)rowNumber
+{
+    if(rowNumber < self.rows.count && rowNumber >= 0)
+    {
+        [self.rows removeObjectAtIndex:rowNumber];
+    }
 }
 
 - (void) storeContents: (NSString *) contents forRow: (int) rowNumber column: (int) columnNumber

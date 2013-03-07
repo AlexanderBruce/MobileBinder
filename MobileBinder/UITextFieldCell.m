@@ -38,12 +38,13 @@
 - (UITextField *) createTextField
 {
     UITextField *textField = [[UITextField alloc] init];
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     float x = 10;
-    float y = 8;
+    float y = 0;
     float width = self.contentView.frame.size.width - (2 * x);
-    float height = 32;
+    float height = self.contentView.frame.size.height - (2 * y);
     textField.frame = CGRectMake(x, y, width, height);
-    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     return textField;
 }
 
