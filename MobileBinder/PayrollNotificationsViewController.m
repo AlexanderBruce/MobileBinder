@@ -43,6 +43,9 @@
     progressIndicator.removeFromSuperViewOnHide = YES;
     self.view.userInteractionEnabled = NO;
     
+
+    
+    
     NSMutableArray *typeIDsToRemove = [[NSMutableArray alloc] init];
     NSMutableArray *typeIDsToAdd = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
@@ -50,12 +53,11 @@
         for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:notificationSection]count]; j++) {
             NSString *notificationLabel = [[self.notificationSettingsSectionsAndRows objectForKey:notificationSection]objectAtIndex:j];
             UISwitch *swtch = [self.switchesToLabels objectForKey:notificationLabel];
-            
             BOOL oldSetting = [self.notificationUserSettings boolForKey:notificationLabel];
             BOOL newSetting = swtch.isOn;
             if((oldSetting == YES) && (newSetting == NO)) //Cancel reminders
             {
-                [typeIDsToRemove addObject:[self.payrollNotificationToArrayofTypeIDs objectForKey:notificationLabel]];
+                [typeIDsToRemove addObjectsFromArray:[self.payrollNotificationToArrayofTypeIDs objectForKey:notificationLabel]];
             }
             else if((oldSetting == NO) && (newSetting == YES)) //Add new reminders
             {
@@ -104,8 +106,14 @@
     NSString *MONTHLY_PAY_DATE = @"Pay Date ";
     [self.payrollNotificationToArrayofTypeIDs setValue:
      [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:MONTHLY_PAY_DATE_TYPEID], nil ]forKey:MONTHLY_PAY_DATE];
+    NSString *MONTHLY_LEAVE_FORMS = @"Leave of Absence";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:MONTHLY_LEAVE_ABSENCE_FORMS_TYPEID], nil ]forKey:MONTHLY_LEAVE_FORMS];
+    NSString *MONTHLY_PAY_EXEMPTION = @"Pay Exemption";
+    [self.payrollNotificationToArrayofTypeIDs setValue:
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:MONTHLY_PAYEXCEPTION_FORMS_TYPEID], nil ]forKey:MONTHLY_PAY_EXEMPTION];
     [self.notificationSettingsSectionsAndRows setObject:
-     [[NSArray alloc]initWithObjects:MONTHLY_PAY_DATE, nil]
+     [[NSArray alloc]initWithObjects:MONTHLY_PAY_DATE,MONTHLY_LEAVE_FORMS,MONTHLY_PAY_EXEMPTION, nil]
                                                  forKey:MONTHLY_HEADING];
     
     NSString *FORMS_HEADING = @"Forms Due To";
@@ -120,10 +128,11 @@
      [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:BIWEEKLY_IFORMS_TYPEID], [NSNumber numberWithInt:MONTHLY_IFORMS_TYPEID], nil ]forKey:IFORMS];
     NSString *MONTHLY_PTO_FORMS = @"Time Closing PTO";
     [self.payrollNotificationToArrayofTypeIDs setValue:
-     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:MONTHLY_PTO_FORMS], nil ]forKey:MONTHLY_PTO_FORMS];
+     [[NSArray alloc]initWithObjects:[NSNumber numberWithInt:MONTHLY_TIME_CLOSING_PTO_FORMS_TYPEID], nil ]forKey:MONTHLY_PTO_FORMS];
     [self.notificationSettingsSectionsAndRows setObject:
-     [[NSArray alloc]initWithObjects:DRH_HR, nil]
+     [[NSArray alloc]initWithObjects:DRH_HR,MNGMT_CENTERS,IFORMS,MONTHLY_PTO_FORMS, nil]
                                                  forKey:FORMS_HEADING];
+
     
     
     
@@ -149,17 +158,17 @@
             [mySwitch setOn:[self.notificationUserSettings boolForKey:notificationLabel]];
         }
     }
-//    
-//    self.notificationUserSettings = [NSUserDefaults standardUserDefaults];
-//    for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
-//        NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
-//        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
-//            NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
-//            
-//            UISwitch *swtch = [self.switchesToLabels objectForKey:jString];
-//            [swtch setOn:[self.notificationUserSettings boolForKey:jString]];
-//        }
-//    }
+    
+    self.notificationUserSettings = [NSUserDefaults standardUserDefaults];
+    for (NSInteger i = 0; i<[self.notificationSettingsSectionsAndRows.allKeys count]; i++) {
+        NSString *iString = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:i];
+        for (NSInteger j = 0; j<[[self.notificationSettingsSectionsAndRows objectForKey:iString]count]; j++) {
+            NSString *jString = [[self.notificationSettingsSectionsAndRows objectForKey:iString]objectAtIndex:j];
+            
+            UISwitch *swtch = [self.switchesToLabels objectForKey:jString];
+            [swtch setOn:[self.notificationUserSettings boolForKey:jString]];
+        }
+    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -201,13 +210,11 @@
     if(!cell) cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    CGRect labelFrame = CGRectMake(20, 13, 200, 20);
-    UILabel *title = [[UILabel alloc]initWithFrame:labelFrame];
+    UILabel *title = cell.textLabel;
     title.backgroundColor = [UIColor clearColor];
     NSString *key = [self.notificationSettingsSectionsAndRows.allKeys objectAtIndex:indexPath.section];
     title.text = [[self.notificationSettingsSectionsAndRows objectForKey:key]objectAtIndex:indexPath.row];
     title.backgroundColor = [UIColor clearColor];
-    [cell addSubview:title];
     
     CGRect switchFrame = CGRectMake(230, 10, 0, 0);
     UISwitch *mySwitch = [self.switchesToLabels objectForKey:title.text];
