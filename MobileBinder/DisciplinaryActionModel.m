@@ -140,8 +140,8 @@
 
 - (NSString *)futureActionsForLevel: (int) level
 {
-    if(level == LEVEL_1_ID) return @"Final Written Warning";
-    else if(level == LEVEL_2_ID) return @"Termination";
+    if(level == LEVEL_1_ID) return @"Progressive corrective action up to and including termination";
+    else if(level == LEVEL_2_ID) return @"Progressive corrective action up to and including termination";
     else return @"";
 }
 
