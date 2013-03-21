@@ -68,8 +68,14 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [NSString stringWithFormat:@"%@/%@",
                           documentsDirectory,DISCIPLINARY_ACTION_DOCUMENT_FILE_NAME];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *managerName = [defaults objectForKey:MANAGER_NAME];
+    NSString *managerTitle = [defaults objectForKey:MANAGER_TITLE];
+    if(managerName.length == 0) managerName = @"Supervisor Name";
+    if(managerTitle.length == 0) managerTitle = @"Title";
+    NSString *violation = [self violationForBehavior:self.behavior andEmployee:self.employee];
     
-    NSString *contents = [NSString stringWithFormat:template,self.employee.firstName, self.employee.lastName];
+    NSString *contents = [NSString stringWithFormat:template,self.employee.firstName, self.employee.lastName, violation, managerName, managerTitle];
     [[contents dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
 }
 

@@ -34,6 +34,8 @@
 #define MONTHLY_PAY_DATE_TYPEID 16
 
 #define MANAGER_EMAIL_KEY @"managerEmailKey"
+#define MANAGER_NAME @"managerName"
+#define MANAGER_TITLE @"managerTitle"
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44

@@ -1,8 +1,21 @@
 #import "ManagerSettingsViewController.h"
 #import "Constants.h"
 
-@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate>
+#define NAME_INDEX_PATH [NSIndexPath indexPathForRow:0 inSection:0]
+#define NAME_LABEL @"Name"
+
+#define TITLE_INDEX_PATH [NSIndexPath indexPathForRow:1 inSection:0]
+#define TITLE_LABEL @"Title"
+
+#define EMAIL_INDEX_PATH [NSIndexPath indexPathForRow:2 inSection:0]
+#define EMAIL_LABEL @"E-mail"
+
+#define FOOTER_TEXT @"This information will be used to auto-populate documents throughout this app"
+
+@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UITextField *nameField;
+@property (nonatomic, strong) UITextField *titleField;
 @property (nonatomic, strong) UITextField *emailField;
 @end
 
@@ -11,37 +24,75 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    UIView *tmpView = [[UIView alloc] initWithFrame:CGRectZero];
+    UIBarButtonItem *tmpButtonItem = [[UIBarButtonItem alloc] initWithCustomView:tmpView];
+    self.navigationItem.leftBarButtonItem = tmpButtonItem;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView reloadData];
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:gestureRecognizer];
+
+}
+
+- (void) hideKeyboard
+{
+    [self.tableView endEditing:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrototypeCell"];
-    if(!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PrototypeCell"];
-    else cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.textLabel.text = @"E-mail";
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PrototypeCell"]; //Dont deque so we don't have to worry about mixing up the textfields
+    cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.emailField = [[UITextField alloc] init];
     
+    //Create textfield
+    UITextField *textField = [[UITextField alloc] init];
     float xOrigin = 72;
-    float yOrigin = 10;
+    float yOrigin = 0;
     float width = cell.contentView.frame.size.width - xOrigin - 7;
-    float height = cell.contentView.frame.size.height - yOrigin - 5;
-    self.emailField.frame = CGRectMake(xOrigin, yOrigin, width , height );
-    self.emailField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
-    self.emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.emailField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.emailField.keyboardType = UIKeyboardTypeEmailAddress;
-    self.emailField.delegate = self;
-    [cell.contentView addSubview:self.emailField];
+    float height = cell.contentView.frame.size.height - yOrigin;
+    textField.frame = CGRectMake(xOrigin, yOrigin, width , height );
+    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    textField.delegate = self;
+
+    if([indexPath isEqual: NAME_INDEX_PATH])
+    {
+        cell.textLabel.text = NAME_LABEL;
+        textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        textField.autocorrectionType = UITextAutocorrectionTypeDefault;
+        textField.keyboardType = UIKeyboardAppearanceDefault;
+        self.nameField = textField;
+        self.nameField.text = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_NAME];
+    }
+    else if([indexPath isEqual: TITLE_INDEX_PATH])
+    {
+        cell.textLabel.text = TITLE_LABEL;
+        textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        textField.autocorrectionType = UITextAutocorrectionTypeDefault;
+        textField.keyboardType = UIKeyboardAppearanceDefault;
+        self.titleField = textField;
+        self.titleField.text = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_TITLE];
+    }
+    else if([indexPath isEqual: EMAIL_INDEX_PATH])
+    {
+        cell.textLabel.text = EMAIL_LABEL;
+        textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        textField.autocorrectionType = UITextAutocorrectionTypeNo;
+        textField.keyboardType = UIKeyboardTypeEmailAddress;
+        self.emailField = textField;
+        self.emailField.text = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_EMAIL_KEY];
+    }
+    [cell.contentView addSubview:textField];
+    
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 3;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -51,20 +102,32 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"Occasionally, the app will send auto-generated documents to this e-mail";
+    return FOOTER_TEXT;
 }
 
-- (IBAction)savePressed:(id)sender
+- (void) textFieldDidEndEditing:(UITextField *)textField
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:self.emailField.text forKey:MANAGER_EMAIL_KEY];
+    if(textField == self.nameField)
+    {
+        [defaults setObject:self.nameField.text forKey:MANAGER_NAME];
+    }
+    else if(textField == self.titleField)
+    {
+        [defaults setObject:self.titleField.text forKey:MANAGER_TITLE];
+    }
+    else if(textField == self.emailField)
+    {
+        [defaults setObject:self.emailField.text forKey:MANAGER_EMAIL_KEY];
+    }
     [defaults synchronize];
-    [self.delegate savedSettingsForViewController:self];
-    [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"%@",[defaults objectForKey:MANAGER_NAME]);
 }
 
-- (IBAction)cancelPressed:(id)sender
+- (IBAction)donePressed:(id)sender
 {
+    [self.tableView endEditing:YES];
+    [self.delegate savedSettingsForViewController:self];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

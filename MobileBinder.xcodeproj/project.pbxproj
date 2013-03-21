@@ -21,6 +21,8 @@
 		49125B1816DE7C9300103A08 /* Termination Notice Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 49125B1716DE7C9300103A08 /* Termination Notice Template.rtf */; };
 		49174A6C16E036EA007497A9 /* UIButton+Disable.m in Sources */ = {isa = PBXBuildFile; fileRef = 49174A6B16E036EA007497A9 /* UIButton+Disable.m */; };
 		4939165B16C2D86C00F9365D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4939165A16C2D86C00F9365D /* MBProgressHUD.m */; };
+		4941D89816FBB02000D7216B /* SeniorRoundingLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941D89716FBB02000D7216B /* SeniorRoundingLog.m */; };
+		4941D89B16FBB18A00D7216B /* EmployeeAutopopulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */; };
 		494CD9F316DD437100112E3E /* RoundingOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */; };
 		494CDA2A16DD4C7B00112E3E /* RoundingDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */; };
 		494D0E3416B84BAB00354964 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3316B84BAB00354964 /* UIKit.framework */; };
@@ -101,6 +103,10 @@
 		4939165916C2D86C00F9365D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		4939165A16C2D86C00F9365D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		4939165C16C2D8BA00F9365D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		4941D89616FBB02000D7216B /* SeniorRoundingLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeniorRoundingLog.h; sourceTree = "<group>"; };
+		4941D89716FBB02000D7216B /* SeniorRoundingLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeniorRoundingLog.m; sourceTree = "<group>"; };
+		4941D89916FBB18A00D7216B /* EmployeeAutopopulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeAutopopulator.h; sourceTree = "<group>"; };
+		4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeAutopopulator.m; sourceTree = "<group>"; };
 		494CD9F116DD437100112E3E /* RoundingOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingOverviewViewController.h; sourceTree = "<group>"; };
 		494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingOverviewViewController.m; sourceTree = "<group>"; };
 		494CDA2816DD4C7B00112E3E /* RoundingDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingDetailsViewController.h; sourceTree = "<group>"; };
@@ -300,6 +306,8 @@
 				49A2457C16DDA86000C4F855 /* RoundingModel.m */,
 				494CD9F116DD437100112E3E /* RoundingOverviewViewController.h */,
 				494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */,
+				4941D89616FBB02000D7216B /* SeniorRoundingLog.h */,
+				4941D89716FBB02000D7216B /* SeniorRoundingLog.m */,
 			);
 			name = Rounding;
 			sourceTree = "<group>";
@@ -380,6 +388,8 @@
 				499C4CFA16D2F4DC00ED6E76 /* SettingsProtocol.h */,
 				49A2457E16DDCA1A00C4F855 /* ResetSettingsViewController.h */,
 				49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */,
+				4941D89916FBB18A00D7216B /* EmployeeAutopopulator.h */,
+				4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -559,6 +569,8 @@
 				49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */,
 				49174A6C16E036EA007497A9 /* UIButton+Disable.m in Sources */,
 				49885D9916E901DC000BE747 /* GradientButton.m in Sources */,
+				4941D89816FBB02000D7216B /* SeniorRoundingLog.m in Sources */,
+				4941D89B16FBB18A00D7216B /* EmployeeAutopopulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

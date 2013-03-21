@@ -224,6 +224,16 @@
     }
     else
     {
+        [self expandCollapseSectionWithIndexPath:[NSArray arrayWithObject:indexPath]];
+    }
+
+}
+
+- (void) expandCollapseSectionWithIndexPath: (NSArray *) indexPathArray
+{
+    [self.myTableView beginUpdates];
+    for (NSIndexPath *indexPath in indexPathArray)
+    {
         BOOL sectionIsExpanded = [self.expandedSections containsObject:[NSNumber numberWithInt:indexPath.section]];
         int numOfDataCellsInExpandedMode = 0;
         if(indexPath.section == ABSENCES_SECTION) numOfDataCellsInExpandedMode = [self.employeeRecord getAbsencesInPastYear].count;
@@ -239,30 +249,24 @@
                 {
                     [rowsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:indexPath.section]];
                 }
-                [self.myTableView beginUpdates];
                 [self.myTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
                 [self.myTableView deleteRowsAtIndexPaths:rowsToDelete withRowAnimation:UITableViewRowAnimationFade];
-                [self.myTableView endUpdates];
             }
         }
         else
         {
             [self.expandedSections addObject:[NSNumber numberWithInt:indexPath.section]];
-
+            
             NSMutableArray *newRows = [[NSMutableArray alloc] init];
             for(int i = 1; i <= numOfDataCellsInExpandedMode; i++ )
             {
                 [newRows addObject:[NSIndexPath indexPathForRow:i inSection:indexPath.section]];
             }
-            [self.myTableView beginUpdates];
             [self.myTableView insertRowsAtIndexPaths:newRows withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.myTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.myTableView endUpdates];
-
-
         }
     }
-
+    [self.myTableView endUpdates];
 }
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -314,11 +318,27 @@
     {
         [self.editButton setTitle:@"Edit"];
         [self.myTableView setEditing:NO animated:YES];
+        NSMutableArray *indexPathsToCollapse = [[NSMutableArray alloc] init];
+        for (NSNumber *num in self.expandedSections)
+        {
+            [indexPathsToCollapse addObject:[NSIndexPath indexPathForRow:0 inSection:[num intValue]]];
+        }
+        [self expandCollapseSectionWithIndexPath:indexPathsToCollapse];        
     }
     else
     {
         [self.editButton setTitle:@"Done"];
         [self.myTableView setEditing:YES animated:YES];
+        NSMutableArray *indexPathsToExpand = [[NSMutableArray alloc] init];
+        int numOfSections = [self numberOfSectionsInTableView:self.myTableView];
+        for (int i = 0; i < numOfSections; i++)
+        {
+            if(![self.expandedSections containsObject:[NSNumber numberWithInt:i]])
+            {
+                [indexPathsToExpand addObject:[NSIndexPath indexPathForRow:0 inSection:i]];
+            }
+        }
+        [self expandCollapseSectionWithIndexPath:indexPathsToExpand];
     }
 }
 
