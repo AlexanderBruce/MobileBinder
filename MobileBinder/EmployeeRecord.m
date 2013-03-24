@@ -36,6 +36,12 @@
     self.myManagedObject.unit = _unit;
 }
 
+- (void) setIdNum:(NSString *)idNum
+{
+    _idNum = idNum;
+    self.myManagedObject.idNum = _idNum;
+}
+
 - (NSArray *) getAbsencesInPastYear
 {
     return self.absencesInPastYear;
@@ -173,6 +179,7 @@
         self.lastName = (managedObject.lastName != nil)  ? managedObject.lastName : @"";
         self.department = (managedObject.department != nil) ? managedObject.department : @"";
         self.unit = (managedObject.unit != nil)  ? managedObject.unit : @"";
+        self.idNum = (managedObject.idNum != nil) ? managedObject.idNum : @"";
         self.allAbsences = (managedObject.absences != nil) ? [managedObject.absences mutableCopy] : [[NSMutableArray alloc] init];
         self.allTardies = (managedObject.tardies != nil) ? [managedObject.tardies mutableCopy] : [[NSMutableArray alloc] init];
         self.allMissedSwipes = (managedObject.missedSwipes != nil) ? [managedObject.missedSwipes mutableCopy] : [[NSMutableArray alloc] init];
@@ -195,6 +202,35 @@
         
     }
     return self;
+}
+
+- (BOOL) isEqual:(id)object
+{
+    if([object isKindOfClass:[self class]])
+    {
+        EmployeeRecord *other = (EmployeeRecord *) object;
+        if(other.idNum.length > 0 && self.idNum.length > 0)
+        {
+            return ([self.idNum isEqualToString:other.idNum]);
+        }
+        else if(other.idNum == nil && self.idNum == nil)
+        {
+            NSString *selfStrForHashing = [NSString stringWithFormat:@"%@ %@",self.firstName,self.lastName];
+            NSString *otherStrForHashing = [NSString stringWithFormat:@"%@ %@",other.firstName,other.lastName];
+            return ([selfStrForHashing isEqualToString:otherStrForHashing]);
+        }
+    }
+    return NO;
+}
+
+- (NSUInteger) hash
+{
+    if(self.idNum != nil && self.idNum.length > 0) return [self.idNum hash];
+    else
+    {
+        NSString *strForHashing = [NSString stringWithFormat:@"%@ %@",self.firstName, self.lastName];
+        return [strForHashing hash];
+    }
 }
 
 

@@ -27,6 +27,7 @@
     if([segue.destinationViewController isKindOfClass:[AddEmployeeViewController class]])
     {
         AddEmployeeViewController *dest = segue.destinationViewController;
+        dest.myModel = self.myModel;
         dest.delegate = self;
     }
     else if([segue.destinationViewController isKindOfClass:[EmployeeViewController class]])

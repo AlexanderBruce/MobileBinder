@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		490120C616DED1CB00963226 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		4906CA3E16FF790300981B74 /* employee_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4906CA3D16FF790300981B74 /* employee_data.csv */; };
 		4907612516D59D7000AC30DB /* Down_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612416D59D7000AC30DB /* Down_Arrow.png */; };
 		4907612716D5A48E00AC30DB /* Up_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612616D5A48E00AC30DB /* Up_Arrow.png */; };
 		4907612916D5CA6000AC30DB /* Delete Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4907612816D5CA6000AC30DB /* Delete Button.png */; };
@@ -77,10 +78,10 @@
 		F7A843A116D40CB8009F09DD /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A8439F16D40CB8009F09DD /* Logo.png */; };
 		F7A843A516D40ECB009F09DD /* Banner copy.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A843A416D40ECB009F09DD /* Banner copy.png */; };
 		F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */; };
-		FA87F32716D42FD200E574E6 /* EditEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4906CA3D16FF790300981B74 /* employee_data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = employee_data.csv; sourceTree = "<group>"; };
 		4907612416D59D7000AC30DB /* Down_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Down_Arrow.png; sourceTree = "<group>"; };
 		4907612616D5A48E00AC30DB /* Up_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Up_Arrow.png; sourceTree = "<group>"; };
 		4907612816D5CA6000AC30DB /* Delete Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete Button.png"; sourceTree = "<group>"; };
@@ -195,8 +196,6 @@
 		F7A843A416D40ECB009F09DD /* Banner copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Banner copy.png"; path = "../Banner copy.png"; sourceTree = "<group>"; };
 		F7EFBFE116B9CCAD00C46D04 /* PayrollPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollPeriodViewController.h; sourceTree = "<group>"; };
 		F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollPeriodViewController.m; sourceTree = "<group>"; };
-		FA87F32516D42FD200E574E6 /* EditEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEmployeeViewController.h; sourceTree = "<group>"; };
-		FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEmployeeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +344,7 @@
 		494D0E3916B84BAB00354964 /* MobileBinder */ = {
 			isa = PBXGroup;
 			children = (
+				4906CA3D16FF790300981B74 /* employee_data.csv */,
 				49FB670016C2CA21004F576F /* Attendance */,
 				F7A843A416D40ECB009F09DD /* Banner copy.png */,
 				499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */,
@@ -388,8 +388,6 @@
 				499C4CFA16D2F4DC00ED6E76 /* SettingsProtocol.h */,
 				49A2457E16DDCA1A00C4F855 /* ResetSettingsViewController.h */,
 				49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */,
-				4941D89916FBB18A00D7216B /* EmployeeAutopopulator.h */,
-				4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -415,6 +413,10 @@
 				4960AFA016B8590900F16ED6 /* AttendanceModel.m */,
 				494D0E5D16B84F7300354964 /* AttendanceViewController.h */,
 				494D0E5E16B84F7300354964 /* AttendanceViewController.m */,
+				499C4CF316D2D9E300ED6E76 /* DisciplinaryActionModel.h */,
+				499C4CF416D2D9E300ED6E76 /* DisciplinaryActionModel.m */,
+				4941D89916FBB18A00D7216B /* EmployeeAutopopulator.h */,
+				4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */,
 				4960AFB316B8639300F16ED6 /* EmployeeRecord.h */,
 				4960AFB416B8639300F16ED6 /* EmployeeRecord.m */,
 				F79A34F416BDAFDC00ACAABB /* EmployeeRecordManagedObject.h */,
@@ -423,10 +425,6 @@
 				4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */,
 				4960AFC216B8759600F16ED6 /* IncidentViewController.h */,
 				4960AFC316B8759600F16ED6 /* IncidentViewController.m */,
-				499C4CF316D2D9E300ED6E76 /* DisciplinaryActionModel.h */,
-				499C4CF416D2D9E300ED6E76 /* DisciplinaryActionModel.m */,
-				FA87F32516D42FD200E574E6 /* EditEmployeeViewController.h */,
-				FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */,
 			);
 			name = Attendance;
 			sourceTree = "<group>";
@@ -518,6 +516,7 @@
 				49125B1816DE7C9300103A08 /* Termination Notice Template.rtf in Resources */,
 				F790E92216DFC16E00CB288C /* back.png in Resources */,
 				F790E92616E0063E00CB288C /* cancercenter.png in Resources */,
+				4906CA3E16FF790300981B74 /* employee_data.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,7 +555,6 @@
 				499C4CF516D2D9E300ED6E76 /* DisciplinaryActionModel.m in Sources */,
 				499C4CF916D2E7A400ED6E76 /* WelcomeViewController.m in Sources */,
 				499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */,
-				FA87F32716D42FD200E574E6 /* EditEmployeeViewController.m in Sources */,
 				4907612C16D5D77D00AC30DB /* MarqueeCell.m in Sources */,
 				494CD9F316DD437100112E3E /* RoundingOverviewViewController.m in Sources */,
 				494CDA2A16DD4C7B00112E3E /* RoundingDetailsViewController.m in Sources */,

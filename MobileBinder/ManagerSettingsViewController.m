@@ -1,20 +1,26 @@
 #import "ManagerSettingsViewController.h"
 #import "Constants.h"
+#import "AttendanceModel.h"
 
 #define NAME_INDEX_PATH [NSIndexPath indexPathForRow:0 inSection:0]
 #define NAME_LABEL @"Name"
 
-#define TITLE_INDEX_PATH [NSIndexPath indexPathForRow:1 inSection:0]
+#define ID_INDEX_PATH [NSIndexPath indexPathForRow:1 inSection:0]
+#define ID_LABEL @"ID"
+
+#define TITLE_INDEX_PATH [NSIndexPath indexPathForRow:2 inSection:0]
 #define TITLE_LABEL @"Title"
 
-#define EMAIL_INDEX_PATH [NSIndexPath indexPathForRow:2 inSection:0]
+#define EMAIL_INDEX_PATH [NSIndexPath indexPathForRow:3 inSection:0]
 #define EMAIL_LABEL @"E-mail"
+
 
 #define FOOTER_TEXT @"This information will be used to auto-populate documents throughout this app"
 
 @interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UITextField *nameField;
+@property (nonatomic, strong) UITextField *idField;
 @property (nonatomic, strong) UITextField *titleField;
 @property (nonatomic, strong) UITextField *emailField;
 @end
@@ -67,6 +73,15 @@
         self.nameField = textField;
         self.nameField.text = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_NAME];
     }
+    else if([indexPath isEqual:ID_INDEX_PATH])
+    {
+        cell.textLabel.text = ID_LABEL;
+        textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        textField.autocorrectionType = UITextAutocorrectionTypeNo;
+        textField.keyboardType = UIKeyboardTypeDecimalPad;
+        self.idField = textField;
+        self.idField.text = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_ID];
+    }
     else if([indexPath isEqual: TITLE_INDEX_PATH])
     {
         cell.textLabel.text = TITLE_LABEL;
@@ -92,7 +107,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -112,6 +127,12 @@
     {
         [defaults setObject:self.nameField.text forKey:MANAGER_NAME];
     }
+    else if(textField == self.idField)
+    {
+        [defaults setObject:self.idField.text forKey:MANAGER_ID];
+        AttendanceModel *model = [[AttendanceModel alloc] init];
+        [model addEmployeesWithSupervisorID:textField.text];
+    }
     else if(textField == self.titleField)
     {
         [defaults setObject:self.titleField.text forKey:MANAGER_TITLE];
@@ -121,7 +142,6 @@
         [defaults setObject:self.emailField.text forKey:MANAGER_EMAIL_KEY];
     }
     [defaults synchronize];
-    NSLog(@"%@",[defaults objectForKey:MANAGER_NAME]);
 }
 
 - (IBAction)donePressed:(id)sender

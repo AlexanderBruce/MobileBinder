@@ -2,6 +2,6 @@
 
 @interface EmployeeAutopopulator : NSObject
 
-- (NSArray *) getManagerNames;
+- (NSSet *) employeesForManagerID: (NSString *) idNum;
 
 @end

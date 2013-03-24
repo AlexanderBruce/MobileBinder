@@ -18,5 +18,6 @@
 @dynamic missedSwipes;
 @dynamic department;
 @dynamic unit;
+@dynamic idNum;
 
 @end

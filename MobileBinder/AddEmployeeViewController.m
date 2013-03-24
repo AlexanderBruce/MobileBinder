@@ -2,11 +2,14 @@
 #import "EmployeeRecord.h"
 #import "Database.h"
 #import "Constants.h"
+#import "AttendanceModel.h"
 
 #define SCROLL_OFFSET IS_4_INCH_SCREEN ? 100 : 200
 #define CONTENT_SIZE IS_4_INCH_SCREEN ? 460: 560
+#define REPEAT_EMPLOYEE_ALERTVIEW 2
+#define INCOMPLETE_FIELDS_ALERTVIEW 3
 
-@interface AddEmployeeViewController () <UITextFieldDelegate, UIActionSheetDelegate>
+@interface AddEmployeeViewController () <UITextFieldDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;
 @property (weak, nonatomic) IBOutlet UITextField *departmentField;
@@ -29,6 +32,7 @@
         [Database saveDatabase];
         [self.delegate editedEmployeedRecord];
     }
+    
     else if(self.firstNameField.text.length > 0 && self.lastNameField.text.length > 0)
     {
         EmployeeRecord *record = [[EmployeeRecord alloc] init];
@@ -38,12 +42,41 @@
         record.unit = self.unitField.text;
         if(!record.unit) record.unit = @"";
         if(!record.department) record.department = @"";
-        [self.delegate addedNewEmployeeRecord:record];
+        self.myRecord = record;
+        if(self.myRecord.idNum && [self.myModel recordExistsByID:record])
+        {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"An employee with this ID already exists. Proceed with adding them?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            alert.tag = REPEAT_EMPLOYEE_ALERTVIEW;
+            [alert show];
+        }
+        else if([self.myModel recordExistsByName:record])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"This employee with this name already exists. Proceed with adding them?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            alert.tag = REPEAT_EMPLOYEE_ALERTVIEW;
+            [alert show];
+        }
+        else
+        {
+            [self.delegate addedNewEmployeeRecord:record];
+        }
     }
+
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"First and Last Name fields must be completed" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        alert.tag = INCOMPLETE_FIELDS_ALERTVIEW;
         [alert show];
+    }
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.tag == REPEAT_EMPLOYEE_ALERTVIEW)
+    {
+        if(alertView.cancelButtonIndex != buttonIndex)
+        {
+            [self.delegate addedNewEmployeeRecord:self.myRecord];
+        }
     }
 }
 

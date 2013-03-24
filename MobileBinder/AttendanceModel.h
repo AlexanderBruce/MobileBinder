@@ -16,6 +16,8 @@
 
 - (void) fetchEmployeeRecordsForFutureUse;
 
+- (void) addEmployeesWithSupervisorID: (NSString *) idNum;
+
 - (int) getNumberOfEmployeeRecords;
 
 - (NSArray *) getEmployeeRecords;
@@ -23,5 +25,9 @@
 - (void) filterEmployeesByString: (NSString *) filterString;
 
 - (void) stopFilteringEmployees;
+
+- (BOOL) recordExistsByName: (EmployeeRecord *) employeeRecord;
+
+- (BOOL) recordExistsByID: (EmployeeRecord *) employeeRecord;
 
 @end

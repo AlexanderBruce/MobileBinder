@@ -2,6 +2,7 @@
 #import "EmployeeRecord.h"
 #import "EmployeeRecordManagedObject.h"
 #import "Database.h"
+#import "EmployeeAutopopulator.h"
 
 
 @interface AttendanceModel() <DatabaseDelegate>
@@ -59,6 +60,17 @@
     [Database saveDatabase];
 }
 
+- (void) addEmployeesWithSupervisorID: (NSString *) idNum
+{
+    EmployeeAutopopulator *autopopulator = [[EmployeeAutopopulator alloc] init];
+    NSSet *newEmployees = [autopopulator employeesForManagerID:idNum];
+    
+    for (EmployeeRecord *record in newEmployees)
+    {
+        [self addEmployeeRecord:record];
+    }
+}
+
 - (void) deleteEmployeeRecord: (EmployeeRecord *) record
 {
     [record deleteFromDatabase:[Database getInstance]];
@@ -91,6 +103,32 @@
     }
 }
 
+- (BOOL) recordExistsByName:(EmployeeRecord *)employeeRecord
+{
+    BOOL ret = NO;
+    NSString *wholeName = [NSString stringWithFormat:@"%@ %@",employeeRecord.firstName, employeeRecord.lastName];
+    for(EmployeeRecord *emp in self.employeeRecords){
+        if ([wholeName isEqualToString:[NSString stringWithFormat:@"%@ %@", emp.firstName, emp.lastName]]) {
+            ret = YES;
+            break;
+        }
+    }
+    return ret;
+
+}
+
+- (BOOL) recordExistsByID:(EmployeeRecord *)employeeRecord
+{
+    BOOL ret = NO;
+    for(EmployeeRecord *emp in self.employeeRecords){
+        if ([employeeRecord.idNum isEqualToString: emp.idNum]) {
+            ret = YES;
+            break;
+        }
+    }
+    return ret;
+}
+
 - (void) stopFilteringEmployees
 {
     self.usingFilter = NO;
@@ -118,6 +156,15 @@
 {
     if(self.usingFilter) return self.filteredRecords;
     else return self.employeeRecords;
+}
+
+- (id) init
+{
+    if(self = [super init])
+    {
+        self.database = [Database getInstance];
+    }
+    return self;
 }
 
 @end
