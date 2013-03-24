@@ -80,6 +80,7 @@
 		FA87F32716D42FD200E574E6 /* EditEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */; };
 		FAB29C4416FF65E100B777AF /* ResourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB29C4316FF65E100B777AF /* ResourcesViewController.m */; };
 		FAB29C4716FF677500B777AF /* ResourcesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB29C4616FF677500B777AF /* ResourcesModel.m */; };
+		FAB29C4B16FF910600B777AF /* ResourceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB29C4A16FF910600B777AF /* ResourceObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -203,6 +204,8 @@
 		FAB29C4316FF65E100B777AF /* ResourcesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcesViewController.m; sourceTree = "<group>"; };
 		FAB29C4516FF677500B777AF /* ResourcesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcesModel.h; sourceTree = "<group>"; };
 		FAB29C4616FF677500B777AF /* ResourcesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcesModel.m; sourceTree = "<group>"; };
+		FAB29C4916FF910600B777AF /* ResourceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceObject.h; sourceTree = "<group>"; };
+		FAB29C4A16FF910600B777AF /* ResourceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -451,6 +454,8 @@
 				FAB29C4316FF65E100B777AF /* ResourcesViewController.m */,
 				FAB29C4516FF677500B777AF /* ResourcesModel.h */,
 				FAB29C4616FF677500B777AF /* ResourcesModel.m */,
+				FAB29C4916FF910600B777AF /* ResourceObject.h */,
+				FAB29C4A16FF910600B777AF /* ResourceObject.m */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -583,6 +588,7 @@
 				4941D89B16FBB18A00D7216B /* EmployeeAutopopulator.m in Sources */,
 				FAB29C4416FF65E100B777AF /* ResourcesViewController.m in Sources */,
 				FAB29C4716FF677500B777AF /* ResourcesModel.m in Sources */,
+				FAB29C4B16FF910600B777AF /* ResourceObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

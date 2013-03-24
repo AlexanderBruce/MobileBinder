@@ -9,9 +9,11 @@
 #import "ResourcesViewController.h"
 #import "ResourcesModel.h"
 #import "WebviewViewController.h"
+#import "ResourceObject.h"
 #define SEGUE @"webSegue"
 
-@interface ResourcesViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ResourcesViewController () <UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate>
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic,strong) ResourcesModel *myModel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSString *webUrl;
@@ -30,11 +32,13 @@
     self.myModel = [[ResourcesModel alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.searchBar.delegate = self;
     
 }
 
 - (void)viewDidUnload {
     [self setTableView:nil];
+    [self setSearchBar:nil];
     [super viewDidUnload];
 }
 
@@ -43,8 +47,9 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrototypeCell"];
     if(!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PrototypeCell"];
-    NSArray *titles = [self.myModel getPageTitles];
-    cell.textLabel.text = [titles objectAtIndex:indexPath.row];
+    NSArray *links = [self.myModel getResourceLinks];
+    ResourceObject *cur = [links objectAtIndex:indexPath.row];
+    cell.textLabel.text = cur.pageTitle;
     return cell;
 }
 
@@ -61,12 +66,47 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *links = [self.myModel getResourceLinks];
-    self.webUrl =(NSString *) [links objectAtIndex:indexPath.row];
-    
+    ResourceObject *r =(ResourceObject *) [links objectAtIndex:indexPath.row];
+    self.webUrl = r.webpageURL;
     [self performSegueWithIdentifier:SEGUE sender:self];
     
 }
 
+
+
+
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [self.searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [self.searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [self.searchBar resignFirstResponder];
+}
+
+- (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [self.searchBar resignFirstResponder];
+    [self.myModel filterResourceLinksByString:searchBar.text];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if(searchText.length == 0)
+    {
+        [self.searchBar resignFirstResponder];
+        [self.myModel stopFilteringResourceLinks];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
 
 
 
