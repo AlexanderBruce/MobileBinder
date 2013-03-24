@@ -48,7 +48,17 @@
     [self.resourceLinks addObject:firstLink];
     [self.resourceLinks addObject:secondLink];
     [self.resourceLinks addObject:thirdLink];
+    [self.pageTitles addObject:@"Google"];
+    [self.pageTitles addObject:@"Yahoo"];
+    [self.pageTitles addObject:@"Apple"];
+    
 }
+
+- (NSArray *) getPageTitles
+{
+    return [self.pageTitles copy];
+}
+
 
 
 

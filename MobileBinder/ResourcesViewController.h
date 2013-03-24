@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ResourcesViewController : UITableViewController
+@interface ResourcesViewController : UIViewController
+
 
 @end

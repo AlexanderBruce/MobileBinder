@@ -14,8 +14,12 @@
 
 - (NSArray *) getResourceLinks;
 
+- (NSArray *) getPageTitles;
+
 - (void) filterResourceLinksByString: (NSString *) filterString;
 
 - (void) stopFilteringResourceLinks;
+
+
 
 @end
