@@ -78,6 +78,8 @@
 		F7A843A516D40ECB009F09DD /* Banner copy.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A843A416D40ECB009F09DD /* Banner copy.png */; };
 		F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */; };
 		FA87F32716D42FD200E574E6 /* EditEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */; };
+		FAB29C4416FF65E100B777AF /* ResourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB29C4316FF65E100B777AF /* ResourcesViewController.m */; };
+		FAB29C4716FF677500B777AF /* ResourcesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB29C4616FF677500B777AF /* ResourcesModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +199,10 @@
 		F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollPeriodViewController.m; sourceTree = "<group>"; };
 		FA87F32516D42FD200E574E6 /* EditEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEmployeeViewController.h; sourceTree = "<group>"; };
 		FA87F32616D42FD200E574E6 /* EditEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEmployeeViewController.m; sourceTree = "<group>"; };
+		FAB29C4216FF65E100B777AF /* ResourcesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcesViewController.h; sourceTree = "<group>"; };
+		FAB29C4316FF65E100B777AF /* ResourcesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcesViewController.m; sourceTree = "<group>"; };
+		FAB29C4516FF677500B777AF /* ResourcesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcesModel.h; sourceTree = "<group>"; };
+		FAB29C4616FF677500B777AF /* ResourcesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcesModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +362,8 @@
 				490A5B0016C1D9990062F36F /* HomeViewController.m */,
 				49AB41FA16C2C93D007AA467 /* iPad.storyboard */,
 				49AB41FC16C2C93D007AA467 /* iPhone.storyboard */,
+				FAB29C4516FF677500B777AF /* ResourcesModel.h */,
+				FAB29C4616FF677500B777AF /* ResourcesModel.m */,
 				490A5AFA16C1D95A0062F36F /* Library */,
 				F7A8439E16D40CB8009F09DD /* Logo small.png */,
 				F7A8439F16D40CB8009F09DD /* Logo.png */,
@@ -367,6 +375,8 @@
 				4939165816C2CADD00F9365D /* Supporting_Files */,
 				49125B1716DE7C9300103A08 /* Termination Notice Template.rtf */,
 				499C4CF616D2E77400ED6E76 /* Welcome */,
+				FAB29C4216FF65E100B777AF /* ResourcesViewController.h */,
+				FAB29C4316FF65E100B777AF /* ResourcesViewController.m */,
 			);
 			path = MobileBinder;
 			sourceTree = "<group>";
@@ -571,6 +581,8 @@
 				49885D9916E901DC000BE747 /* GradientButton.m in Sources */,
 				4941D89816FBB02000D7216B /* SeniorRoundingLog.m in Sources */,
 				4941D89B16FBB18A00D7216B /* EmployeeAutopopulator.m in Sources */,
+				FAB29C4416FF65E100B777AF /* ResourcesViewController.m in Sources */,
+				FAB29C4716FF677500B777AF /* ResourcesModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
