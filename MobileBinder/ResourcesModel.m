@@ -42,16 +42,24 @@
 
 - (void) makeLinks
 {
-    
+    NSString *firstLink = @"http://www.google.com/";
+    NSString *secondLink = @"http://www.yahoo.com/";
+    NSString *thirdLink = @"http://www.apple.com/";
+    [self.resourceLinks addObject:firstLink];
+    [self.resourceLinks addObject:secondLink];
+    [self.resourceLinks addObject:thirdLink];
 }
 
 
 
 - (void) filterResourceLinksByString: (NSString *) filterString{
+    self.usingFilter = YES;
     
 }
 
-- (void) stopFilteringResourceLinks{
+- (void) stopFilteringResourceLinks
+{
+    self.usingFilter = NO;
     
 }
 
