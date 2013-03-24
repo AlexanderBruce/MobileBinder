@@ -9,6 +9,7 @@
 
 - (void) viewDidLoad
 {
+    NSLog(@"%@",self.webpageURL);
     [super viewDidLoad];
     self.webview.delegate = self;
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:self.webpageURL]];
@@ -54,4 +55,10 @@
     [self setLoadingIndicator:nil];
     [super viewDidUnload];
 }
+
+
+
+
+
+
 @end
