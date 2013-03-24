@@ -357,7 +357,6 @@
 				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
 				F79A34E716BD8FAE00ACAABB /* Database.h */,
 				F79A34E816BD8FAE00ACAABB /* Database.m */,
-				49A2457416DD75E500C4F855 /* Extras */,
 				490A5AFF16C1D9990062F36F /* HomeViewController.h */,
 				490A5B0016C1D9990062F36F /* HomeViewController.m */,
 				49AB41FA16C2C93D007AA467 /* iPad.storyboard */,
@@ -399,15 +398,6 @@
 				4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */,
 			);
 			name = Settings;
-			sourceTree = "<group>";
-		};
-		49A2457416DD75E500C4F855 /* Extras */ = {
-			isa = PBXGroup;
-			children = (
-				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
-				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
-			);
-			name = Extras;
 			sourceTree = "<group>";
 		};
 		49FB670016C2CA21004F576F /* Attendance */ = {
@@ -455,6 +445,8 @@
 		FAB29C4816FF6DE300B777AF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
+				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
 				FAB29C4216FF65E100B777AF /* ResourcesViewController.h */,
 				FAB29C4316FF65E100B777AF /* ResourcesViewController.m */,
 				FAB29C4516FF677500B777AF /* ResourcesModel.h */,
