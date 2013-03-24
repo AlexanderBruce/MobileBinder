@@ -1326,7 +1326,7 @@
             </objects>
             <point key="canvasLocation" x="-1046" y="-444"/>
         </scene>
-        <!--Webview View Controller - Policy-->
+        <!--Webview View Controller-->
         <scene sceneID="JIr-Wn-Z2O">
             <objects>
                 <viewController id="AWd-6K-XpQ" customClass="WebviewViewController" sceneMemberID="viewController">
@@ -1358,7 +1358,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Policy" id="SBG-HF-5I3"/>
+                    <navigationItem key="navigationItem" id="SBG-HF-5I3"/>
                     <connections>
                         <outlet property="loadingIndicator" destination="Dmq-Mw-bxY" id="agp-16-BHO"/>
                         <outlet property="webview" destination="7VH-Iw-Z1G" id="To8-is-RMK"/>
@@ -1462,7 +1462,6 @@
         <class className="RoundingDetailsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingDetailsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="addPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -1480,7 +1479,6 @@
         <class className="WebviewViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WebviewViewController.h"/>
             <relationships>
-                <relationship kind="action" name="donePressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="webview" candidateClass="UIWebView"/>
             </relationships>
