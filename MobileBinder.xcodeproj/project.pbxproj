@@ -68,6 +68,7 @@
 		49D9B01716CABD8300CCD463 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D9B01616CABD8300CCD463 /* MessageUI.framework */; };
 		49DBA76E1703B3B500605FAD /* ResourcesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DBA76D1703B3B500605FAD /* ResourcesModel.m */; };
 		49DBA7711703B3E400605FAD /* ResourceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DBA7701703B3E400605FAD /* ResourceObject.m */; };
+		49DBA7731703B44300605FAD /* ResourcesData in Resources */ = {isa = PBXBuildFile; fileRef = 49DBA7721703B44300605FAD /* ResourcesData */; };
 		49FB66FF16C2CA0D004F576F /* PayrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FB66FE16C2CA0D004F576F /* PayrollModel.m */; };
 		F745C9A016D7E3F900F5138C /* new_Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = F745C99F16D7E3F900F5138C /* new_Banner.png */; };
 		F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */; };
@@ -189,6 +190,7 @@
 		49DBA76D1703B3B500605FAD /* ResourcesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcesModel.m; sourceTree = "<group>"; };
 		49DBA76F1703B3E400605FAD /* ResourceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceObject.h; sourceTree = "<group>"; };
 		49DBA7701703B3E400605FAD /* ResourceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceObject.m; sourceTree = "<group>"; };
+		49DBA7721703B44300605FAD /* ResourcesData */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ResourcesData; sourceTree = "<group>"; };
 		49FB66FD16C2CA0D004F576F /* PayrollModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollModel.h; sourceTree = "<group>"; };
 		49FB66FE16C2CA0D004F576F /* PayrollModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollModel.m; sourceTree = "<group>"; };
 		F745C99F16D7E3F900F5138C /* new_Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = new_Banner.png; path = ../new_Banner.png; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				497661191703B33F00C8E0D9 /* ResourcesViewController.h */,
 				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
 				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
+				49DBA7721703B44300605FAD /* ResourcesData */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				F790E92216DFC16E00CB288C /* back.png in Resources */,
 				F790E92616E0063E00CB288C /* cancercenter.png in Resources */,
 				4906CA3E16FF790300981B74 /* employee_data.csv in Resources */,
+				49DBA7731703B44300605FAD /* ResourcesData in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
