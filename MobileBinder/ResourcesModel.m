@@ -27,6 +27,11 @@
     return self.resourceLinks.count;
 }
 
+- (int) getNumberOfCategoriesWhenUnfiltered
+{
+    return self.resourceLinks.count;
+}
+
 - (int) getNumberOfLinksForCategory: (int) categoryNum
 {
     NSDictionary *dict;
@@ -52,12 +57,13 @@
     if(self.usingFilter) dict = self.filteredLinks;
     else dict = self.resourceLinks;
     NSArray * sortedKeys = [[dict allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
-    NSArray *values = [sortedKeys sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+    NSArray *values = [dict objectForKey:[sortedKeys objectAtIndex:categoryNum]];
+    NSArray *sortedValues = [values sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSString *first = [(ResourceObject *)a pageTitle];
         NSString *second = [(ResourceObject *)b pageTitle];
         return [first compare:second];
     }];
-    return [values objectAtIndex:index];
+    return [sortedValues objectAtIndex:index];
 }
 
 - (void) retrieveLinks
@@ -81,7 +87,7 @@
         }
         else if([line hasPrefix:@"!!"])
         {
-            [self.resourceLinks setObject:currentCategory forKey:currentCategoryName];
+            if(currentCategory) [self.resourceLinks setObject:currentCategory forKey:currentCategoryName];
             NSArray *data = [line componentsSeparatedByString:@"!!"];
             currentCategory = [[NSMutableArray alloc] init];
             currentCategoryName = [data objectAtIndex:1];
@@ -115,7 +121,7 @@
             }
             if(matchesFilter) [filteredValues addObject:currentLink];
         }
-        [self.filteredLinks setObject:filteredValues forKey:key];
+        if(filteredValues.count > 0 ) [self.filteredLinks setObject:filteredValues forKey:key];
     }
 }
 

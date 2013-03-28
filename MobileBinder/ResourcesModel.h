@@ -5,6 +5,8 @@
 
 - (int) getNumberOfCategories;
 
+- (int) getNumberOfCategoriesWhenUnfiltered;
+
 - (int) getNumberOfLinksForCategory: (int) categoryNum;
 
 - (ResourceObject *) getResourceForCategory: (int) categoryNum index: (int) index;

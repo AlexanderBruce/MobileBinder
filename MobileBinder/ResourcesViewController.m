@@ -93,7 +93,7 @@
 {
     [self.searchBar resignFirstResponder];
     [self.myModel filterResourceLinksByString:searchBar.text];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadData];
 }
 
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -102,7 +102,7 @@
     {
         [self.searchBar resignFirstResponder];
         [self.myModel stopFilteringResourceLinks];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadData];
     }
 }
 
