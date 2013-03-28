@@ -1,23 +1,23 @@
 #import "RoundingLog.h"
-#import "RoundingLogManagedObject.h"
+#import "EmployeeRoundingLogManagedObject.h"
 #import "Database.h"
 
 @interface RoundingLog()
 @property (nonatomic, strong) NSMutableArray *rows; //Contains dictionaries of column numbers to column contents
-@property (nonatomic, strong) RoundingLogManagedObject *managedObject;
 @end
 
 @implementation RoundingLog
 
-- (NSArray *) columnTitles
+- (NSArray *) getColumnTitles
 {
-    if (!_columnTitles) _columnTitles = [NSArray arrayWithObjects: @"Employee Name",@"Personal Connection",@"Working Well?",@"Recognition for Others",@"Process Opprtunities",@"Tools & Equipment",@"Follow-up Actions",nil];
-    return _columnTitles;
+    //ABSTRACT
+    return nil;
 }
+
 
 - (int) numberOfColumns
 {
-    return self.columnTitles.count;
+    return [self getColumnTitles].count;
 }
 
 - (int) numberOfRows
@@ -25,35 +25,6 @@
     return self.rows.count;
 }
 
-- (void) setDate:(NSDate *)date
-{
-    _date = date;
-    self.managedObject.date = date;
-}
-
-- (void) setUnit:(NSString *)unit
-{
-    _unit = unit;
-    self.managedObject.unit = unit;
-}
-
-- (void) setLeader:(NSString *)leader
-{
-    _leader = leader;
-    self.managedObject.leader = leader;
-}
-
-- (void) setKeyFocus:(NSString *)keyFocus
-{
-    _keyFocus = keyFocus;
-    self.managedObject.keyFocus = keyFocus;
-}
-
-- (void) setKeyReminders:(NSString *)keyReminders
-{
-    _keyReminders = keyReminders;
-    self.managedObject.keyReminders = keyReminders;
-}
 
 - (int) addRow
 {
@@ -114,17 +85,13 @@
 }
 
 
-- (id) initWithManagedObject: (RoundingLogManagedObject *) managedObject
+- (id) initWithManagedObject: (EmployeeRoundingLogManagedObject *) managedObject
 {
     if(self = [super init])
     {
         self.rows = [[NSMutableArray alloc] init];
         
-        self.date = (managedObject.date) ? managedObject.date : nil;
-        self.unit = (managedObject.unit) ? managedObject.unit : @"";
-        self.leader = (managedObject.leader) ? managedObject.leader : @"";
-        self.keyFocus = (managedObject.keyFocus) ? managedObject.keyFocus : @"";
-        self.keyReminders = (managedObject.keyReminders) ? managedObject.keyReminders : @"";
+        //IMPLEMENT FURTHER IN SUBCLASSES
         
         self.managedObject = managedObject;
     }

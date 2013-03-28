@@ -37,7 +37,7 @@
 		4939165B16C2D86C00F9365D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4939165A16C2D86C00F9365D /* MBProgressHUD.m */; };
 		4941D89816FBB02000D7216B /* SeniorRoundingLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941D89716FBB02000D7216B /* SeniorRoundingLog.m */; };
 		4941D89B16FBB18A00D7216B /* EmployeeAutopopulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */; };
-		494CD9F316DD437100112E3E /* RoundingOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */; };
+		494CD9F316DD437100112E3E /* EmployeeRoundingOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CD9F216DD437100112E3E /* EmployeeRoundingOverviewViewController.m */; };
 		494CDA2A16DD4C7B00112E3E /* RoundingDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */; };
 		494D0E3416B84BAB00354964 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3316B84BAB00354964 /* UIKit.framework */; };
 		494D0E3616B84BAB00354964 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3516B84BAB00354964 /* Foundation.framework */; };
@@ -61,6 +61,14 @@
 		496DFF5616C6D70D00111136 /* PayrollData in Resources */ = {isa = PBXBuildFile; fileRef = 496DFF5516C6D70D00111136 /* PayrollData */; };
 		4976611A1703B33F00C8E0D9 /* ResourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497661181703B33F00C8E0D9 /* ResourcesViewController.m */; };
 		497B0C1F1703E6E100451D35 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B0C1E1703E6E100451D35 /* ASIDownloadCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		497B0C221704875400451D35 /* EmployeeRoundingLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B0C211704875400451D35 /* EmployeeRoundingLog.m */; };
+		497B0C25170487BA00451D35 /* SeniorRoundingAllLogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B0C24170487BA00451D35 /* SeniorRoundingAllLogsViewController.m */; };
+		497B0C281704889600451D35 /* EmployeeRoundingAllLogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B0C271704889600451D35 /* EmployeeRoundingAllLogsViewController.m */; };
+		497B0C2B17048B3E00451D35 /* SeniorRoundingLogManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B0C2A17048B3D00451D35 /* SeniorRoundingLogManagedObject.m */; };
+		497B0C2E17048BC700451D35 /* SeniorRoundingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B0C2D17048BC600451D35 /* SeniorRoundingModel.m */; };
+		497B0C3417048F8500451D35 /* SeniorRoundingOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B0C3317048F8500451D35 /* SeniorRoundingOverviewViewController.m */; };
+		497B0C371704A37E00451D35 /* SeniorRoundingDocumentGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 497B0C361704A37D00451D35 /* SeniorRoundingDocumentGenerator.m */; };
+		497B0C391704A63800451D35 /* Senior Rounding Document Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 497B0C381704A63800451D35 /* Senior Rounding Document Template.rtf */; };
 		49885D9916E901DC000BE747 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49885D9816E901DC000BE747 /* GradientButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		498F86C516DD6387005118C1 /* UITextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498F86C416DD6387005118C1 /* UITextFieldCell.m */; };
 		499C4CF216D2B9D800ED6E76 /* Corrective Action Notice Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */; };
@@ -69,7 +77,7 @@
 		499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CFC16D30AF800ED6E76 /* ManagerSettingsViewController.m */; };
 		49A2457216DD757F00C4F855 /* RoundingLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457116DD757F00C4F855 /* RoundingLog.m */; };
 		49A2457716DDA19C00C4F855 /* RoundingAllLogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457616DDA19C00C4F855 /* RoundingAllLogsViewController.m */; };
-		49A2457A16DDA44C00C4F855 /* RoundingLogManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */; };
+		49A2457A16DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457916DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.m */; };
 		49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457C16DDA86000C4F855 /* RoundingModel.m */; };
 		49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */; };
 		49A2458316DDD6F800C4F855 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */; };
@@ -151,8 +159,8 @@
 		4941D89716FBB02000D7216B /* SeniorRoundingLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeniorRoundingLog.m; sourceTree = "<group>"; };
 		4941D89916FBB18A00D7216B /* EmployeeAutopopulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeAutopopulator.h; sourceTree = "<group>"; };
 		4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeAutopopulator.m; sourceTree = "<group>"; };
-		494CD9F116DD437100112E3E /* RoundingOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingOverviewViewController.h; sourceTree = "<group>"; };
-		494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingOverviewViewController.m; sourceTree = "<group>"; };
+		494CD9F116DD437100112E3E /* EmployeeRoundingOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRoundingOverviewViewController.h; sourceTree = "<group>"; };
+		494CD9F216DD437100112E3E /* EmployeeRoundingOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRoundingOverviewViewController.m; sourceTree = "<group>"; };
 		494CDA2816DD4C7B00112E3E /* RoundingDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingDetailsViewController.h; sourceTree = "<group>"; };
 		494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingDetailsViewController.m; sourceTree = "<group>"; };
 		494D0E2F16B84BAB00354964 /* MobileBinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileBinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +202,22 @@
 		497661191703B33F00C8E0D9 /* ResourcesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcesViewController.h; sourceTree = "<group>"; };
 		497B0C1D1703E6E100451D35 /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
 		497B0C1E1703E6E100451D35 /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
+		497B0C201704875400451D35 /* EmployeeRoundingLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRoundingLog.h; sourceTree = "<group>"; };
+		497B0C211704875400451D35 /* EmployeeRoundingLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRoundingLog.m; sourceTree = "<group>"; };
+		497B0C23170487BA00451D35 /* SeniorRoundingAllLogsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeniorRoundingAllLogsViewController.h; sourceTree = "<group>"; };
+		497B0C24170487BA00451D35 /* SeniorRoundingAllLogsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeniorRoundingAllLogsViewController.m; sourceTree = "<group>"; };
+		497B0C261704889600451D35 /* EmployeeRoundingAllLogsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRoundingAllLogsViewController.h; sourceTree = "<group>"; };
+		497B0C271704889600451D35 /* EmployeeRoundingAllLogsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRoundingAllLogsViewController.m; sourceTree = "<group>"; };
+		497B0C2917048B3D00451D35 /* SeniorRoundingLogManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeniorRoundingLogManagedObject.h; sourceTree = "<group>"; };
+		497B0C2A17048B3D00451D35 /* SeniorRoundingLogManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeniorRoundingLogManagedObject.m; sourceTree = "<group>"; };
+		497B0C2C17048BC600451D35 /* SeniorRoundingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeniorRoundingModel.h; sourceTree = "<group>"; };
+		497B0C2D17048BC600451D35 /* SeniorRoundingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeniorRoundingModel.m; sourceTree = "<group>"; };
+		497B0C3217048F8400451D35 /* SeniorRoundingOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeniorRoundingOverviewViewController.h; sourceTree = "<group>"; };
+		497B0C3317048F8500451D35 /* SeniorRoundingOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeniorRoundingOverviewViewController.m; sourceTree = "<group>"; };
+		497B0C351704A37D00451D35 /* SeniorRoundingDocumentGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeniorRoundingDocumentGenerator.h; sourceTree = "<group>"; };
+		497B0C361704A37D00451D35 /* SeniorRoundingDocumentGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeniorRoundingDocumentGenerator.m; sourceTree = "<group>"; };
+		497B0C381704A63800451D35 /* Senior Rounding Document Template.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Senior Rounding Document Template.rtf"; sourceTree = "<group>"; };
+		497B0C3A1704B09000451D35 /* RoundingLogManagedObjectProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoundingLogManagedObjectProtocol.h; sourceTree = "<group>"; };
 		49885D9716E901DC000BE747 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
 		49885D9816E901DC000BE747 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		498F86C316DD6387005118C1 /* UITextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldCell.h; sourceTree = "<group>"; };
@@ -210,8 +234,8 @@
 		49A2457116DD757F00C4F855 /* RoundingLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingLog.m; sourceTree = "<group>"; };
 		49A2457516DDA19B00C4F855 /* RoundingAllLogsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingAllLogsViewController.h; sourceTree = "<group>"; };
 		49A2457616DDA19C00C4F855 /* RoundingAllLogsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingAllLogsViewController.m; sourceTree = "<group>"; };
-		49A2457816DDA44C00C4F855 /* RoundingLogManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingLogManagedObject.h; sourceTree = "<group>"; };
-		49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingLogManagedObject.m; sourceTree = "<group>"; };
+		49A2457816DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRoundingLogManagedObject.h; sourceTree = "<group>"; };
+		49A2457916DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRoundingLogManagedObject.m; sourceTree = "<group>"; };
 		49A2457B16DDA86000C4F855 /* RoundingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingModel.h; sourceTree = "<group>"; };
 		49A2457C16DDA86000C4F855 /* RoundingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingModel.m; sourceTree = "<group>"; };
 		49A2457E16DDCA1A00C4F855 /* ResetSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetSettingsViewController.h; sourceTree = "<group>"; };
@@ -380,20 +404,36 @@
 		494CD9F016DD431100112E3E /* Rounding */ = {
 			isa = PBXGroup;
 			children = (
+				497B0C261704889600451D35 /* EmployeeRoundingAllLogsViewController.h */,
+				497B0C271704889600451D35 /* EmployeeRoundingAllLogsViewController.m */,
+				497B0C201704875400451D35 /* EmployeeRoundingLog.h */,
+				497B0C211704875400451D35 /* EmployeeRoundingLog.m */,
+				49A2457816DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.h */,
+				49A2457916DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.m */,
+				494CD9F116DD437100112E3E /* EmployeeRoundingOverviewViewController.h */,
+				494CD9F216DD437100112E3E /* EmployeeRoundingOverviewViewController.m */,
 				49A2457516DDA19B00C4F855 /* RoundingAllLogsViewController.h */,
 				49A2457616DDA19C00C4F855 /* RoundingAllLogsViewController.m */,
 				494CDA2816DD4C7B00112E3E /* RoundingDetailsViewController.h */,
 				494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */,
 				49A2457016DD757F00C4F855 /* RoundingLog.h */,
 				49A2457116DD757F00C4F855 /* RoundingLog.m */,
-				49A2457816DDA44C00C4F855 /* RoundingLogManagedObject.h */,
-				49A2457916DDA44C00C4F855 /* RoundingLogManagedObject.m */,
+				497B0C3A1704B09000451D35 /* RoundingLogManagedObjectProtocol.h */,
 				49A2457B16DDA86000C4F855 /* RoundingModel.h */,
 				49A2457C16DDA86000C4F855 /* RoundingModel.m */,
-				494CD9F116DD437100112E3E /* RoundingOverviewViewController.h */,
-				494CD9F216DD437100112E3E /* RoundingOverviewViewController.m */,
+				497B0C381704A63800451D35 /* Senior Rounding Document Template.rtf */,
+				497B0C23170487BA00451D35 /* SeniorRoundingAllLogsViewController.h */,
+				497B0C24170487BA00451D35 /* SeniorRoundingAllLogsViewController.m */,
+				497B0C351704A37D00451D35 /* SeniorRoundingDocumentGenerator.h */,
+				497B0C361704A37D00451D35 /* SeniorRoundingDocumentGenerator.m */,
 				4941D89616FBB02000D7216B /* SeniorRoundingLog.h */,
 				4941D89716FBB02000D7216B /* SeniorRoundingLog.m */,
+				497B0C2917048B3D00451D35 /* SeniorRoundingLogManagedObject.h */,
+				497B0C2A17048B3D00451D35 /* SeniorRoundingLogManagedObject.m */,
+				497B0C2C17048BC600451D35 /* SeniorRoundingModel.h */,
+				497B0C2D17048BC600451D35 /* SeniorRoundingModel.m */,
+				497B0C3217048F8400451D35 /* SeniorRoundingOverviewViewController.h */,
+				497B0C3317048F8500451D35 /* SeniorRoundingOverviewViewController.m */,
 			);
 			name = Rounding;
 			sourceTree = "<group>";
@@ -617,6 +657,7 @@
 				F790E92616E0063E00CB288C /* cancercenter.png in Resources */,
 				4906CA3E16FF790300981B74 /* employee_data.csv in Resources */,
 				49DBA7731703B44300605FAD /* ResourcesData in Resources */,
+				497B0C391704A63800451D35 /* Senior Rounding Document Template.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,13 +697,13 @@
 				499C4CF916D2E7A400ED6E76 /* WelcomeViewController.m in Sources */,
 				499C4CFD16D30AF800ED6E76 /* ManagerSettingsViewController.m in Sources */,
 				4907612C16D5D77D00AC30DB /* MarqueeCell.m in Sources */,
-				494CD9F316DD437100112E3E /* RoundingOverviewViewController.m in Sources */,
+				494CD9F316DD437100112E3E /* EmployeeRoundingOverviewViewController.m in Sources */,
 				494CDA2A16DD4C7B00112E3E /* RoundingDetailsViewController.m in Sources */,
 				4961F83F16DD525000B5EBC8 /* UITextViewCell.m in Sources */,
 				498F86C516DD6387005118C1 /* UITextFieldCell.m in Sources */,
 				49A2457216DD757F00C4F855 /* RoundingLog.m in Sources */,
 				49A2457716DDA19C00C4F855 /* RoundingAllLogsViewController.m in Sources */,
-				49A2457A16DDA44C00C4F855 /* RoundingLogManagedObject.m in Sources */,
+				49A2457A16DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.m in Sources */,
 				49A2457D16DDA86000C4F855 /* RoundingModel.m in Sources */,
 				49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */,
 				49174A6C16E036EA007497A9 /* UIButton+Disable.m in Sources */,
@@ -681,6 +722,13 @@
 				49377B901703E44900B33AD2 /* ASIDataDecompressor.m in Sources */,
 				49377B931703E46900B33AD2 /* ASIDataCompressor.m in Sources */,
 				497B0C1F1703E6E100451D35 /* ASIDownloadCache.m in Sources */,
+				497B0C221704875400451D35 /* EmployeeRoundingLog.m in Sources */,
+				497B0C25170487BA00451D35 /* SeniorRoundingAllLogsViewController.m in Sources */,
+				497B0C281704889600451D35 /* EmployeeRoundingAllLogsViewController.m in Sources */,
+				497B0C2B17048B3E00451D35 /* SeniorRoundingLogManagedObject.m in Sources */,
+				497B0C2E17048BC700451D35 /* SeniorRoundingModel.m in Sources */,
+				497B0C3417048F8500451D35 /* SeniorRoundingOverviewViewController.m in Sources */,
+				497B0C371704A37E00451D35 /* SeniorRoundingDocumentGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

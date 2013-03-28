@@ -1,5 +1,6 @@
 #import "RoundingAllLogsViewController.h"
-#import "RoundingOverviewViewController.h"
+#import "EmployeeRoundingOverviewViewController.h"
+#import "SeniorRoundingOverviewViewController.h"
 #import "RoundingModel.h"
 #import "RoundingLog.h"
 
@@ -17,12 +18,8 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.destinationViewController isKindOfClass:[RoundingOverviewViewController class]])
-    {
-        RoundingOverviewViewController *dest = segue.destinationViewController;
-        dest.log = self.selectedLog;
-        dest.model = self.model;
-    }
+    [segue.destinationViewController setLog:self.selectedLog];
+    [segue.destinationViewController setModel:self.model];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -30,27 +27,22 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrototypeCell"];
     if(!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"PrototypeCell"];
     NSArray *logs = [self.model getRoundingLogs];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateStyle = NSDateFormatterShortStyle;
+
     RoundingLog *currentLog = [logs objectAtIndex:indexPath.row];
-    
-    //Create label text for cell
-    NSMutableString *labelText = [@"" mutableCopy];
-    
-    if(currentLog.date) [labelText appendString:[formatter stringFromDate:currentLog.date]];
-    if(currentLog.date && currentLog.unit.length > 0) [labelText appendFormat:@": %@", currentLog.unit];
-    else if(currentLog.unit.length > 0) [labelText appendFormat:@"%@",currentLog.unit];
-    if((currentLog.date || currentLog.unit.length > 0) && currentLog.leader.length > 0) [labelText appendFormat:@" (%@)",currentLog.leader];
-    else if(currentLog.leader.length > 0) [labelText appendFormat:@"(%@)",currentLog.leader];
-    cell.textLabel.text = labelText;
-    
-    //Create detail text for cell
-    NSString *detailText = @"";
-    if(currentLog.keyFocus.length > 0) detailText = currentLog.keyFocus;
-    else if(currentLog.keyReminders.length > 0) detailText = currentLog.keyReminders;
-    cell.detailTextLabel.text = detailText;
-    
+    [self customizeCell:cell usingRoundingLog:currentLog];
     return cell;
+}
+
+- (UITableViewCell *) customizeCell: (UITableViewCell *) cell usingRoundingLog: (RoundingLog *) log
+{
+    //ABSTRACT METHOD
+    return cell;
+}
+
+- (RoundingModel *) createModel
+{
+    //ABSTRACT METHOD
+    return nil;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -97,7 +89,7 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.model = [[RoundingModel alloc] init];
+    self.model = [self createModel];
     self.model.delegate = self;
     [self.model fetchRoundingLogsForFutureUse];
 }

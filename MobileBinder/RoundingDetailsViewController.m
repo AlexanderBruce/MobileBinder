@@ -44,7 +44,7 @@
 {
     NSString *employeeAtRow = [[self.log allContentsForColumn:EMPLOYEE_SECTION] objectAtIndex:row];
     if(employeeAtRow.length > 0) return employeeAtRow;
-    else return [NSString stringWithFormat:@"Employee %d",row + 1];
+    else return [NSString stringWithFormat:@"Unit %d",row + 1];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -87,11 +87,11 @@
 {
     if(indexPath.section == EMPLOYEE_SECTION)
     {
-        UITextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmployeeCell"];
+        UITextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrototypeCell"];
 
         if(!cell)
         {
-            cell = [[UITextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"EmployeeCell"];
+            cell = [[UITextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PrototypeCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.textField.delegate = self;
@@ -131,7 +131,7 @@
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
         cell.textLabel.textColor = [UIColor whiteColor];
-        cell.textLabel.text = @"Delete Employee";
+        cell.textLabel.text = @"Delete Unit";
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -147,9 +147,9 @@
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(section < self.log.columnTitles.count)
+    if(section < [self.log getColumnTitles].count)
     {
-        return [self.log.columnTitles objectAtIndex:section];
+        return [[self.log getColumnTitles] objectAtIndex:section];
     }
     else return @"";
 }

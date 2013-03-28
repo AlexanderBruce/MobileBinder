@@ -20,10 +20,10 @@
             </objects>
             <point key="canvasLocation" x="-1673" y="161"/>
         </scene>
-        <!--Rounding All Logs View Controller - All Logs-->
+        <!--Employee Rounding All Logs View Controller - All Logs-->
         <scene sceneID="cCV-0U-Nak">
             <objects>
-                <viewController id="C85-t0-3Ll" customClass="RoundingAllLogsViewController" sceneMemberID="viewController">
+                <viewController id="C85-t0-3Ll" customClass="EmployeeRoundingAllLogsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g84-4p-Q3X">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -79,10 +79,10 @@
             </objects>
             <point key="canvasLocation" x="-472" y="-418"/>
         </scene>
-        <!--Rounding Overview View Controller - Overview-->
+        <!--Employee Rounding Overview View Controller - Overview-->
         <scene sceneID="YFB-Ag-Ae0">
             <objects>
-                <viewController id="Vti-SD-kIL" customClass="RoundingOverviewViewController" sceneMemberID="viewController">
+                <viewController id="Vti-SD-kIL" customClass="EmployeeRoundingOverviewViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XYK-5F-N7C">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -188,7 +188,7 @@
                         <outlet property="keyFocusField" destination="Kxz-1P-q90" id="x2W-cf-SiI"/>
                         <outlet property="keyRemindersField" destination="DBb-Im-uVB" id="oox-hC-9iH"/>
                         <outlet property="leaderField" destination="uNZ-to-VQt" id="Zbl-wX-ZSW"/>
-                        <outlet property="myScrollView" destination="U8B-ng-nYQ" id="4Vz-NC-T1E"/>
+                        <outlet property="scrollView" destination="U8B-ng-nYQ" id="kYh-hF-Qx6"/>
                         <outlet property="unitField" destination="Cgv-GA-Fbm" id="SY7-eU-n05"/>
                         <segue destination="faZ-56-Z2Z" kind="push" identifier="roundingDetailsSegue" id="DrN-Ib-9xp"/>
                     </connections>
@@ -1269,10 +1269,10 @@
             </objects>
             <point key="canvasLocation" x="1271" y="-393"/>
         </scene>
-        <!--Rounding All Logs View Controller - All Logs-->
+        <!--Senior Rounding All Logs View Controller - All Logs-->
         <scene sceneID="46R-FZ-bb1">
             <objects>
-                <viewController id="bLB-xk-Wj1" customClass="RoundingAllLogsViewController" sceneMemberID="viewController">
+                <viewController id="bLB-xk-Wj1" customClass="SeniorRoundingAllLogsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UrN-rY-cSZ">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1321,11 +1321,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="PjR-zK-89I" id="Sab-iH-RaB"/>
+                        <segue destination="OHt-tC-LzD" kind="push" identifier="roundingLogOverviewSegue" id="eXP-qk-VU9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ujw-cT-W4j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1046" y="-444"/>
+            <point key="canvasLocation" x="-1850" y="-542"/>
         </scene>
         <!--Webview View Controller-->
         <scene sceneID="JIr-Wn-Z2O">
@@ -1357,6 +1358,144 @@
             </objects>
             <point key="canvasLocation" x="-675" y="1451"/>
         </scene>
+        <!--Senior Rounding Overview View Controller - Overview-->
+        <scene sceneID="N9p-78-Hor">
+            <objects>
+                <viewController id="OHt-tC-LzD" customClass="SeniorRoundingOverviewViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hm6-Th-UQb">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="eNG-2W-A1y">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="4zq-8h-hq5">
+                                        <rect key="frame" x="116" y="81" width="184" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Unit/Dept." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zgp-ZV-241">
+                                        <rect key="frame" x="20" y="84" width="88" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hkU-vX-Onv">
+                                        <rect key="frame" x="20" y="149" width="88" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Notes with Department Leader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XxB-NE-ORG">
+                                        <rect key="frame" x="20" y="196" width="280" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N7t-sh-E3q">
+                                        <rect key="frame" x="20" y="20" width="101" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="vYy-dE-0sk">
+                                        <rect key="frame" x="116" y="16" width="184" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="EDI-Nz-uSX">
+                                        <rect key="frame" x="116" y="146" width="184" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Cu4-rQ-91P">
+                                        <rect key="frame" x="20" y="227" width="280" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </scrollView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="vKN-qz-A9R">
+                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="trash" id="EL8-oi-hpB">
+                                        <connections>
+                                            <action selector="deletePressed:" destination="OHt-tC-LzD" id="Kvg-8S-bsW"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="m91-fR-oO3"/>
+                                    <barButtonItem systemItem="action" id="bcp-Fh-Z3M">
+                                        <connections>
+                                            <action selector="sharePressed:" destination="OHt-tC-LzD" id="wkZ-1p-5rC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Overview" id="IW1-VL-CCr">
+                        <barButtonItem key="rightBarButtonItem" title="Next" style="done" id="e6i-6D-sBj">
+                            <connections>
+                                <action selector="nextPressed:" destination="OHt-tC-LzD" id="oKf-JJ-ZW7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dateField" destination="vYy-dE-0sk" id="WQq-UT-1Pk"/>
+                        <outlet property="nameField" destination="EDI-Nz-uSX" id="e8x-dH-BKT"/>
+                        <outlet property="notesView" destination="Cu4-rQ-91P" id="Hbl-be-hDs"/>
+                        <outlet property="scrollView" destination="eNG-2W-A1y" id="sbb-Bl-0gp"/>
+                        <outlet property="unitField" destination="4zq-8h-hq5" id="WLP-8O-OEi"/>
+                        <segue destination="D0z-Sh-7Jl" kind="push" identifier="roundingDetailsSegue" id="Ah0-c0-646"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ubQ-E3-e6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1384" y="-551"/>
+        </scene>
+        <!--Rounding Details View Controller - Details-->
+        <scene sceneID="vxY-jQ-BNN">
+            <objects>
+                <viewController id="D0z-Sh-7Jl" customClass="RoundingDetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BaF-bA-91D">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="aBF-JN-QwP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Details" id="pfA-e7-Qpt">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Vh9-j4-2Tf">
+                            <connections>
+                                <action selector="addPressed:" destination="D0z-Sh-7Jl" id="FKq-fN-iX7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="aBF-JN-QwP" id="GAX-nH-Jfx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yfH-4O-jvd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-957" y="-551"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Banner copy.png" width="719" height="116"/>
@@ -1364,6 +1503,138 @@
         <image name="back.png" width="297" height="422"/>
         <image name="cancercenter.png" width="374" height="420"/>
     </resources>
+    <classes>
+        <class className="AddEmployeeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEmployeeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="departmentField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="unitField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AttendanceViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AttendanceViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="EmployeeRoundingAllLogsViewController" superclassName="RoundingAllLogsViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeRoundingAllLogsViewController.h"/>
+        </class>
+        <class className="EmployeeRoundingOverviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeRoundingOverviewViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="keyFocusField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="keyRemindersField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="leaderField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="unitField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="EmployeeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="GradientButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GradientButton.h"/>
+        </class>
+        <class className="HomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
+        </class>
+        <class className="IncidentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IncidentViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="employeeNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="incidentDateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="incidentTypeControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="ManagerSettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ManagerSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="PayrollNotificationsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PayrollNotificationsViewController.h"/>
+        </class>
+        <class className="PayrollPeriodViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PayrollPeriodViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="periodSelection" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="periodTypeSegmented" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="RemindersViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RemindersViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ResetSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ResetSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="eraseContentCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="resetAllCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="resetSettingsCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="ResourcesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ResourcesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RoundingAllLogsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingAllLogsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RoundingDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="SeniorRoundingAllLogsViewController" superclassName="RoundingAllLogsViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SeniorRoundingAllLogsViewController.h"/>
+        </class>
+        <class className="SeniorRoundingOverviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SeniorRoundingOverviewViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="notesView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="unitField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="WebviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WebviewViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="webview" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="WelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WelcomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

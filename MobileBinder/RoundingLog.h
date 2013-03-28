@@ -1,20 +1,18 @@
 #import <Foundation/Foundation.h>
-@class RoundingLogManagedObject;
+#import <CoreData/CoreData.h>
+#import "RoundingLogManagedObjectProtocol.h"
 
-@interface RoundingLog : NSObject
+@interface RoundingLog : NSObject 
 
-@property (nonatomic, strong) NSDate *date;
-@property (nonatomic, strong) NSString *unit;
-@property (nonatomic, strong) NSString *leader;
-@property (nonatomic, strong) NSString *keyFocus;
-@property (nonatomic, strong) NSString *keyReminders;
-
-@property (nonatomic, strong) NSArray *columnTitles;
+@property (nonatomic, strong)  id<RoundingLogManagedObjectProtocol> managedObject;
 @property (nonatomic, readonly) int numberOfColumns;
 @property (nonatomic, readonly) int numberOfRows;
 
 //Returns the row number for the row that was just added
 - (int) addRow;
+
+//ABSTRACT
+- (NSArray *) getColumnTitles;
 
 - (void) deleteRow: (int) rowNumber;
 
@@ -24,7 +22,7 @@
 
 - (NSArray *) allContentsForColumn: (int) columnNumber;
 
-- (id) initWithManagedObject: (RoundingLogManagedObject *) managedObject;
+- (id) initWithManagedObject: (id<RoundingLogManagedObjectProtocol> ) managedObject;
 
 - (void) deleteFromDatabase: (UIManagedDocument *) database;
 

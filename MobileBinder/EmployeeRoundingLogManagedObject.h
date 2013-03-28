@@ -1,8 +1,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "RoundingLogManagedObjectProtocol.h"
 
 
-@interface RoundingLogManagedObject : NSManagedObject
+@interface EmployeeRoundingLogManagedObject : NSManagedObject <RoundingLogManagedObjectProtocol>
 
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * unit;

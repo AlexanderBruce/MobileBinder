@@ -1,7 +1,7 @@
-#import "RoundingLogManagedObject.h"
+#import "EmployeeRoundingLogManagedObject.h"
 
 
-@implementation RoundingLogManagedObject
+@implementation EmployeeRoundingLogManagedObject
 
 @dynamic date;
 @dynamic unit;

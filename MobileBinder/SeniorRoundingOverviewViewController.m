@@ -1,28 +1,29 @@
-#import "RoundingOverviewViewController.h"
+#import "SeniorRoundingOverviewViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "RoundingDetailsViewController.h"
 #import "RoundingLog.h"
+#import "RoundingModel.h"
+#import "SeniorRoundingLog.h"
 #import "Constants.h"
 #import "Database.h"
-#import "RoundingAllLogsViewController.h"
-#import "RoundingModel.h"
 
 #define ROUNDING_DETAILS_SEGUE @"roundingDetailsSegue"
 
 #define SCROLL_OFFSET IS_4_INCH_SCREEN ? 140 : 200
 #define CONTENT_SIZE IS_4_INCH_SCREEN ? 550: 590
 
-@interface RoundingOverviewViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate,UIActionSheetDelegate>
+@interface SeniorRoundingOverviewViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
 @property (weak, nonatomic) IBOutlet UITextField *unitField;
-@property (weak, nonatomic) IBOutlet UITextField *leaderField;
-@property (weak, nonatomic) IBOutlet UITextField *keyFocusField;
-@property (weak, nonatomic) IBOutlet UITextField *keyRemindersField;
-@property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (nonatomic, strong) NSDateFormatter *formatter;
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UITextView *notesView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic) BOOL firstResponderIsActive;
+@property (nonatomic, strong) NSDateFormatter *formatter;
+@property (nonatomic, weak) MFMailComposeViewController *mailer;
 @end
 
-@implementation RoundingOverviewViewController
+@implementation SeniorRoundingOverviewViewController
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -33,7 +34,65 @@
     }
 }
 
-- (IBAction)nextPressed:(UIBarButtonItem *)sender
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self.mailer dismissViewControllerAnimated:YES completion:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+}
+
+
+
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    self.notesView.layer.cornerRadius = 5;
+    self.notesView.clipsToBounds = YES;
+    [self.notesView.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor]];
+    [self.notesView.layer setBorderWidth:1.3]; //2.0
+    self.firstResponderIsActive = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, CONTENT_SIZE);
+    self.scrollView.scrollEnabled = NO;
+    self.dateField.delegate = self;
+    self.unitField.delegate = self;
+    self.nameField.delegate = self;
+    self.notesView.delegate = self;
+    self.formatter = [[NSDateFormatter alloc] init];
+    self.formatter.dateStyle = NSDateFormatterShortStyle;
+    self.dateField.inputView = [self createDatePicker];
+    
+    if(self.log.date)
+    {
+        self.dateField.text = [self.formatter stringFromDate:self.log.date];
+    }
+    else
+    {
+        self.dateField.text = [self.formatter stringFromDate:[NSDate date]];
+    }
+    self.unitField.text = self.log.unit;
+    self.nameField.text = self.log.name;
+    self.notesView.text = self.log.notes;
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.delegate = self;
+    [self.scrollView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void) keyboardWillBeHidden
+{
+    self.scrollView.scrollEnabled = NO;
+}
+
+- (void) hideKeyboard
+{
+    [self.view endEditing:YES];
+}
+
+
+- (IBAction)nextPressed:(id)sender
 {
     [self performSegueWithIdentifier:ROUNDING_DETAILS_SEGUE sender:self];
 }
@@ -54,84 +113,13 @@
     }
 }
 
-- (void) viewDidLoad
+- (IBAction)sharePressed:(id)sender
 {
-    [super viewDidLoad];
-    self.firstResponderIsActive = NO;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-    self.myScrollView.contentSize = CGSizeMake(self.myScrollView.contentSize.width, CONTENT_SIZE);
-    self.myScrollView.scrollEnabled = NO;
-
-    
-    self.dateField.delegate = self;
-    self.unitField.delegate = self;
-    self.leaderField.delegate = self;
-    self.keyFocusField.delegate = self;
-    self.keyRemindersField.delegate = self;
-    self.formatter = [[NSDateFormatter alloc] init];
-    self.formatter.dateStyle = NSDateFormatterShortStyle;
-    self.dateField.inputView = [self createDatePicker];
-    
-    if(self.log.date)
-    {
-        self.dateField.text = [self.formatter stringFromDate:self.log.date];
-    }
-    else
-    {
-        self.dateField.text = [self.formatter stringFromDate:[NSDate date]];
-    }
-    self.unitField.text = self.log.unit;
-    self.leaderField.text = self.log.leader;
-    self.keyFocusField.text = self.log.keyFocus;
-    self.keyRemindersField.text = self.log.keyReminders;
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    gestureRecognizer.delegate = self;
-    [self.view addGestureRecognizer:gestureRecognizer];
+    [self saveDataIntoLog];
+    self.mailer = [self.model generateRoundingDocumentFor:self.log];
+    self.mailer.mailComposeDelegate = self;
+    [self presentModalViewController:self.mailer animated:YES];
 }
-
-- (void) hideKeyboard
-{
-    [self.view endEditing:YES];
-}
-
--(void) textFieldDidBeginEditing:(UITextField *)textField
-{
-    self.myScrollView.scrollEnabled = YES;
-    self.firstResponderIsActive = YES;
-    if(textField == self.keyFocusField || textField == self.keyRemindersField)
-    {
-        [self.myScrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
-    }
-}
-
-- (BOOL) textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
--(void) textFieldDidEndEditing:(UITextField *)textField
-{
-    self.firstResponderIsActive = NO;
-    double delayInSeconds = 0.1;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        if(!self.firstResponderIsActive)
-        {
-            [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-        }}
-    );
-}
-
-- (void) keyboardWillBeHidden
-{
-    self.myScrollView.scrollEnabled = NO;
-}
-
 
 - (UIView *) createDatePicker
 {
@@ -177,14 +165,18 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [self.myScrollView endEditing:YES];
+    [self.scrollView endEditing:YES];
+    [self saveDataIntoLog];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) saveDataIntoLog
+{
     self.log.date = [self.formatter dateFromString:self.dateField.text];
     self.log.unit = self.unitField.text;
-    self.log.leader = self.leaderField.text;
-    self.log.keyFocus = self.keyFocusField.text;
-    self.log.keyReminders = self.keyRemindersField.text;
+    self.log.name = self.nameField.text;
+    self.log.notes = self.notesView.text;
     [Database saveDatabase];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -192,19 +184,50 @@
     [super viewDidDisappear:animated];
 }
 
+-(void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.scrollView.scrollEnabled = YES;
+    self.firstResponderIsActive = YES;
+    if(textField == self.nameField)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
+    }
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void) textFieldDidEndEditing:(UITextField *)textField
+{
+    self.firstResponderIsActive = NO;
+    double delayInSeconds = 0.1;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        if(!self.firstResponderIsActive)
+        {
+            [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        }}
+    );
+}
+
+
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
 - (void)viewDidUnload
 {
     [self setDateField:nil];
     [self setUnitField:nil];
-    [self setLeaderField:nil];
-    [self setKeyFocusField:nil];
-    [self setKeyRemindersField:nil];
-    [self setMyScrollView:nil];
+    [self setNameField:nil];
+    [self setNotesView:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
 }
 @end
