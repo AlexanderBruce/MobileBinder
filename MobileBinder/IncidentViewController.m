@@ -16,7 +16,7 @@
 #define LEVEL_2_ALERT_TAG 3
 #define LEVEL_3_ALERT_TAG 4
 
-@interface IncidentViewController () <UITextFieldDelegate, WebviewViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
+@interface IncidentViewController () <UITextFieldDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *employeeNameField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *incidentTypeControl;
 @property (weak, nonatomic) IBOutlet UITextField *incidentDateField;
@@ -28,15 +28,6 @@
 
 @implementation IncidentViewController
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:LEVEL_1_SEGUE])
-    {
-        WebviewViewController *dest = (WebviewViewController *) segue.destinationViewController;
-        dest.delegate = self;
-        dest.webpageURL = @"http://www.hr.duke.edu/policies/time_away/availability.php";
-    }
-}
 
 - (void)viewDidLoad
 {

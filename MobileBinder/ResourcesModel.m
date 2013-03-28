@@ -1,14 +1,9 @@
-//
-//  ResourcesModel.m
-//  MobileBinder
-//
-//  Created by Alexander Bruce on 3/24/13.
-//  Copyright (c) 2013 Duke University. All rights reserved.
-//
-
 #import "ResourcesModel.h"
 #import "ResourceObject.h"
-@interface ResourcesModel() 
+
+#define RESOURCES_DATA_FILE @"ResourcesData"
+
+@interface ResourcesModel()
 @property (nonatomic) BOOL usingFilter;
 @property (nonatomic, strong) NSMutableArray *resourceLinks;
 @property (nonatomic, strong) NSMutableArray *filteredLinks;
@@ -16,54 +11,54 @@
 
 @implementation ResourcesModel
 
--(id)init{
+-(id)init
+{
     if(self==[super init])
     {
-        
+        self.resourceLinks = [[NSMutableArray alloc] init];
+        [self retrieveLinks];
     }
-    self.resourceLinks = [[NSMutableArray alloc] init];
-    [self makeLinks];
     return self;
 }
 
 
-- (int) getNumberOfResourceLinks{
+- (int) getNumberOfResourceLinks
+{
     if(self.usingFilter) return self.filteredLinks.count;
     return self.resourceLinks.count;
-    
 }
 
-- (NSArray *) getResourceLinks{
+- (NSArray *) getResourceLinks
+{
     if(self.usingFilter) return self.filteredLinks;
     else return self.resourceLinks;
 }
 
-- (void) makeLinks
+- (void) retrieveLinks
 {
-    ResourceObject *first = [[ResourceObject alloc]init];
-    first.webpageURL = @"http://www.google.com";
-    first.pageTitle = @"Google";
-    [self.resourceLinks addObject:first];
+    NSString* path = [[NSBundle mainBundle] pathForResource:RESOURCES_DATA_FILE ofType:@""];
+    NSArray *lines = [[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil]
+                      componentsSeparatedByString:@"\n"];
     
-    ResourceObject *second = [[ResourceObject alloc]init];
-    second.webpageURL = @"http://www.apple.com";
-    second.pageTitle = @"Apple";
-    [self.resourceLinks addObject:second];
-    
-    ResourceObject *third = [[ResourceObject alloc]init];
-    third.webpageURL = @"http://www.yahoo.com";
-    third.pageTitle = @"Yahoo";
-    [self.resourceLinks addObject:third];
-
+    for (NSString *line in lines)
+    {
+        if([line hasPrefix:@"//"]) continue; //Skip comment lines
+        if([line hasPrefix:@"##"])
+        {
+            NSArray *data = [line componentsSeparatedByString:@"##"];
+            if(data.count != 4) [NSException raise:NSInvalidArgumentException format:@"Each header must have the form ##Page Title##Page URL##"];
+            ResourceObject *resourceObj = [[ResourceObject alloc] init];
+            resourceObj.pageTitle = [data objectAtIndex:1];
+            resourceObj.webpageURL = [data objectAtIndex:2];
+            [self.resourceLinks addObject:resourceObj];
+        }
+    }
 }
 
-
-
-
-
-- (void) filterResourceLinksByString: (NSString *) filterString{
+- (void) filterResourceLinksByString: (NSString *) filterString
+{
     self.usingFilter = YES;
-        self.filteredLinks = [[NSMutableArray alloc] init];
+    self.filteredLinks = [[NSMutableArray alloc] init];
     NSMutableArray *filterArray = (NSMutableArray *)[[filterString componentsSeparatedByString:@" "] mutableCopy];
     [filterArray removeObject:@""];
     for (ResourceObject *currentLink in self.resourceLinks)
@@ -73,8 +68,6 @@
         {
             NSRange pageRange = [currentLink.pageTitle rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
             NSRange urlRange = [currentLink.webpageURL rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
-            
-
             if(pageRange.location == NSNotFound && urlRange.location == NSNotFound )
             {
                 matchesFilter = NO;
@@ -90,8 +83,5 @@
 - (void) stopFilteringResourceLinks
 {
     self.usingFilter = NO;
-    
 }
-
-
 @end

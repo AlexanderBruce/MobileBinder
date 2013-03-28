@@ -1,11 +1,3 @@
-//
-//  ResourcesViewController.m
-//  MobileBinder
-//
-//  Created by Alexander Bruce on 3/24/13.
-//  Copyright (c) 2013 Duke University. All rights reserved.
-//
-
 #import "ResourcesViewController.h"
 #import "ResourcesModel.h"
 #import "WebviewViewController.h"
@@ -20,11 +12,12 @@
 @end
 
 @implementation ResourcesViewController
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.destinationViewController isKindOfClass:[WebviewViewController class]]){
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.destinationViewController isKindOfClass:[WebviewViewController class]])
+    {
         WebviewViewController *dest = segue.destinationViewController;
         dest.webpageURL = self.webUrl;
-        
     }
 }
 -(void) viewDidLoad
@@ -36,7 +29,8 @@
     
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setTableView:nil];
     [self setSearchBar:nil];
     [super viewDidUnload];
@@ -69,6 +63,7 @@
     ResourceObject *r =(ResourceObject *) [links objectAtIndex:indexPath.row];
     self.webUrl = r.webpageURL;
     [self performSegueWithIdentifier:SEGUE sender:self];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 
