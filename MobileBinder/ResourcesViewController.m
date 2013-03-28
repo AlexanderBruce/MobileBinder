@@ -26,7 +26,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
-    
 }
 
 - (void)viewDidUnload
@@ -41,35 +40,39 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrototypeCell"];
     if(!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PrototypeCell"];
-    NSArray *links = [self.myModel getResourceLinks];
-    ResourceObject *cur = [links objectAtIndex:indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    ResourceObject *cur = [self.myModel getResourceForCategory:indexPath.section index:indexPath.row];
     cell.textLabel.text = cur.pageTitle;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 34;
+    return 38;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.myModel getNumberOfResourceLinks];
+    return [self.myModel getNumberOfLinksForCategory:section];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *links = [self.myModel getResourceLinks];
-    ResourceObject *r =(ResourceObject *) [links objectAtIndex:indexPath.row];
+    ResourceObject *r = [self.myModel getResourceForCategory:indexPath.section index:indexPath.row];
     self.webUrl = r.webpageURL;
     [self performSegueWithIdentifier:SEGUE sender:self];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [self.myModel getNumberOfCategories];
+}
 
-
-
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [self.myModel getNameOfCategory:section];
+}
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {

@@ -1,10 +1,15 @@
 #import <Foundation/Foundation.h>
+@class ResourceObject;
 
 @interface ResourcesModel : NSObject
 
-- (int) getNumberOfResourceLinks;
+- (int) getNumberOfCategories;
 
-- (NSArray *) getResourceLinks;
+- (int) getNumberOfLinksForCategory: (int) categoryNum;
+
+- (ResourceObject *) getResourceForCategory: (int) categoryNum index: (int) index;
+
+- (NSString *) getNameOfCategory: (int) categoryNum;
 
 - (void) filterResourceLinksByString: (NSString *) filterString;
 

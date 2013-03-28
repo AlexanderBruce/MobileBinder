@@ -45,21 +45,15 @@ typedef enum {
     [[self request] cancel];
 }
 
-//- (void) viewDidAppear:(BOOL)animated
-//{
-//    [self startConnections];
-//
-//}
-
 - (void) startConnections
 {
     [self.lock lock];
     self.webview.alpha = 0;
     self.webviewConnectionStatus = UnFinished;
-    self.cachingConnectionStatus = UnFinished;
+    self.cachingConnectionStatus = Failed;
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:self.webpageURL]];
     [self.webview loadRequest:requestObj];
-    [self loadURL:[NSURL URLWithString:self.webpageURL]];
+//    [self loadURL:[NSURL URLWithString:self.webpageURL]];
     [self.lock unlock];
 //    NSLog(@"|%@|",[NSString localizedNameOfStringEncoding:5]);
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
