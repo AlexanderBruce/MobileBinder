@@ -35,7 +35,7 @@ typedef enum {
 {
     [super viewDidLoad];
     self.webview.delegate = self;
-//    [self startConnections];
+    [self startConnections];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -45,27 +45,42 @@ typedef enum {
     [[self request] cancel];
 }
 
-- (void) viewDidAppear:(BOOL)animated
-{
-    [self startConnections];
-
-}
+//- (void) viewDidAppear:(BOOL)animated
+//{
+//    [self startConnections];
+//
+//}
 
 - (void) startConnections
 {
     [self.lock lock];
     self.webview.alpha = 0;
-//    self.webviewConnectionStatus = UnFinished;
-//    self.cachingConnectionStatus = UnFinished;
-//    NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:self.webpageURL]];
-//    [self.webview loadRequest:requestObj];
+    self.webviewConnectionStatus = UnFinished;
+    self.cachingConnectionStatus = UnFinished;
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:self.webpageURL]];
+    [self.webview loadRequest:requestObj];
     [self loadURL:[NSURL URLWithString:self.webpageURL]];
     [self.lock unlock];
+//    NSLog(@"|%@|",[NSString localizedNameOfStringEncoding:5]);
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *str = [NSString stringWithContentsOfFile:
+//     [defaults objectForKey:@"AmazonPath"] encoding:5 error:nil];
+//    NSLog(@"URL = %@",[defaults URLForKey:@"AmazonURL"]);
+//    NSLog(@"Path = %@",[defaults objectForKey:@"AmazonPath"]);
+////    NSLog(@"Contents = %@",str);
+//    
+//    [self.webview loadData:[str dataUsingEncoding:NSUTF8StringEncoding] MIMEType:@"application/xhtml+xml" textEncodingName:@"utf-8" baseURL:[defaults URLForKey:@"AmazonURL"]];
+
 }
 
 - (void) webViewDidStartLoad:(UIWebView *)webView
 {
     [self.loadingIndicator startAnimating];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    return YES;
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
@@ -118,9 +133,16 @@ typedef enum {
 {
     [self.lock lock];
     self.cachingConnectionStatus = Succeeded;
-    NSError* error = nil;
     self.cachingResponse = [NSString stringWithContentsOfFile:
-                            [theRequest downloadDestinationPath] encoding:[theRequest responseEncoding] error:&error];
+                            [theRequest downloadDestinationPath] encoding:[theRequest responseEncoding] error:nil];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:theRequest.downloadDestinationPath forKey:@"AmazonPath"];
+////    NSLog(@"Path = %@",theRequest.downloadDestinationPath);
+//    NSLog(@"URL = %@", theRequest.url);
+////    NSLog(@"Encoding = %u",theRequest.responseEncoding);
+////    NSLog(@"Contents = %@",self.cachingResponse);
+//    [defaults setURL:theRequest.url forKey:@"AmazonURL"];
+//    [defaults synchronize];
     if(self.webviewConnectionStatus == Failed)
     {
         self.webview.alpha = 1;
