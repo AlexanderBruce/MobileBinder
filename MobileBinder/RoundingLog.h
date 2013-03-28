@@ -16,6 +16,7 @@
 
 - (void) deleteRow: (int) rowNumber;
 
+//Will return empty string rather than null
 - (NSString *) contentsForRow: (int) rowNumber column: (int) columnNumber;
 
 - (void) storeContents: (NSString *) contents forRow: (int) rowNumber column: (int) columnNumber;

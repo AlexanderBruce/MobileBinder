@@ -14,10 +14,6 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-//    AttendanceModel *model = [[AttendanceModel alloc] init];
-//    [model addEmployeesWithSupervisorID:@"00130925"];
-    
-    
     [super viewDidAppear:animated];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if(![defaults boolForKey:USED_APP_BEFORE])
@@ -26,6 +22,7 @@
         [defaults synchronize];
         [self performSegueWithIdentifier:WELCOME_SEGUE sender:self];
     }
+
 }
 
 @end

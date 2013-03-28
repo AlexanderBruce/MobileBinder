@@ -1,6 +1,7 @@
 #import "RoundingLog.h"
 #import "EmployeeRoundingLogManagedObject.h"
 #import "Database.h"
+#import "RoundingLogManagedObjectProtocol.h"
 
 @interface RoundingLog()
 @property (nonatomic, strong) NSMutableArray *rows; //Contains dictionaries of column numbers to column contents
@@ -85,11 +86,11 @@
 }
 
 
-- (id) initWithManagedObject: (EmployeeRoundingLogManagedObject *) managedObject
+- (id) initWithManagedObject: (id<RoundingLogManagedObjectProtocol> ) managedObject
 {
     if(self = [super init])
     {
-        self.rows = [[NSMutableArray alloc] init];
+        self.rows = (managedObject.contents) ? managedObject.contents : [[NSMutableArray alloc] init];
         
         //IMPLEMENT FURTHER IN SUBCLASSES
         

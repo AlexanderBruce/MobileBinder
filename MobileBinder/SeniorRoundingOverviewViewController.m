@@ -9,8 +9,8 @@
 
 #define ROUNDING_DETAILS_SEGUE @"roundingDetailsSegue"
 
-#define SCROLL_OFFSET IS_4_INCH_SCREEN ? 140 : 200
-#define CONTENT_SIZE IS_4_INCH_SCREEN ? 550: 590
+#define SCROLL_OFFSET IS_4_INCH_SCREEN ? 120 : 200
+#define CONTENT_SIZE IS_4_INCH_SCREEN ? 480: 590
 
 @interface SeniorRoundingOverviewViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
@@ -211,6 +211,28 @@
         {
             [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         }}
+    );
+}
+
+- (void) textViewDidBeginEditing:(UITextView *)textView
+{
+    self.scrollView.scrollEnabled = YES;
+    self.firstResponderIsActive = YES;
+    [self.scrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
+}
+
+- (void) textViewDidEndEditing:(UITextView *)textView
+{
+    self.firstResponderIsActive = NO;
+    double delayInSeconds = 0.1;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        if(!self.firstResponderIsActive)
+        {
+            [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        }}
+                   
     );
 }
 
