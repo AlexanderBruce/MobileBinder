@@ -4,7 +4,11 @@
 #define PROCEED_ALERT_TAG 2
 
 #define WELCOME_SECTION 0
+#define RECOMMEND_SECTION 1
+#define OPTIONAL_SECTION 2
 #define WELCOME_HEADER @"Welcome to the Mobile Binder! Before you begin, please customize these settings so this app can best serve your needs."
+#define OPTIONAL_HEADER @"Optional"
+#define RECOMMEND_HEADER @"Recommended"
 
 
 @interface WelcomeViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -61,18 +65,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if(section == WELCOME_SECTION) return 0;
-    return 2;
+    if(section == WELCOME_SECTION) return 0;
+    else if (section == RECOMMEND_SECTION) return 2;
+    else if (section ==)
+    else return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if(section == WELCOME_SECTION) return WELCOME_HEADER;
+    else if(
     else return @"";
 }
 
