@@ -36,9 +36,13 @@
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    [self.mailer dismissViewControllerAnimated:YES completion:^{
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
+    if(!result == MFMailComposeResultCancelled)
+    {
+        [self.mailer dismissViewControllerAnimated:YES completion:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }
+
 }
 
 
