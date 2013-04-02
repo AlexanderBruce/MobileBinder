@@ -67,8 +67,8 @@
 {
     if(section == WELCOME_SECTION) return 0;
     else if (section == RECOMMEND_SECTION) return 2;
-    else if (section ==)
-    else return 1;
+//    else if (section ==)
+//    else return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -79,7 +79,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if(section == WELCOME_SECTION) return WELCOME_HEADER;
-    else if(
+//    else if(
     else return @"";
 }
 

@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
+#import "GenericViewController.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : GenericViewController
 
 @end

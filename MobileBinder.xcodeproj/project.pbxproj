@@ -83,6 +83,9 @@
 		49A2458316DDD6F800C4F855 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */; };
 		49A2458416DDD6F800C4F855 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */; };
 		49A6F61A170A40D00075BDD9 /* Row in Resources */ = {isa = PBXBuildFile; fileRef = 49A6F619170A40D00075BDD9 /* Row */; };
+		49A6F61D170A7BB00075BDD9 /* CustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F61C170A7BB00075BDD9 /* CustomizationViewController.m */; };
+		49A6F61F170A808D0075BDD9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A6F61E170A808C0075BDD9 /* CoreMedia.framework */; };
+		49A6F622170A84680075BDD9 /* GenericViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F621170A84680075BDD9 /* GenericViewController.m */; };
 		49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F216C1E39E007AA467 /* RemindersViewController.m */; };
 		49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */; };
 		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
@@ -244,6 +247,11 @@
 		49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		49A6F619170A40D00075BDD9 /* Row */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Row; sourceTree = "<group>"; };
+		49A6F61B170A7BB00075BDD9 /* CustomizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizationViewController.h; sourceTree = "<group>"; };
+		49A6F61C170A7BB00075BDD9 /* CustomizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizationViewController.m; sourceTree = "<group>"; };
+		49A6F61E170A808C0075BDD9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		49A6F620170A84670075BDD9 /* GenericViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericViewController.h; sourceTree = "<group>"; };
+		49A6F621170A84680075BDD9 /* GenericViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericViewController.m; sourceTree = "<group>"; };
 		49AB41F116C1E39E007AA467 /* RemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindersViewController.h; sourceTree = "<group>"; };
 		49AB41F216C1E39E007AA467 /* RemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindersViewController.m; sourceTree = "<group>"; };
 		49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
@@ -281,6 +289,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49A6F61F170A808D0075BDD9 /* CoreMedia.framework in Frameworks */,
 				49377B951703E5A800B33AD2 /* libxml2.2.dylib in Frameworks */,
 				49377B841703E32F00B33AD2 /* libz.dylib in Frameworks */,
 				49377B821703E31F00B33AD2 /* MobileCoreServices.framework in Frameworks */,
@@ -406,7 +415,6 @@
 		494CD9F016DD431100112E3E /* Rounding */ = {
 			isa = PBXGroup;
 			children = (
-				49A6F619170A40D00075BDD9 /* Row */,
 				497B0C261704889600451D35 /* EmployeeRoundingAllLogsViewController.h */,
 				497B0C271704889600451D35 /* EmployeeRoundingAllLogsViewController.m */,
 				497B0C201704875400451D35 /* EmployeeRoundingLog.h */,
@@ -424,6 +432,7 @@
 				497B0C3A1704B09000451D35 /* RoundingLogManagedObjectProtocol.h */,
 				49A2457B16DDA86000C4F855 /* RoundingModel.h */,
 				49A2457C16DDA86000C4F855 /* RoundingModel.m */,
+				49A6F619170A40D00075BDD9 /* Row */,
 				497B0C381704A63800451D35 /* Senior Rounding Document Template.rtf */,
 				497B0C23170487BA00451D35 /* SeniorRoundingAllLogsViewController.h */,
 				497B0C24170487BA00451D35 /* SeniorRoundingAllLogsViewController.m */,
@@ -444,6 +453,7 @@
 		494D0E2416B84BAB00354964 = {
 			isa = PBXGroup;
 			children = (
+				49A6F61E170A808C0075BDD9 /* CoreMedia.framework */,
 				494D0E3916B84BAB00354964 /* MobileBinder */,
 				494D0E3216B84BAB00354964 /* Frameworks */,
 				494D0E3016B84BAB00354964 /* Products */,
@@ -479,13 +489,13 @@
 		494D0E3916B84BAB00354964 /* MobileBinder */ = {
 			isa = PBXGroup;
 			children = (
-				4906CA3D16FF790300981B74 /* employee_data.csv */,
 				49FB670016C2CA21004F576F /* Attendance */,
 				F7A843A416D40ECB009F09DD /* Banner copy.png */,
 				499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */,
 				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
 				F79A34E716BD8FAE00ACAABB /* Database.h */,
 				F79A34E816BD8FAE00ACAABB /* Database.m */,
+				4906CA3D16FF790300981B74 /* employee_data.csv */,
 				490A5AFF16C1D9990062F36F /* HomeViewController.h */,
 				490A5B0016C1D9990062F36F /* HomeViewController.m */,
 				49AB41FA16C2C93D007AA467 /* iPad.storyboard */,
@@ -502,6 +512,8 @@
 				4939165816C2CADD00F9365D /* Supporting_Files */,
 				49125B1716DE7C9300103A08 /* Termination Notice Template.rtf */,
 				499C4CF616D2E77400ED6E76 /* Welcome */,
+				49A6F620170A84670075BDD9 /* GenericViewController.h */,
+				49A6F621170A84680075BDD9 /* GenericViewController.m */,
 			);
 			path = MobileBinder;
 			sourceTree = "<group>";
@@ -523,6 +535,8 @@
 				499C4CFA16D2F4DC00ED6E76 /* SettingsProtocol.h */,
 				49A2457E16DDCA1A00C4F855 /* ResetSettingsViewController.h */,
 				49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */,
+				49A6F61B170A7BB00075BDD9 /* CustomizationViewController.h */,
+				49A6F61C170A7BB00075BDD9 /* CustomizationViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -733,6 +747,8 @@
 				497B0C2E17048BC700451D35 /* SeniorRoundingModel.m in Sources */,
 				497B0C3417048F8500451D35 /* SeniorRoundingOverviewViewController.m in Sources */,
 				497B0C371704A37E00451D35 /* SeniorRoundingDocumentGenerator.m in Sources */,
+				49A6F61D170A7BB00075BDD9 /* CustomizationViewController.m in Sources */,
+				49A6F622170A84680075BDD9 /* GenericViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
