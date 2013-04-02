@@ -79,10 +79,11 @@
         if([line hasPrefix:@"##"])
         {
             NSArray *data = [line componentsSeparatedByString:@"##"];
-            if(data.count != 4) [NSException raise:NSInvalidArgumentException format:@"Each header must have the form ##Page Title##Page URL##"];
+            if(data.count != 5) [NSException raise:NSInvalidArgumentException format:@"Each header must have the form ##Page Title##Page URL##description##"];
             ResourceObject *resourceObj = [[ResourceObject alloc] init];
             resourceObj.pageTitle = [data objectAtIndex:1];
             resourceObj.webpageURL = [data objectAtIndex:2];
+            resourceObj.description = [data objectAtIndex:3];
             [currentCategory addObject:resourceObj];
         }
         else if([line hasPrefix:@"!!"])
@@ -113,7 +114,8 @@
             {
                 NSRange pageRange = [currentLink.pageTitle rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
                 NSRange urlRange = [currentLink.webpageURL rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
-                if(pageRange.location == NSNotFound && urlRange.location == NSNotFound )
+                NSRange descripRange = [currentLink.description rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
+                if(pageRange.location == NSNotFound && urlRange.location == NSNotFound && descripRange.location == NSNotFound)
                 {
                     matchesFilter = NO;
                     break;
