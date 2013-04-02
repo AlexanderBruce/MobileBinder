@@ -1,8 +1,8 @@
 #import "CustomizationViewController.h"
 #import "MobileCoreServices/UTCoreTypes.h"
+#import "Constants.h"
 
 @interface CustomizationViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate>
-@property (nonatomic, strong) UIPopoverController *popController; //Maybe make weak
 @end
 
 @implementation CustomizationViewController
@@ -19,40 +19,22 @@
 
 - (IBAction)selectFromLibraryPressed:(UIButton *)sender
 {
-    if ([self.popController isPopoverVisible])
+    if ([UIImagePickerController isSourceTypeAvailable:
+         UIImagePickerControllerSourceTypeSavedPhotosAlbum])
     {
-        [self.popController dismissPopoverAnimated:YES];
-        self.popController = nil;
-    } else {
+        UIImagePickerController *imagePicker =
+        [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
         if ([UIImagePickerController isSourceTypeAvailable:
-             UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+             UIImagePickerControllerSourceTypePhotoLibrary])
         {
-            UIImagePickerController *imagePicker =
-            [[UIImagePickerController alloc] init];
-            imagePicker.delegate = self;
-            if ([UIImagePickerController isSourceTypeAvailable:
-                 UIImagePickerControllerSourceTypePhotoLibrary])
-            {
-                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            }
-            imagePicker.mediaTypes = [NSArray arrayWithObjects:
-                                      (NSString *) kUTTypeImage,
-                                      nil];
-            imagePicker.allowsEditing = NO;
-            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            {
-                self.popController = [[UIPopoverController alloc]
-                                          initWithContentViewController:imagePicker];
-                
-                self.popController.delegate = self;
-                [self.popController presentPopoverFromRect:self.view.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-            }
-            else
-            {
-                imagePicker.delegate = self;
-                [self presentModalViewController:imagePicker animated:YES];
-            }
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         }
+        imagePicker.mediaTypes = [NSArray arrayWithObjects:
+                                  (NSString *) kUTTypeImage,
+                                  nil];
+        imagePicker.allowsEditing = NO;
+        [self presentModalViewController:imagePicker animated:YES];
     }
 }
 
@@ -75,18 +57,22 @@
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [self.popController dismissPopoverAnimated:true];
-    self.popController = nil;
-    
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     [self dismissModalViewControllerAnimated:YES];
-    if ([mediaType isEqualToString:(NSString *)kUTTypeImage])
-    {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage]) forKey:@"BackgroundImage"];
-//        UIImage *image = [[UIImage alloc] initWithData:UIImageJPEGRepresentation([info objectForKey:UIImagePickerController], .2)];
-//        UIImage *scaledImage = [UIImage scaleImage:image toSize:SCALED_IMAGE_SIZE];
-    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+        if ([mediaType isEqualToString:(NSString *)kUTTypeImage])
+        {
+            UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+            //Save image
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:BACKGROUND_IMAGE_FILENAME];
+            NSData *imageData = UIImagePNGRepresentation(image);
+            [imageData writeToFile:savedImagePath atomically:NO];
+            dispatch_async(dispatch_get_main_queue(), ^{});
+        }
+    });
 }
 
 /*
@@ -94,7 +80,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 */
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self.popController dismissPopoverAnimated:true];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 

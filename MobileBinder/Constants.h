@@ -41,5 +41,7 @@
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
 
+#define BACKGROUND_IMAGE_FILENAME @"BackgroundImage"
+
 
 @end

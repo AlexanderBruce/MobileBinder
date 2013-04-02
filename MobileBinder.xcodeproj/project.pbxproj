@@ -85,7 +85,7 @@
 		49A6F61A170A40D00075BDD9 /* Row in Resources */ = {isa = PBXBuildFile; fileRef = 49A6F619170A40D00075BDD9 /* Row */; };
 		49A6F61D170A7BB00075BDD9 /* CustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F61C170A7BB00075BDD9 /* CustomizationViewController.m */; };
 		49A6F61F170A808D0075BDD9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A6F61E170A808C0075BDD9 /* CoreMedia.framework */; };
-		49A6F622170A84680075BDD9 /* GenericViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F621170A84680075BDD9 /* GenericViewController.m */; };
+		49A6F622170A84680075BDD9 /* BackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F621170A84680075BDD9 /* BackgroundViewController.m */; };
 		49AB41F316C1E39E007AA467 /* RemindersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F216C1E39E007AA467 /* RemindersViewController.m */; };
 		49AB41F616C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */; };
 		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
@@ -250,8 +250,8 @@
 		49A6F61B170A7BB00075BDD9 /* CustomizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizationViewController.h; sourceTree = "<group>"; };
 		49A6F61C170A7BB00075BDD9 /* CustomizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizationViewController.m; sourceTree = "<group>"; };
 		49A6F61E170A808C0075BDD9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		49A6F620170A84670075BDD9 /* GenericViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericViewController.h; sourceTree = "<group>"; };
-		49A6F621170A84680075BDD9 /* GenericViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericViewController.m; sourceTree = "<group>"; };
+		49A6F620170A84670075BDD9 /* BackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundViewController.h; sourceTree = "<group>"; };
+		49A6F621170A84680075BDD9 /* BackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundViewController.m; sourceTree = "<group>"; };
 		49AB41F116C1E39E007AA467 /* RemindersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindersViewController.h; sourceTree = "<group>"; };
 		49AB41F216C1E39E007AA467 /* RemindersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindersViewController.m; sourceTree = "<group>"; };
 		49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
@@ -512,8 +512,8 @@
 				4939165816C2CADD00F9365D /* Supporting_Files */,
 				49125B1716DE7C9300103A08 /* Termination Notice Template.rtf */,
 				499C4CF616D2E77400ED6E76 /* Welcome */,
-				49A6F620170A84670075BDD9 /* GenericViewController.h */,
-				49A6F621170A84680075BDD9 /* GenericViewController.m */,
+				49A6F620170A84670075BDD9 /* BackgroundViewController.h */,
+				49A6F621170A84680075BDD9 /* BackgroundViewController.m */,
 			);
 			path = MobileBinder;
 			sourceTree = "<group>";
@@ -748,7 +748,7 @@
 				497B0C3417048F8500451D35 /* SeniorRoundingOverviewViewController.m in Sources */,
 				497B0C371704A37E00451D35 /* SeniorRoundingDocumentGenerator.m in Sources */,
 				49A6F61D170A7BB00075BDD9 /* CustomizationViewController.m in Sources */,
-				49A6F622170A84680075BDD9 /* GenericViewController.m in Sources */,
+				49A6F622170A84680075BDD9 /* BackgroundViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
