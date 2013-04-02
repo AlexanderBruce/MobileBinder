@@ -2,4 +2,6 @@
 
 @interface BackgroundViewController : UIViewController
 
++ (void) refreshBackground;
+
 @end

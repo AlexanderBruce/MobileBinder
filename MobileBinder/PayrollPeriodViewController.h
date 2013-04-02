@@ -1,14 +1,7 @@
-//
-//  PayrollPeriodViewController.h
-//  MobileBinder
-//
-//  Created by Samuel Rang on 1/30/13.
-//  Copyright (c) 2013 Duke University. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
+#import "BackgroundViewController.h"
 
-@interface PayrollPeriodViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource> ;
+@interface PayrollPeriodViewController : BackgroundViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource> ;
 
 @property (strong, nonatomic) NSMutableArray* possiblePayPeriods;
 

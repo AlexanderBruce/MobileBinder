@@ -29,7 +29,7 @@
     self.tableView.dataSource = self;
     NSArray *values = [[NSArray alloc] initWithObjects:@"Notifications",@"Manager Details",@"Personalization", nil];
     NSArray *keys = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:1 inSection:1], [NSIndexPath indexPathForRow:0 inSection:2],nil];
-    self.recommendedRows = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:1 inSection:1], nil];
+    self.recommendedRows = [[NSMutableArray alloc] initWithObjects:[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:1 inSection:1], nil];
     self.rowTitles = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
     NSArray *values1 = [[NSArray alloc] initWithObjects:@"notificationSettings",@"managerSettings", @"personalizationSettings", nil];
     keys = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:1 inSection:1],[NSIndexPath indexPathForRow:0 inSection:2], nil];
