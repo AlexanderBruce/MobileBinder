@@ -29,9 +29,16 @@ static UIColor *backgroundColor;
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:BACKGROUND_IMAGE_FILENAME];
-    UIImage *image = [UIImage imageWithContentsOfFile:getImagePath];
-    backgroundColor = [UIColor colorWithPatternImage:image];
+    NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:BACKGROUND_IMAGE_FILENAME];
+    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    if(image)
+    {
+        backgroundColor = [UIColor colorWithPatternImage:image];
+    }
+    else if(!image)
+    {
+        backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    }
 }
 
 + (void) refreshBackground

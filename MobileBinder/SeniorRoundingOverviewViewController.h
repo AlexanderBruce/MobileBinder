@@ -1,8 +1,9 @@
 #import <UIKit/UIKit.h>
-@class SeniorRoundingLog;
-@class RoundingModel;
+#import "BackgroundViewController.h"
+#import "RoundingOverviewViewController.h"
+#import "SeniorRoundingLog.h"
+#import "RoundingLog.h"
 
-@interface SeniorRoundingOverviewViewController : UIViewController
+@interface SeniorRoundingOverviewViewController : RoundingOverviewViewController
 @property (nonatomic, strong) SeniorRoundingLog *log;
-@property (nonatomic, strong) RoundingModel *model;
 @end

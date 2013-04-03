@@ -12,7 +12,7 @@
     </entity>
     <entity name="EmployeeRoundingLogManagedObject" representedClassName="EmployeeRoundingLogManagedObject" syncable="YES">
         <attribute name="contents" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="employeeName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="keyFocus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="keyReminders" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="leader" optional="YES" attributeType="String" syncable="YES"/>

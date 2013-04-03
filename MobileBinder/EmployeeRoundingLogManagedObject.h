@@ -5,7 +5,7 @@
 
 @interface EmployeeRoundingLogManagedObject : NSManagedObject <RoundingLogManagedObjectProtocol>
 
-@property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSString * employeeName;
 @property (nonatomic, retain) NSString * unit;
 @property (nonatomic, retain) NSString * leader;
 @property (nonatomic, retain) NSString * keyFocus;

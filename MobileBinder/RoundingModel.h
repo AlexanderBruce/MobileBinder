@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <MessageUI/MFMailComposeViewController.h>
 @class RoundingLog;
-@class SeniorRoundingDocumentGenerator;
+@class RoundingDocumentGenerator;
 
 @protocol RoundingModelDelegate <NSObject>
 
@@ -14,7 +14,7 @@
 @property (nonatomic, weak) id<RoundingModelDelegate> delegate;
 @property (nonatomic) Class managedObjectClass;
 @property (nonatomic) Class roundingLogClass;
-@property (nonatomic, strong) SeniorRoundingDocumentGenerator *generator;
+@property (nonatomic, strong) RoundingDocumentGenerator *generator;
 
 - (RoundingLog *) addNewRoundingLog;
 

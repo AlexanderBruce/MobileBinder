@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "RoundingDocumentGenerator.h"
 
-@interface SeniorRoundingDocumentGenerator : RoundingDocumentGenerator
+@interface EmployeeRoundingDocumentGenerator : RoundingDocumentGenerator
 
 @end

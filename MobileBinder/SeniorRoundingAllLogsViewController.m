@@ -10,7 +10,7 @@
 @implementation SeniorRoundingAllLogsViewController
 
 
-- (UITableViewCell *) customizeCell:(UITableViewCell *)cell usingRoundingLog:(RoundingLog *)log
+- (UITableViewCell *) customizeCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath usingRoundingLog:(RoundingLog *)log
 {
     if(![log isKindOfClass:[SeniorRoundingLog class]])
     {
@@ -29,6 +29,8 @@
     else if(currentLog.unit.length > 0) [labelText appendFormat:@"%@",currentLog.unit];
     if((currentLog.date || currentLog.unit.length > 0) && currentLog.name.length > 0) [labelText appendFormat:@" (%@)",currentLog.name];
     else if(currentLog.name.length > 0) [labelText appendFormat:@"(%@)",currentLog.name];
+    
+    if(labelText.length == 0) labelText = [NSString stringWithFormat:@"Log %d",indexPath.row + 1];
     cell.textLabel.text = labelText;
     
     //Create detail text for cell

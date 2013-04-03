@@ -88,7 +88,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="U8B-ng-nYQ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Kxz-1P-q90">
@@ -130,8 +130,8 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S57-Ed-s8K">
-                                        <rect key="frame" x="20" y="20" width="101" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Employee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S57-Ed-s8K">
+                                        <rect key="frame" x="20" y="20" width="101" height="23"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -156,23 +156,25 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jFO-NN-uFY">
-                                        <rect key="frame" x="20" y="366" width="280" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <state key="normal" title="Delete Log" backgroundImage="Delete Button.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="deletePressed:" destination="Vti-SD-kIL" eventType="touchUpInside" id="CWq-dS-UIJ"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </scrollView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Xw2-4P-1Vn">
+                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="trash" id="B3a-dS-XJk">
+                                        <connections>
+                                            <action selector="deletePressed:" destination="Vti-SD-kIL" id="90A-ZC-htL"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="mwH-ln-0Nd"/>
+                                    <barButtonItem systemItem="action" id="XWj-gf-A3Z">
+                                        <connections>
+                                            <action selector="sharePressed:" destination="Vti-SD-kIL" id="6hj-dL-sMl"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -184,11 +186,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="dateField" destination="hl2-Dh-oAI" id="ACB-va-QC2"/>
+                        <outlet property="employeeNameField" destination="hl2-Dh-oAI" id="kny-Wh-wyz"/>
                         <outlet property="keyFocusField" destination="Kxz-1P-q90" id="x2W-cf-SiI"/>
                         <outlet property="keyRemindersField" destination="DBb-Im-uVB" id="oox-hC-9iH"/>
                         <outlet property="leaderField" destination="uNZ-to-VQt" id="Zbl-wX-ZSW"/>
-                        <outlet property="scrollView" destination="U8B-ng-nYQ" id="kYh-hF-Qx6"/>
+                        <outlet property="scrollView" destination="U8B-ng-nYQ" id="XmS-97-ed3"/>
                         <outlet property="unitField" destination="Cgv-GA-Fbm" id="SY7-eU-n05"/>
                         <segue destination="faZ-56-Z2Z" kind="push" identifier="roundingDetailsSegue" id="DrN-Ib-9xp"/>
                     </connections>
@@ -544,7 +546,7 @@
             </objects>
             <point key="canvasLocation" x="39" y="169"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Table View Controller - Settings-->
         <scene sceneID="boX-01-jes">
             <objects>
                 <tableViewController id="EcV-72-NOV" sceneMemberID="viewController">
@@ -603,7 +605,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Customization" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XJy-IS-9pR">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Personalization" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XJy-IS-9pR">
                                                     <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -646,7 +648,7 @@
                             <outlet property="delegate" destination="EcV-72-NOV" id="Vib-Xn-kLS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Emq-Fq-8zJ"/>
+                    <navigationItem key="navigationItem" title="Settings" id="Emq-Fq-8zJ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bn4-gn-zTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -667,14 +669,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Notifications" id="STZ-zu-bMa">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="qTX-YT-qjh">
+                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="HGk-6A-Zs1">
                             <connections>
-                                <action selector="cancelPressed:" destination="AHj-au-6ik" id="7JA-Qv-q8t"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="HGk-6A-Zs1">
-                            <connections>
-                                <action selector="savePressed:" destination="AHj-au-6ik" id="iAH-lB-4df"/>
+                                <action selector="donePressed:" destination="AHj-au-6ik" id="BkG-tc-xUb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1129,7 +1126,7 @@
             </objects>
             <point key="canvasLocation" x="-144" y="762"/>
         </scene>
-        <!--Payroll Period View Controller-->
+        <!--Payroll Period View Controller - Payroll-->
         <scene sceneID="XTQ-Hb-Je3">
             <objects>
                 <viewController id="lSA-7O-ggg" customClass="PayrollPeriodViewController" sceneMemberID="viewController">
@@ -1137,43 +1134,42 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="4P3-7T-WTh">
-                                <rect key="frame" x="-5" y="0.0" width="331" height="130"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="V2r-cY-igV">
+                                <rect key="frame" x="0.0" y="88" width="320" height="328"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="hey-N1-gVx">
+                                <rect key="frame" x="140" y="50" width="160" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="hey-N1-gVx">
-                                        <rect key="frame" x="112" y="80" width="146" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Pg2-pM-MSF">
-                                        <rect key="frame" x="73" y="20" width="185" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="Biweekly"/>
-                                            <segment title="Monthly"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="segmentedValueChanged:" destination="lSA-7O-ggg" eventType="valueChanged" id="6lO-4q-miA"/>
-                                        </connections>
-                                    </segmentedControl>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pay Period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Ju-I6-aw6">
-                                        <rect key="frame" x="20" y="84" width="84" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </scrollView>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Pg2-pM-MSF">
+                                <rect key="frame" x="20" y="8" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Biweekly"/>
+                                    <segment title="Monthly"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedValueChanged:" destination="lSA-7O-ggg" eventType="valueChanged" id="6lO-4q-miA"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pay Period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Ju-I6-aw6">
+                                <rect key="frame" x="20" y="54" width="112" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Gdq-rN-Wgg"/>
+                    <navigationItem key="navigationItem" title="Payroll" id="Gdq-rN-Wgg"/>
                     <connections>
-                        <outlet property="myScrollView" destination="4P3-7T-WTh" id="NiC-DH-IDI"/>
-                        <outlet property="periodSelection" destination="hey-N1-gVx" id="t8s-zd-cfm"/>
+                        <outlet property="payPeriodTableView" destination="V2r-cY-igV" id="5cx-yM-iz5"/>
+                        <outlet property="periodSelectionField" destination="hey-N1-gVx" id="qnd-y1-0hl"/>
                         <outlet property="periodTypeSegmented" destination="Pg2-pM-MSF" id="f3y-OT-fQE"/>
                     </connections>
                 </viewController>
@@ -1476,7 +1472,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ubQ-E3-e6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1384" y="-551"/>
+            <point key="canvasLocation" x="-1460" y="-563"/>
         </scene>
         <!--Rounding Details View Controller - Details-->
         <scene sceneID="vxY-jQ-BNN">
@@ -1507,12 +1503,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfH-4O-jvd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-957" y="-551"/>
+            <point key="canvasLocation" x="-1069" y="-551"/>
         </scene>
         <!--Personalization View Controller - Personalization-->
         <scene sceneID="WON-OE-4o0">
             <objects>
-                <viewController storyboardIdentifier="customizationSettings" id="ebS-2W-pWG" customClass="PersonalizationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="personalizationSettings" id="ebS-2W-pWG" customClass="PersonalizationViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sad-eo-iZJ">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1543,151 +1539,7 @@
     </scenes>
     <resources>
         <image name="Banner copy.png" width="719" height="116"/>
-        <image name="Delete Button.png" width="602" height="86"/>
     </resources>
-    <classes>
-        <class className="AddEmployeeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEmployeeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="departmentField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="unitField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="AttendanceViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AttendanceViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="BackgroundViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BackgroundViewController.h"/>
-        </class>
-        <class className="EmployeeRoundingAllLogsViewController" superclassName="RoundingAllLogsViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeRoundingAllLogsViewController.h"/>
-        </class>
-        <class className="EmployeeRoundingOverviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeRoundingOverviewViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dateField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="keyFocusField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="keyRemindersField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="leaderField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="unitField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="EmployeeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="GradientButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GradientButton.h"/>
-        </class>
-        <class className="HomeViewController" superclassName="BackgroundViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
-        </class>
-        <class className="IncidentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IncidentViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="employeeNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="incidentDateField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="incidentTypeControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="ManagerSettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ManagerSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="PayrollNotificationsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PayrollNotificationsViewController.h"/>
-        </class>
-        <class className="PayrollPeriodViewController" superclassName="BackgroundViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PayrollPeriodViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="segmentedValueChanged:"/>
-                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="periodSelection" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="periodTypeSegmented" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="PersonalizationViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PersonalizationViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RemindersViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RemindersViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="ResetSettingsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ResetSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="eraseContentCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="resetAllCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="resetSettingsCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="ResourcesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ResourcesViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RoundingAllLogsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingAllLogsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RoundingDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addPressed:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SeniorRoundingAllLogsViewController" superclassName="RoundingAllLogsViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SeniorRoundingAllLogsViewController.h"/>
-        </class>
-        <class className="SeniorRoundingOverviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SeniorRoundingOverviewViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dateField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="notesView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="unitField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="WebviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WebviewViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="webview" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="WelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WelcomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

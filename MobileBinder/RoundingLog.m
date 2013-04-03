@@ -9,9 +9,10 @@
 
 @implementation RoundingLog
 
+//ABSTRACT
 - (NSArray *) getColumnTitles
 {
-    //ABSTRACT
+    [NSException raise:@"Override Error" format:@"Method %@ must be overidden in class %@",NSStringFromSelector(_cmd),self.class];
     return nil;
 }
 
@@ -30,6 +31,8 @@
 - (int) addRow
 {
     [self.rows addObject:[[NSMutableDictionary alloc] init]];
+    self.managedObject.contents = self.rows; //Maybe not necessary
+    NSLog(@"Add row to make %d rows",self.rows.count);
     return self.rows.count - 1;
 }
 
@@ -39,18 +42,21 @@
     {
         [self.rows removeObjectAtIndex:rowNumber];
     }
+    self.managedObject.contents = self.rows;
 }
 
 - (void) storeContents: (NSString *) contents forRow: (int) rowNumber column: (int) columnNumber
 {
-    if(rowNumber > self.rows.count)
+    NSLog(@"Store for row %d",rowNumber);
+    if(rowNumber >= self.rows.count)
     {
         [NSException raise:@"Invalid row number" format:@"You have tried to store contents in a row (%d) that is strictly greater than the current number of rows",rowNumber];
     }
-    if(rowNumber == self.rows.count)
-    {
-        [self.rows addObject:[[NSMutableDictionary alloc] init]];
-    }
+//    if(rowNumber == self.rows.count)
+//    {
+//        NSLog(@"Safty adding row");
+//        [self.rows addObject:[[NSMutableDictionary alloc] init]];
+//    }
     NSMutableDictionary *rowDictionary = [self.rows objectAtIndex:rowNumber];
     [rowDictionary setObject:contents forKey:[NSNumber numberWithInt: columnNumber]];
     self.managedObject.contents = self.rows;
@@ -91,7 +97,7 @@
     if(self = [super init])
     {
         self.rows = (managedObject.contents) ? managedObject.contents : [[NSMutableArray alloc] init];
-        
+
         //IMPLEMENT FURTHER IN SUBCLASSES
         
         self.managedObject = managedObject;

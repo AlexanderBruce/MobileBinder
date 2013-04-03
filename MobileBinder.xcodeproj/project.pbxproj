@@ -82,7 +82,6 @@
 		49A2458016DDCA1A00C4F855 /* ResetSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */; };
 		49A2458316DDD6F800C4F855 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */; };
 		49A2458416DDD6F800C4F855 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */; };
-		49A6F61A170A40D00075BDD9 /* Row in Resources */ = {isa = PBXBuildFile; fileRef = 49A6F619170A40D00075BDD9 /* Row */; };
 		49A6F61D170A7BB00075BDD9 /* PersonalizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F61C170A7BB00075BDD9 /* PersonalizationViewController.m */; };
 		49A6F61F170A808D0075BDD9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A6F61E170A808C0075BDD9 /* CoreMedia.framework */; };
 		49A6F622170A84680075BDD9 /* BackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A6F621170A84680075BDD9 /* BackgroundViewController.m */; };
@@ -114,6 +113,11 @@
 		49F58761170B55F800589070 /* Thumbnail3.png in Resources */ = {isa = PBXBuildFile; fileRef = 49F58757170B55F800589070 /* Thumbnail3.png */; };
 		49F58762170B55F800589070 /* Thumbnail4.png in Resources */ = {isa = PBXBuildFile; fileRef = 49F58758170B55F800589070 /* Thumbnail4.png */; };
 		49F58763170B55F800589070 /* Thumbnail5.png in Resources */ = {isa = PBXBuildFile; fileRef = 49F58759170B55F800589070 /* Thumbnail5.png */; };
+		49F58768170B67EB00589070 /* EmployeeRoundingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F58767170B67EB00589070 /* EmployeeRoundingModel.m */; };
+		49F5876B170B681400589070 /* EmployeeRoundingDocumentGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5876A170B681400589070 /* EmployeeRoundingDocumentGenerator.m */; };
+		49F5876F170B687500589070 /* RoundingDocumentGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5876E170B687400589070 /* RoundingDocumentGenerator.m */; };
+		49F58772170B6A3E00589070 /* RoundingOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F58771170B6A3D00589070 /* RoundingOverviewViewController.m */; };
+		49F58774170B7D5C00589070 /* Employee Rounding Document Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 49F58773170B7D5B00589070 /* Employee Rounding Document Template.rtf */; };
 		49FB66FF16C2CA0D004F576F /* PayrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FB66FE16C2CA0D004F576F /* PayrollModel.m */; };
 		F745C9A016D7E3F900F5138C /* new_Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = F745C99F16D7E3F900F5138C /* new_Banner.png */; };
 		F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */; };
@@ -265,7 +269,6 @@
 		49A2457F16DDCA1A00C4F855 /* ResetSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetSettingsViewController.m; sourceTree = "<group>"; };
 		49A2458116DDD6F800C4F855 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		49A2458216DDD6F800C4F855 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
-		49A6F619170A40D00075BDD9 /* Row */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Row; sourceTree = "<group>"; };
 		49A6F61B170A7BB00075BDD9 /* PersonalizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalizationViewController.h; sourceTree = "<group>"; };
 		49A6F61C170A7BB00075BDD9 /* PersonalizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalizationViewController.m; sourceTree = "<group>"; };
 		49A6F61E170A808C0075BDD9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -309,6 +312,15 @@
 		49F58757170B55F800589070 /* Thumbnail3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumbnail3.png; sourceTree = "<group>"; };
 		49F58758170B55F800589070 /* Thumbnail4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumbnail4.png; sourceTree = "<group>"; };
 		49F58759170B55F800589070 /* Thumbnail5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumbnail5.png; sourceTree = "<group>"; };
+		49F58766170B67EB00589070 /* EmployeeRoundingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRoundingModel.h; sourceTree = "<group>"; };
+		49F58767170B67EB00589070 /* EmployeeRoundingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRoundingModel.m; sourceTree = "<group>"; };
+		49F58769170B681400589070 /* EmployeeRoundingDocumentGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRoundingDocumentGenerator.h; sourceTree = "<group>"; };
+		49F5876A170B681400589070 /* EmployeeRoundingDocumentGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRoundingDocumentGenerator.m; sourceTree = "<group>"; };
+		49F5876D170B687400589070 /* RoundingDocumentGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingDocumentGenerator.h; sourceTree = "<group>"; };
+		49F5876E170B687400589070 /* RoundingDocumentGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingDocumentGenerator.m; sourceTree = "<group>"; };
+		49F58770170B6A3D00589070 /* RoundingOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingOverviewViewController.h; sourceTree = "<group>"; };
+		49F58771170B6A3D00589070 /* RoundingOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundingOverviewViewController.m; sourceTree = "<group>"; };
+		49F58773170B7D5B00589070 /* Employee Rounding Document Template.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Employee Rounding Document Template.rtf"; sourceTree = "<group>"; };
 		49FB66FD16C2CA0D004F576F /* PayrollModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollModel.h; sourceTree = "<group>"; };
 		49FB66FE16C2CA0D004F576F /* PayrollModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollModel.m; sourceTree = "<group>"; };
 		F745C99F16D7E3F900F5138C /* new_Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = new_Banner.png; path = ../new_Banner.png; sourceTree = "<group>"; };
@@ -459,37 +471,21 @@
 		494CD9F016DD431100112E3E /* Rounding */ = {
 			isa = PBXGroup;
 			children = (
-				497B0C261704889600451D35 /* EmployeeRoundingAllLogsViewController.h */,
-				497B0C271704889600451D35 /* EmployeeRoundingAllLogsViewController.m */,
-				497B0C201704875400451D35 /* EmployeeRoundingLog.h */,
-				497B0C211704875400451D35 /* EmployeeRoundingLog.m */,
-				49A2457816DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.h */,
-				49A2457916DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.m */,
-				494CD9F116DD437100112E3E /* EmployeeRoundingOverviewViewController.h */,
-				494CD9F216DD437100112E3E /* EmployeeRoundingOverviewViewController.m */,
+				49F58765170B66F200589070 /* Employee */,
 				49A2457516DDA19B00C4F855 /* RoundingAllLogsViewController.h */,
 				49A2457616DDA19C00C4F855 /* RoundingAllLogsViewController.m */,
 				494CDA2816DD4C7B00112E3E /* RoundingDetailsViewController.h */,
 				494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */,
+				49F5876D170B687400589070 /* RoundingDocumentGenerator.h */,
+				49F5876E170B687400589070 /* RoundingDocumentGenerator.m */,
 				49A2457016DD757F00C4F855 /* RoundingLog.h */,
 				49A2457116DD757F00C4F855 /* RoundingLog.m */,
 				497B0C3A1704B09000451D35 /* RoundingLogManagedObjectProtocol.h */,
 				49A2457B16DDA86000C4F855 /* RoundingModel.h */,
 				49A2457C16DDA86000C4F855 /* RoundingModel.m */,
-				49A6F619170A40D00075BDD9 /* Row */,
-				497B0C381704A63800451D35 /* Senior Rounding Document Template.rtf */,
-				497B0C23170487BA00451D35 /* SeniorRoundingAllLogsViewController.h */,
-				497B0C24170487BA00451D35 /* SeniorRoundingAllLogsViewController.m */,
-				497B0C351704A37D00451D35 /* SeniorRoundingDocumentGenerator.h */,
-				497B0C361704A37D00451D35 /* SeniorRoundingDocumentGenerator.m */,
-				4941D89616FBB02000D7216B /* SeniorRoundingLog.h */,
-				4941D89716FBB02000D7216B /* SeniorRoundingLog.m */,
-				497B0C2917048B3D00451D35 /* SeniorRoundingLogManagedObject.h */,
-				497B0C2A17048B3D00451D35 /* SeniorRoundingLogManagedObject.m */,
-				497B0C2C17048BC600451D35 /* SeniorRoundingModel.h */,
-				497B0C2D17048BC600451D35 /* SeniorRoundingModel.m */,
-				497B0C3217048F8400451D35 /* SeniorRoundingOverviewViewController.h */,
-				497B0C3317048F8500451D35 /* SeniorRoundingOverviewViewController.m */,
+				49F58770170B6A3D00589070 /* RoundingOverviewViewController.h */,
+				49F58771170B6A3D00589070 /* RoundingOverviewViewController.m */,
+				49F58764170B66ED00589070 /* Senior */,
 			);
 			name = Rounding;
 			sourceTree = "<group>";
@@ -622,6 +618,46 @@
 				49E7AA34170B4BD000727724 /* Background0.png */,
 			);
 			name = "Background Images";
+			sourceTree = "<group>";
+		};
+		49F58764170B66ED00589070 /* Senior */ = {
+			isa = PBXGroup;
+			children = (
+				497B0C381704A63800451D35 /* Senior Rounding Document Template.rtf */,
+				497B0C23170487BA00451D35 /* SeniorRoundingAllLogsViewController.h */,
+				497B0C24170487BA00451D35 /* SeniorRoundingAllLogsViewController.m */,
+				497B0C351704A37D00451D35 /* SeniorRoundingDocumentGenerator.h */,
+				497B0C361704A37D00451D35 /* SeniorRoundingDocumentGenerator.m */,
+				4941D89616FBB02000D7216B /* SeniorRoundingLog.h */,
+				4941D89716FBB02000D7216B /* SeniorRoundingLog.m */,
+				497B0C2917048B3D00451D35 /* SeniorRoundingLogManagedObject.h */,
+				497B0C2A17048B3D00451D35 /* SeniorRoundingLogManagedObject.m */,
+				497B0C2C17048BC600451D35 /* SeniorRoundingModel.h */,
+				497B0C2D17048BC600451D35 /* SeniorRoundingModel.m */,
+				497B0C3217048F8400451D35 /* SeniorRoundingOverviewViewController.h */,
+				497B0C3317048F8500451D35 /* SeniorRoundingOverviewViewController.m */,
+			);
+			name = Senior;
+			sourceTree = "<group>";
+		};
+		49F58765170B66F200589070 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				49F58773170B7D5B00589070 /* Employee Rounding Document Template.rtf */,
+				497B0C261704889600451D35 /* EmployeeRoundingAllLogsViewController.h */,
+				497B0C271704889600451D35 /* EmployeeRoundingAllLogsViewController.m */,
+				49F58769170B681400589070 /* EmployeeRoundingDocumentGenerator.h */,
+				49F5876A170B681400589070 /* EmployeeRoundingDocumentGenerator.m */,
+				497B0C201704875400451D35 /* EmployeeRoundingLog.h */,
+				497B0C211704875400451D35 /* EmployeeRoundingLog.m */,
+				49A2457816DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.h */,
+				49A2457916DDA44C00C4F855 /* EmployeeRoundingLogManagedObject.m */,
+				49F58766170B67EB00589070 /* EmployeeRoundingModel.h */,
+				49F58767170B67EB00589070 /* EmployeeRoundingModel.m */,
+				494CD9F116DD437100112E3E /* EmployeeRoundingOverviewViewController.h */,
+				494CD9F216DD437100112E3E /* EmployeeRoundingOverviewViewController.m */,
+			);
+			name = Employee;
 			sourceTree = "<group>";
 		};
 		49FB670016C2CA21004F576F /* Attendance */ = {
@@ -758,7 +794,6 @@
 				4906CA3E16FF790300981B74 /* employee_data.csv in Resources */,
 				49DBA7731703B44300605FAD /* ResourcesData in Resources */,
 				497B0C391704A63800451D35 /* Senior Rounding Document Template.rtf in Resources */,
-				49A6F61A170A40D00075BDD9 /* Row in Resources */,
 				49A6F630170B254B0075BDD9 /* JPImagePickerDetailController.xib in Resources */,
 				49A6F632170B254B0075BDD9 /* JPImagePickerOverviewController.xib in Resources */,
 				49E7AA35170B4BD000727724 /* Thumbnail0.png in Resources */,
@@ -773,6 +808,7 @@
 				49F58761170B55F800589070 /* Thumbnail3.png in Resources */,
 				49F58762170B55F800589070 /* Thumbnail4.png in Resources */,
 				49F58763170B55F800589070 /* Thumbnail5.png in Resources */,
+				49F58774170B7D5C00589070 /* Employee Rounding Document Template.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -851,6 +887,10 @@
 				49A6F631170B254B0075BDD9 /* JPImagePickerOverviewController.m in Sources */,
 				49A6F633170B254B0075BDD9 /* UIImageResizing.m in Sources */,
 				49E7AA27170B450900727724 /* PredefinedImagesModel.m in Sources */,
+				49F58768170B67EB00589070 /* EmployeeRoundingModel.m in Sources */,
+				49F5876B170B681400589070 /* EmployeeRoundingDocumentGenerator.m in Sources */,
+				49F5876F170B687500589070 /* RoundingDocumentGenerator.m in Sources */,
+				49F58772170B6A3E00589070 /* RoundingOverviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

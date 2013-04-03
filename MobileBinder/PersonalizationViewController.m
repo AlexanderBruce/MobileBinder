@@ -35,6 +35,11 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    //Hide back button
+    UIView *tmpView = [[UIView alloc] initWithFrame:CGRectZero];
+    UIBarButtonItem *tmpButtonItem = [[UIBarButtonItem alloc] initWithCustomView:tmpView];
+    self.navigationItem.leftBarButtonItem = tmpButtonItem;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -166,8 +171,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:BACKGROUND_IMAGE_FILENAME];
         NSData *imageData = UIImagePNGRepresentation(scaledImage);
         [imageData writeToFile:savedImagePath atomically:YES];
-        [BackgroundViewController refreshBackground];
         dispatch_async(dispatch_get_main_queue(), ^{
+            [BackgroundViewController refreshBackground];
             self.view.userInteractionEnabled = YES;
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         });

@@ -27,12 +27,7 @@
 
 @implementation PayrollNotificationsViewController
 
-- (IBAction)cancelPressed:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)savePressed:(id)sender
+- (IBAction)donePressed:(id)sender
 {
     MBProgressHUD *progressIndicator = [MBProgressHUD showHUDAddedTo:self.view animated:YES fontSize:PROGRESS_INDICATOR_LABEL_FONT_SIZE];
     progressIndicator.animationType = MBProgressHUDAnimationFade;
@@ -42,9 +37,6 @@
     progressIndicator.taskInProgress = YES;
     progressIndicator.removeFromSuperViewOnHide = YES;
     self.view.userInteractionEnabled = NO;
-    
-
-    
     
     NSMutableArray *typeIDsToRemove = [[NSMutableArray alloc] init];
     NSMutableArray *typeIDsToAdd = [[NSMutableArray alloc] init];
@@ -175,19 +167,12 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
     
-    [super viewWillDisappear:animated];
-    //Code moved up to savePressed method
-}
+    //Hide back button
+    UIView *tmpView = [[UIView alloc] initWithFrame:CGRectZero];
+    UIBarButtonItem *tmpButtonItem = [[UIBarButtonItem alloc] initWithCustomView:tmpView];
+    self.navigationItem.leftBarButtonItem = tmpButtonItem;
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source

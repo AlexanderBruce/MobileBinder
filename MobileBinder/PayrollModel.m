@@ -10,7 +10,8 @@
 @property (nonatomic,strong) NSMutableDictionary *typeIDToDateArray;
 @property (nonatomic, strong) NSMutableDictionary *typeIDToText;
 @property (nonatomic, strong) NSMutableDictionary *periodToDates;
-@property (nonatomic, strong) NSString *year;
+@property (nonatomic) int year;
+@property (atomic) BOOL isInitialized;
 @end
 
 @implementation PayrollModel
@@ -68,7 +69,11 @@
     for (NSString *line in lines)
     {
         if([line hasPrefix:@"//"]) continue; //Skip comment lines
-        if([line hasPrefix:@"##"])
+        if ([line hasPrefix:@"!!"])
+        {
+            self.year = [[line substringWithRange:NSMakeRange(2, 4)] intValue];
+        }
+        else if([line hasPrefix:@"##"])
         {
             NSArray *headerArray = [line componentsSeparatedByString:@"##"];
             if(headerArray.count != 4) [NSException raise:NSInvalidArgumentException format:@"Each header must have the form ##Description##typeID##"];
@@ -88,7 +93,7 @@
             {
                 NSCalendar *calendar = [NSCalendar currentCalendar];
                 NSDateComponents *components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:date];
-                components.year = 2013; //FIX ME
+                components.year = self.year;
                 date = [calendar dateFromComponents:components];
                 [datesForTypeID addObject:date];
                 
@@ -108,7 +113,9 @@
         self.typeIDToDateArray = [[NSMutableDictionary alloc] init];
         self.typeIDToText = [[NSMutableDictionary alloc] init];
         self.periodToDates = [[NSMutableDictionary alloc] init];
-        [self parseData];
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self parseData];
+//        });
     }
     return self;
 }

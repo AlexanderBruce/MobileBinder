@@ -5,6 +5,7 @@
 #import "UITextFieldCell.h"
 #import "UIButton+Disable.h"
 #import "Constants.h"
+#import "RoundingLogManagedObjectProtocol.h"
 
 #define EMPLOYEE_SECTION 0
 #define EMPLOYEE_SECTION_HEIGHT 35
@@ -31,7 +32,6 @@
     self.currentRow = [self.log addRow];
     if(self.log.numberOfRows >= 2) [self.switchButton enableButton];
     else [self.switchButton disableButton];
-    [Database saveDatabase];
     NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.log.numberOfColumns - 1)];
     [self.tableView beginUpdates];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:EMPLOYEE_SECTION] atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -177,12 +177,6 @@
 }
 
 
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.tableView reloadData];
-}
-
 - (void) showPicker
 {
     if(self.pickerIsVisible) return;
@@ -248,6 +242,16 @@
     self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, 5000);
     [self createPicker];
     
+
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.delegate = self;
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow)
                                                  name:UIKeyboardWillShowNotification
@@ -257,16 +261,32 @@
                                              selector:@selector(keyboardWillHide)
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    gestureRecognizer.delegate = self;
-    gestureRecognizer.cancelsTouchesInView = NO;
-    [self.tableView addGestureRecognizer:gestureRecognizer];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
+    
+    [self.tableView reloadData];
+}
+
+- (void) applicationWillResignActive
+{
+    [self.tableView endEditing:YES];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if([self.log allContentsForColumn:EMPLOYEE_SECTION].count == 0) [self.employeeNameField becomeFirstResponder];
+    if(self.log.numberOfRows == 0)
+    {
+        self.currentRow = [self.log addRow];
+        [self.employeeNameField becomeFirstResponder];
+    }
 }
 
 - (void) hideKeyboard
@@ -318,15 +338,6 @@
     [self.view addSubview: pickerView];
 }
 
-- (void)viewDidUnload
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
-}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
@@ -337,12 +348,6 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
     [self setTableView:nil];
     [super viewDidUnload];
 }

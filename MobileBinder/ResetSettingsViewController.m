@@ -1,7 +1,9 @@
 #import "ResetSettingsViewController.h"
 #import "Database.h"
 #import <CoreData/CoreData.h>
+#import "Constants.h"
 #import "MBProgressHUD.h"
+#import "BackgroundViewController.h"
 
 
 #define RESET_SETTINGS_TAG 2
@@ -50,8 +52,14 @@
     ? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
     : [NSDictionary dictionary];
     [[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
-    
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    //Delete background
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *backgroundPath = [documentsDirectory stringByAppendingPathComponent:BACKGROUND_IMAGE_FILENAME];
+    [[NSFileManager defaultManager] removeItemAtPath: backgroundPath error: nil];
+    [BackgroundViewController refreshBackground];
 }
 
 - (void) eraseContent
@@ -150,10 +158,6 @@
     [HUD hide:YES afterDelay:RESET_COMPLETE_HUD_SHOW_TIME];
 
 }
-
-
-
-
 
 - (void)viewDidUnload {
     [self setResetSettingsCell:nil];

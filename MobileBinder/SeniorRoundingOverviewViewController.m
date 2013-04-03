@@ -1,50 +1,26 @@
 #import "SeniorRoundingOverviewViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "RoundingDetailsViewController.h"
 #import "RoundingLog.h"
 #import "RoundingModel.h"
 #import "SeniorRoundingLog.h"
 #import "Constants.h"
 #import "Database.h"
 
-#define ROUNDING_DETAILS_SEGUE @"roundingDetailsSegue"
 
 #define SCROLL_OFFSET IS_4_INCH_SCREEN ? 120 : 200
 #define CONTENT_SIZE IS_4_INCH_SCREEN ? 480: 590
 
-@interface SeniorRoundingOverviewViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@interface SeniorRoundingOverviewViewController () <UITextFieldDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
 @property (weak, nonatomic) IBOutlet UITextField *unitField;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextView *notesView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic) BOOL firstResponderIsActive;
 @property (nonatomic, strong) NSDateFormatter *formatter;
 @property (nonatomic, weak) MFMailComposeViewController *mailer;
 @end
 
 @implementation SeniorRoundingOverviewViewController
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.destinationViewController isKindOfClass:[RoundingDetailsViewController class]])
-    {
-        RoundingDetailsViewController *dest = segue.destinationViewController;
-        dest.log = self.log;
-    }
-}
-
-- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    if(!result == MFMailComposeResultCancelled)
-    {
-        [self.mailer dismissViewControllerAnimated:YES completion:^{
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-    }
-
-}
-
 
 
 - (void) viewDidLoad
@@ -56,9 +32,6 @@
     [self.notesView.layer setBorderWidth:1.3]; //2.0
     self.firstResponderIsActive = NO;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden)
-                                                 name:UIKeyboardWillHideNotification object:nil];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, CONTENT_SIZE);
     self.scrollView.scrollEnabled = NO;
     self.dateField.delegate = self;
@@ -77,53 +50,23 @@
     {
         self.dateField.text = [self.formatter stringFromDate:[NSDate date]];
     }
-    self.unitField.text = self.log.unit;
-    self.nameField.text = self.log.name;
-    self.notesView.text = self.log.notes;
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    gestureRecognizer.delegate = self;
-    [self.scrollView addGestureRecognizer:gestureRecognizer];
-}
-
-- (void) keyboardWillBeHidden
-{
-    self.scrollView.scrollEnabled = NO;
-}
-
-- (void) hideKeyboard
-{
-    [self.view endEditing:YES];
-}
-
-
-- (IBAction)nextPressed:(id)sender
-{
-    [self performSegueWithIdentifier:ROUNDING_DETAILS_SEGUE sender:self];
-}
-
-- (IBAction)deletePressed:(id)sender
-{
-    [self.view endEditing:YES];
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Are you sure you want to delete this rounding log?"] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil];
-    [sheet showInView:self.view];
-}
-
-- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == actionSheet.destructiveButtonIndex)
+    if(self.log.name.length > 0)
     {
-        [self.model deleteRoundingLog: self.log];
-        [self.navigationController popViewControllerAnimated:YES];
+        self.nameField.text = self.log.name;
     }
+    else
+    {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *name = [defaults objectForKey:MANAGER_NAME];
+        if(!name) name = @"";
+        self.nameField.text = name;
+    }
+    self.unitField.text = self.log.unit;
+    self.notesView.text = self.log.notes;
+
 }
 
-- (IBAction)sharePressed:(id)sender
-{
-    [self saveDataIntoLog];
-    self.mailer = [self.model generateRoundingDocumentFor:self.log];
-    self.mailer.mailComposeDelegate = self;
-    [self presentModalViewController:self.mailer animated:YES];
-}
+
 
 - (UIView *) createDatePicker
 {
@@ -167,12 +110,6 @@
     self.dateField.text = [self.formatter stringFromDate:datePicker.date];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [self.scrollView endEditing:YES];
-    [self saveDataIntoLog];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (void) saveDataIntoLog
 {
@@ -183,10 +120,6 @@
     [Database saveDatabase];
 }
 
-- (void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -240,20 +173,12 @@
     );
 }
 
-
-- (void) dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
 - (void)viewDidUnload
 {
     [self setDateField:nil];
     [self setUnitField:nil];
     [self setNameField:nil];
     [self setNotesView:nil];
-    [self setScrollView:nil];
     [super viewDidUnload];
 }
 @end

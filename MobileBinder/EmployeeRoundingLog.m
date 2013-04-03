@@ -10,14 +10,14 @@
 
 - (NSArray *) getColumnTitles
 {
-    if (!_columnTitles) _columnTitles = [NSArray arrayWithObjects: @"Employee Name",@"Personal Connection",@"Working Well?",@"Recognition for Others",@"Process Opprtunities",@"Tools & Equipment",@"Follow-up Actions",nil];
+    if (!_columnTitles) _columnTitles = [NSArray arrayWithObjects: @"Date",@"Personal Connection",@"Working Well?",@"Recognition for Others",@"Process Opportunities",@"Tools & Equipment",@"Follow-up Actions",nil];
     return _columnTitles;
 }
 
-- (void) setDate:(NSDate *)date
+- (void) setEmployeeName:(NSString *)employeeName
 {
-    _date = date;
-    self.managedObject.date = date;
+    _employeeName = employeeName;
+    self.managedObject.employeeName = _employeeName;
 }
 
 - (void) setUnit:(NSString *)unit
@@ -48,7 +48,7 @@
 {
     if(self = [super initWithManagedObject:managedObject])
     {        
-        self.date = (managedObject.date) ? managedObject.date : nil;
+        self.employeeName = (managedObject.employeeName) ? managedObject.employeeName : @"";
         self.unit = (managedObject.unit) ? managedObject.unit : @"";
         self.leader = (managedObject.leader) ? managedObject.leader : @"";
         self.keyFocus = (managedObject.keyFocus) ? managedObject.keyFocus : @"";
