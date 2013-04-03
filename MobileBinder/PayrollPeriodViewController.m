@@ -10,6 +10,7 @@
 
 #import "PayrollPeriodViewController.h"
 #import <Foundation/NSDate.h>
+#import "OutlinedLabel.h"
 #import "PayrollModel.h"
 
 #define KEYBOARD_HEIGHT 216.0f
@@ -32,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *payPeriodTableView;
 @property(strong,nonatomic) NSArray *modelData;
 @property(strong,nonatomic) NSArray *importantDateLabels;
+@property (weak, nonatomic) IBOutlet OutlinedLabel *myLabel;
 @end
 
 @implementation PayrollPeriodViewController
@@ -39,6 +41,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.myLabel.outlineColor = [UIColor blackColor];
+    self.myLabel.outlineWidth = .6;
+    self.myLabel.verticalAlignment = AGKOutlineLabelVerticalAlignmentMiddle;
+    self.myLabel.shadeBlur = 0;
+    self.myLabel.diffuseShadowColor = [UIColor blackColor];
+    self.myLabel.diffuseShadowOffset = CGSizeZero;
+    
     self.myModel = [[PayrollModel alloc] init];
     self.payrollStringsToPayrollModel = [NSMutableDictionary dictionary];
     self.monthlyPayPeriods = [[NSMutableArray alloc]initWithObjects:
@@ -215,6 +224,7 @@
     [self setPayPeriodTableView:nil];
     [self setPayPeriodTableView:nil];
     [self setPayPeriodTableView:nil];
+    [self setMyLabel:nil];
     [super viewDidUnload];
 }
 @end

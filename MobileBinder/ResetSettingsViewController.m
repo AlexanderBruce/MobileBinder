@@ -59,7 +59,9 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *backgroundPath = [documentsDirectory stringByAppendingPathComponent:BACKGROUND_IMAGE_FILENAME];
     [[NSFileManager defaultManager] removeItemAtPath: backgroundPath error: nil];
-    [BackgroundViewController refreshBackground];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [BackgroundViewController refreshBackground];
+    });
 }
 
 - (void) eraseContent
@@ -156,7 +158,6 @@
     HUD.labelText = @"Complete";
     [HUD show:YES];
     [HUD hide:YES afterDelay:RESET_COMPLETE_HUD_SHOW_TIME];
-
 }
 
 - (void)viewDidUnload {

@@ -119,6 +119,7 @@
 		49F58772170B6A3E00589070 /* RoundingOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F58771170B6A3D00589070 /* RoundingOverviewViewController.m */; };
 		49F58774170B7D5C00589070 /* Employee Rounding Document Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 49F58773170B7D5B00589070 /* Employee Rounding Document Template.rtf */; };
 		49FB66FF16C2CA0D004F576F /* PayrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FB66FE16C2CA0D004F576F /* PayrollModel.m */; };
+		49FFC802170CC56C0034ABBE /* OutlinedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FFC801170CC56C0034ABBE /* OutlinedLabel.m */; };
 		F745C9A016D7E3F900F5138C /* new_Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = F745C99F16D7E3F900F5138C /* new_Banner.png */; };
 		F753793116B8A1A000DEFD48 /* PayrollNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */; };
 		F790E92216DFC16E00CB288C /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = F790E92116DFC16E00CB288C /* back.png */; };
@@ -323,6 +324,8 @@
 		49F58773170B7D5B00589070 /* Employee Rounding Document Template.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Employee Rounding Document Template.rtf"; sourceTree = "<group>"; };
 		49FB66FD16C2CA0D004F576F /* PayrollModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollModel.h; sourceTree = "<group>"; };
 		49FB66FE16C2CA0D004F576F /* PayrollModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollModel.m; sourceTree = "<group>"; };
+		49FFC800170CC56C0034ABBE /* OutlinedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlinedLabel.h; sourceTree = "<group>"; };
+		49FFC801170CC56C0034ABBE /* OutlinedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlinedLabel.m; sourceTree = "<group>"; };
 		F745C99F16D7E3F900F5138C /* new_Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = new_Banner.png; path = ../new_Banner.png; sourceTree = "<group>"; };
 		F753792F16B8A1A000DEFD48 /* PayrollNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollNotificationsViewController.h; sourceTree = "<group>"; };
 		F753793016B8A1A000DEFD48 /* PayrollNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollNotificationsViewController.m; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 				498F86C416DD6387005118C1 /* UITextFieldCell.m */,
 				4961F83D16DD525000B5EBC8 /* UITextViewCell.h */,
 				4961F83E16DD525000B5EBC8 /* UITextViewCell.m */,
+				49FFC800170CC56C0034ABBE /* OutlinedLabel.h */,
+				49FFC801170CC56C0034ABBE /* OutlinedLabel.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -891,6 +896,7 @@
 				49F5876B170B681400589070 /* EmployeeRoundingDocumentGenerator.m in Sources */,
 				49F5876F170B687500589070 /* RoundingDocumentGenerator.m in Sources */,
 				49F58772170B6A3E00589070 /* RoundingOverviewViewController.m in Sources */,
+				49FFC802170CC56C0034ABBE /* OutlinedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

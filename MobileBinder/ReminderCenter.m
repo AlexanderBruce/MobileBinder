@@ -39,6 +39,7 @@ static ReminderCenter *instance;
             managedObject.typeID = [NSNumber numberWithInt:reminder.typeID];
             
             UILocalNotification *notif = [[UILocalNotification alloc] init];
+            //ALEX BRUCE LOOK AT FIRE DATE HERE
             notif.fireDate = reminder.fireDate;
             notif.timeZone = [NSTimeZone defaultTimeZone];
             notif.alertBody = reminder.text;
