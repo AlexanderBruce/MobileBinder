@@ -41,12 +41,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.myLabel.outlineColor = [UIColor blackColor];
-    self.myLabel.outlineWidth = .6;
-    self.myLabel.verticalAlignment = AGKOutlineLabelVerticalAlignmentMiddle;
-    self.myLabel.shadeBlur = 0;
-    self.myLabel.diffuseShadowColor = [UIColor blackColor];
-    self.myLabel.diffuseShadowOffset = CGSizeZero;
+    [self.myLabel customize];
+
     
     self.myModel = [[PayrollModel alloc] init];
     self.payrollStringsToPayrollModel = [NSMutableDictionary dictionary];

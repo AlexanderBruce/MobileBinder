@@ -13,9 +13,12 @@ static UIColor *backgroundColor;
 
 + (void) initialize
 {
-    instances = [[NSMutableArray alloc] init];
-    vcToValueMap = [[NSMutableDictionary alloc] init];
-    [BackgroundViewController loadBackgroundImage];
+    if(self == [BackgroundViewController class])
+    {
+        instances = [[NSMutableArray alloc] init];
+        vcToValueMap = [[NSMutableDictionary alloc] init];
+        [BackgroundViewController loadBackgroundImage];
+    }
 }
 
 + (NSValue *) addViewControllerToInstances: (BackgroundViewController *) viewController

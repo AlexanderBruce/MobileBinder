@@ -15,4 +15,6 @@ typedef enum _ASIAuthenticationType {
 @property (nonatomic, strong) UIColor * diffuseShadowColor;
 @property (nonatomic) CGSize diffuseShadowOffset;
 
+- (void) customize;
+
 @end

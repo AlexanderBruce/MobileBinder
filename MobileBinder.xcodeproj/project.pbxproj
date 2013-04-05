@@ -96,6 +96,8 @@
 		49AB41F916C222B0007AA467 /* ReminderManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB41F816C222B0007AA467 /* ReminderManagedObject.m */; };
 		49AB41FE16C2C93D007AA467 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AB41FA16C2C93D007AA467 /* iPad.storyboard */; };
 		49AB41FF16C2C93D007AA467 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AB41FC16C2C93D007AA467 /* iPhone.storyboard */; };
+		49B73E14170F7AFD008408C7 /* AllSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B73E13170F7AFD008408C7 /* AllSettingsViewController.m */; };
+		49B73E18170F8462008408C7 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B73E17170F8462008408C7 /* AboutViewController.m */; };
 		49D9B01716CABD8300CCD463 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D9B01616CABD8300CCD463 /* MessageUI.framework */; };
 		49DBA76E1703B3B500605FAD /* ResourcesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DBA76D1703B3B500605FAD /* ResourcesModel.m */; };
 		49DBA7711703B3E400605FAD /* ResourceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DBA7701703B3E400605FAD /* ResourceObject.m */; };
@@ -293,6 +295,10 @@
 		49AB41F816C222B0007AA467 /* ReminderManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderManagedObject.m; sourceTree = "<group>"; };
 		49AB41FB16C2C93D007AA467 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		49AB41FD16C2C93D007AA467 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
+		49B73E12170F7AFD008408C7 /* AllSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSettingsViewController.h; sourceTree = "<group>"; };
+		49B73E13170F7AFD008408C7 /* AllSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSettingsViewController.m; sourceTree = "<group>"; };
+		49B73E16170F8462008408C7 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		49B73E17170F8462008408C7 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		49D9B01616CABD8300CCD463 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		49DBA76C1703B3B500605FAD /* ResourcesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcesModel.h; sourceTree = "<group>"; };
 		49DBA76D1703B3B500605FAD /* ResourcesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcesModel.m; sourceTree = "<group>"; };
@@ -534,7 +540,10 @@
 		494D0E3916B84BAB00354964 /* MobileBinder */ = {
 			isa = PBXGroup;
 			children = (
+				49B73E15170F845A008408C7 /* About */,
 				49FB670016C2CA21004F576F /* Attendance */,
+				49A6F620170A84670075BDD9 /* BackgroundViewController.h */,
+				49A6F621170A84680075BDD9 /* BackgroundViewController.m */,
 				F7A843A416D40ECB009F09DD /* Banner copy.png */,
 				499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */,
 				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
@@ -557,8 +566,6 @@
 				4939165816C2CADD00F9365D /* Supporting_Files */,
 				49125B1716DE7C9300103A08 /* Termination Notice Template.rtf */,
 				499C4CF616D2E77400ED6E76 /* Welcome */,
-				49A6F620170A84670075BDD9 /* BackgroundViewController.h */,
-				49A6F621170A84680075BDD9 /* BackgroundViewController.m */,
 			);
 			path = MobileBinder;
 			sourceTree = "<group>";
@@ -585,6 +592,8 @@
 				49A6F61C170A7BB00075BDD9 /* PersonalizationViewController.m */,
 				49E7AA25170B450900727724 /* PredefinedImagesModel.h */,
 				49E7AA26170B450900727724 /* PredefinedImagesModel.m */,
+				49B73E12170F7AFD008408C7 /* AllSettingsViewController.h */,
+				49B73E13170F7AFD008408C7 /* AllSettingsViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -604,6 +613,15 @@
 				49A6F62D170B254B0075BDD9 /* UIImageResizing.m */,
 			);
 			name = JPImagePicker;
+			sourceTree = "<group>";
+		};
+		49B73E15170F845A008408C7 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				49B73E16170F8462008408C7 /* AboutViewController.h */,
+				49B73E17170F8462008408C7 /* AboutViewController.m */,
+			);
+			name = About;
 			sourceTree = "<group>";
 		};
 		49E7AA28170B492E00727724 /* Background Images */ = {
@@ -897,6 +915,8 @@
 				49F5876F170B687500589070 /* RoundingDocumentGenerator.m in Sources */,
 				49F58772170B6A3E00589070 /* RoundingOverviewViewController.m in Sources */,
 				49FFC802170CC56C0034ABBE /* OutlinedLabel.m in Sources */,
+				49B73E14170F7AFD008408C7 /* AllSettingsViewController.m in Sources */,
+				49B73E18170F8462008408C7 /* AboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

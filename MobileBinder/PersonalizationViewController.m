@@ -6,6 +6,7 @@
 #import "JPImagePickerController.h"
 #import "BackgroundViewController.h"
 #import "PredefinedImagesModel.h"
+#import "OutlinedLabel.h"
 
 #define HEADER_TEXT @"App Wallpaper"
 
@@ -14,7 +15,6 @@
 
 #define LIBRARY_LABEL @"Select from Library"
 #define LIBRARY_ROW 1
-
 
 @interface PersonalizationViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, UITableViewDataSource, UITableViewDelegate, JPImagePickerControllerDelegate, JPImagePickerControllerDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,6 +35,8 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = nil;
     
     //Hide back button
     UIView *tmpView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -77,9 +79,25 @@
     return cell;
 }
 
-- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+#define HEADER_HEIGHT 42
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return HEADER_TEXT;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, HEADER_HEIGHT)];
+    //section text as a label
+    float x = 12;
+    float y = 9;
+    OutlinedLabel *label = [[OutlinedLabel alloc] initWithFrame:CGRectMake(x, y, view.frame.size.width - x, HEADER_HEIGHT - y)];
+    label.font = [UIFont boldSystemFontOfSize:17];
+    [view addSubview:label];
+    [label customize];
+    label.text = HEADER_TEXT;
+    [label setBackgroundColor:[UIColor clearColor]];
+    return view;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return HEADER_HEIGHT;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -170,7 +188,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:BACKGROUND_IMAGE_FILENAME];
         NSData *imageData = UIImagePNGRepresentation(scaledImage);
-        [imageData writeToFile:savedImagePath atomically:YES];
+        BOOL success = [imageData writeToFile:savedImagePath atomically:YES];
+        NSLog(@"Success = %d",success);
         dispatch_async(dispatch_get_main_queue(), ^{
             [BackgroundViewController refreshBackground];
             self.view.userInteractionEnabled = YES;

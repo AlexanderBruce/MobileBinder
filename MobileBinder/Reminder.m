@@ -10,6 +10,10 @@
 
 @implementation Reminder
 
+- (BOOL) isInPast
+{
+    return ([self.fireDate timeIntervalSinceNow] < 0.0);
+}
 
 - (id) initWithText:(NSString *)text eventDate:(NSDate *)eventDate fireDate:(NSDate *)fireDate typeID:(int)typeID
 {
