@@ -32,7 +32,6 @@
 {
     [self.rows addObject:[[NSMutableDictionary alloc] init]];
     self.managedObject.contents = self.rows; //Maybe not necessary
-    NSLog(@"Add row to make %d rows",self.rows.count);
     return self.rows.count - 1;
 }
 
@@ -47,16 +46,11 @@
 
 - (void) storeContents: (NSString *) contents forRow: (int) rowNumber column: (int) columnNumber
 {
-    NSLog(@"Store for row %d",rowNumber);
     if(rowNumber >= self.rows.count)
     {
         [NSException raise:@"Invalid row number" format:@"You have tried to store contents in a row (%d) that is strictly greater than the current number of rows",rowNumber];
     }
-//    if(rowNumber == self.rows.count)
-//    {
-//        NSLog(@"Safty adding row");
-//        [self.rows addObject:[[NSMutableDictionary alloc] init]];
-//    }
+
     NSMutableDictionary *rowDictionary = [self.rows objectAtIndex:rowNumber];
     [rowDictionary setObject:contents forKey:[NSNumber numberWithInt: columnNumber]];
     self.managedObject.contents = self.rows;

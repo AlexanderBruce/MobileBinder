@@ -156,7 +156,6 @@
 {
     if(searchText.length == 0)
     {
-        [self.mySearchBar resignFirstResponder];
         [self.myModel stopFilteringEmployees];
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
