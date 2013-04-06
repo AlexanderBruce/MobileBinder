@@ -57,10 +57,8 @@
     
     self.payPeriodTableView.delegate = self;
     self.payPeriodTableView.dataSource = self;
-//    self.payPeriodTableView.alpha = .85;
     self.payPeriodTableView.backgroundColor = [UIColor clearColor];
     self.payPeriodTableView.opaque = NO;
-//    self.payPeriodTableView.backgroundView = nil;
     
     for(int i = 0; i < [self.monthlyPayPeriods count]; i++)
     {
@@ -78,7 +76,6 @@
 -(UIView *) createPeriodPicker
 {
     UIView *pickerView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, KEYBOARD_HEIGHT+TOOLBAR_HEIGHT)];
-    
     self.myPicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0, TOOLBAR_HEIGHT, self.view.frame.size.width, KEYBOARD_HEIGHT)];
     self.myPicker.dataSource = self;
     self.myPicker.delegate = self;
@@ -92,17 +89,15 @@
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [toolBar setItems:[NSArray arrayWithObjects: flexible, self.doneButton, nil]];
     
-
     [pickerView addSubview:self.myPicker];
     [pickerView addSubview:toolBar];
-    
     return pickerView;
 }
 
 - (void)donePressed
 {
-    [self.periodSelectionField resignFirstResponder];
     [self.payPeriodTableView reloadData];
+    [self.periodSelectionField resignFirstResponder];
 }
 
 - (IBAction)segmentedValueChanged:(id)sender
