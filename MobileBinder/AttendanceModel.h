@@ -14,6 +14,10 @@
 
 - (void) deleteEmployeeRecord: (EmployeeRecord *) record;
 
+- (void) clearEmployeeRecords;
+
+- (void) clearEmployeeRecordsbySupervisorID: (NSString *)idNum;
+
 - (void) fetchEmployeeRecordsForFutureUse;
 
 - (void) addEmployeesWithSupervisorID: (NSString *) idNum;
@@ -29,5 +33,7 @@
 - (BOOL) recordExistsByName: (EmployeeRecord *) employeeRecord;
 
 - (BOOL) recordExistsByID: (EmployeeRecord *) employeeRecord;
+
+
 
 @end

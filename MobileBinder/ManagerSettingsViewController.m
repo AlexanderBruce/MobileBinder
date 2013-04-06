@@ -1,6 +1,8 @@
 #import "ManagerSettingsViewController.h"
 #import "Constants.h"
 #import "AttendanceModel.h"
+#import "ResetSettingsViewController.h"
+#import "EmployeeRecord.h"
 
 #define NAME_INDEX_PATH [NSIndexPath indexPathForRow:0 inSection:0]
 #define NAME_LABEL @"Name"
@@ -14,10 +16,12 @@
 #define EMAIL_INDEX_PATH [NSIndexPath indexPathForRow:3 inSection:0]
 #define EMAIL_LABEL @"E-mail"
 
+#define NOTIFY_ID_CHANGE_ALERT_TAG 2
+
 
 #define FOOTER_TEXT @"This information will be used to auto-populate documents throughout this app"
 
-@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
+@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UITextField *nameField;
 @property (nonatomic, strong) UITextField *idField;
@@ -129,10 +133,9 @@
     }
     else if(textField == self.idField)
     {
-        [defaults setObject:self.idField.text forKey:MANAGER_ID];
-        AttendanceModel *model = [[AttendanceModel alloc] init];
-        [model addEmployeesWithSupervisorID:textField.text];
+        
     }
+    
     else if(textField == self.titleField)
     {
         [defaults setObject:self.titleField.text forKey:MANAGER_TITLE];
@@ -147,8 +150,41 @@
 - (IBAction)donePressed:(id)sender
 {
     [self.tableView endEditing:YES];
-    [self.delegate savedSettingsForViewController:self];
-    [self.navigationController popViewControllerAnimated:YES];
+    if(![self.idField.text isEqual: [[NSUserDefaults standardUserDefaults]objectForKey:MANAGER_ID]]){
+        UIAlertView *notifyIDChange = [[UIAlertView alloc] initWithTitle:@"Import Options" message:@"You have changed your Unique ID. You have options for importing employees." delegate:self cancelButtonTitle:@"Don't import" otherButtonTitles:@"Import Only", @"Clear and Import",@"Replace Old ID's Employees", nil];
+        notifyIDChange.tag = NOTIFY_ID_CHANGE_ALERT_TAG;
+        [notifyIDChange show];
+        [[NSUserDefaults standardUserDefaults] setObject:self.idField.text forKey:MANAGER_ID];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    else
+    {
+        [self.delegate savedSettingsForViewController:self];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == NOTIFY_ID_CHANGE_ALERT_TAG)
+    {
+        AttendanceModel *model = [[AttendanceModel alloc] init];
+        if (buttonIndex == 1)
+        {
+            [model addEmployeesWithSupervisorID:self.idField.text];
+        }
+        else if (buttonIndex == 2)
+        {
+
+            [model clearEmployeeRecords];
+            [model addEmployeesWithSupervisorID:self.idField.text];
+        }
+        [self.delegate savedSettingsForViewController:self];
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField

@@ -67,7 +67,10 @@
     
     for (EmployeeRecord *record in newEmployees)
     {
-        [self addEmployeeRecord:record];
+        if(![self recordExistsByID:record])
+        {
+            [self addEmployeeRecord:record];
+        }
     }
 }
 
@@ -76,6 +79,23 @@
     [record deleteFromDatabase:[Database getInstance]];
     [self.employeeRecords removeObject:record];
     [self.filteredRecords removeObject:record];
+}
+
+- (void) clearEmployeeRecords
+{
+    [self clearEmployeeRecordsbySupervisorID:@"##"];
+}
+
+- (void) clearEmployeeRecordsbySupervisorID: (NSString *)idNum
+{
+    NSArray *employees = [self getEmployeeRecords];
+    for (EmployeeRecord *emp in employees)
+    {
+        if ([emp.idNum isEqualToString:idNum] || [@"##" isEqualToString:idNum])
+        {
+            [self deleteEmployeeRecord:emp];
+        }
+    }
 }
 
 - (void) filterEmployeesByString: (NSString *) filterString
@@ -162,7 +182,7 @@
 {
     if(self = [super init])
     {
-        self.database = [Database getInstance];
+        [self obtainedDatabase:[Database getInstance]];
     }
     return self;
 }
