@@ -20,7 +20,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
+- (IBAction)doneButtonPressed:(id)sender {
+}
 
+- (IBAction)cancelButtonPressed:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 
 @end
