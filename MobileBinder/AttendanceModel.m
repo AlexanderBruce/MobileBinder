@@ -182,7 +182,7 @@
 {
     if(self = [super init])
     {
-        [self obtainedDatabase:[Database getInstance]];
+        self.database = [Database getInstance];
     }
     return self;
 }

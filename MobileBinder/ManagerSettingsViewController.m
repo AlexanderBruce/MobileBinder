@@ -1,8 +1,6 @@
 #import "ManagerSettingsViewController.h"
 #import "Constants.h"
 #import "AttendanceModel.h"
-#import "ResetSettingsViewController.h"
-#import "EmployeeRecord.h"
 
 #define NAME_INDEX_PATH [NSIndexPath indexPathForRow:0 inSection:0]
 #define NAME_LABEL @"Name"
@@ -21,12 +19,13 @@
 
 #define FOOTER_TEXT @"This information will be used to auto-populate documents throughout this app"
 
-@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate>
+@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, AttendanceModelDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UITextField *nameField;
 @property (nonatomic, strong) UITextField *idField;
 @property (nonatomic, strong) UITextField *titleField;
 @property (nonatomic, strong) UITextField *emailField;
+@property (nonatomic) BOOL  didFinishImporting;
 @end
 
 @implementation ManagerSettingsViewController
@@ -40,6 +39,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView reloadData];
+    self.didFinishImporting = NO;
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:gestureRecognizer];
@@ -170,6 +170,14 @@
     if (alertView.tag == NOTIFY_ID_CHANGE_ALERT_TAG)
     {
         AttendanceModel *model = [[AttendanceModel alloc] init];
+        model.delegate = self;
+        [model fetchEmployeeRecordsForFutureUse];
+        NSArray *emps = [model getEmployeeRecords];
+        while(!self.didFinishImporting)
+        {
+        }
+        self.didFinishImporting = NO;
+        NSLog(@"%@",emps);
         if (buttonIndex == 1)
         {
             [model addEmployeesWithSupervisorID:self.idField.text];
@@ -182,8 +190,12 @@
         }
         [self.delegate savedSettingsForViewController:self];
         [self.navigationController popViewControllerAnimated:YES];
-
     }
+}
+
+- (void) doneRetrievingEmployeeRecords
+{
+    self.didFinishImporting = YES;
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
