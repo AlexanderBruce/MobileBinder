@@ -134,6 +134,7 @@
 		F7A843A116D40CB8009F09DD /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A8439F16D40CB8009F09DD /* Logo.png */; };
 		F7A843A516D40ECB009F09DD /* Banner copy.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A843A416D40ECB009F09DD /* Banner copy.png */; };
 		F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */; };
+		FA69FD9F1710B2DA0070BFE4 /* AddResourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA69FD9E1710B2DA0070BFE4 /* AddResourceViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -346,6 +347,8 @@
 		F7A843A416D40ECB009F09DD /* Banner copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Banner copy.png"; path = "../Banner copy.png"; sourceTree = "<group>"; };
 		F7EFBFE116B9CCAD00C46D04 /* PayrollPeriodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayrollPeriodViewController.h; sourceTree = "<group>"; };
 		F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollPeriodViewController.m; sourceTree = "<group>"; };
+		FA69FD9D1710B2DA0070BFE4 /* AddResourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddResourceViewController.h; sourceTree = "<group>"; };
+		FA69FD9E1710B2DA0070BFE4 /* AddResourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddResourceViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -737,6 +740,8 @@
 				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
 				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
 				49DBA7721703B44300605FAD /* ResourcesData */,
+				FA69FD9D1710B2DA0070BFE4 /* AddResourceViewController.h */,
+				FA69FD9E1710B2DA0070BFE4 /* AddResourceViewController.m */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -917,6 +922,7 @@
 				49FFC802170CC56C0034ABBE /* OutlinedLabel.m in Sources */,
 				49B73E14170F7AFD008408C7 /* AllSettingsViewController.m in Sources */,
 				49B73E18170F8462008408C7 /* AboutViewController.m in Sources */,
+				FA69FD9F1710B2DA0070BFE4 /* AddResourceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
