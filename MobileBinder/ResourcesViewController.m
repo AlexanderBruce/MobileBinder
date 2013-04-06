@@ -9,6 +9,7 @@
 @property (nonatomic,strong) ResourcesModel *myModel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSString *webUrl;
+@property (nonatomic) BOOL searchBarShouldBeginEditing;
 @end
 
 @implementation ResourcesViewController
@@ -26,6 +27,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
+    self.searchBarShouldBeginEditing = YES;
 }
 
 - (void)viewDidUnload
@@ -96,11 +98,17 @@
     [self.tableView reloadData];
 }
 
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    BOOL boolToReturn = self.searchBarShouldBeginEditing;
+    self.searchBarShouldBeginEditing = YES;
+    return boolToReturn;
+}
+
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if(searchText.length == 0)
+    if(searchBar.text.length == 0)
     {
-        [self.searchBar resignFirstResponder];
         [self.myModel stopFilteringResourceLinks];
         [self.tableView reloadData];
     }

@@ -6,8 +6,9 @@
 #define TEMPLATE_FILE_TYPE @"rtf"
 #define ROUNDING_DOCUMENT_FILE_NAME @"Senior Rounding Document.rtf"
 
-#define TABLE_ROW @"\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx2070\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx4248\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx6426\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx8604\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx10782\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx12960 %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell\\row"
+#define TABLE_ROW @"\\trrh1200\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx2070\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx4248\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx6426\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx8604\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx10782\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx12960 %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell\\row"
 
+//\trrhN
 @interface SeniorRoundingDocumentGenerator()
 @property (nonatomic, strong) SeniorRoundingLog *log;
 @end

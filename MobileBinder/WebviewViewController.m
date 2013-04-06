@@ -51,7 +51,8 @@ typedef enum {
     self.webview.alpha = 0;
     self.webviewConnectionStatus = UnFinished;
     self.cachingConnectionStatus = Failed;
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:self.webpageURL]];
+    NSString *urlString =[self.webpageURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [self.webview loadRequest:requestObj];
 //    [self loadURL:[NSURL URLWithString:self.webpageURL]];
     [self.lock unlock];
@@ -79,6 +80,7 @@ typedef enum {
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
+    NSLog(@"Finished");
     [self.lock lock];
     self.webviewConnectionStatus = Succeeded;
     [self.loadingIndicator stopAnimating];
@@ -88,6 +90,7 @@ typedef enum {
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    NSLog(@"Failed %@",error.localizedDescription);
     [self.lock lock];
     self.webviewConnectionStatus = Failed;
     if(self.cachingConnectionStatus == Failed)

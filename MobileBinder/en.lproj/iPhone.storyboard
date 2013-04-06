@@ -950,7 +950,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="EcV-72-NOV" kind="push" id="Rmr-qc-NMJ"/>
+                                    <segue destination="0iM-UA-dP0" kind="push" id="Qrq-l2-XgH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="x0R-uL-Tba" customClass="GradientButton">
@@ -963,6 +963,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="wa8-b7-YOP" kind="push" id="XGW-ah-zns"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="mQ2-Go-zDd" customClass="GradientButton">
                                 <rect key="frame" x="200" y="245" width="100" height="70"/>
@@ -1021,6 +1024,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uGJ-iB-OTz" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1303" y="161"/>
+        </scene>
+        <!--About View Controller - About-->
+        <scene sceneID="N7U-Up-mdB">
+            <objects>
+                <viewController id="wa8-b7-YOP" customClass="AboutViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PTu-Wi-ipa">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BBo-AI-YYG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Developed by Andrew Patterson, Alex Bruce &amp; Sam Rang" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JRC-kN-10E" customClass="OutlinedLabel">
+                                        <rect key="frame" x="20" y="168" width="280" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="About" id="waM-Hg-Jzi"/>
+                    <connections>
+                        <outlet property="scrollView" destination="BBo-AI-YYG" id="5Ut-su-Qj1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hDJ-Ur-jD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1532" y="764"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="maT-sC-yRt">
@@ -1157,7 +1193,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pay Period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Ju-I6-aw6" customClass="OutlinedLabel">
-                                <rect key="frame" x="20" y="45" width="112" height="33"/>
+                                <rect key="frame" x="20" y="48" width="112" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1367,6 +1403,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jk3-ih-X7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-690" y="1451"/>
+        </scene>
+        <!--All Settings View Controller - Settings-->
+        <scene sceneID="gQR-xF-NCc">
+            <objects>
+                <viewController id="0iM-UA-dP0" customClass="AllSettingsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gDM-Ad-m4O">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ajo-cm-g0B">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="JyS-T9-SxE"/>
+                    <connections>
+                        <outlet property="tableView" destination="ajo-cm-g0B" id="dAg-3x-bao"/>
+                        <segue destination="AHj-au-6ik" kind="push" identifier="notificationsSegue" id="poD-xf-Hzx"/>
+                        <segue destination="ebS-2W-pWG" kind="push" identifier="personalizationSegue" id="k56-cZ-JWH"/>
+                        <segue destination="n00-OW-1gr" kind="push" identifier="managerDetailsSegue" id="6D2-vm-dfv"/>
+                        <segue destination="IFw-GD-zRf" kind="push" identifier="resetSegue" id="vgx-j7-pVR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WEC-rG-qGI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="48" y="1432"/>
         </scene>
         <!--Senior Rounding Overview View Controller - Overview-->
         <scene sceneID="N9p-78-Hor">

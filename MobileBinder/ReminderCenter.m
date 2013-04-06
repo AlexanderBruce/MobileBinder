@@ -38,18 +38,20 @@ static ReminderCenter *instance;
             managedObject.fireDate = reminder.fireDate;
             managedObject.typeID = [NSNumber numberWithInt:reminder.typeID];
             
-            UILocalNotification *notif = [[UILocalNotification alloc] init];
-            //ALEX BRUCE LOOK AT FIRE DATE HERE
-            notif.fireDate = reminder.fireDate;
-            notif.timeZone = [NSTimeZone defaultTimeZone];
-            notif.alertBody = reminder.text;
-            notif.hasAction = NO;
-            notif.soundName = UILocalNotificationDefaultSoundName;
-            notif.applicationIconBadgeNumber = 1;
-            NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-            [dictionary setObject:[NSNumber numberWithInt:reminder.typeID] forKey:TYPE_ID_KEY];
-            notif.userInfo = dictionary;
-            [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+            if(!reminder.isInPast)
+            {
+                UILocalNotification *notif = [[UILocalNotification alloc] init];
+                notif.fireDate = reminder.fireDate;
+                notif.timeZone = [NSTimeZone defaultTimeZone];
+                notif.alertBody = reminder.text;
+                notif.hasAction = NO;
+                notif.soundName = UILocalNotificationDefaultSoundName;
+                notif.applicationIconBadgeNumber = 1;
+                NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+                [dictionary setObject:[NSNumber numberWithInt:reminder.typeID] forKey:TYPE_ID_KEY];
+                notif.userInfo = dictionary;
+                [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+            }
         }
         [self synchronize];
         dispatch_async(dispatch_get_main_queue(), ^{

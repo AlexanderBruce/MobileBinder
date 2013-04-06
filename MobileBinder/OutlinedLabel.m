@@ -203,4 +203,15 @@
     }
 }
 
+- (void) customize
+{
+    self.textColor = [UIColor whiteColor];
+    self.outlineColor = [UIColor blackColor];
+    self.outlineWidth = .6;
+    self.verticalAlignment = AGKOutlineLabelVerticalAlignmentMiddle;
+    self.shadeBlur = 0;
+    self.diffuseShadowColor = [UIColor blackColor];
+    self.diffuseShadowOffset = CGSizeZero;
+}
+
 @end

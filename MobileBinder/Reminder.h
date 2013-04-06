@@ -6,6 +6,7 @@
 @property (nonatomic, strong, readonly) NSDate *eventDate;
 @property (nonatomic, strong, readonly) NSDate *fireDate;
 @property (nonatomic, readonly) int typeID;
+@property (nonatomic, readonly) BOOL isInPast;
 
 - (id) initWithText: (NSString *) text eventDate: (NSDate *) eventDate fireDate: (NSDate *) fireDate typeID: (int) typeID;
 
