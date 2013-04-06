@@ -3,6 +3,7 @@
 #import "WebviewViewController.h"
 #import "ResourceObject.h"
 #define SEGUE @"webSegue"
+#define RESOURCE_SEGUE @"addResourceSegue"
 
 @interface ResourcesViewController () <UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -114,6 +115,9 @@
     }
 }
 
+- (IBAction)addResourceButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"addResourceSegue" sender:self];
+}
 
 
 
