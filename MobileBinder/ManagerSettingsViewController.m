@@ -19,13 +19,12 @@
 
 #define FOOTER_TEXT @"This information will be used to auto-populate documents throughout this app"
 
-@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, AttendanceModelDelegate>
+@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UITextField *nameField;
 @property (nonatomic, strong) UITextField *idField;
 @property (nonatomic, strong) UITextField *titleField;
 @property (nonatomic, strong) UITextField *emailField;
-@property (nonatomic) BOOL  didFinishImporting;
 @end
 
 @implementation ManagerSettingsViewController
@@ -39,7 +38,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView reloadData];
-    self.didFinishImporting = NO;
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:gestureRecognizer];
@@ -150,7 +148,7 @@
 {
     [self.tableView endEditing:YES];
     if(![self.idField.text isEqual: [[NSUserDefaults standardUserDefaults]objectForKey:MANAGER_ID]]){
-        UIAlertView *notifyIDChange = [[UIAlertView alloc] initWithTitle:@"Import Options" message:@"You have changed your Unique ID. You have options for importing employees." delegate:self cancelButtonTitle:@"Don't import" otherButtonTitles:@"Import Only", @"Clear and Import",@"Replace Old ID's Employees", nil];
+        UIAlertView *notifyIDChange = [[UIAlertView alloc] initWithTitle:@"Import Options" message:@"You have changed your Unique ID. You have options for importing employees." delegate:self cancelButtonTitle:@"Don't import" otherButtonTitles:@"Import Only", @"Clear and Import", nil];//@"Replace Old ID's Employees",
         notifyIDChange.tag = NOTIFY_ID_CHANGE_ALERT_TAG;
         [notifyIDChange show];
         [[NSUserDefaults standardUserDefaults] setObject:self.idField.text forKey:MANAGER_ID];
@@ -170,21 +168,12 @@
     if (alertView.tag == NOTIFY_ID_CHANGE_ALERT_TAG)
     {
         AttendanceModel *model = [[AttendanceModel alloc] init];
-        model.delegate = self;
-        [model fetchEmployeeRecordsForFutureUse];
-        NSArray *emps = [model getEmployeeRecords];
-        while(!self.didFinishImporting)
-        {
-        }
-        self.didFinishImporting = NO;
-        NSLog(@"%@",emps);
-        if (buttonIndex == 1)
+        if (buttonIndex == 0)
         {
             [model addEmployeesWithSupervisorID:self.idField.text];
         }
-        else if (buttonIndex == 2)
+        else if (buttonIndex == 1)
         {
-
             [model clearEmployeeRecords];
             [model addEmployeesWithSupervisorID:self.idField.text];
         }
@@ -193,10 +182,6 @@
     }
 }
 
-- (void) doneRetrievingEmployeeRecords
-{
-    self.didFinishImporting = YES;
-}
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {

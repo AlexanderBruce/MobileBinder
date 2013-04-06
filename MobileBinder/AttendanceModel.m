@@ -25,7 +25,8 @@
         self.employeeRecords = [[NSMutableArray alloc] init];
         for (EmployeeRecordManagedObject *currentManagedObject in recordManagedObjects)
         {
-            [self.employeeRecords addObject:[[EmployeeRecord alloc] initWithManagedObject:currentManagedObject]];
+            EmployeeRecord *emp = [[EmployeeRecord alloc] initWithManagedObject:currentManagedObject];
+            [self.employeeRecords addObject:emp];
         }
         [self sortEmployeeRecords];
         dispatch_async(dispatch_get_main_queue(), ^{
