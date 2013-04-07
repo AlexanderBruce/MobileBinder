@@ -9,6 +9,7 @@
 
 @interface AttendanceModel : NSObject
 @property (nonatomic, weak) id<AttendanceModelDelegate> delegate;
+@property (nonatomic) BOOL isInitialized;
 
 - (void) addEmployeeRecord: (EmployeeRecord *) record;
 

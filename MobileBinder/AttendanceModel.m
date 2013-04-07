@@ -30,6 +30,7 @@
         }
         [self sortEmployeeRecords];
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.isInitialized = YES;
             [self.delegate doneRetrievingEmployeeRecords];
         });
     });
@@ -183,6 +184,7 @@
 {
     if(self = [super init])
     {
+        self.isInitialized = NO;
         self.database = [Database getInstance];
     }
     return self;

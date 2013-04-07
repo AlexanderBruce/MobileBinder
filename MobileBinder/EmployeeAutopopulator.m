@@ -6,9 +6,8 @@
 
 - (NSSet *) employeesForManagerID: (NSString *) idNum
 {
-    NSString *blah = @"0";
-    idNum = [blah stringByAppendingString:idNum];
-    NSLog(@"%@",idNum);
+    NSString *leadingZero = @"0";
+    idNum = [leadingZero stringByAppendingString:idNum];
     NSString* path = [[NSBundle mainBundle] pathForResource:EMPLOYEE_DATA_FILE ofType:@""];
     NSArray* lines = [[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil]
                       componentsSeparatedByString:@"\r"];
