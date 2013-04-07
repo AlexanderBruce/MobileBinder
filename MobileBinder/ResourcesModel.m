@@ -2,7 +2,7 @@
 #import "ResourceObject.h"
 
 #define RESOURCES_DATA_FILE @"ResourcesData"
-#define CUSTOM_DATA_FILE @"CustomResourcesData2"
+#define CUSTOM_DATA_FILE @"CustomResourcesData"
 
 @interface ResourcesModel()
 @property (nonatomic) BOOL usingFilter;
