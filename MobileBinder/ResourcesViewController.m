@@ -2,6 +2,7 @@
 #import "ResourcesModel.h"
 #import "WebviewViewController.h"
 #import "ResourceObject.h"
+#import "AddResourceViewController.h"
 #define SEGUE @"webSegue"
 #define RESOURCE_SEGUE @"addResourceSegue"
 
@@ -21,6 +22,11 @@
         WebviewViewController *dest = segue.destinationViewController;
         dest.webpageURL = self.webUrl;
     }
+    if([segue.destinationViewController isKindOfClass:[AddResourceViewController class]])
+        {
+            AddResourceViewController *dest = segue.destinationViewController;
+            dest.myModel = self.myModel;
+        }
 }
 -(void) viewDidLoad
 {
@@ -37,7 +43,6 @@
     [self setSearchBar:nil];
     [super viewDidUnload];
 }
-
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
