@@ -2,11 +2,14 @@
 #import "ResourceObject.h"
 
 #define RESOURCES_DATA_FILE @"ResourcesData"
+#define CUSTOM_DATA_FILE @"CustomResourcesData1"
 
 @interface ResourcesModel()
 @property (nonatomic) BOOL usingFilter;
 @property (nonatomic, strong) NSMutableDictionary *resourceLinks;
 @property (nonatomic, strong) NSMutableDictionary *filteredLinks;
+@property (nonatomic, strong) NSString *filterString;
+
 @end
 
 @implementation ResourcesModel
@@ -99,6 +102,7 @@
 
 - (void) filterResourceLinksByString: (NSString *) filterString
 {
+    self.filterString = filterString;
     self.usingFilter = YES;
     self.filteredLinks = [[NSMutableDictionary alloc] init];
     NSMutableArray *filterArray = (NSMutableArray *)[[filterString componentsSeparatedByString:@" "] mutableCopy];
@@ -125,6 +129,44 @@
         }
         if(filteredValues.count > 0 ) [self.filteredLinks setObject:filteredValues forKey:key];
     }
+}
+
+- (void) addResourceObjectwithPageTitle:(NSString *) pTitle url:(NSString *) url description:(NSString*) description category:(NSString*)category{
+    ResourceObject *resource = [[ResourceObject alloc]init];
+    resource.webpageURL = url;
+    resource.description = description;
+    resource.pageTitle = pTitle;
+    NSMutableArray *array = [self.resourceLinks objectForKey:category];
+    if(!array){
+        
+        array = [[NSMutableArray alloc]init];
+    }
+
+    [array addObject:resource];
+    [self.resourceLinks setObject:array forKey:category];
+    if(self.usingFilter){
+        [self filterResourceLinksByString:[self filterString]];
+    }
+    NSString *towrite = [NSString stringWithFormat:@"!!%@!!\n##%@##%@##%@##\n",category,resource.pageTitle,resource.webpageURL,resource.description];
+    [self writeCustomFile:towrite];
+}
+
+-(void) writeCustomFile:(NSString *)write
+{
+        //Read in
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",
+                          documentsDirectory,CUSTOM_DATA_FILE];
+    NSString *oldFileContents = [NSString stringWithContentsOfFile:filePath
+                                                           encoding:NSUTF8StringEncoding
+                                                              error:nil];
+    if(!oldFileContents) oldFileContents = @"";
+    
+    NSString *contentsToWrite = [NSString stringWithFormat:@"%@%@",oldFileContents,write];
+
+    [[contentsToWrite dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
 }
 
 - (void) stopFilteringResourceLinks
