@@ -59,9 +59,9 @@
         managedObject.lastName = record.lastName;
         managedObject.department = record.department;
         managedObject.unit = record.unit;
+        managedObject.idNum = record.idNum;
         record.myManagedObject = managedObject;
         [self sortEmployeeRecords];
-        [Database saveDatabase];
     }
 }
 
@@ -142,7 +142,11 @@
 {
     BOOL ret = NO;
     for(EmployeeRecord *emp in self.employeeRecords){
-        if ([employeeRecord.idNum isEqualToString: emp.idNum]) {
+        NSLog(@"New %@",employeeRecord.idNum);
+        NSLog(@"Old %@",emp.idNum);
+        if ([employeeRecord.idNum isEqualToString: emp.idNum])
+        {
+            NSLog(@"EQUAL!!!");
             ret = YES;
             break;
         }

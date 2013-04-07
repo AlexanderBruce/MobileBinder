@@ -2,6 +2,7 @@
 #import "Constants.h"
 #import "AttendanceModel.h"
 #import "MBProgressHUD.h"
+#import "Database.h"
 
 
 #define NAME_INDEX_PATH [NSIndexPath indexPathForRow:0 inSection:0]
@@ -47,6 +48,7 @@
     [self.tableView addGestureRecognizer:gestureRecognizer];
     self.myModel = [[AttendanceModel alloc] init];
     self.myModel.delegate = self;
+    [self.myModel fetchEmployeeRecordsForFutureUse];
 }
 
 - (void) doneRetrievingEmployeeRecords
@@ -56,12 +58,16 @@
     if (self.tryingToAddEmployees)
     {
         [self.myModel addEmployeesWithSupervisorID:self.idField.text];
+        [Database saveDatabase];
+        self.tryingToAddEmployees = NO;
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self.delegate savedSettingsForViewController:self];
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    self.tryingToAddEmployees = NO;
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    
-    [self.delegate savedSettingsForViewController:self];
-    [self.navigationController popViewControllerAnimated:YES];
+    else
+    {
+        
+    }
 }
 
 - (void) hideKeyboard
@@ -201,10 +207,11 @@
         {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self.myModel addEmployeesWithSupervisorID:self.idField.text];
+            [Database saveDatabase];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         else
         {
-            [self.myModel fetchEmployeeRecordsForFutureUse];
             self.tryingToAddEmployees = YES;
         }
     }

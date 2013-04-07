@@ -32,7 +32,7 @@
             EmployeeRecord *employee = [[EmployeeRecord alloc]init];
             [employee setFirstName:[[employeeName objectAtIndex:0]capitalizedString]];
             [employee setLastName:[[employeeName lastObject]capitalizedString]];
-            [employee setIdNum:[lineValues objectAtIndex:22]];
+            [employee setIdNum:[[lineValues objectAtIndex:12] substringFromIndex:1]];
             [employees addObject:employee];
         }
     }
