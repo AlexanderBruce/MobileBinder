@@ -151,7 +151,7 @@
     }
     else if(textField == self.idField)
     {
-        
+        //Should check to make sure it matches UID format
     }
     
     else if(textField == self.titleField)

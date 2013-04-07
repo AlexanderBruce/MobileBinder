@@ -51,28 +51,27 @@
 
 - (void) addEmployeeRecord: (EmployeeRecord *) record
 {
-    [self.employeeRecords addObject:record];
-    EmployeeRecordManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([EmployeeRecordManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
-    managedObject.firstName = record.firstName;
-    managedObject.lastName = record.lastName;
-    managedObject.department = record.department;
-    managedObject.unit = record.unit;
-    record.myManagedObject = managedObject;
-    [self sortEmployeeRecords];
-    [Database saveDatabase];
+    if(![self recordExistsByID:record])
+    {
+        [self.employeeRecords addObject:record];
+        EmployeeRecordManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([EmployeeRecordManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
+        managedObject.firstName = record.firstName;
+        managedObject.lastName = record.lastName;
+        managedObject.department = record.department;
+        managedObject.unit = record.unit;
+        record.myManagedObject = managedObject;
+        [self sortEmployeeRecords];
+        [Database saveDatabase];
+    }
 }
 
 - (void) addEmployeesWithSupervisorID: (NSString *) idNum
 {
     EmployeeAutopopulator *autopopulator = [[EmployeeAutopopulator alloc] init];
     NSSet *newEmployees = [autopopulator employeesForManagerID:idNum];
-    
     for (EmployeeRecord *record in newEmployees)
     {
-        if(![self recordExistsByID:record])
-        {
-            [self addEmployeeRecord:record];
-        }
+        [self addEmployeeRecord:record];   
     }
 }
 
