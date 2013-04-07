@@ -2,7 +2,7 @@
 #import "ResourceObject.h"
 
 #define RESOURCES_DATA_FILE @"ResourcesData"
-#define CUSTOM_DATA_FILE @"CustomResourcesData1"
+#define CUSTOM_DATA_FILE @"CustomResourcesData2"
 
 @interface ResourcesModel()
 @property (nonatomic) BOOL usingFilter;
@@ -74,6 +74,16 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:RESOURCES_DATA_FILE ofType:@""];
     NSArray *lines = [[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil]
                       componentsSeparatedByString:@"\n"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",
+                          documentsDirectory,CUSTOM_DATA_FILE];
+    NSArray *otherContentsArray = [[NSString stringWithContentsOfFile:filePath
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:nil] componentsSeparatedByString:@"\n"];
+    
+    lines = [lines arrayByAddingObjectsFromArray:otherContentsArray];
     NSMutableArray *currentCategory;
     NSString *currentCategoryName;
     for (NSString *line in lines)
@@ -163,6 +173,7 @@
                                                            encoding:NSUTF8StringEncoding
                                                               error:nil];
     if(!oldFileContents) oldFileContents = @"";
+    NSLog(@"Old file contents = \n %@",oldFileContents);
     
     NSString *contentsToWrite = [NSString stringWithFormat:@"%@%@",oldFileContents,write];
 
