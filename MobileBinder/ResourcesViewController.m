@@ -38,7 +38,6 @@
     [super viewDidUnload];
 }
 
-
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrototypeCell"];

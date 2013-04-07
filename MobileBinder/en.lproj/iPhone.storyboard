@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8tJ-h4-1Ol">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8tJ-h4-1Ol">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -931,35 +931,35 @@
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Developed by Alex Bruce, Andrew Patterson &amp; Sam Rang" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JRC-kN-10E" customClass="OutlinedLabel">
                                         <rect key="frame" x="20" y="108" width="280" height="42"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Conceived by Brian Anderson &amp; Dexter Nolley" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Czx-ue-zRb" customClass="OutlinedLabel">
                                         <rect key="frame" x="20" y="183" width="280" height="42"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mobile Binder" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0VE-vH-oTk" customClass="OutlinedLabel">
-                                        <rect key="frame" x="20" y="20" width="280" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <rect key="frame" x="20" y="20" width="280" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Special thanks to Duke Computer Science Department" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0CA-s9-TsM" customClass="OutlinedLabel">
-                                        <rect key="frame" x="20" y="261" width="280" height="46"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="20" y="251" width="280" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="A paradigm of managerial efficiency" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qy3-ht-ccm" customClass="OutlinedLabel">
-                                        <rect key="frame" x="20" y="57" width="280" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="20" y="57" width="280" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1632,6 +1632,174 @@
     <resources>
         <image name="Banner copy.png" width="719" height="116"/>
     </resources>
+    <classes>
+        <class className="AboutViewController" superclassName="BackgroundViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="AddEmployeeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEmployeeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="departmentField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="unitField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AddResourceViewController" superclassName="BackgroundViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddResourceViewController.h"/>
+        </class>
+        <class className="AllSettingsViewController" superclassName="BackgroundViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AllSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="AttendanceViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AttendanceViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="BackgroundViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BackgroundViewController.h"/>
+        </class>
+        <class className="EmployeeRoundingAllLogsViewController" superclassName="RoundingAllLogsViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeRoundingAllLogsViewController.h"/>
+        </class>
+        <class className="EmployeeRoundingOverviewViewController" superclassName="RoundingOverviewViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeRoundingOverviewViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="employeeNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="keyFocusField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="keyRemindersField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="leaderField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="unitField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="EmployeeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="GradientButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GradientButton.h"/>
+        </class>
+        <class className="HomeViewController" superclassName="BackgroundViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
+        </class>
+        <class className="IncidentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IncidentViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="employeeNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="incidentDateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="incidentTypeControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="ManagerSettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ManagerSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="donePressed:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="OutlinedLabel" superclassName="UILabel">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OutlinedLabel.h"/>
+        </class>
+        <class className="PayrollNotificationsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PayrollNotificationsViewController.h"/>
+        </class>
+        <class className="PayrollPeriodViewController" superclassName="BackgroundViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PayrollPeriodViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="myLabel" candidateClass="OutlinedLabel"/>
+                <relationship kind="outlet" name="payPeriodTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="periodSelectionField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="periodTypeSegmented" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="PersonalizationViewController" superclassName="BackgroundViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PersonalizationViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RemindersViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RemindersViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ResetSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ResetSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="eraseContentCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="resetAllCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="resetSettingsCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="ResourcesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ResourcesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RoundingAllLogsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingAllLogsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RoundingDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RoundingOverviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingOverviewViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="SeniorRoundingAllLogsViewController" superclassName="RoundingAllLogsViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SeniorRoundingAllLogsViewController.h"/>
+        </class>
+        <class className="SeniorRoundingOverviewViewController" superclassName="RoundingOverviewViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SeniorRoundingOverviewViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dateField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="nameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="notesView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="unitField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="WebviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WebviewViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="webview" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="WelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WelcomeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="proceedPressed:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

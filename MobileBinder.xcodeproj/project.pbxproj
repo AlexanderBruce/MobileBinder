@@ -37,6 +37,7 @@
 		4939165B16C2D86C00F9365D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4939165A16C2D86C00F9365D /* MBProgressHUD.m */; };
 		4941D89816FBB02000D7216B /* SeniorRoundingLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941D89716FBB02000D7216B /* SeniorRoundingLog.m */; };
 		4941D89B16FBB18A00D7216B /* EmployeeAutopopulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */; };
+		49451BB51710D41E003E9C10 /* bow_tie.png in Resources */ = {isa = PBXBuildFile; fileRef = 49451BB41710D41E003E9C10 /* bow_tie.png */; };
 		494CD9F316DD437100112E3E /* EmployeeRoundingOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CD9F216DD437100112E3E /* EmployeeRoundingOverviewViewController.m */; };
 		494CDA2A16DD4C7B00112E3E /* RoundingDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CDA2916DD4C7B00112E3E /* RoundingDetailsViewController.m */; };
 		494D0E3416B84BAB00354964 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D0E3316B84BAB00354964 /* UIKit.framework */; };
@@ -190,6 +191,7 @@
 		4941D89716FBB02000D7216B /* SeniorRoundingLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeniorRoundingLog.m; sourceTree = "<group>"; };
 		4941D89916FBB18A00D7216B /* EmployeeAutopopulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeAutopopulator.h; sourceTree = "<group>"; };
 		4941D89A16FBB18A00D7216B /* EmployeeAutopopulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeAutopopulator.m; sourceTree = "<group>"; };
+		49451BB41710D41E003E9C10 /* bow_tie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bow_tie.png; sourceTree = "<group>"; };
 		494CD9F116DD437100112E3E /* EmployeeRoundingOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRoundingOverviewViewController.h; sourceTree = "<group>"; };
 		494CD9F216DD437100112E3E /* EmployeeRoundingOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRoundingOverviewViewController.m; sourceTree = "<group>"; };
 		494CDA2816DD4C7B00112E3E /* RoundingDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundingDetailsViewController.h; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 		490A5AFA16C1D95A0062F36F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				49451BB41710D41E003E9C10 /* bow_tie.png */,
 				49A6F623170B25330075BDD9 /* JPImagePicker */,
 				49377B6F1703E27200B33AD2 /* Webpage Request */,
 				49885D9716E901DC000BE747 /* GradientButton.h */,
@@ -837,6 +840,7 @@
 				49F58762170B55F800589070 /* Thumbnail4.png in Resources */,
 				49F58763170B55F800589070 /* Thumbnail5.png in Resources */,
 				49F58774170B7D5C00589070 /* Employee Rounding Document Template.rtf in Resources */,
+				49451BB51710D41E003E9C10 /* bow_tie.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
