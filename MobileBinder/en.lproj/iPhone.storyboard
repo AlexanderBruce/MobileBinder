@@ -1053,7 +1053,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Home page for duke health employees" minimumFontSize="17" id="Mow-hz-GL5">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Home page for Duke Health employees" minimumFontSize="17" id="Mow-hz-GL5">
                                 <rect key="frame" x="20" y="236" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1076,6 +1076,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="preExistingPressed:" destination="kdW-m0-cDR" eventType="touchUpInside" id="lEd-jU-LqH"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q0w-GJ-Oam" customClass="OutlinedLabel">
                                 <rect key="frame" x="20" y="275" width="200" height="21"/>
@@ -1126,6 +1129,12 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                     </view>
+                    <connections>
+                        <outlet property="category" destination="P9v-Dr-Pni" id="2XP-oU-E1s"/>
+                        <outlet property="description" destination="Mow-hz-GL5" id="xPR-kn-S5E"/>
+                        <outlet property="pageTitle" destination="yd7-0C-sND" id="5Dj-H8-9du"/>
+                        <outlet property="webPageUrl" destination="e5o-g4-qGc" id="T3g-KJ-XiY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rAD-nP-LmP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

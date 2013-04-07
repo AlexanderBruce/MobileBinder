@@ -17,6 +17,8 @@
 
 - (void) stopFilteringResourceLinks;
 
+- (void) addResourceObjectwithPageTitle:(NSString *) pTitle url:(NSString *) url description:(NSString*) description category:(NSString*)category;
+
 
 
 @end

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BackgroundViewController.h"
+@class ResourcesModel;
 
 @interface AddResourceViewController : BackgroundViewController
-
+@property (strong,nonatomic) ResourcesModel * myModel;
 @end
