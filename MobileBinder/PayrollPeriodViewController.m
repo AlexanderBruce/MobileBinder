@@ -11,6 +11,7 @@
 #import "PayrollPeriodViewController.h"
 #import <Foundation/NSDate.h>
 #import "OutlinedLabel.h"
+#import "PayrollCategory.h"
 #import "PayrollModel.h"
 
 #define KEYBOARD_HEIGHT 216.0f
@@ -19,20 +20,15 @@
 #define BIWEEKLY_SEGMENT 0
 #define MONTHLY_SEGMENT 1
 
-@interface PayrollPeriodViewController () <UITextFieldDelegate> 
+@interface PayrollPeriodViewController () <UITextFieldDelegate, PayrollModelDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *periodTypeSegmented;
 @property (weak, nonatomic) IBOutlet UITextField *periodSelectionField;
 
 @property(strong,nonatomic) UIBarButtonItem *doneButton;
-@property(strong,nonatomic) NSMutableArray *monthlyPayPeriods;
-@property(strong,nonatomic) NSMutableArray *biweeklyPayPeriods;
 @property(strong,nonatomic) UIPickerView *myPicker;
 @property(strong,nonatomic) NSString *selectedPayPeriod;
 @property(strong,nonatomic) PayrollModel *myModel;
-@property(strong,nonatomic) NSMutableDictionary *payrollStringsToPayrollModel;
 @property (weak, nonatomic) IBOutlet UITableView *payPeriodTableView;
-@property(strong,nonatomic) NSArray *modelData;
-@property(strong,nonatomic) NSArray *importantDateLabels;
 @property (weak, nonatomic) IBOutlet OutlinedLabel *myLabel;
 @end
 
@@ -42,34 +38,22 @@
 {
     [super viewDidLoad];
     [self.myLabel customize];
-
-    
-    self.myModel = [[PayrollModel alloc] init];
-    self.payrollStringsToPayrollModel = [NSMutableDictionary dictionary];
-    self.monthlyPayPeriods = [[NSMutableArray alloc]initWithObjects:
-                              @"January",@"February",@"March", @"April",
-                              @"May", @"June", @"July", @"August",
-                              @"September", @"October", @"November", @"December",nil];
-    self.biweeklyPayPeriods = [[NSMutableArray alloc]initWithObjects:
-                               @"Jan-1", @"Jan-2", @"Feb-1", @"Feb-2", @"Mar-1", @"Mar-2", @"Apr-1", @"Apr-2",
-                               @"May-1", @"May-2", @"Jun-1", @"Jun-2", @"Jul-1", @"Jul-2", @"Aug-1", @"Aug-2",
-                               @"Sep-1", @"Sep-2", @"Oct-1", @"Oct-2", @"Nov-1", @"Nov-2", @"Dec-1", @"Dec-2", nil];
-    
-    self.payPeriodTableView.delegate = self;
-    self.payPeriodTableView.dataSource = self;
+    self.payPeriodTableView.hidden = YES;
     self.payPeriodTableView.backgroundColor = [UIColor clearColor];
     self.payPeriodTableView.opaque = NO;
-    
-    for(int i = 0; i < [self.monthlyPayPeriods count]; i++)
-    {
-        [self.payrollStringsToPayrollModel setValue:[[self.monthlyPayPeriods objectAtIndex:i]substringToIndex:3] forKey:[self.monthlyPayPeriods objectAtIndex:i]];
-    }
-    for(int i = 0; i < [self.biweeklyPayPeriods count]; i++)
-    {
-        [self.payrollStringsToPayrollModel setValue:[NSString stringWithFormat:@"%02d", (i+1)] forKey:[self.biweeklyPayPeriods objectAtIndex:i]];
-    }
+
+    self.myModel = [[PayrollModel alloc] init];
+    [self.myModel initializeModelWithDelegate:self];
+}
+
+- (void) doneInitializingPayrollModel
+{
+    self.payPeriodTableView.delegate = self;
+    self.payPeriodTableView.dataSource = self;
+    self.payPeriodTableView.hidden = NO;
     self.periodSelectionField.inputView = [self createPeriodPicker];
     self.periodTypeSegmented.selectedSegmentIndex = 0;
+    self.selectedPayPeriod = [[self.myModel getPeriods] objectAtIndex:0];
     [self segmentedValueChanged:self.periodTypeSegmented];
 }
 
@@ -102,14 +86,12 @@
 
 - (IBAction)segmentedValueChanged:(id)sender
 {
-    if (self.periodTypeSegmented.selectedSegmentIndex == MONTHLY_SEGMENT)
+    if(self.periodTypeSegmented.selectedSegmentIndex == 0)
     {
-        self.importantDateLabels = [[NSArray alloc]initWithObjects:@"Forms Due to Management Centers (except DRH)", @"Forms Due To DRH HR", @"Leave of Absence Forms Due to Corporate Payroll", @"Pay Exception Forms Due to Corporate Payroll", @"All Types of iForms", @"Time and Attendance Closing to Update PTO Balances", @"Pay Date", nil];
+        self.myModel.mode = BiweeklyMode;
     }
-    else
-    {
-        self.importantDateLabels = [[NSArray alloc]initWithObjects:@"Pay Period Begin Date",@"Pay Period End Date", @"Pay Date", @"Time/Attendance and Electronic Time Cards Employee Lock Down", @"Time/Attendance and Electronic Time Cards Supervisor Lock Down", @"Gross Adjustment Forms Due to Corporate Payroll", @"Forms Due to Management Centers", @"All Forms Due to DRH HR", @"All Types of iForms", nil];
-    }
+    else self.myModel.mode = MonthlyMode;
+    
     [self.myPicker reloadAllComponents];
     [self.myPicker selectRow:0 inComponent:0 animated:YES];
     self.selectedPayPeriod = [self pickerView:self.myPicker titleForRow:0 forComponent:0];
@@ -133,36 +115,17 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
 {
-    if(self.periodTypeSegmented.selectedSegmentIndex == MONTHLY_SEGMENT)
-    {
-        return [self.monthlyPayPeriods count];
-    }
-    else
-    {
-        return [self.biweeklyPayPeriods count];
-    }
+    return [self.myModel getPeriods].count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *result = nil;
-    if([pickerView isEqual:self.myPicker])
-    {
-        if(self.periodTypeSegmented.selectedSegmentIndex == 1)
-        {
-            result = [self.monthlyPayPeriods objectAtIndex:row];
-        }
-        else if (self.periodTypeSegmented.selectedSegmentIndex == 0)
-        {
-            result = [self.biweeklyPayPeriods objectAtIndex:row];
-        }
-    }
-    return result;
+    return [[self.myModel getPeriods] objectAtIndex:row];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.importantDateLabels.count;
+    return [self.myModel getCategories].count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -186,26 +149,23 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.alpha = 1;
     
-    UILabel *label = cell.textLabel;
-    label.backgroundColor = [UIColor clearColor];
-    self.modelData = [self.myModel datesForPayPeriod:[self.payrollStringsToPayrollModel objectForKey:self.selectedPayPeriod]];
-    if(indexPath.section >= self.modelData.count)
+    NSDate *date = [self.myModel getDateForCategoryNum:indexPath.section period:self.selectedPayPeriod];
+    if(date)
     {
-        [NSException raise:@"Crash and Burn Exception!" format:@"Something went wrong in the cellForRowAtIndexPathMethod of PayrollPeriodViewController"];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"EE MMMM dd, yyyy"];
+        NSString *title = [dateFormatter stringFromDate:date];
+        cell.textLabel.text = title;
     }
-    NSDate *date =[self.modelData objectAtIndex:indexPath.section];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"EE MMMM dd, yyyy"];
-    NSString *title = [dateFormatter stringFromDate:date];
-    label.text = title;
-    label.backgroundColor = [UIColor clearColor];
-
+    else cell.textLabel.text = @"No date";
+    
     return cell;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [self.importantDateLabels objectAtIndex:section];
+    PayrollCategory *category = [[self.myModel getCategories] objectAtIndex:section];
+    return category.name;
 }
 
 - (void)viewDidUnload
