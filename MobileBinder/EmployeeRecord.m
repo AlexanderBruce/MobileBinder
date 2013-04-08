@@ -39,6 +39,7 @@
 - (void) setIdNum:(NSString *)idNum
 {
     _idNum = idNum;
+    NSLog(@"Setting IDNUM");
     self.myManagedObject.idNum = _idNum;
 }
 
@@ -180,6 +181,7 @@
         self.department = (managedObject.department != nil) ? managedObject.department : @"";
         self.unit = (managedObject.unit != nil)  ? managedObject.unit : @"";
         self.idNum = (managedObject.idNum != nil) ? managedObject.idNum : @"";
+        NSLog(@"Read from managed object idNum = %@",self.idNum);
         self.allAbsences = (managedObject.absences != nil) ? [managedObject.absences mutableCopy] : [[NSMutableArray alloc] init];
         self.allTardies = (managedObject.tardies != nil) ? [managedObject.tardies mutableCopy] : [[NSMutableArray alloc] init];
         self.allMissedSwipes = (managedObject.missedSwipes != nil) ? [managedObject.missedSwipes mutableCopy] : [[NSMutableArray alloc] init];

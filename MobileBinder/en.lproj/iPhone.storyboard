@@ -77,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0o-bz-G2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-472" y="-418"/>
+            <point key="canvasLocation" x="-472" y="-423"/>
         </scene>
         <!--Employee Rounding Overview View Controller - Overview-->
         <scene sceneID="YFB-Ag-Ae0">
@@ -228,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRD-X1-01N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="-430"/>
+            <point key="canvasLocation" x="473" y="-423"/>
         </scene>
         <!--Add Employee View Controller-->
         <scene sceneID="hRY-xI-mWg">
@@ -327,7 +327,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4n-Ah-mJu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="875" y="-409"/>
+            <point key="canvasLocation" x="875" y="-423"/>
         </scene>
         <!--Employee View Controller-->
         <scene sceneID="iV3-Wj-jGA">
@@ -459,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46P-rE-I01" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="905" y="212"/>
+            <point key="canvasLocation" x="875" y="169"/>
         </scene>
         <!--Webview View Controller - Policy-->
         <scene sceneID="bts-Uf-Nnd">
@@ -501,7 +501,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q6v-CO-oaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1319" y="212"/>
+            <point key="canvasLocation" x="1271" y="169"/>
         </scene>
         <!--Attendance View Controller - Employees-->
         <scene sceneID="YdY-tB-IdQ">
@@ -661,7 +661,7 @@
                     </cells>
                 </tableViewSection>
             </objects>
-            <point key="canvasLocation" x="536" y="1352"/>
+            <point key="canvasLocation" x="347" y="1451"/>
         </scene>
         <!--Reset Settings View Controller - Reset-->
         <scene sceneID="t2J-gA-h1P">
@@ -749,7 +749,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I5g-ao-kHz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48" y="2022"/>
+            <point key="canvasLocation" x="347" y="3160"/>
         </scene>
         <!--Manager Settings View Controller - Manager Details-->
         <scene sceneID="wyj-xU-j4L">
@@ -780,7 +780,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDB-Kt-f6U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536" y="2485"/>
+            <point key="canvasLocation" x="347" y="2588"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="NBr-tl-ctC">
@@ -1031,7 +1031,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SID-Y9-Zwo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1082" y="1451"/>
+            <point key="canvasLocation" x="-1090" y="1451"/>
         </scene>
         <!--Add Resource View Controller-->
         <scene sceneID="p4N-Dx-s8N">
@@ -1194,7 +1194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gi4-dC-Sy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-144" y="762"/>
+            <point key="canvasLocation" x="39" y="746"/>
         </scene>
         <!--Payroll Period View Controller - Payroll-->
         <scene sceneID="XTQ-Hb-Je3">
@@ -1246,7 +1246,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ES4-ta-vLs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="800"/>
+            <point key="canvasLocation" x="473" y="746"/>
         </scene>
         <!--Add Employee View Controller-->
         <scene sceneID="ow7-B8-50e">
@@ -1347,7 +1347,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7A3-4m-j1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1271" y="-393"/>
+            <point key="canvasLocation" x="1271" y="-423"/>
         </scene>
         <!--Senior Rounding All Logs View Controller - All Logs-->
         <scene sceneID="46R-FZ-bb1">
@@ -1406,7 +1406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ujw-cT-W4j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1850" y="-542"/>
+            <point key="canvasLocation" x="-1848" y="-551"/>
         </scene>
         <!--Webview View Controller-->
         <scene sceneID="JIr-Wn-Z2O">
@@ -1436,7 +1436,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jk3-ih-X7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-675" y="1451"/>
+            <point key="canvasLocation" x="-690" y="1451"/>
         </scene>
         <!--All Settings View Controller - Settings-->
         <scene sceneID="gQR-xF-NCc">
@@ -1466,7 +1466,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WEC-rG-qGI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48" y="1432"/>
+            <point key="canvasLocation" x="-238" y="1451"/>
         </scene>
         <!--Senior Rounding Overview View Controller - Overview-->
         <scene sceneID="N9p-78-Hor">
@@ -1573,7 +1573,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ubQ-E3-e6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1460" y="-563"/>
+            <point key="canvasLocation" x="-1460" y="-551"/>
         </scene>
         <!--Rounding Details View Controller - Details-->
         <scene sceneID="vxY-jQ-BNN">
@@ -1635,7 +1635,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="czX-RD-2qQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536" y="1931"/>
+            <point key="canvasLocation" x="347" y="2028"/>
         </scene>
     </scenes>
     <resources>
