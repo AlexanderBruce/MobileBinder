@@ -20,6 +20,8 @@
 #define BIWEEKLY_SEGMENT 0
 #define MONTHLY_SEGMENT 1
 
+#define SAVED_SETTINGS_KEY @"payrollSavedSettingsKey"
+
 @interface PayrollPeriodViewController () <UITextFieldDelegate, PayrollModelDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *periodTypeSegmented;
 @property (weak, nonatomic) IBOutlet UITextField *periodSelectionField;
@@ -52,9 +54,10 @@
     self.payPeriodTableView.dataSource = self;
     self.payPeriodTableView.hidden = NO;
     self.periodSelectionField.inputView = [self createPeriodPicker];
-    self.periodTypeSegmented.selectedSegmentIndex = 0;
-    self.selectedPayPeriod = [[self.myModel getPeriods] objectAtIndex:0];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.periodTypeSegmented.selectedSegmentIndex = [[defaults objectForKey:SAVED_SETTINGS_KEY] intValue];
     [self segmentedValueChanged:self.periodTypeSegmented];
+    self.selectedPayPeriod = [[self.myModel getPeriods] objectAtIndex:0];
 }
 
 -(UIView *) createPeriodPicker
@@ -91,6 +94,10 @@
         self.myModel.mode = BiweeklyMode;
     }
     else self.myModel.mode = MonthlyMode;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithInt:self.periodTypeSegmented.selectedSegmentIndex] forKey:SAVED_SETTINGS_KEY];
+    [defaults synchronize];
     
     [self.myPicker reloadAllComponents];
     [self.myPicker selectRow:0 inComponent:0 animated:YES];
