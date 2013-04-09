@@ -1,5 +1,5 @@
 #import "WelcomeViewController.h"
-#import "PayrollNotificationsViewController.h"
+#import "NotificationSettingsViewController.h"
 
 #define PROCEED_ALERT_TAG 2
 

@@ -1,4 +1,6 @@
 ##Pay Period Begin##1##
+**Pay period begins today**
+!!09:00!!
 01-1: 17-12-12
 01-2: 31-12-12
 02-1: 14-01-13
@@ -27,6 +29,8 @@
 12-2: 02-12-13
 
 ##Pay Period End##2##
+**Pay period ends today**
+!!09:00!!
 01-1: 30-12-12
 01-2: 13-01-13
 02-1: 27-01-13
@@ -55,6 +59,8 @@
 12-2: 15-12-13
 
 ##Pay Date##3##
+**Biweekly Pay Day!**
+!!09:00!!
 01-1: 11-01-13
 01-2: 25-01-13
 02-1: 08-02-13
@@ -83,6 +89,8 @@
 12-2: 27-12-13
 
 ##Time/Attendance & Electronic Time Cards Employee Lock Down##4##
+**Time/Attendance/Electronic time cards for employees are locked down today at 10 AM**
+!!09:00!!
 01-1: 02-01-13
 01-2: 14-01-13
 02-1: 28-01-13
@@ -111,6 +119,8 @@
 12-2: 16-12-13
 
 ##Time/Attendance & Electronic Time Cards Supervisor Lock Down##5##
+**Time/Attendance/Electronic time cards for supervisors are locked down at 10 AM**
+!!09:00!!
 01-1: 03-01-13
 01-2: 15-01-13
 02-1: 29-01-13
@@ -139,6 +149,8 @@
 12-2: 17-12-13
 
 ##Gross Adjustments Due##6##
+**Pay period gross adjustments are due by 3pm**
+!!09:00!!
 01-1: 03-01-13
 01-2: 15-01-13
 02-1: 29-01-13
@@ -167,6 +179,8 @@
 12-2: 17-12-13
 
 ##Forms Due to Management Centers##7##
+**Biweekly forms due to management centers by noon (except DRH)**
+!!09:00!!
 01-1: 20-12-12
 01-2: 04-01-13
 02-1: 16-01-13
@@ -195,6 +209,8 @@
 12-2: 06-12-13
 
 ##All Forms Due to DRH HR##8##
+**All biweekly forms due to DRH HR by 5 PM**
+!!09:00!!
 01-1: 20-12-12
 01-2: 04-01-13
 02-1: 16-01-13
@@ -223,6 +239,8 @@
 12-2: 06-12-13
 
 ##All Types of iForms##9##
+**All biweekly iForms due by 5 PM**
+!!09:00!!
 01-1: 21-12-12
 01-2: 07-01-13
 02-1: 18-01-13

@@ -88,7 +88,7 @@
             }
             if(numberOfFetches >= MAX_NUMBER_OF_FETCHES && numberRetrieved <MIN_SIZE_UNTIL_FETCH_COMPLETE)
             {
-                self.noRemindersHeaderText = @"No reminders scheduled";
+                self.noRemindersHeaderText = @"No scheduled reminders";
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             }
             [self.tableView.infiniteScrollingView stopAnimating];

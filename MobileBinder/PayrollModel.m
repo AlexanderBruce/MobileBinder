@@ -7,6 +7,7 @@
 #define MONTHLY_PAYROLL_DATA_FILE @"MonthlyPayrollData"
 
 #define DATE_FORMAT_CODE @"dd-MM-yy"
+#define TIME_FORMAT_CODE @"HH:mm"
 
 @interface PayrollModel()
 @property (nonatomic, strong) NSMutableArray *biweeklyCategories;
@@ -36,22 +37,52 @@
 
 - (void) addRemindersForTypeIDs: (NSArray *) toAdd andCancelRemindersForTypeIDs: (NSArray *) toCancel completion: (void (^) (void)) block
 {
-//    ReminderCenter *center = [ReminderCenter getInstance];
-//    [center cancelRemindersWithTypeIDs:toCancel completion:^{
-//        NSMutableArray *remindersToAdd = [[NSMutableArray alloc] init];
-//        for (NSNumber *typeID in toAdd)
-//        {
-//            NSArray *dates = [self getDatesForTypeID:[typeID intValue]];
-//            for (NSDate *currentDate in dates)
-//            {
-//                Reminder *reminder = [[Reminder alloc] initWithText:[self getTextForTypeID:[typeID intValue]] eventDate:currentDate fireDate:currentDate typeID:[typeID intValue]];
-//                [remindersToAdd addObject:reminder];
-//            }
-//        }
-//        [center addReminders:remindersToAdd completion:^{
-//            block();
-//        }];
-//    }];
+    ReminderCenter *center = [ReminderCenter getInstance];
+    [center cancelRemindersWithTypeIDs:toCancel completion:^{
+        NSMutableArray *remindersToAdd = [[NSMutableArray alloc] init];
+        for (NSNumber *typeID in toAdd)
+        {
+            NSArray *biweeklyReminders = [self produceRemindersFromCategories:self.biweeklyCategories matchingTypeID:[typeID intValue]];
+            NSArray *monthlyReminders =[self produceRemindersFromCategories:self.monthlyCategories matchingTypeID:[typeID intValue]];
+            [remindersToAdd addObjectsFromArray:biweeklyReminders];
+            [remindersToAdd addObjectsFromArray:monthlyReminders];
+        }
+        [center addReminders:remindersToAdd completion:^{
+            block();
+        }];
+    }];
+}
+
+- (NSArray *) produceRemindersFromCategories: (NSArray *) categories matchingTypeID: (int) typeID
+{
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    for (PayrollCategory *category in categories)
+    {
+        if(category.typeID == typeID)
+        {
+            NSArray *dates = [category getDates];
+            
+            NSDateComponents *timeComps = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:category.fireTime];
+            
+            for (NSDate *date in dates)
+            {
+                NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit) fromDate:date];
+                
+                NSDateComponents *dateAndTimecomps = [[NSDateComponents alloc] init];
+                dateAndTimecomps.year = dateComps.year;
+                dateAndTimecomps.month = dateComps.month;                
+                dateAndTimecomps.day = dateComps.day;
+                dateAndTimecomps.hour = timeComps.hour;
+                dateAndTimecomps.minute = timeComps.minute;
+                
+                NSDate *fireDateAndTime = [[NSCalendar currentCalendar] dateFromComponents:dateAndTimecomps];
+
+                Reminder *reminder = [[Reminder alloc] initWithText:[category getNotificationText] fireDate:fireDateAndTime typeID:category.typeID];
+                [returnArray addObject:reminder];
+            }
+        }
+    }
+    return returnArray;
 }
 
 - (NSArray *) getPeriods
@@ -74,6 +105,8 @@
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATE_FORMAT_CODE;
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    timeFormatter.dateFormat = TIME_FORMAT_CODE;
     
     NSString* path = [[NSBundle mainBundle] pathForResource:file
                                                      ofType:@""];
@@ -95,8 +128,23 @@
             currentCategory.typeID = [[headerArray objectAtIndex:2] intValue];
             [categories addObject:currentCategory];
         }
+        else if([line hasPrefix:@"**"])
+        {
+            NSArray *notificationTextArray = [line componentsSeparatedByString:@"**"];
+            if(notificationTextArray.count != 3) [NSException raise:NSInvalidArgumentException format:@"Each notification text header must have the form **Notification Text**"];
+            [currentCategory setNotificationText:[notificationTextArray objectAtIndex:1]];
+        }
+        else if([line hasPrefix:@"!!"])
+        {
+            NSArray *notificationTimeArray = [line componentsSeparatedByString:@"!!"];
+            if(notificationTimeArray.count != 3) [NSException raise:NSInvalidArgumentException format:@"Each notification fire time header must have the form !!Fire Time!!"];
+            NSDate *time = [timeFormatter dateFromString:[notificationTimeArray objectAtIndex:1]];
+            if(time)
+            {
+                currentCategory.fireTime = time;
+            }
+        }
         else
-            
         {
             if(line.length < 4) continue;
             int delimiterLocation = [line rangeOfString:@":"].location;

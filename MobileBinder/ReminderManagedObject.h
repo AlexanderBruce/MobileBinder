@@ -5,7 +5,6 @@
 @interface ReminderManagedObject : NSManagedObject
 
 @property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSDate * eventDate;
 @property (nonatomic, retain) NSDate * fireDate;
 @property (nonatomic, retain) NSNumber * typeID;
 

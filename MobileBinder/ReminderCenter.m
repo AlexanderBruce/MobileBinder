@@ -34,7 +34,6 @@ static ReminderCenter *instance;
         {
             ReminderManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([ReminderManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
             managedObject.text = reminder.text;
-            managedObject.eventDate = reminder.eventDate;
             managedObject.fireDate = reminder.fireDate;
             managedObject.typeID = [NSNumber numberWithInt:reminder.typeID];
             

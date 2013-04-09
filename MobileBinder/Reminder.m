@@ -3,7 +3,6 @@
 
 @interface Reminder()
 @property (nonatomic, strong, readwrite) NSString *text;
-@property (nonatomic, strong, readwrite) NSDate *eventDate;
 @property (nonatomic, strong, readwrite) NSDate *fireDate;
 @property (nonatomic, readwrite) int typeID;
 @end
@@ -15,13 +14,13 @@
     return ([self.fireDate timeIntervalSinceNow] < 0.0);
 }
 
-- (id) initWithText:(NSString *)text eventDate:(NSDate *)eventDate fireDate:(NSDate *)fireDate typeID:(int)typeID
+- (id) initWithText:(NSString *)text fireDate:(NSDate *)fireDate typeID:(int)typeID
 {
     if(self = [super init])
     {
         self.text = text;
-        self.eventDate = eventDate;
         self.fireDate = fireDate;
+//        NSLog(@"Fire date = %@",self.fireDate);
         self.typeID = typeID;
     }
     return self;
@@ -32,7 +31,6 @@
     if(self = [super init])
     {
         self.text = managedObject.text;
-        self.eventDate = managedObject.eventDate;
         self.fireDate = managedObject.fireDate;
         self.typeID = managedObject.typeID;
     }
