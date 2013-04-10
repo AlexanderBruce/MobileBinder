@@ -89,6 +89,14 @@
             }
         }
     }
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",
+                          documentsDirectory,CUSTOM_DATA_FILE];
+    NSString *contentsToWrite = @"";
+    
+    [[contentsToWrite dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
 
 }
 

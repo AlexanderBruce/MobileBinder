@@ -1,8 +1,9 @@
 #import "ResourcesModel.h"
 #import "ResourceObject.h"
+#import "Constants.h"
 
 #define RESOURCES_DATA_FILE @"ResourcesData"
-#define CUSTOM_DATA_FILE @"CustomResourcesData"
+
 
 @interface ResourcesModel()
 @property (nonatomic) BOOL usingFilter;
@@ -173,7 +174,6 @@
                                                            encoding:NSUTF8StringEncoding
                                                               error:nil];
     if(!oldFileContents) oldFileContents = @"";
-    NSLog(@"Old file contents = \n %@",oldFileContents);
     
     NSString *contentsToWrite = [NSString stringWithFormat:@"%@%@",oldFileContents,write];
 
