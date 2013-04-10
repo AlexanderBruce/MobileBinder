@@ -14,5 +14,6 @@
 @dynamic text;
 @dynamic fireDate;
 @dynamic typeID;
+@dynamic uniqueID;
 
 @end

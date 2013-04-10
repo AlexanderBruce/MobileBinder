@@ -1,10 +1,12 @@
 #import "Reminder.h"
 #import "ReminderManagedObject.h"
 
+#define CURRENT_UNUSED_UNIQUE_ID_KEY @"reminderCurrentUnusedUniqueIdKey"
 @interface Reminder()
 @property (nonatomic, strong, readwrite) NSString *text;
 @property (nonatomic, strong, readwrite) NSDate *fireDate;
 @property (nonatomic, readwrite) int typeID;
+@property (nonatomic, readwrite) int uniqueID;
 @end
 
 @implementation Reminder
@@ -22,6 +24,11 @@
         self.fireDate = fireDate;
 //        NSLog(@"Fire date = %@",self.fireDate);
         self.typeID = typeID;
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        self.uniqueID = [defaults integerForKey:CURRENT_UNUSED_UNIQUE_ID_KEY];
+        [defaults setInteger:self.uniqueID + 1 forKey:CURRENT_UNUSED_UNIQUE_ID_KEY];
+        [defaults synchronize];
     }
     return self;
 }
@@ -33,6 +40,7 @@
         self.text = managedObject.text;
         self.fireDate = managedObject.fireDate;
         self.typeID = managedObject.typeID;
+        self.uniqueID = [managedObject.uniqueID intValue];
     }
     return self;
 }

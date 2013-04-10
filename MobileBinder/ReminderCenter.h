@@ -6,6 +6,8 @@
 
 + (ReminderCenter *) getInstance;
 
+- (void) addReminders:(NSArray *)reminders cancelRemindersWithTypeIDs: (NSArray *) typeIDArray completion:(void (^)(void))block;
+
 - (void) addReminders: (NSArray *) reminders completion: (void (^) (void)) block;
 
 //TypeIDArray is an array of NSNumbers of the typeIDs that you wish to cancel
@@ -17,4 +19,8 @@
  */
 - (NSArray *) getRemindersBetween: (NSDate *) begin andEndDate: (NSDate *) end;
 
+- (void) reset;
+
+//Call this when the app becomes active in order to ensure that the proper UILocalNotifications are scheduled
+- (void) refreshReminders;
 @end

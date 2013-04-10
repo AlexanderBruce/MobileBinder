@@ -3,7 +3,9 @@
 #import <CoreData/CoreData.h>
 #import "Constants.h"
 #import "MBProgressHUD.h"
+#import "ReminderCenter.h"
 #import "BackgroundViewController.h"
+#import "ReminderManagedObject.h"
 
 
 #define RESET_SETTINGS_TAG 2
@@ -59,6 +61,9 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *backgroundPath = [documentsDirectory stringByAppendingPathComponent:BACKGROUND_IMAGE_FILENAME];
     [[NSFileManager defaultManager] removeItemAtPath: backgroundPath error: nil];
+    
+    //Remove notifications from reminder center
+    [[ReminderCenter getInstance] reset];
     dispatch_async(dispatch_get_main_queue(), ^{
         [BackgroundViewController refreshBackground];
     });
@@ -66,23 +71,25 @@
 
 - (void) eraseContent
 {
-    UIManagedDocument *document = [Database getInstance];
-    NSManagedObjectContext *managedObjectContext = document.managedObjectContext;
-    NSError * error;
-    // retrieve the store URL
-    NSURL * storeURL = [[managedObjectContext persistentStoreCoordinator] URLForPersistentStore:[[[managedObjectContext persistentStoreCoordinator] persistentStores] lastObject]];
-    // lock the current context
-    [managedObjectContext lock];
-    [managedObjectContext reset];//to drop pending changes
-    //delete the store from the current managedObjectContext
-    if ([[managedObjectContext persistentStoreCoordinator] removePersistentStore:[[[managedObjectContext persistentStoreCoordinator] persistentStores] lastObject] error:&error])
+    NSManagedObjectContext *context = [Database getInstance].managedObjectContext;
+    NSManagedObjectModel *model = [[context persistentStoreCoordinator]
+                                   managedObjectModel];
+    
+    for(NSEntityDescription *entity in [model entities])
     {
-        // remove the file containing the data
-        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:&error];
-        //recreate the store like in the  appDelegate method
-        [[managedObjectContext persistentStoreCoordinator] addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];//recreates the persistent store
+        //Don't delete reminders
+        if(![entity.name isEqualToString:NSStringFromClass([ReminderManagedObject class])])
+        {
+            NSFetchRequest *request = [[NSFetchRequest alloc] init];
+            [request setEntity:entity];
+            NSArray *results = [context executeFetchRequest:request error:nil];
+            for(NSManagedObject *object in results)
+            {
+                [context deleteObject:object];
+            }
+        }
     }
-    [managedObjectContext unlock];
+
 }
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
