@@ -17,7 +17,7 @@
 
 #define SCROLL_OFFSET IS_4_INCH_SCREEN ? 15 : 115
 #define PICKER_OFFSET IS_4_INCH_SCREEN ? 50 : 150
-#define CONTENT_SIZE IS_4_INCH_SCREEN ? 460: 560
+#define CONTENT_SIZE IS_4_INCH_SCREEN ? 360: 460
 #define REPEAT_EMPLOYEE_ALERTVIEW 2
 #define INCOMPLETE_FIELDS_ALERTVIEW 3
 
@@ -199,6 +199,14 @@
     if(textField == self.description || textField == self.category)
     {
         [self.myScrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
+    }
+    else if( textField == self.pageTitle)
+    {
+        [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
+    else if(textField == self.webPageUrl )
+    {
+        [self.myScrollView setContentOffset:CGPointMake(0, 40) animated:YES];
     }
 }
 
