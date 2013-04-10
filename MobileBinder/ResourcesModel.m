@@ -55,6 +55,16 @@
     return [sortedKeys objectAtIndex:categoryNum];
 }
 
+-(NSString*) getNameOfCategoryWhenUnFiltered:(int)categoryNum
+{
+    NSDictionary *dict;
+    dict = self.resourceLinks;
+    NSArray * sortedKeys = [[dict allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
+    return [sortedKeys objectAtIndex:categoryNum];
+}
+
+
+
 - (ResourceObject *) getResourceForCategory: (int) categoryNum index: (int) index
 {
     NSDictionary *dict;
