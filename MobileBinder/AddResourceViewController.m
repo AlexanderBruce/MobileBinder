@@ -16,6 +16,7 @@
 #define PICKER_SHOW_ANIMATION_SPEED .5
 
 #define SCROLL_OFFSET IS_4_INCH_SCREEN ? 15 : 115
+#define PICKER_OFFSET IS_4_INCH_SCREEN ? 50 : 150
 #define CONTENT_SIZE IS_4_INCH_SCREEN ? 460: 560
 #define REPEAT_EMPLOYEE_ALERTVIEW 2
 #define INCOMPLETE_FIELDS_ALERTVIEW 3
@@ -72,13 +73,14 @@
 {
     if(!self.pickerIsVisible)
     {
+        [self.myScrollView endEditing:YES];
         self.pickerIsVisible = YES;
         [UIView animateWithDuration:PICKER_SHOW_ANIMATION_SPEED animations:^
          {
              self.pickerView.frame = CGRectMake(0, self.view.frame.size.height - self.pickerView.frame.size.height, self.pickerView.frame.size.width, self.pickerView.frame.size.height);
          }];
         self.firstResponderIsActive = YES;
-        [self.myScrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
+        [self.myScrollView setContentOffset:CGPointMake(0, PICKER_OFFSET) animated:YES];
     }
 }
 
@@ -148,6 +150,7 @@
 
 -(void) pickerPressed
 {
+    
     if(self.pickerIsVisible)
     {
         self.pickerIsVisible = NO;
@@ -182,6 +185,15 @@
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField
 {
+    
+    if(self.pickerIsVisible){
+        self.pickerIsVisible = NO;
+        [UIView animateWithDuration:PICKER_HIDE_ANIMATION_SPEED animations:^
+         {
+             self.pickerView.frame = CGRectMake(0, self.view.frame.size.height, self.pickerView.frame.size.width, self.pickerView.frame.size.height);
+         }];
+        
+    }
     self.myScrollView.scrollEnabled = YES;
     self.firstResponderIsActive = YES;
     if(textField == self.description || textField == self.category)
@@ -198,6 +210,7 @@
 
 -(void) textFieldDidEndEditing:(UITextField *)textField
 {
+    
     self.firstResponderIsActive = NO;
     double delayInSeconds = 0.1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
