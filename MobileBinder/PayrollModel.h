@@ -15,6 +15,7 @@ typedef enum Mode {
 
 @property (nonatomic) Mode mode;
 
+//The block is guaranteed to run on the main thread
 - (void) addRemindersForTypeIDs: (NSArray *) toAdd andCancelRemindersForTypeIDs: (NSArray *) toCancel completion: (void (^) (void)) block;
 
 - (NSArray *) getPeriods;

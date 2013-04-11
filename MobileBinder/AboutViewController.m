@@ -61,6 +61,12 @@
     [self.scrollView setContentOffset:newOffset animated:NO];
 }
 
+#define ENLARGE_TIME 10 //0.7
+#define OVERLAP_TIME 0.1
+#define SPIN_TIME 3
+#define NUM_OF_ROATATIONS 11
+#define SHRINK_TIME 0.7
+
 - (void) bowtieMethod
 {
     self.bowtieView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bow_tie.png"]];
@@ -71,38 +77,92 @@
     float y = (self.view.frame.size.height / 2) - (height / 2);
     self.bowtieView.frame = CGRectMake(x, y , width, height);
     [self.view addSubview:self.bowtieView];
-    CGAffineTransform enlarge = CGAffineTransformScale(self.view.transform, 14, 14);
-//    CGAffineTransform rotate1 = CGAffineTransformMakeRotation(2 * M_PI);
-//    CGAffineTransform rotate2 = CGAffineTransformRotate(enlarge, 2/3 * M_PI);
-//    CGAffineTransform rotate3 = CGAffineTransformRotate(rotate2, 2/3 * M_PI);
-    CGAffineTransform shrink = CGAffineTransformIdentity;
+//    
+//    
+//    
+//    CGAffineTransform enlarge = CGAffineTransformScale(self.view.transform, 280, 280);
+//    CGAffineTransform shrink = CGAffineTransformIdentity;
+    
+    CABasicAnimation *zoomInAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    zoomInAnimation.beginTime = 0.0f;
+    zoomInAnimation.fromValue = [NSNumber numberWithFloat:1.0];
+    zoomInAnimation.toValue = [NSNumber numberWithFloat:100.0];
+    zoomInAnimation.removedOnCompletion = NO;
+    zoomInAnimation.additive = YES;
+    zoomInAnimation.duration = ENLARGE_TIME;
+//    [self.bowtieView.layer addAnimation:zoomInAnimation forKey:@"animation1"];
+    
+    CABasicAnimation* spinAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    spinAnimation.beginTime = 0;
+    spinAnimation.duration = ENLARGE_TIME;
+    spinAnimation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear];
+    spinAnimation.removedOnCompletion = NO;
+    spinAnimation.additive = YES;
+    spinAnimation.toValue = [NSNumber numberWithFloat: NUM_OF_ROATATIONS * M_PI * 2.0];
+//    [self.bowtieView.layer addAnimation:spinAnimation forKey:@"animation2"];
+
+    
+    CABasicAnimation *zoomOutAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    zoomOutAnimation.beginTime = 0;
+    zoomOutAnimation.duration = ENLARGE_TIME;
+    zoomOutAnimation.fromValue = [NSNumber numberWithFloat:100.0];
+    zoomOutAnimation.toValue = [NSNumber numberWithFloat:1.0];
+    zoomOutAnimation.removedOnCompletion = NO;
+    zoomOutAnimation.additive = YES;
+//    zoomOutAnimation.duration = SHRINK_TIME;
+//    [self.bowtieView.layer addAnimation:zoomOutAnimation forKey:@"animation3"];
+
+
     
     
-    [UIView animateWithDuration:1 delay:0 options:0 animations:^{
-        self.bowtieView.transform = enlarge;
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:1 delay:0 options:0 animations:^{
-            CABasicAnimation* spinAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-            spinAnimation.duration = 5.0;
-            spinAnimation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear];
-            spinAnimation.toValue = [NSNumber numberWithFloat: 2.0 * M_PI * 20.0];
-            [self.bowtieView.layer addAnimation:spinAnimation forKey:@"spinAnimation"];
-        } completion:^(BOOL finished) {
-//            [UIView animateWithDuration:1 delay:0 options:0 animations:^{
-//                self.bowtieView.transform = rotate2;
+//    [self.bowtieView.layer addAnimation:zoomInAnimation forKey:@"enlargeAnimation"];
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.removedOnCompletion = NO;
+    group.animations = [NSArray arrayWithObjects:zoomInAnimation,spinAnimation,zoomOutAnimation, nil];
+    [self.bowtieView.layer addAnimation:group forKey:@"animation"];
+
+
+    
+
+    
+    
+//    [UIView animateWithDuration:ENLARGE_TIME delay:0 options:0 animations:^{
+//        self.bowtieView.transform = enlarge;
+//    } completion:^(BOOL finished) {}];
+    
+    double delayInSeconds = ENLARGE_TIME - OVERLAP_TIME;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+    {
+        CABasicAnimation* spinAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+        spinAnimation.duration = SPIN_TIME;
+        spinAnimation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear];
+        spinAnimation.toValue = [NSNumber numberWithFloat: NUM_OF_ROATATIONS * M_PI * 2.0];
+        [self.bowtieView.layer addAnimation:spinAnimation forKey:@"spinAnimation"];
+        
+        double delayInSeconds = SPIN_TIME - OVERLAP_TIME;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+        {
+            
+            CABasicAnimation *ZoomInAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+            ZoomInAnimation.fromValue = [NSNumber numberWithFloat:280.0];
+            ZoomInAnimation.toValue = [NSNumber numberWithFloat:1.0];
+            ZoomInAnimation.duration = SHRINK_TIME;
+            [self.bowtieView.layer addAnimation:ZoomInAnimation forKey:@"shrinkAnimation"];
+        });
+            
+            
+//            [UIView animateWithDuration:SHRINK_TIME delay:0 options:0 animations:^{
+//               self.bowtieView.transform = shrink;
 //            } completion:^(BOOL finished) {
-//                [UIView animateWithDuration:1 delay:0 options:0 animations:^{
-//                    self.bowtieView.transform = rotate3;
-//                } completion:^(BOOL finished){
-                    [UIView animateWithDuration:1 delay:0 options:0 animations:^{
-                        self.bowtieView.transform = shrink;
-                    } completion:^(BOOL finished) {
-                        [self.navigationController popViewControllerAnimated:YES];
-                    }];
-        }];
-    }];
-//    }];
-//    }];
+//                [self.navigationController popViewControllerAnimated:YES];
+//            }];
+//        });
+    });
+
 }
 
 - (void)viewDidUnload

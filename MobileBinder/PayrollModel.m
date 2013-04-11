@@ -37,8 +37,8 @@
 
 - (void) addRemindersForTypeIDs: (NSArray *) toAdd andCancelRemindersForTypeIDs: (NSArray *) toCancel completion: (void (^) (void)) block
 {
-    ReminderCenter *center = [ReminderCenter getInstance];
-    [center cancelRemindersWithTypeIDs:toCancel completion:^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        ReminderCenter *center = [ReminderCenter getInstance];
         NSMutableArray *remindersToAdd = [[NSMutableArray alloc] init];
         for (NSNumber *typeID in toAdd)
         {
@@ -47,10 +47,12 @@
             [remindersToAdd addObjectsFromArray:biweeklyReminders];
             [remindersToAdd addObjectsFromArray:monthlyReminders];
         }
-        [center addReminders:remindersToAdd completion:^{
-            block();
+        [center addReminders:remindersToAdd cancelRemindersWithTypeIDs:toCancel completion:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block();
+            });
         }];
-    }];
+    });
 }
 
 - (NSArray *) produceRemindersFromCategories: (NSArray *) categories matchingTypeID: (int) typeID

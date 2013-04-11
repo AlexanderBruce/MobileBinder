@@ -60,21 +60,9 @@ static UIManagedDocument *database;
 
 + (void) saveDatabaseWithCompletion: (void (^) (void)) block
 {
-    dispatch_queue_t callerQueue = dispatch_get_current_queue();
-    dispatch_retain(callerQueue);
-
     [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
-        dispatch_async(callerQueue, ^{
-            block();
-            dispatch_release(callerQueue);
-        });
+        block();
     }];
 }
-
-+ (void) runBlock:(void (^)())block{
-    NSLog(@"Thread 2 = %@",[NSThread currentThread]);
-	block();
-}
-
 
 @end

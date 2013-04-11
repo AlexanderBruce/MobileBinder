@@ -72,6 +72,7 @@
 		497B0C391704A63800451D35 /* Senior Rounding Document Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 497B0C381704A63800451D35 /* Senior Rounding Document Template.rtf */; };
 		49885D9916E901DC000BE747 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49885D9816E901DC000BE747 /* GradientButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		498F86C516DD6387005118C1 /* UITextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498F86C416DD6387005118C1 /* UITextFieldCell.m */; };
+		4995577C1715D3D700065708 /* BetterDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4995577B1715D3D700065708 /* BetterDatabase.m */; };
 		499C4CF216D2B9D800ED6E76 /* Corrective Action Notice Template.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */; };
 		499C4CF516D2D9E300ED6E76 /* DisciplinaryActionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CF416D2D9E300ED6E76 /* DisciplinaryActionModel.m */; };
 		499C4CF916D2E7A400ED6E76 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499C4CF816D2E7A400ED6E76 /* WelcomeViewController.m */; };
@@ -257,6 +258,8 @@
 		49885D9816E901DC000BE747 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		498F86C316DD6387005118C1 /* UITextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldCell.h; sourceTree = "<group>"; };
 		498F86C416DD6387005118C1 /* UITextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldCell.m; sourceTree = "<group>"; };
+		4995577A1715D3D700065708 /* BetterDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetterDatabase.h; sourceTree = "<group>"; };
+		4995577B1715D3D700065708 /* BetterDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetterDatabase.m; sourceTree = "<group>"; };
 		499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Corrective Action Notice Template.rtf"; sourceTree = "<group>"; };
 		499C4CF316D2D9E300ED6E76 /* DisciplinaryActionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisciplinaryActionModel.h; sourceTree = "<group>"; };
 		499C4CF416D2D9E300ED6E76 /* DisciplinaryActionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisciplinaryActionModel.m; sourceTree = "<group>"; };
@@ -556,6 +559,8 @@
 				49A6F620170A84670075BDD9 /* BackgroundViewController.h */,
 				49A6F621170A84680075BDD9 /* BackgroundViewController.m */,
 				F7A843A416D40ECB009F09DD /* Banner copy.png */,
+				4995577A1715D3D700065708 /* BetterDatabase.h */,
+				4995577B1715D3D700065708 /* BetterDatabase.m */,
 				499C4CF116D2B9D800ED6E76 /* Corrective Action Notice Template.rtf */,
 				4960AFA516B85B5400F16ED6 /* Data.xcdatamodeld */,
 				F79A34E716BD8FAE00ACAABB /* Database.h */,
@@ -937,6 +942,7 @@
 				49B73E18170F8462008408C7 /* AboutViewController.m in Sources */,
 				FA69FD9F1710B2DA0070BFE4 /* AddResourceViewController.m in Sources */,
 				49C5117A1711F5130083305E /* PayrollCategory.m in Sources */,
+				4995577C1715D3D700065708 /* BetterDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

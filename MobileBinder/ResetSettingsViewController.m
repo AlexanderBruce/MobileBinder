@@ -63,10 +63,11 @@
     [[NSFileManager defaultManager] removeItemAtPath: backgroundPath error: nil];
     
     //Remove notifications from reminder center
-    [[ReminderCenter getInstance] reset];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [BackgroundViewController refreshBackground];
-    });
+    [[ReminderCenter getInstance] resetWithCompletition:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [BackgroundViewController refreshBackground];
+        });
+    }];
 }
 
 - (void) eraseContent

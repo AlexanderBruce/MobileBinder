@@ -77,27 +77,14 @@
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         int64_t delayInSeconds = 2.0; //These two seconds are necessary...who knows why
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        __block int numberRetrieved = 0;
-        __block int numberOfFetches = 0;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            
-            while (numberRetrieved < MIN_SIZE_UNTIL_FETCH_COMPLETE && numberOfFetches < MAX_NUMBER_OF_FETCHES)
-            {
-                numberRetrieved += [self addNewDataToTableView];
-                numberOfFetches ++;
-            }
-            if(numberOfFetches >= MAX_NUMBER_OF_FETCHES && numberRetrieved <MIN_SIZE_UNTIL_FETCH_COMPLETE)
-            {
-                self.noRemindersHeaderText = @"No scheduled reminders";
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-            [self.tableView.infiniteScrollingView stopAnimating];
+            [self addNewDataToTableViewNumRetrievedSoFar:0 numOfFetchesSoFar:0];
         });
 
     }];
 }
 
-- (int) addNewDataToTableView
+- (void) addNewDataToTableViewNumRetrievedSoFar: (int) numRetrieved numOfFetchesSoFar: (int) numOfFetches
 {
     ReminderCenter *center = [ReminderCenter getInstance];
     NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
@@ -106,47 +93,62 @@
     dayComponent.day = NUMBER_OF_DAYS_IN_FETCH;
     self.minDateInTable = self.maxDateInTable;
     self.maxDateInTable = [calendar dateByAddingComponents:dayComponent toDate:self.maxDateInTable options:0];
-    NSArray *newReminders =[center getRemindersBetween:self.minDateInTable andEndDate:self.maxDateInTable];
-    NSMutableArray *newIndexPaths = [[NSMutableArray alloc] init];
-    
-    NSDateComponents *lastComponents;
-    int section = self.sectionTitles.count - 1;
-    int row = 0;
-    
-    for(Reminder *current in newReminders)
-    {
-        NSDateComponents *currentComponents = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:current.fireDate];
-        if(currentComponents.day == lastComponents.day && currentComponents.month == lastComponents.month && currentComponents.year == lastComponents.year)
+    [center getRemindersBetween:self.minDateInTable andEndDate:self.maxDateInTable withCompletion:^(NSArray * newReminders) {
+        NSMutableArray *newIndexPaths = [[NSMutableArray alloc] init];
+        NSLog(@"Num fetched = %d",newReminders.count);
+        
+        NSDateComponents *lastComponents;
+        int section = self.sectionTitles.count - 1;
+        int row = 0;
+        
+        for(Reminder *current in newReminders)
         {
-            row ++;
-            NSMutableArray *arrayForSection = [self.rowsForSections objectForKey:[NSNumber numberWithInt:section]];
-            [arrayForSection addObject:current];
-        }
-        else
-        {
-            lastComponents = currentComponents;
-            section ++;
-            row = 0;
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            formatter.dateStyle = NSDateFormatterLongStyle;
-            [self.sectionTitles addObject:[formatter stringFromDate:[calendar dateFromComponents:currentComponents]]];
-            [self.rowsForSections setObject:[NSMutableArray arrayWithObject:current] forKey:[NSNumber numberWithInt:section]];
-            if(section > 0)
+            NSDateComponents *currentComponents = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:current.fireDate];
+            if(currentComponents.day == lastComponents.day && currentComponents.month == lastComponents.month && currentComponents.year == lastComponents.year)
             {
-                [self.tableView insertSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                row ++;
+                NSMutableArray *arrayForSection = [self.rowsForSections objectForKey:[NSNumber numberWithInt:section]];
+                [arrayForSection addObject:current];
             }
             else
             {
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+                lastComponents = currentComponents;
+                section ++;
+                row = 0;
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                formatter.dateStyle = NSDateFormatterLongStyle;
+                [self.sectionTitles addObject:[formatter stringFromDate:[calendar dateFromComponents:currentComponents]]];
+                [self.rowsForSections setObject:[NSMutableArray arrayWithObject:current] forKey:[NSNumber numberWithInt:section]];
+                if(section > 0)
+                {
+                    [self.tableView insertSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+                else
+                {
+                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
             }
+            [newIndexPaths addObject:[NSIndexPath indexPathForRow:row inSection:section]];
         }
-        [newIndexPaths addObject:[NSIndexPath indexPathForRow:row inSection:section]];    
-    }
-    
-    [self.tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
-    return newIndexPaths.count;
+        
+        [self.tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+        
+        int numOfFetchesNow = numOfFetches + 1;
+        int numRetrievedNow = numRetrieved + newReminders.count;
+        
+        if(numOfFetchesNow >= MAX_NUMBER_OF_FETCHES && numRetrievedNow < MIN_SIZE_UNTIL_FETCH_COMPLETE)
+        {
+            self.noRemindersHeaderText = @"No scheduled reminders";
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        else if(numRetrieved < MIN_SIZE_UNTIL_FETCH_COMPLETE && numOfFetchesNow < MAX_NUMBER_OF_FETCHES)
+        {
+            [self addNewDataToTableViewNumRetrievedSoFar:numRetrievedNow numOfFetchesSoFar:numOfFetchesNow];
+        }
+        [self.tableView.infiniteScrollingView stopAnimating];
 
+    }];
 }
 
 - (void) viewDidAppear:(BOOL)animated
