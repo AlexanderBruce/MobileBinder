@@ -13,9 +13,13 @@
 
 - (NSString *) getNameOfCategory: (int) categoryNum;
 
+- (NSString *) getNameOfCategoryWhenUnFiltered:(int)categoryNum;
+
 - (void) filterResourceLinksByString: (NSString *) filterString;
 
 - (void) stopFilteringResourceLinks;
+
+- (void) addResourceObjectwithPageTitle:(NSString *) pTitle url:(NSString *) url description:(NSString*) description category:(NSString*)category;
 
 
 

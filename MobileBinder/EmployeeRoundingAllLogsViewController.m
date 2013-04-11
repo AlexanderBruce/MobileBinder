@@ -1,5 +1,6 @@
 #import "EmployeeRoundingAllLogsViewController.h"
 #import "EmployeeRoundingLog.h"
+#import "EmployeeRoundingModel.h"
 
 @interface EmployeeRoundingAllLogsViewController ()
 
@@ -7,7 +8,7 @@
 
 @implementation EmployeeRoundingAllLogsViewController
 
-- (UITableViewCell *) customizeCell:(UITableViewCell *)cell usingRoundingLog:(RoundingLog *)log
+- (UITableViewCell *) customizeCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath usingRoundingLog:(RoundingLog *)log
 {
     if(![log isKindOfClass:[EmployeeRoundingLog class]])
     {
@@ -21,11 +22,13 @@
     //Create label text for cell
     NSMutableString *labelText = [@"" mutableCopy];
     
-    if(currentLog.date) [labelText appendString:[formatter stringFromDate:currentLog.date]];
-    if(currentLog.date && currentLog.unit.length > 0) [labelText appendFormat:@": %@", currentLog.unit];
+    if(currentLog.employeeName.length > 0) [labelText appendString:currentLog.employeeName];
+    if(currentLog.employeeName.length > 0 && currentLog.unit.length > 0) [labelText appendFormat:@": %@", currentLog.unit];
     else if(currentLog.unit.length > 0) [labelText appendFormat:@"%@",currentLog.unit];
-    if((currentLog.date || currentLog.unit.length > 0) && currentLog.leader.length > 0) [labelText appendFormat:@" (%@)",currentLog.leader];
+    if((currentLog.employeeName.length > 0|| currentLog.unit.length > 0) && currentLog.leader.length > 0) [labelText appendFormat:@" (%@)",currentLog.leader];
     else if(currentLog.leader.length > 0) [labelText appendFormat:@"(%@)",currentLog.leader];
+    
+    if(labelText.length == 0) labelText = [NSString stringWithFormat:@"Log %d",indexPath.row + 1];
     cell.textLabel.text = labelText;
     
     //Create detail text for cell
@@ -34,6 +37,11 @@
     else if(currentLog.keyReminders.length > 0) detailText = currentLog.keyReminders;
     cell.detailTextLabel.text = detailText;
     return cell;
+}
+
+- (RoundingModel *) createModel
+{
+    return [[EmployeeRoundingModel alloc] init];
 }
 
 @end

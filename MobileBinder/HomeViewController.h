@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
+#import "BackgroundViewController.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : BackgroundViewController
 
 @end

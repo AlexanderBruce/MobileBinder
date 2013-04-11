@@ -2,13 +2,16 @@
 #import "ResourcesModel.h"
 #import "WebviewViewController.h"
 #import "ResourceObject.h"
+#import "AddResourceViewController.h"
 #define SEGUE @"webSegue"
+#define RESOURCE_SEGUE @"addResourceSegue"
 
 @interface ResourcesViewController () <UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic,strong) ResourcesModel *myModel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSString *webUrl;
+@property (nonatomic) BOOL searchBarShouldBeginEditing;
 @end
 
 @implementation ResourcesViewController
@@ -19,6 +22,11 @@
         WebviewViewController *dest = segue.destinationViewController;
         dest.webpageURL = self.webUrl;
     }
+    if([segue.destinationViewController isKindOfClass:[AddResourceViewController class]])
+        {
+            AddResourceViewController *dest = segue.destinationViewController;
+            dest.myModel = self.myModel;
+        }
 }
 -(void) viewDidLoad
 {
@@ -26,6 +34,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
+    self.searchBarShouldBeginEditing = YES;
 }
 
 - (void)viewDidUnload
@@ -34,7 +43,6 @@
     [self setSearchBar:nil];
     [super viewDidUnload];
 }
-
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -96,16 +104,25 @@
     [self.tableView reloadData];
 }
 
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    BOOL boolToReturn = self.searchBarShouldBeginEditing;
+    self.searchBarShouldBeginEditing = YES;
+    return boolToReturn;
+}
+
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if(searchText.length == 0)
+    if(searchBar.text.length == 0)
     {
-        [self.searchBar resignFirstResponder];
         [self.myModel stopFilteringResourceLinks];
         [self.tableView reloadData];
     }
 }
 
+- (IBAction)addResourceButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"addResourceSegue" sender:self];
+}
 
 
 

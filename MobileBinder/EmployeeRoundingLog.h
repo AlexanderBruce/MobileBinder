@@ -2,7 +2,7 @@
 
 @interface EmployeeRoundingLog : RoundingLog
 
-@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSString *employeeName;
 @property (nonatomic, strong) NSString *unit;
 @property (nonatomic, strong) NSString *leader;
 @property (nonatomic, strong) NSString *keyFocus;

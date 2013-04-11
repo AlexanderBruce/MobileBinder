@@ -29,19 +29,19 @@
     NSArray *logs = [self.model getRoundingLogs];
 
     RoundingLog *currentLog = [logs objectAtIndex:indexPath.row];
-    [self customizeCell:cell usingRoundingLog:currentLog];
+    [self customizeCell:cell forIndexPath:indexPath usingRoundingLog:currentLog];
     return cell;
 }
 
-- (UITableViewCell *) customizeCell: (UITableViewCell *) cell usingRoundingLog: (RoundingLog *) log
+- (UITableViewCell *) customizeCell: (UITableViewCell *) cell forIndexPath: (NSIndexPath *) indexPath usingRoundingLog: (RoundingLog *) log
 {
-    //ABSTRACT METHOD
-    return cell;
+    [NSException raise:@"Override Error" format:@"Method %@ must be overidden in class %@",NSStringFromSelector(_cmd),self.class];
+    return nil;
 }
 
 - (RoundingModel *) createModel
 {
-    //ABSTRACT METHOD
+    [NSException raise:@"Override Error" format:@"Method %@ must be overidden in class %@",NSStringFromSelector(_cmd),self.class];
     return nil;
 }
 

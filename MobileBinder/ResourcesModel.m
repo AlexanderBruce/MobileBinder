@@ -1,12 +1,16 @@
 #import "ResourcesModel.h"
 #import "ResourceObject.h"
+#import "Constants.h"
 
 #define RESOURCES_DATA_FILE @"ResourcesData"
+
 
 @interface ResourcesModel()
 @property (nonatomic) BOOL usingFilter;
 @property (nonatomic, strong) NSMutableDictionary *resourceLinks;
 @property (nonatomic, strong) NSMutableDictionary *filteredLinks;
+@property (nonatomic, strong) NSString *filterString;
+
 @end
 
 @implementation ResourcesModel
@@ -51,6 +55,16 @@
     return [sortedKeys objectAtIndex:categoryNum];
 }
 
+-(NSString*) getNameOfCategoryWhenUnFiltered:(int)categoryNum
+{
+    NSDictionary *dict;
+    dict = self.resourceLinks;
+    NSArray * sortedKeys = [[dict allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
+    return [sortedKeys objectAtIndex:categoryNum];
+}
+
+
+
 - (ResourceObject *) getResourceForCategory: (int) categoryNum index: (int) index
 {
     NSDictionary *dict;
@@ -71,6 +85,16 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:RESOURCES_DATA_FILE ofType:@""];
     NSArray *lines = [[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil]
                       componentsSeparatedByString:@"\n"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",
+                          documentsDirectory,CUSTOM_DATA_FILE];
+    NSArray *otherContentsArray = [[NSString stringWithContentsOfFile:filePath
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:nil] componentsSeparatedByString:@"\n"];
+    
+    lines = [lines arrayByAddingObjectsFromArray:otherContentsArray];
     NSMutableArray *currentCategory;
     NSString *currentCategoryName;
     for (NSString *line in lines)
@@ -79,10 +103,11 @@
         if([line hasPrefix:@"##"])
         {
             NSArray *data = [line componentsSeparatedByString:@"##"];
-            if(data.count != 4) [NSException raise:NSInvalidArgumentException format:@"Each header must have the form ##Page Title##Page URL##"];
+            if(data.count != 5) [NSException raise:NSInvalidArgumentException format:@"Each header must have the form ##Page Title##Page URL##description##"];
             ResourceObject *resourceObj = [[ResourceObject alloc] init];
             resourceObj.pageTitle = [data objectAtIndex:1];
             resourceObj.webpageURL = [data objectAtIndex:2];
+            resourceObj.description = [data objectAtIndex:3];
             [currentCategory addObject:resourceObj];
         }
         else if([line hasPrefix:@"!!"])
@@ -98,6 +123,7 @@
 
 - (void) filterResourceLinksByString: (NSString *) filterString
 {
+    self.filterString = filterString;
     self.usingFilter = YES;
     self.filteredLinks = [[NSMutableDictionary alloc] init];
     NSMutableArray *filterArray = (NSMutableArray *)[[filterString componentsSeparatedByString:@" "] mutableCopy];
@@ -113,7 +139,8 @@
             {
                 NSRange pageRange = [currentLink.pageTitle rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
                 NSRange urlRange = [currentLink.webpageURL rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
-                if(pageRange.location == NSNotFound && urlRange.location == NSNotFound )
+                NSRange descripRange = [currentLink.description rangeOfString:currentFilter options:NSCaseInsensitiveSearch];
+                if(pageRange.location == NSNotFound && urlRange.location == NSNotFound && descripRange.location == NSNotFound)
                 {
                     matchesFilter = NO;
                     break;
@@ -123,6 +150,44 @@
         }
         if(filteredValues.count > 0 ) [self.filteredLinks setObject:filteredValues forKey:key];
     }
+}
+
+- (void) addResourceObjectwithPageTitle:(NSString *) pTitle url:(NSString *) url description:(NSString*) description category:(NSString*)category{
+    ResourceObject *resource = [[ResourceObject alloc]init];
+    resource.webpageURL = url;
+    resource.description = description;
+    resource.pageTitle = pTitle;
+    NSMutableArray *array = [self.resourceLinks objectForKey:category];
+    if(!array){
+        
+        array = [[NSMutableArray alloc]init];
+    }
+
+    [array addObject:resource];
+    [self.resourceLinks setObject:array forKey:category];
+    if(self.usingFilter){
+        [self filterResourceLinksByString:[self filterString]];
+    }
+    NSString *towrite = [NSString stringWithFormat:@"!!%@!!\n##%@##%@##%@##\n",category,resource.pageTitle,resource.webpageURL,resource.description];
+    [self writeCustomFile:towrite];
+}
+
+-(void) writeCustomFile:(NSString *)write
+{
+        //Read in
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",
+                          documentsDirectory,CUSTOM_DATA_FILE];
+    NSString *oldFileContents = [NSString stringWithContentsOfFile:filePath
+                                                           encoding:NSUTF8StringEncoding
+                                                              error:nil];
+    if(!oldFileContents) oldFileContents = @"";
+    
+    NSString *contentsToWrite = [NSString stringWithFormat:@"%@%@",oldFileContents,write];
+
+    [[contentsToWrite dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
 }
 
 - (void) stopFilteringResourceLinks

@@ -6,33 +6,26 @@
 #define TEMPLATE_FILE_TYPE @"rtf"
 #define ROUNDING_DOCUMENT_FILE_NAME @"Senior Rounding Document.rtf"
 
+#define TABLE_ROW @"\\trrh1200\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx2070\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx4248\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx6426\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx8604\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx10782\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx12960 %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell %@\\intbl\\cell\\row"
 
+//\trrhN
 @interface SeniorRoundingDocumentGenerator()
 @property (nonatomic, strong) SeniorRoundingLog *log;
-
 @end
 
 @implementation SeniorRoundingDocumentGenerator
 
-- (MFMailComposeViewController *) generateRoundingDocumentFor: (RoundingLog *) log
+- (NSString *) getTemplate
 {
-    if(![log isKindOfClass:[SeniorRoundingLog class]])
-    {
-        [NSException raise:@"Document Generation Error" format:@"Trying to generate a rounding document from a non senior rounding log"];
-    }
-    self.log = (SeniorRoundingLog *) log;
     NSString* templatePath = [[NSBundle mainBundle] pathForResource:TEMPLATE_FILE_NAME
                                                              ofType:TEMPLATE_FILE_TYPE];
     NSString *templateContents = [NSString stringWithContentsOfFile:templatePath
                                                            encoding:NSUTF8StringEncoding
                                                               error:nil];
-    [self writeDocumentUsingTemplate: templateContents];
-    NSString *subject = [NSString stringWithFormat:@"Senior Rounding Log"];
-    NSString *messageBody = [NSString stringWithFormat:@"This Senior Rounding Log has been generated for your convenience."];
-    return [self createMailViewControllerWithSubject:subject messageBody:messageBody];
+    return templateContents;
 }
 
-- (void) writeDocumentUsingTemplate: (NSString *) template
+- (NSString *) writeDocumentUsingTemplate: (NSString *) template
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains
     (NSDocumentDirectory, NSUserDomainMask, YES);
@@ -44,51 +37,49 @@
     NSString *date = [formatter stringFromDate:self.log.date];
     NSString *unit = self.log.unit;
     NSString *name = self.log.name;
-    int numberOfColumns = [self.log getColumnTitles].count;
-    NSString *v00 = [self.log contentsForRow:0 column:0];
-    NSString *v01 = [self.log contentsForRow:0 column:1];
-    NSString *v02 = [self.log contentsForRow:0 column:2];
-    NSString *v03 = [self.log contentsForRow:0 column:3];
-    NSString *v04 = [self.log contentsForRow:0 column:4];
-    NSString *v05 = [self.log contentsForRow:0 column:5];
-    NSString *v10 = [self.log contentsForRow:1 column:0];
-    NSString *v11 = [self.log contentsForRow:1 column:1];
-    NSString *v12 = [self.log contentsForRow:1 column:2];
-    NSString *v13 = [self.log contentsForRow:1 column:3];
-    NSString *v14 = [self.log contentsForRow:1 column:4];
-    NSString *v15 = [self.log contentsForRow:1 column:5];
-    NSString *v20 = [self.log contentsForRow:2 column:0];
-    NSString *v21 = [self.log contentsForRow:2 column:1];
-    NSString *v22 = [self.log contentsForRow:2 column:2];
-    NSString *v23 = [self.log contentsForRow:2 column:3];
-    NSString *v24 = [self.log contentsForRow:2 column:4];
-    NSString *v25 = [self.log contentsForRow:2 column:5];
-
+    NSString *notes = self.log.notes;
     
-    NSString *contents = [NSString stringWithFormat:template,date,unit,name,v00,v01,v02,v03,v04,v05,v10,v11,v12,v13,v14,v15,v20,v21,v22,v23,v24,v25];
-    [[contents dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
-}
-
--(MFMailComposeViewController *) createMailViewControllerWithSubject: (NSString *) subject messageBody: (NSString *) messageBody
-{
-    //get the documents directory:
-    NSArray *paths = NSSearchPathForDirectoriesInDomains
-    (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:ROUNDING_DOCUMENT_FILE_NAME];
-    
-    NSData *myData = [NSData dataWithContentsOfFile:filePath];
-    
-    MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-    
-    mailer.subject = subject;
-    [mailer setMessageBody:messageBody isHTML:NO];
-    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_EMAIL_KEY];
-    if(email)
+    int numColumns = self.log.numberOfColumns;
+    int numRows = self.log.numberOfRows;
+    NSMutableArray *logContents = [[NSMutableArray alloc] init];
+    for(int r = 0; r < numRows; r++)
     {
-        [mailer setToRecipients:[NSArray arrayWithObject:email]];
+        for(int c = 0; c < numColumns; c++)
+        {
+            [logContents addObject:[self.log contentsForRow:r column:c]];
+        }
     }
-    [mailer addAttachmentData:myData mimeType:@"application/msword" fileName:subject];
-    return mailer;
+    NSMutableString *tableTemplate = [TABLE_PREFACE mutableCopy];
+    for (int i = 0; i < numRows; i++)
+    {
+        [tableTemplate appendString:TABLE_ROW];
+    }
+    [tableTemplate appendString:TABLE_EPILOGUE];
+    
+    //Add general info and tableTemplate
+    template = [NSString stringWithFormat:template, date, unit, name, notes, tableTemplate];
+    
+    NSRange range = NSMakeRange(0, [logContents count]);
+    NSMutableData* data = [NSMutableData dataWithLength: sizeof(id) * [logContents count]];
+    
+    [logContents getObjects: (__unsafe_unretained id *)data.mutableBytes range:range];
+    
+    //Add info to table
+    NSString* completeFile = [[NSString alloc] initWithFormat: template  arguments: data.mutableBytes];
+//    NSString *completeFile = [NSString stringWithFormat:template,@"Hi",@"Joe",@"Bob",@"SMith",@"Mary",@"Mad"];
+    
+    [[completeFile dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
+    return ROUNDING_DOCUMENT_FILE_NAME;
 }
+
+- (NSString *) getSubject
+{
+    return @"Senior Rounding Log";
+}
+
+- (NSString *) getBody
+{
+    return [NSString stringWithFormat:@"This senior rounding log has been generated for your convenience."];
+}
+
 @end

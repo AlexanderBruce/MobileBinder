@@ -9,10 +9,15 @@
 
 @interface AttendanceModel : NSObject
 @property (nonatomic, weak) id<AttendanceModelDelegate> delegate;
+@property (nonatomic) BOOL isInitialized;
 
 - (void) addEmployeeRecord: (EmployeeRecord *) record;
 
 - (void) deleteEmployeeRecord: (EmployeeRecord *) record;
+
+- (void) clearEmployeeRecords;
+
+- (void) clearEmployeeRecordsbySupervisorID: (NSString *)idNum;
 
 - (void) fetchEmployeeRecordsForFutureUse;
 
@@ -29,5 +34,7 @@
 - (BOOL) recordExistsByName: (EmployeeRecord *) employeeRecord;
 
 - (BOOL) recordExistsByID: (EmployeeRecord *) employeeRecord;
+
+
 
 @end

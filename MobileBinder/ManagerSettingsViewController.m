@@ -1,6 +1,9 @@
 #import "ManagerSettingsViewController.h"
 #import "Constants.h"
 #import "AttendanceModel.h"
+#import "MBProgressHUD.h"
+#import "Database.h"
+
 
 #define NAME_INDEX_PATH [NSIndexPath indexPathForRow:0 inSection:0]
 #define NAME_LABEL @"Name"
@@ -14,15 +17,19 @@
 #define EMAIL_INDEX_PATH [NSIndexPath indexPathForRow:3 inSection:0]
 #define EMAIL_LABEL @"E-mail"
 
+#define ID_CHANGE_ALERT_TAG 2
+
 
 #define FOOTER_TEXT @"This information will be used to auto-populate documents throughout this app"
 
-@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
+@interface ManagerSettingsViewController () <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate, AttendanceModelDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UITextField *nameField;
 @property (nonatomic, strong) UITextField *idField;
 @property (nonatomic, strong) UITextField *titleField;
 @property (nonatomic, strong) UITextField *emailField;
+@property (nonatomic, strong) AttendanceModel *myModel;
+@property (atomic) BOOL tryingToAddEmployees;
 @end
 
 @implementation ManagerSettingsViewController
@@ -39,7 +46,28 @@
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:gestureRecognizer];
+    self.myModel = [[AttendanceModel alloc] init];
+    self.myModel.delegate = self;
+    [self.myModel fetchEmployeeRecordsForFutureUse];
+}
 
+- (void) doneRetrievingEmployeeRecords
+{
+    //If boolean is true then add employees
+    //Else don't
+    if (self.tryingToAddEmployees)
+    {
+        [self.myModel addEmployeesWithSupervisorID:self.idField.text];
+        [Database saveDatabase];
+        self.tryingToAddEmployees = NO;
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self.delegate savedSettingsForViewController:self];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        
+    }
 }
 
 - (void) hideKeyboard
@@ -129,10 +157,9 @@
     }
     else if(textField == self.idField)
     {
-        [defaults setObject:self.idField.text forKey:MANAGER_ID];
-        AttendanceModel *model = [[AttendanceModel alloc] init];
-        [model addEmployeesWithSupervisorID:textField.text];
+        //Should check to make sure it matches UID format
     }
+    
     else if(textField == self.titleField)
     {
         [defaults setObject:self.titleField.text forKey:MANAGER_TITLE];
@@ -147,9 +174,49 @@
 - (IBAction)donePressed:(id)sender
 {
     [self.tableView endEditing:YES];
-    [self.delegate savedSettingsForViewController:self];
-    [self.navigationController popViewControllerAnimated:YES];
+    if(![self.idField.text isEqual: [[NSUserDefaults standardUserDefaults]objectForKey:MANAGER_ID]]){
+        UIAlertView *notifyIDChange = [[UIAlertView alloc] initWithTitle:@"Import Options" message:@"You have changed your Unique ID. You have options for importing employees." delegate:self cancelButtonTitle:@"Don't import" otherButtonTitles:@"Import Only",  nil];//@"Replace Old ID's Employees",@"Clear and Import",
+        notifyIDChange.tag = ID_CHANGE_ALERT_TAG;
+        [notifyIDChange show];
+        [[NSUserDefaults standardUserDefaults] setObject:self.idField.text forKey:MANAGER_ID];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    else
+    {
+        [self.delegate savedSettingsForViewController:self];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
+
+
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == ID_CHANGE_ALERT_TAG)
+    {
+        MBProgressHUD *progressIndicator = [MBProgressHUD showHUDAddedTo:self.view animated:YES fontSize:PROGRESS_INDICATOR_LABEL_FONT_SIZE];
+        progressIndicator.animationType = MBProgressHUDAnimationFade;
+        progressIndicator.mode = MBProgressHUDModeIndeterminate;
+        progressIndicator.labelText = @"Updating Attendance";
+        progressIndicator.dimBackground = NO;
+        progressIndicator.taskInProgress = YES;
+        progressIndicator.removeFromSuperViewOnHide = YES;
+        self.view.userInteractionEnabled = NO;
+
+        if(self.myModel.isInitialized)
+        {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self.myModel addEmployeesWithSupervisorID:self.idField.text];
+            [Database saveDatabase];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            self.tryingToAddEmployees = YES;
+        }
+    }
+}
+
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {

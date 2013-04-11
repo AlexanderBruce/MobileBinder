@@ -3,7 +3,7 @@
 
 @implementation EmployeeRoundingLogManagedObject
 
-@dynamic date;
+@dynamic employeeName;
 @dynamic unit;
 @dynamic leader;
 @dynamic keyFocus;

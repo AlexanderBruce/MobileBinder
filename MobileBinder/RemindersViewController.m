@@ -4,17 +4,6 @@
 #import "ReminderCenter.h"
 #import "MarqueeCell.h"
 
-#define KEYBOARD_HEIGHT 216.0f
-#define TOOLBAR_HEIGHT 44
-
-#define PICKER_APPEAR_TIME .5
-#define PICKER_DISAPPEAR_TIME .5
-
-#define DAY_TITLE @"Day"
-#define WEEK_TITLE @"Week"
-#define MONTH_TITLE @"Month"
-#define YEAR_TITLE @"Year"
-
 #define FIRST_DAY_IN_TABLE -7
 #define NUMBER_OF_DAYS_IN_FETCH 14
 #define MIN_SIZE_UNTIL_FETCH_COMPLETE 12
@@ -27,7 +16,7 @@
 
 @property (nonatomic, strong) NSMutableArray *sectionTitles;
 @property (nonatomic, strong) NSMutableDictionary *rowsForSections;
-
+@property (nonatomic, strong) NSString *noRemindersHeaderText;
 @end
 
 @implementation RemindersViewController
@@ -42,12 +31,14 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [self.sectionTitles objectAtIndex:section];
+    if(self.sectionTitles.count == 0) return self.noRemindersHeaderText;
+    else return [self.sectionTitles objectAtIndex:section];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.sectionTitles.count;
+    if(self.sectionTitles.count == 0) return 1;
+    else return self.sectionTitles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,7 +60,7 @@
     [super viewDidLoad];
     self.sectionTitles = [[NSMutableArray alloc] init];
     self.rowsForSections = [[NSMutableDictionary alloc] init];
-    
+    self.noRemindersHeaderText = @"";
     
     NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -94,6 +85,11 @@
             {
                 numberRetrieved += [self addNewDataToTableView];
                 numberOfFetches ++;
+            }
+            if(numberOfFetches >= MAX_NUMBER_OF_FETCHES && numberRetrieved <MIN_SIZE_UNTIL_FETCH_COMPLETE)
+            {
+                self.noRemindersHeaderText = @"No scheduled reminders";
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             }
             [self.tableView.infiniteScrollingView stopAnimating];
         });
@@ -135,9 +131,16 @@
             formatter.dateStyle = NSDateFormatterLongStyle;
             [self.sectionTitles addObject:[formatter stringFromDate:[calendar dateFromComponents:currentComponents]]];
             [self.rowsForSections setObject:[NSMutableArray arrayWithObject:current] forKey:[NSNumber numberWithInt:section]];
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if(section > 0)
+            {
+                [self.tableView insertSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            else
+            {
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
         }
-        [newIndexPaths addObject:[NSIndexPath indexPathForRow:row inSection:section]];
+        [newIndexPaths addObject:[NSIndexPath indexPathForRow:row inSection:section]];    
     }
     
     [self.tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];

@@ -1,19 +1,39 @@
 #import "PayrollModel.h"
 #import "ReminderCenter.h"
 #import "Reminder.h"
+#import "PayrollCategory.h"
 
-#define PAYROLL_DATA_FILE @"PayrollData"
+#define BIWEEKLY_PAYROLL_DATA_FILE @"BiweeklyPayrollData"
+#define MONTHLY_PAYROLL_DATA_FILE @"MonthlyPayrollData"
 
-#define DATE_FORMAT_CODE @"dd-MM"
+#define DATE_FORMAT_CODE @"dd-MM-yy"
+#define TIME_FORMAT_CODE @"HH:mm"
 
 @interface PayrollModel()
-@property (nonatomic,strong) NSMutableDictionary *typeIDToDateArray;
-@property (nonatomic, strong) NSMutableDictionary *typeIDToText;
-@property (nonatomic, strong) NSMutableDictionary *periodToDates;
-@property (nonatomic, strong) NSString *year;
+@property (nonatomic, strong) NSMutableArray *biweeklyCategories;
+@property (nonatomic, strong) NSMutableArray *biweeklyPeriods;
+@property (nonatomic, strong) NSMutableArray *monthlyCategories;
+@property (nonatomic, strong) NSMutableArray *monthlyPeriods;
+@property (nonatomic, strong) NSMutableArray *currentCategories;
+@property (nonatomic, strong) NSMutableArray *currentPeriods;
 @end
 
 @implementation PayrollModel
+
+- (void) setMode:(Mode)mode
+{
+    _mode = mode;
+    if(_mode == BiweeklyMode)
+    {
+        self.currentCategories = self.biweeklyCategories;
+        self.currentPeriods = self.biweeklyPeriods;
+    }
+    else
+    {
+        self.currentCategories = self.monthlyCategories;
+        self.currentPeriods = self.monthlyPeriods;
+    }
+}
 
 - (void) addRemindersForTypeIDs: (NSArray *) toAdd andCancelRemindersForTypeIDs: (NSArray *) toCancel completion: (void (^) (void)) block
 {
@@ -22,12 +42,10 @@
         NSMutableArray *remindersToAdd = [[NSMutableArray alloc] init];
         for (NSNumber *typeID in toAdd)
         {
-            NSArray *dates = [self getDatesForTypeID:[typeID intValue]];
-            for (NSDate *currentDate in dates)
-            {
-                Reminder *reminder = [[Reminder alloc] initWithText:[self getTextForTypeID:[typeID intValue]] eventDate:currentDate fireDate:currentDate typeID:[typeID intValue]];
-                [remindersToAdd addObject:reminder];
-            }
+            NSArray *biweeklyReminders = [self produceRemindersFromCategories:self.biweeklyCategories matchingTypeID:[typeID intValue]];
+            NSArray *monthlyReminders =[self produceRemindersFromCategories:self.monthlyCategories matchingTypeID:[typeID intValue]];
+            [remindersToAdd addObjectsFromArray:biweeklyReminders];
+            [remindersToAdd addObjectsFromArray:monthlyReminders];
         }
         [center addReminders:remindersToAdd completion:^{
             block();
@@ -35,47 +53,96 @@
     }];
 }
 
-- (NSArray*) datesForPayPeriod: (NSString *) payPeriod
+- (NSArray *) produceRemindersFromCategories: (NSArray *) categories matchingTypeID: (int) typeID
 {
-    return [self.periodToDates objectForKey:payPeriod];
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    for (PayrollCategory *category in categories)
+    {
+        if(category.typeID == typeID)
+        {
+            NSArray *dates = [category getDates];
+            
+            NSDateComponents *timeComps = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:category.fireTime];
+            
+            for (NSDate *date in dates)
+            {
+                NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit) fromDate:date];
+                
+                NSDateComponents *dateAndTimecomps = [[NSDateComponents alloc] init];
+                dateAndTimecomps.year = dateComps.year;
+                dateAndTimecomps.month = dateComps.month;                
+                dateAndTimecomps.day = dateComps.day;
+                dateAndTimecomps.hour = timeComps.hour;
+                dateAndTimecomps.minute = timeComps.minute;
+                
+                NSDate *fireDateAndTime = [[NSCalendar currentCalendar] dateFromComponents:dateAndTimecomps];
+
+                Reminder *reminder = [[Reminder alloc] initWithText:[category getNotificationText] fireDate:fireDateAndTime typeID:category.typeID];
+                [returnArray addObject:reminder];
+            }
+        }
+    }
+    return returnArray;
 }
 
-- (NSArray *) getDatesForTypeID: (int) typeID
+- (NSArray *) getPeriods
 {
-    return [self.typeIDToDateArray objectForKey:[NSNumber numberWithInt:typeID]];
+    return self.currentPeriods;
 }
 
-- (NSString *) getTextForTypeID: (int) typeID
+- (NSArray *) getCategories
 {
-    NSString *text = [self.typeIDToText objectForKey:[NSNumber numberWithInt:typeID]];
-    return text ? text : @"";
+    return self.currentCategories;
 }
 
+- (NSDate *) getDateForCategoryNum: (int) categoryNum period: (NSString *) period
+{
+    PayrollCategory *category = [self.currentCategories objectAtIndex:categoryNum];
+    return [category dateForPeriod:period];
+}
 
-- (void) parseData
+- (void) parseDataFromFile: (NSString *) file categories: (NSMutableArray *) categories periods: (NSMutableArray *) periods
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = DATE_FORMAT_CODE;
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    timeFormatter.dateFormat = TIME_FORMAT_CODE;
     
-    NSString* path = [[NSBundle mainBundle] pathForResource:PAYROLL_DATA_FILE
+    NSString* path = [[NSBundle mainBundle] pathForResource:file
                                                      ofType:@""];
     NSArray *lines = [[NSString stringWithContentsOfFile:path
                                        encoding:NSUTF8StringEncoding
                                           error:nil]
              componentsSeparatedByString:@"\n"];
     
-    NSMutableArray *datesForTypeID = [[NSMutableArray alloc] init];
+    PayrollCategory *currentCategory;
     for (NSString *line in lines)
     {
         if([line hasPrefix:@"//"]) continue; //Skip comment lines
-        if([line hasPrefix:@"##"])
+        else if([line hasPrefix:@"##"])
         {
             NSArray *headerArray = [line componentsSeparatedByString:@"##"];
             if(headerArray.count != 4) [NSException raise:NSInvalidArgumentException format:@"Each header must have the form ##Description##typeID##"];
-            int currentTypeID = [[headerArray objectAtIndex:2] intValue];
-            datesForTypeID = [[NSMutableArray alloc] init];
-            [self.typeIDToDateArray setObject:datesForTypeID forKey:[NSNumber numberWithInt:currentTypeID]];
-            [self.typeIDToText setObject:[headerArray objectAtIndex:1] forKey:[NSNumber numberWithInt:currentTypeID]];
+            currentCategory = [[PayrollCategory alloc] init];
+            currentCategory.name = [headerArray objectAtIndex:1];
+            currentCategory.typeID = [[headerArray objectAtIndex:2] intValue];
+            [categories addObject:currentCategory];
+        }
+        else if([line hasPrefix:@"**"])
+        {
+            NSArray *notificationTextArray = [line componentsSeparatedByString:@"**"];
+            if(notificationTextArray.count != 3) [NSException raise:NSInvalidArgumentException format:@"Each notification text header must have the form **Notification Text**"];
+            [currentCategory setNotificationText:[notificationTextArray objectAtIndex:1]];
+        }
+        else if([line hasPrefix:@"!!"])
+        {
+            NSArray *notificationTimeArray = [line componentsSeparatedByString:@"!!"];
+            if(notificationTimeArray.count != 3) [NSException raise:NSInvalidArgumentException format:@"Each notification fire time header must have the form !!Fire Time!!"];
+            NSDate *time = [timeFormatter dateFromString:[notificationTimeArray objectAtIndex:1]];
+            if(time)
+            {
+                currentCategory.fireTime = time;
+            }
         }
         else
         {
@@ -86,29 +153,36 @@
             NSDate *date = [formatter dateFromString:dateString];
             if(date)
             {
-                NSCalendar *calendar = [NSCalendar currentCalendar];
-                NSDateComponents *components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:date];
-                components.year = 2013; //FIX ME
-                date = [calendar dateFromComponents:components];
-                [datesForTypeID addObject:date];
-                
-                NSMutableArray *datesForPeriod = [self.periodToDates objectForKey:period];
-                if(!datesForPeriod) datesForPeriod = [[NSMutableArray alloc] init];
-                [datesForPeriod addObject:date];
-                [self.periodToDates setObject:datesForPeriod forKey:period];
+                [currentCategory addDate:date forPeriod:period];
+                if(![periods containsObject:period])
+                {
+                    [periods addObject:period];
+                }
             }
         }
     }
+}
+
+- (void) initializeModelWithDelegate:(id<PayrollModelDelegate>)delegate
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{    
+        [self parseDataFromFile:BIWEEKLY_PAYROLL_DATA_FILE categories:self.biweeklyCategories periods:self.biweeklyPeriods];
+        [self parseDataFromFile:MONTHLY_PAYROLL_DATA_FILE categories:self.monthlyCategories periods:self.monthlyPeriods];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [delegate doneInitializingPayrollModel];
+        });
+    });
 }
 
 - (id) init
 {
     if(self = [super init])
     {
-        self.typeIDToDateArray = [[NSMutableDictionary alloc] init];
-        self.typeIDToText = [[NSMutableDictionary alloc] init];
-        self.periodToDates = [[NSMutableDictionary alloc] init];
-        [self parseData];
+        self.biweeklyCategories = [[NSMutableArray alloc] init];
+        self.biweeklyPeriods = [[NSMutableArray alloc] init];
+        self.monthlyCategories = [[NSMutableArray alloc] init];
+        self.monthlyPeriods = [[NSMutableArray alloc] init];
+        self.mode = BiweeklyMode;
     }
     return self;
 }

@@ -1,4 +1,3 @@
-//Hi Alex Bruce
 #import <UIKit/UIKit.h>
 @class AttendanceModel;
 

@@ -12,8 +12,8 @@
 @implementation ReminderManagedObject
 
 @dynamic text;
-@dynamic eventDate;
 @dynamic fireDate;
 @dynamic typeID;
+@dynamic uniqueID;
 
 @end

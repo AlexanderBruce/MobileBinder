@@ -25,10 +25,12 @@
         self.employeeRecords = [[NSMutableArray alloc] init];
         for (EmployeeRecordManagedObject *currentManagedObject in recordManagedObjects)
         {
-            [self.employeeRecords addObject:[[EmployeeRecord alloc] initWithManagedObject:currentManagedObject]];
+            EmployeeRecord *emp = [[EmployeeRecord alloc] initWithManagedObject:currentManagedObject];
+            [self.employeeRecords addObject:emp];
         }
         [self sortEmployeeRecords];
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.isInitialized = YES;
             [self.delegate doneRetrievingEmployeeRecords];
         });
     });
@@ -49,25 +51,27 @@
 
 - (void) addEmployeeRecord: (EmployeeRecord *) record
 {
-    [self.employeeRecords addObject:record];
-    EmployeeRecordManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([EmployeeRecordManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
-    managedObject.firstName = record.firstName;
-    managedObject.lastName = record.lastName;
-    managedObject.department = record.department;
-    managedObject.unit = record.unit;
-    record.myManagedObject = managedObject;
-    [self sortEmployeeRecords];
-    [Database saveDatabase];
+    if(![self recordExistsByID:record])
+    {
+        [self.employeeRecords addObject:record];
+        EmployeeRecordManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([EmployeeRecordManagedObject class]) inManagedObjectContext:self.database.managedObjectContext];
+        managedObject.firstName = record.firstName;
+        managedObject.lastName = record.lastName;
+        managedObject.department = record.department;
+        managedObject.unit = record.unit;
+        managedObject.idNum = record.idNum;
+        record.myManagedObject = managedObject;
+        [self sortEmployeeRecords];
+    }
 }
 
 - (void) addEmployeesWithSupervisorID: (NSString *) idNum
 {
     EmployeeAutopopulator *autopopulator = [[EmployeeAutopopulator alloc] init];
     NSSet *newEmployees = [autopopulator employeesForManagerID:idNum];
-    
     for (EmployeeRecord *record in newEmployees)
     {
-        [self addEmployeeRecord:record];
+        [self addEmployeeRecord:record];   
     }
 }
 
@@ -76,6 +80,23 @@
     [record deleteFromDatabase:[Database getInstance]];
     [self.employeeRecords removeObject:record];
     [self.filteredRecords removeObject:record];
+}
+
+- (void) clearEmployeeRecords
+{
+    [self clearEmployeeRecordsbySupervisorID:@"##"];
+}
+
+- (void) clearEmployeeRecordsbySupervisorID: (NSString *)idNum
+{
+    NSArray *employees = [self getEmployeeRecords];
+    for (EmployeeRecord *emp in employees)
+    {
+        if ([emp.idNum isEqualToString:idNum] || [@"##" isEqualToString:idNum])
+        {
+            [self deleteEmployeeRecord:emp];
+        }
+    }
 }
 
 - (void) filterEmployeesByString: (NSString *) filterString
@@ -121,7 +142,11 @@
 {
     BOOL ret = NO;
     for(EmployeeRecord *emp in self.employeeRecords){
-        if ([employeeRecord.idNum isEqualToString: emp.idNum]) {
+        NSLog(@"New %@",employeeRecord.idNum);
+        NSLog(@"Old %@",emp.idNum);
+        if ([employeeRecord.idNum isEqualToString: emp.idNum])
+        {
+            NSLog(@"EQUAL!!!");
             ret = YES;
             break;
         }
@@ -162,6 +187,7 @@
 {
     if(self = [super init])
     {
+        self.isInitialized = NO;
         self.database = [Database getInstance];
     }
     return self;

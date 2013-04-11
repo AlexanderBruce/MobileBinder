@@ -1,8 +1,10 @@
 #import <UIKit/UIKit.h>
+#import "RoundingOverviewViewController.h"
 @class RoundingModel;
-@class EmployeeRoundingLog;
+#import "RoundingLog.h"
+#import "EmployeeRoundingLog.h"
 
-@interface EmployeeRoundingOverviewViewController : UIViewController
+@interface EmployeeRoundingOverviewViewController : RoundingOverviewViewController
 
 @property (nonatomic, strong) EmployeeRoundingLog *log;
 @property (nonatomic, strong) RoundingModel *model;

@@ -4,6 +4,7 @@
 #import "AddEmployeeViewController.h"
 #import "EmployeeRecord.h"
 #import "EmployeeViewController.h"
+#import "Database.h"
 
 #define CUSTOM_CELL_NIB @"AttendanceCell"
 #define CUSTOM_CELL_IDENTIFIER @"AttendanceCellIdentifier"
@@ -47,6 +48,7 @@
 - (void) addedNewEmployeeRecord: (EmployeeRecord *) record
 {
     [self.myModel addEmployeeRecord:record];
+    [Database saveDatabase];
     [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -156,7 +158,6 @@
 {
     if(searchText.length == 0)
     {
-        [self.mySearchBar resignFirstResponder];
         [self.myModel stopFilteringEmployees];
         [self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }

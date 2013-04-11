@@ -11,4 +11,5 @@
 @interface ResourceObject : NSObject
 @property (nonatomic, strong) NSString *pageTitle;
 @property (nonatomic, strong) NSString *webpageURL;
+@property (nonatomic, strong) NSString *description;
 @end

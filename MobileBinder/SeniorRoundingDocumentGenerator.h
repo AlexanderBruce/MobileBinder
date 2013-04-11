@@ -1,9 +1,6 @@
 #import <Foundation/Foundation.h>
-#import <MessageUI/MFMailComposeViewController.h>
-@class RoundingLog;
+#import "RoundingDocumentGenerator.h"
 
-@interface SeniorRoundingDocumentGenerator : NSObject
-
-- (MFMailComposeViewController *) generateRoundingDocumentFor: (RoundingLog *) log;
+@interface SeniorRoundingDocumentGenerator : RoundingDocumentGenerator
 
 @end
