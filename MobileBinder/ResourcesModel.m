@@ -1,8 +1,9 @@
 #import "ResourcesModel.h"
 #import "ResourceObject.h"
+#import "Constants.h"
 
 #define RESOURCES_DATA_FILE @"ResourcesData"
-#define CUSTOM_DATA_FILE @"CustomResourcesData"
+
 
 @interface ResourcesModel()
 @property (nonatomic) BOOL usingFilter;
@@ -53,6 +54,16 @@
     NSArray * sortedKeys = [[dict allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
     return [sortedKeys objectAtIndex:categoryNum];
 }
+
+-(NSString*) getNameOfCategoryWhenUnFiltered:(int)categoryNum
+{
+    NSDictionary *dict;
+    dict = self.resourceLinks;
+    NSArray * sortedKeys = [[dict allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
+    return [sortedKeys objectAtIndex:categoryNum];
+}
+
+
 
 - (ResourceObject *) getResourceForCategory: (int) categoryNum index: (int) index
 {
@@ -173,7 +184,6 @@
                                                            encoding:NSUTF8StringEncoding
                                                               error:nil];
     if(!oldFileContents) oldFileContents = @"";
-    NSLog(@"Old file contents = \n %@",oldFileContents);
     
     NSString *contentsToWrite = [NSString stringWithFormat:@"%@%@",oldFileContents,write];
 

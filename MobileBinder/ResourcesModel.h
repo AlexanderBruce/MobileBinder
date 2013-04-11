@@ -13,6 +13,8 @@
 
 - (NSString *) getNameOfCategory: (int) categoryNum;
 
+- (NSString *) getNameOfCategoryWhenUnFiltered:(int)categoryNum;
+
 - (void) filterResourceLinksByString: (NSString *) filterString;
 
 - (void) stopFilteringResourceLinks;

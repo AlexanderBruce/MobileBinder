@@ -30,6 +30,7 @@
 @property (nonatomic, strong) UITextField *emailField;
 @property (nonatomic, strong) AttendanceModel *myModel;
 @property (atomic) BOOL tryingToAddEmployees;
+@property (nonatomic) BOOL isWelcomeScreen;
 @end
 
 @implementation ManagerSettingsViewController
@@ -49,6 +50,15 @@
     self.myModel = [[AttendanceModel alloc] init];
     self.myModel.delegate = self;
     [self.myModel fetchEmployeeRecordsForFutureUse];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (!([defaults objectForKey:MANAGER_ID]||[defaults objectForKey:MANAGER_NAME]||[defaults objectForKey:MANAGER_EMAIL_KEY]))
+    {
+        self.isWelcomeScreen = YES;
+    }
+    else
+    {
+        self.isWelcomeScreen = NO;
+    }
 }
 
 - (void) doneRetrievingEmployeeRecords
@@ -174,8 +184,8 @@
 - (IBAction)donePressed:(id)sender
 {
     [self.tableView endEditing:YES];
-    if(![self.idField.text isEqual: [[NSUserDefaults standardUserDefaults]objectForKey:MANAGER_ID]]){
-        UIAlertView *notifyIDChange = [[UIAlertView alloc] initWithTitle:@"Import Options" message:@"You have changed your Unique ID. You have options for importing employees." delegate:self cancelButtonTitle:@"Don't import" otherButtonTitles:@"Import Only",  nil];//@"Replace Old ID's Employees",@"Clear and Import",
+    if(![self.idField.text isEqual: [[NSUserDefaults standardUserDefaults]objectForKey:MANAGER_ID]]&&!self.isWelcomeScreen){
+        UIAlertView *notifyIDChange = [[UIAlertView alloc] initWithTitle:@"Import Options" message:@"You have changed your Unique ID. You have options for importing employees." delegate:self cancelButtonTitle:@"Don't import" otherButtonTitles:@"Import",  nil];//@"Replace Old ID's Employees",@"Clear and Import",
         notifyIDChange.tag = ID_CHANGE_ALERT_TAG;
         [notifyIDChange show];
         [[NSUserDefaults standardUserDefaults] setObject:self.idField.text forKey:MANAGER_ID];

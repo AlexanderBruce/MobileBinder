@@ -43,5 +43,7 @@
 
 #define BACKGROUND_IMAGE_FILENAME @"BackgroundImage"
 
+#define CUSTOM_DATA_FILE @"CustomResourcesData"
+
 
 @end
