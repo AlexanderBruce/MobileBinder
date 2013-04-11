@@ -51,14 +51,6 @@ static dispatch_semaphore_t lockSemaphore;
                                                      name:NSManagedObjectContextDidSaveNotification
                                                    object:self.document.managedObjectContext];
         
-//        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-//        context.parentContext = self.document.managedObjectContext.parentContext;
-//        self.document.managedObjectContext = context;
-        
-
-        
-//        self.document.managedObjectContext.concurrencyType = NSPrivateQueueConcurrencyType;
-        
         lockSemaphore = dispatch_semaphore_create(1);
         dispatch_retain(lockSemaphore);
     }
@@ -67,10 +59,6 @@ static dispatch_semaphore_t lockSemaphore;
 
 - (void)performWithDocument:(OnDocumentReady)onDocumentReady
 {
-//    NSLog(@"Perform with document");
-//    void (^OnDocumentDidLoad)(BOOL) = ^(BOOL success) {
-//        onDocumentReady(self.document);
-//    };
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self.document.fileURL path]]) {
         [self.document saveToURL:self.document.fileURL
@@ -97,38 +85,6 @@ static dispatch_semaphore_t lockSemaphore;
         [NSException raise:@"Database Exception" format:@"Something went wrong trying to create/open/use the database"];
     }
 }
-
-//- (id) performWithDocumentAndReturn:(id (^)(UIManagedDocument *))onDocumentReady
-//{
-//    __block id returnValue;
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:[self.document.fileURL path]]) {
-//        [self.document saveToURL:self.document.fileURL
-//                forSaveOperation:UIDocumentSaveForCreating
-//               completionHandler:^(BOOL success)
-//         {
-//             [self.document.managedObjectContext performBlockAndWait:^{
-//                 returnValue = onDocumentReady(self.document);
-//             }];
-//         }];
-//    } else if (self.document.documentState == UIDocumentStateClosed) {
-//        [self.document openWithCompletionHandler:^(BOOL success) {
-//            NSLog(@"self.doc.manobjcon = %@",self.document.managedObjectContext);
-//            [self.document.managedObjectContext performBlockAndWait:^{
-//                returnValue = onDocumentReady(self.document);
-//            }];
-//        }];
-//    } else if (self.document.documentState == UIDocumentStateNormal)
-//    {
-//        NSLog(@"self.doc.manobjcon = %@",self.document.managedObjectContext);
-//        [self.document.managedObjectContext performBlockAndWait:^{
-//            returnValue = onDocumentReady(self.document);
-//        }];
-//    } else
-//    {
-//        [NSException raise:@"Database Exception" format:@"Something went wrong trying to create/open/use the database"];
-//    }
-//    return returnValue;
-//}
 
 - (void) save: (UIManagedDocument *) document
 {
@@ -157,14 +113,14 @@ static dispatch_semaphore_t lockSemaphore;
 - (void)objectsDidChange:(NSNotification *)notification
 {
 #ifdef DEBUG
-    NSLog(@"NSManagedObjects did change.");
+//  Do something if you want
 #endif
 }
 
 - (void)contextDidSave:(NSNotification *)notification
 {
 #ifdef DEBUG
-    NSLog(@"NSManagedContext did save.");
+    //  Do something if you want
 #endif
 }
 

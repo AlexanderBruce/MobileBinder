@@ -61,7 +61,6 @@ static ReminderCenter *instance;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[BetterDatabase sharedDocumentHandler] lock];
         [[BetterDatabase sharedDocumentHandler] performWithDocument:^(UIManagedDocument *document){
-            NSLog(@"Refresh reminders inside");
             [self refreshRemindersPrivatelyWithDatabase:document];
             [[BetterDatabase sharedDocumentHandler] save:document withCompletion:^{
                 [[BetterDatabase sharedDocumentHandler] unlock];
@@ -184,9 +183,7 @@ static ReminderCenter *instance;
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[BetterDatabase sharedDocumentHandler] lock];
-        NSLog(@"Locked");
         [[BetterDatabase sharedDocumentHandler] performWithDocument:^(UIManagedDocument *document) {
-            NSLog(@"Inside PerformWithDocument");
             NSArray *result = [self getRemindersBetween:begin andEndDate:end fromDatabase:document];
             [[BetterDatabase sharedDocumentHandler] unlock];
             dispatch_async(dispatch_get_main_queue(),^{
@@ -198,7 +195,6 @@ static ReminderCenter *instance;
 
 - (NSArray *) getRemindersBetween: (NSDate *) begin andEndDate: (NSDate *) end fromDatabase: (UIManagedDocument *) document
 {
-    NSLog(@"Fetching ");
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
     fetchRequest.entity = [NSEntityDescription entityForName:NSStringFromClass([ReminderManagedObject class]) inManagedObjectContext:document.managedObjectContext];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(fireDate >= %@) AND (fireDate < %@)", begin, end];
@@ -213,7 +209,6 @@ static ReminderCenter *instance;
     {
         [remindersToReturn addObject:[[Reminder alloc] initWithManagedObject:currentManagedObject]];
     }
-    NSLog(@"Num or reminders between = %d",remindersToReturn.count);
     return remindersToReturn;
 }
 

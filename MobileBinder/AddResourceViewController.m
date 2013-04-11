@@ -9,6 +9,7 @@
 #import "AddResourceViewController.h"
 #import "ResourcesModel.h"
 #import "Constants.h"
+#import "OutlinedLabel.h"
 
 #define KEYBOARD_HEIGHT 216.0f
 #define TOOLBAR_HEIGHT 44
@@ -40,6 +41,14 @@
 {
     [super viewDidLoad];
     [self createPicker];
+    for (UIView *view in self.myScrollView.subviews)
+    {
+        if([view isKindOfClass:[OutlinedLabel class]])
+        {
+            OutlinedLabel *label = (OutlinedLabel *) view;
+            [label customize];
+        }
+    }
     self.pickerIsVisible = NO;
     self.description.delegate = self;
     self.pageTitle.delegate = self;
@@ -56,7 +65,7 @@
 {
     if([self.pageTitle.text isEqualToString:@""]||[self.webPageUrl.text isEqualToString:@""]||[self.category.text isEqualToString:@""])
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Missing Fields" message:@"A resource needs a title, a url, and a category" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Missing Fields" message:@"A resource needs a title, a URL and a category" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
         [alert show];
         
     }

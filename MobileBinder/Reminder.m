@@ -22,7 +22,6 @@
     {
         self.text = text;
         self.fireDate = fireDate;
-//        NSLog(@"Fire date = %@",self.fireDate);
         self.typeID = typeID;
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

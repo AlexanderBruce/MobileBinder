@@ -114,8 +114,9 @@
         {
             if(currentCategory) [self.resourceLinks setObject:currentCategory forKey:currentCategoryName];
             NSArray *data = [line componentsSeparatedByString:@"!!"];
-            currentCategory = [[NSMutableArray alloc] init];
             currentCategoryName = [data objectAtIndex:1];
+            currentCategory = [self.resourceLinks objectForKey:currentCategoryName];
+            if(!currentCategory) currentCategory = [[NSMutableArray alloc] init];
         }
         [self.resourceLinks setObject:currentCategory forKey:currentCategoryName];
     }
@@ -174,7 +175,7 @@
 
 -(void) writeCustomFile:(NSString *)write
 {
-        //Read in
+    //Read in
     NSArray *paths = NSSearchPathForDirectoriesInDomains
     (NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];

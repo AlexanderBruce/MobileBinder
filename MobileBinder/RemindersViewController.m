@@ -95,7 +95,6 @@
     self.maxDateInTable = [calendar dateByAddingComponents:dayComponent toDate:self.maxDateInTable options:0];
     [center getRemindersBetween:self.minDateInTable andEndDate:self.maxDateInTable withCompletion:^(NSArray * newReminders) {
         NSMutableArray *newIndexPaths = [[NSMutableArray alloc] init];
-        NSLog(@"Num fetched = %d",newReminders.count);
         
         NSDateComponents *lastComponents;
         int section = self.sectionTitles.count - 1;

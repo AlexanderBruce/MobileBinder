@@ -188,8 +188,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:BACKGROUND_IMAGE_FILENAME];
         NSData *imageData = UIImagePNGRepresentation(scaledImage);
-        BOOL success = [imageData writeToFile:savedImagePath atomically:YES];
-        NSLog(@"Success = %d",success);
+        [imageData writeToFile:savedImagePath atomically:YES];
         dispatch_async(dispatch_get_main_queue(), ^{
             [BackgroundViewController refreshBackground];
             self.view.userInteractionEnabled = YES;

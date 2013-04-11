@@ -779,7 +779,7 @@ NSString *const kMarqueeLabelShouldAnimateNotification = @"MarqueeLabelShouldAni
         [anInvocation invokeWithTarget:self.subLabel];
     } else {
         #if TARGET_IPHONE_SIMULATOR
-            NSLog(@"Method selector not recognized by MarqueeLabel or its contained UILabel");
+			[NSException raise:@"MarqueeLabel Exception" format:@"Method selector not recognized by MarqueeLabel or its contained UILabel"];
         #endif
         [super forwardInvocation:anInvocation];
     }

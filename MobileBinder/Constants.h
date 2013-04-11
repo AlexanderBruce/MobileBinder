@@ -34,6 +34,7 @@
 #define MONTHLY_PAY_DATE_TYPEID 16
 
 #define MANAGER_EMAIL_KEY @"managerEmailKey"
+#define MANAGER_ID_ALREADY_ADDED_KEY @"managerIDAlreadyAddedKey"
 #define MANAGER_ID @"managerID"
 #define MANAGER_NAME @"managerName"
 #define MANAGER_TITLE @"managerTitle"

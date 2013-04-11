@@ -30,7 +30,6 @@
 @property (nonatomic, strong) UITextField *emailField;
 @property (nonatomic, strong) AttendanceModel *myModel;
 @property (atomic) BOOL tryingToAddEmployees;
-@property (nonatomic) BOOL isWelcomeScreen;
 @end
 
 @implementation ManagerSettingsViewController
@@ -50,33 +49,19 @@
     self.myModel = [[AttendanceModel alloc] init];
     self.myModel.delegate = self;
     [self.myModel fetchEmployeeRecordsForFutureUse];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (!([defaults objectForKey:MANAGER_ID]||[defaults objectForKey:MANAGER_NAME]||[defaults objectForKey:MANAGER_EMAIL_KEY]))
-    {
-        self.isWelcomeScreen = YES;
-    }
-    else
-    {
-        self.isWelcomeScreen = NO;
-    }
 }
 
 - (void) doneRetrievingEmployeeRecords
 {
-    //If boolean is true then add employees
-    //Else don't
     if (self.tryingToAddEmployees)
     {
         [self.myModel addEmployeesWithSupervisorID:self.idField.text];
         [Database saveDatabase];
         self.tryingToAddEmployees = NO;
+        self.view.userInteractionEnabled = YES;
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.delegate savedSettingsForViewController:self];
         [self.navigationController popViewControllerAnimated:YES];
-    }
-    else
-    {
-        
     }
 }
 
@@ -184,17 +169,59 @@
 - (IBAction)donePressed:(id)sender
 {
     [self.tableView endEditing:YES];
-    if(![self.idField.text isEqual: [[NSUserDefaults standardUserDefaults]objectForKey:MANAGER_ID]]&&!self.isWelcomeScreen){
-        UIAlertView *notifyIDChange = [[UIAlertView alloc] initWithTitle:@"Import Options" message:@"You have changed your Unique ID. You have options for importing employees." delegate:self cancelButtonTitle:@"Don't import" otherButtonTitles:@"Import",  nil];//@"Replace Old ID's Employees",@"Clear and Import",
-        notifyIDChange.tag = ID_CHANGE_ALERT_TAG;
-        [notifyIDChange show];
-        [[NSUserDefaults standardUserDefaults] setObject:self.idField.text forKey:MANAGER_ID];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL alreadyAddedManagerID = [defaults boolForKey:MANAGER_ID_ALREADY_ADDED_KEY];
+    if(alreadyAddedManagerID)
+    {
+        NSString *oldManagerId = [defaults objectForKey:MANAGER_ID];
+        if(![self.idField.text isEqualToString:oldManagerId])
+        {
+            UIAlertView *notifyIDChange = [[UIAlertView alloc] initWithTitle:@"Import Options" message:@"Do you wish to import employees for this manager ID?" delegate:self cancelButtonTitle:@"Don't import" otherButtonTitles:@"Import",  nil];//@"Replace Old ID's Employees",@"Clear and Import",
+            notifyIDChange.tag = ID_CHANGE_ALERT_TAG;
+            [notifyIDChange show];
+            [defaults setObject:self.idField.text forKey:MANAGER_ID];
+            [defaults synchronize];
+        }
+        else
+        {
+            [self.delegate savedSettingsForViewController:self];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
     else
     {
+        [self importEmployees];
+        
+        [defaults setObject:self.idField.text forKey:MANAGER_ID];
+        [defaults setBool:YES forKey:MANAGER_ID_ALREADY_ADDED_KEY];
+        [defaults synchronize];
+    }
+}
+
+- (void) importEmployees
+{
+    MBProgressHUD *progressIndicator = [MBProgressHUD showHUDAddedTo:self.view animated:YES fontSize:PROGRESS_INDICATOR_LABEL_FONT_SIZE];
+    progressIndicator.animationType = MBProgressHUDAnimationFade;
+    progressIndicator.mode = MBProgressHUDModeIndeterminate;
+    progressIndicator.labelText = @"Updating...";
+    progressIndicator.dimBackground = NO;
+    progressIndicator.taskInProgress = YES;
+    progressIndicator.removeFromSuperViewOnHide = YES;
+    self.view.userInteractionEnabled = NO;
+    
+    if(self.myModel.isInitialized)
+    {
+        [self.myModel addEmployeesWithSupervisorID:self.idField.text];
+        [Database saveDatabase];
+        self.view.userInteractionEnabled = YES;
         [self.delegate savedSettingsForViewController:self];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        self.tryingToAddEmployees = YES;
     }
 }
 
@@ -204,25 +231,14 @@
 {
     if (alertView.tag == ID_CHANGE_ALERT_TAG)
     {
-        MBProgressHUD *progressIndicator = [MBProgressHUD showHUDAddedTo:self.view animated:YES fontSize:PROGRESS_INDICATOR_LABEL_FONT_SIZE];
-        progressIndicator.animationType = MBProgressHUDAnimationFade;
-        progressIndicator.mode = MBProgressHUDModeIndeterminate;
-        progressIndicator.labelText = @"Updating Attendance";
-        progressIndicator.dimBackground = NO;
-        progressIndicator.taskInProgress = YES;
-        progressIndicator.removeFromSuperViewOnHide = YES;
-        self.view.userInteractionEnabled = NO;
-
-        if(self.myModel.isInitialized)
+        if(buttonIndex == 1)
         {
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self.myModel addEmployeesWithSupervisorID:self.idField.text];
-            [Database saveDatabase];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self importEmployees];
         }
         else
         {
-            self.tryingToAddEmployees = YES;
+            [self.delegate savedSettingsForViewController:self];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
