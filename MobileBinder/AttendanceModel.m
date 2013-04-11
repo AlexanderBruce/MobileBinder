@@ -142,11 +142,8 @@
 {
     BOOL ret = NO;
     for(EmployeeRecord *emp in self.employeeRecords){
-        NSLog(@"New %@",employeeRecord.idNum);
-        NSLog(@"Old %@",emp.idNum);
         if ([employeeRecord.idNum isEqualToString: emp.idNum])
         {
-            NSLog(@"EQUAL!!!");
             ret = YES;
             break;
         }
