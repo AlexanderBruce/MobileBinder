@@ -5,6 +5,8 @@
 #define LEVEL_2_COLOR [UIColor yellowColor]
 #define LEVEL_3_COLOR [UIColor redColor]
 
+#define LABEL_FORMAT @"(%d)"
+
 @interface AttendanceCell()
 @property (weak, nonatomic) IBOutlet UIProgressView *absencesProgressView;
 @property (weak, nonatomic) IBOutlet UIProgressView *tardiesProgressView;
@@ -12,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *depLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *absencesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tardiesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *missedSwipesLabel;
 @end
 
 @implementation AttendanceCell
@@ -23,22 +28,25 @@
     self.depLabel.text = department;
 }
 
-- (void) updateAbsenceProgress:(float)absenceProgress withLevel:(int)level
+- (void) updateNumAbsence:(int)numAbsences progress:(float)absenceProgress level:(int)level
 {
     self.absencesProgressView.progress = absenceProgress;
     self.absencesProgressView.progressTintColor = [self colorForLevel:level];
+    self.absencesLabel.text = [NSString stringWithFormat:LABEL_FORMAT,numAbsences];
 }
 
--(void) updateTardyProgress:(float)tardyProgress withLevel:(int)level
+-(void) updateNumTardy:(int)numTardy progress:(float)tardyProgress level:(int)level
 {
     self.tardiesProgressView.progress = tardyProgress;
     self.tardiesProgressView.progressTintColor = [self colorForLevel:level];
+    self.tardiesLabel.text = [NSString stringWithFormat:LABEL_FORMAT,numTardy];
 }
 
--(void) updateMissedSwipesProgress:(float)missedSwipesProgress withLevel:(int)level
+-(void) updateNumMissedSwipes:(int)numMissedSwipes progress:(float)missedSwipesProgress level:(int)level
 {
     self.missedSwipesProgressView.progress = missedSwipesProgress;
     self.missedSwipesProgressView.progressTintColor = [self colorForLevel:level];
+    self.missedSwipesLabel.text = [NSString stringWithFormat:LABEL_FORMAT,numMissedSwipes];
 }
 
 - (UIColor *) colorForLevel: (int) level

@@ -108,7 +108,10 @@ static ReminderCenter *instance;
         NSDate *lastScheduledFireDate = [[notifsToSchedule lastObject] fireDate];
         [notifsToSchedule addObject:[self createWarningNotifWithFireDate:lastScheduledFireDate]];
     }
-    [UIApplication sharedApplication].scheduledLocalNotifications = notifsToSchedule;
+    if(notifsToSchedule.count > 0) //Saftey check to make sure we don't overwrite with zero notifs
+    {
+        [UIApplication sharedApplication].scheduledLocalNotifications = notifsToSchedule;
+    }
 }
 
 - (UILocalNotification *) createNotifFromManagedObj: (ReminderManagedObject *) managedObj

@@ -44,13 +44,13 @@
 
 
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
-- (int) addAbsence: (NSDate *) date;
+- (int) addAbsence: (NSDate *) date error: (NSError **) error;
 
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
-- (int) addTardy: (NSDate *) date;
+- (int) addTardy: (NSDate *) date error: (NSError **) error;
 
 /* Returns a level ID if and only if the employee has reached a NEW level. Returns a negative number otherwise */
-- (int) addMissedSwipe: (NSDate *) date;
+- (int) addMissedSwipe: (NSDate *) date error: (NSError **) error;
 
 
 - (void) removeAbsence: (NSDate *) date;

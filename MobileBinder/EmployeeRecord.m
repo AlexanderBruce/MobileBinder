@@ -57,13 +57,28 @@
     return self.missedSwipesInPastYear;
 }
 
-- (int) addAbsence: (NSDate *) date
+- (int) addAbsence: (NSDate *) date error:(NSError *__autoreleasing *)error
 {
+    //Don't allow duplicate absences
+    for (NSDate *oldDate in self.allAbsences)
+    {
+        if([EmployeeRecord date:date isTheSameAs:oldDate])
+        {
+            if(error) //Have to check to ensure we don't dereference a null pointer
+            {
+                NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                [details setValue:@"You have already entered an absence for this date" forKey:NSLocalizedDescriptionKey];
+                *error = [NSError errorWithDomain:@"Duplicate Absence" code:200 userInfo:details];
+            }
+            return -1;
+        }
+    }
+    
     [self.allAbsences addObject:date];
     self.myManagedObject.absences = self.allAbsences;
     self.absencesInPastYear = [[NSMutableArray alloc] init];
-    for (NSDate *date in self.allAbsences) {
-        if([EmployeeRecord dateIsWithinPastYear:date]) [self.absencesInPastYear addObject:date];
+    for (NSDate *currentDate in self.allAbsences) {
+        if([EmployeeRecord dateIsWithinPastYear:currentDate]) [self.absencesInPastYear addObject:currentDate];
     }
     
     int count = [self getAbsencesInPastYear].count;
@@ -73,13 +88,13 @@
     else return -1;
 }
 
-- (int) addTardy: (NSDate *) date
+- (int) addTardy: (NSDate *) date error:(NSError *__autoreleasing *)error
 {
     [self.allTardies addObject:date];
     self.myManagedObject.tardies = self.allTardies;
     self.tardiesInPastYear = [[NSMutableArray alloc] init];
-    for (NSDate *date in self.allTardies) {
-        if([EmployeeRecord dateIsWithinPastYear:date]) [self.tardiesInPastYear addObject:date];
+    for (NSDate *currentDate in self.allTardies) {
+        if([EmployeeRecord dateIsWithinPastYear:currentDate]) [self.tardiesInPastYear addObject:currentDate];
     }
     int count = [self getTardiesInPastYear].count;
     if(count == LEVEL_1_TARDY_THRESHOLD) return LEVEL_1_ID;
@@ -88,13 +103,14 @@
     else return -1;
 }
 
-- (int) addMissedSwipe: (NSDate *) date
+- (int) addMissedSwipe: (NSDate *) date error:(NSError *__autoreleasing *)error
 {
     [self.allMissedSwipes addObject:date];
     self.myManagedObject.missedSwipes = self.allMissedSwipes;
     self.missedSwipesInPastYear = [[NSMutableArray alloc] init];
-    for (NSDate *date in self.missedSwipesInPastYear) {
-        if([EmployeeRecord dateIsWithinPastYear:date]) [self.missedSwipesInPastYear addObject:date];
+    for (NSDate *currentDate in self.allMissedSwipes)
+    {
+        if([EmployeeRecord dateIsWithinPastYear:currentDate]) [self.missedSwipesInPastYear addObject:currentDate];
     }
     int count = [self getMissedSwipesInPastYear].count;
     if(count == LEVEL_1_SWIPE_THRESHOLD) return LEVEL_1_ID;
@@ -122,6 +138,17 @@
     [self.allMissedSwipes removeObject:date];
     [self.missedSwipesInPastYear removeObject:date];
     self.myManagedObject.missedSwipes = self.allMissedSwipes;
+}
+
++ (BOOL) date: (NSDate *) date1 isTheSameAs: (NSDate *) date2
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents *comps1 = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:date1];
+    NSDateComponents *comps2 = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:date2];
+
+    BOOL isTheSame = ((comps1.day == comps2.day) && (comps1.month == comps2.month) && (comps1.year == comps2.year));
+    return isTheSame;
 }
 
 + (BOOL)dateIsWithinPastYear:(NSDate*)date
@@ -196,7 +223,7 @@
         }
         
         self.missedSwipesInPastYear = [[NSMutableArray alloc] init];
-        for (NSDate *date in self.missedSwipesInPastYear) {
+        for (NSDate *date in self.allMissedSwipes) {
             if([EmployeeRecord dateIsWithinPastYear:date]) [self.missedSwipesInPastYear addObject:date];
         }
         

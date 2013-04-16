@@ -4,6 +4,8 @@
 #import "Database.h"
 #import "DisciplinaryActionModel.h"
 #import "Constants.h"
+#import "EmployeeRecord.h"
+#import "OutlinedLabel.h"
 
 #define ABSENCE_INDEX 0
 #define TARDY_INDEX 1
@@ -43,6 +45,14 @@
     formatter.dateStyle = NSDateFormatterLongStyle;
     self.incidentDateField.text = [formatter stringFromDate:[NSDate date]];
     self.myModel = [[DisciplinaryActionModel alloc] init];
+    for (UIView *view in self.myScrollView.subviews)
+    {
+        if([view isKindOfClass:[OutlinedLabel class]])
+        {
+            OutlinedLabel *label = (OutlinedLabel *) view;
+            [label customize];
+        }
+    }
 }
 
 #pragma mark - WebviewViewControllerDelegate
@@ -63,34 +73,42 @@
     }
     int changeOfLevel = -1;
     Behavior *behavior;
+    NSError *error = nil;
     if(self.incidentTypeControl.selectedSegmentIndex == ABSENCE_INDEX)
     {
         behavior = Absence;
-        changeOfLevel = [self.employeeRecord addAbsence:self.incidentDate];
+        changeOfLevel = [self.employeeRecord addAbsence:self.incidentDate error:&error];
     }
     else if(self.incidentTypeControl.selectedSegmentIndex == TARDY_INDEX)
     {
         behavior = Tardy;
-        changeOfLevel = [self.employeeRecord addTardy:self.incidentDate];
+        changeOfLevel = [self.employeeRecord addTardy:self.incidentDate error:&error];
     }
     else if(self.incidentTypeControl.selectedSegmentIndex == TIMECARD_INDEX)
     {
         behavior = Missed_Swipe;
-        changeOfLevel =[self.employeeRecord addMissedSwipe:self.incidentDate];
+        changeOfLevel =[self.employeeRecord addMissedSwipe:self.incidentDate error:&error];
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [Database saveDatabase];
     });
     
-    if (changeOfLevel >= 0)
+    if(error)
+    {
+        [[[UIAlertView alloc] initWithTitle:error.domain message:error.localizedDescription delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    }
+    else if (changeOfLevel >= 0)
     {
         self.mailer = [self.myModel generateDisciplinaryActionDocumentFor:self.employeeRecord forBehavior:behavior level:changeOfLevel];
         self.mailer.mailComposeDelegate = self;
         [self presentModalViewController:self.mailer animated:YES];
         return;
     }
-    [self.navigationController popViewControllerAnimated:YES]; 
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error

@@ -1,7 +1,8 @@
 #import <UIKit/UIKit.h>
-#import "EmployeeRecord.h"
+#import "BackgroundViewController.h"
+@class EmployeeRecord;
 
-@interface IncidentViewController : UIViewController
+@interface IncidentViewController : BackgroundViewController
 
 @property (nonatomic, strong) EmployeeRecord *employeeRecord;
 
