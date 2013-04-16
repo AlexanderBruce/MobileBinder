@@ -1,6 +1,7 @@
 #import "RoundingOverviewViewController.h"
 #import "RoundingDetailsViewController.h"
 #import "RoundingModel.h"
+#import "OutlinedLabel.h"
 #import <MessageUI/MFMailComposeViewController.h>
 
 
@@ -38,6 +39,14 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    for (UIView *view in self.scrollView.subviews)
+    {
+        if([view isKindOfClass:[OutlinedLabel class]])
+        {
+            OutlinedLabel *label = (OutlinedLabel *) view;
+            [label customize];
+        }
+    }
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.delegate = self;
     [self.scrollView addGestureRecognizer:gestureRecognizer];

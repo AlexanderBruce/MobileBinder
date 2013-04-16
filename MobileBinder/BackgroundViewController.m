@@ -3,6 +3,7 @@
 
 @interface BackgroundViewController ()
 @property (nonatomic, weak) NSValue *value; //Opaque object used for holding weak reference to self
+@property (nonatomic, weak) UIView *backgroundView; //Only used when a viewcontroller is presented modally
 @end
 
 static NSMutableArray *instances;
@@ -50,7 +51,29 @@ static UIColor *backgroundColor;
     for (NSValue *value in instances)
     {
         BackgroundViewController *vc = [value nonretainedObjectValue];
-        vc.view.backgroundColor = backgroundColor;
+        [BackgroundViewController setBackgroundForViewController:vc];
+    }
+}
+
+#define TOOLBAR_HEIGHT 44
+
++ (void) setBackgroundForViewController: (BackgroundViewController *) viewController
+{
+    if(viewController.presentingViewController)
+    {
+        viewController.view.backgroundColor = [UIColor clearColor];
+        UIView *backgroundView = viewController.backgroundView;
+        if(!backgroundView)
+        {
+            backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, TOOLBAR_HEIGHT, viewController.view.frame.size.width, viewController.view.frame.size.height - TOOLBAR_HEIGHT)];
+            [viewController.view addSubview:backgroundView];
+            [viewController.view sendSubviewToBack:backgroundView];
+        }
+        backgroundView.backgroundColor = backgroundColor;
+    }
+    else
+    {
+        viewController.view.backgroundColor = backgroundColor;
     }
 }
 
@@ -63,7 +86,7 @@ static UIColor *backgroundColor;
 {
     [super viewDidLoad];
     self.value = [BackgroundViewController addViewControllerToInstances:self];
-    self.view.backgroundColor = backgroundColor;
+    [BackgroundViewController setBackgroundForViewController:self];
 }
 
 - (void) dealloc

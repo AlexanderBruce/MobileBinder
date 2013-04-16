@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
+#import "BackgroundViewController.h"
 @class AttendanceModel;
-
 @class EmployeeRecord;
 
 @protocol AddEmployeeDelegate <NSObject>
@@ -12,7 +12,7 @@
 - (void) editedEmployeedRecord;
 @end
 
-@interface AddEmployeeViewController : UIViewController
+@interface AddEmployeeViewController : BackgroundViewController
 @property (nonatomic, weak) id<AddEmployeeDelegate> delegate;
 @property (nonatomic, strong) EmployeeRecord *myRecord;
 @property (nonatomic, strong) AttendanceModel *myModel;

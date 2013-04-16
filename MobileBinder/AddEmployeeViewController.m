@@ -1,6 +1,7 @@
 #import "AddEmployeeViewController.h"
 #import "EmployeeRecord.h"
 #import "Database.h"
+#import "OutlinedLabel.h"
 #import "Constants.h"
 #import "AttendanceModel.h"
 
@@ -105,6 +106,15 @@
                                                  name:UIKeyboardWillHideNotification object:nil];
     self.myScrollView.contentSize = CGSizeMake(self.myScrollView.contentSize.width, CONTENT_SIZE);
     self.myScrollView.scrollEnabled = NO;
+    
+    for (UIView *view in self.myScrollView.subviews)
+    {
+        if([view isKindOfClass:[OutlinedLabel class]])
+        {
+            OutlinedLabel *label = (OutlinedLabel *) view;
+            [label customize];
+        }
+    }
 }
 
 

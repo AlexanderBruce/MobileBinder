@@ -64,7 +64,7 @@
      }];
 }
 
-- (IBAction)savePressed:(UIButton *)sender
+- (IBAction)savePressed:(id)sender
 {
     if(self.incidentTypeControl.selectedSegmentIndex < 0)
     {
@@ -138,7 +138,7 @@
 {
     if(!IS_4_INCH_SCREEN)
     {
-        [self.myScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+        [self.myScrollView setContentOffset:CGPointMake(0, 85) animated:YES];
     }
 }
 
