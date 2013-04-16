@@ -16,7 +16,6 @@
     return nil;
 }
 
-
 - (int) numberOfColumns
 {
     return [self getColumnTitles].count;
@@ -27,11 +26,24 @@
     return self.rows.count;
 }
 
+- (void) discardChanges
+{
+    self.rows = (self.managedObject.contents) ? self.managedObject.contents : [[NSMutableArray alloc] init];
+    self.saved = YES;
+}
+
+- (void) saveLogWithCompletition:(void (^)(void))block
+{
+    self.managedObject.contents = self.rows;
+    self.saved = YES;
+    [Database saveDatabaseWithCompletion:block];
+}
+
 
 - (int) addRow
 {
     [self.rows addObject:[[NSMutableDictionary alloc] init]];
-    self.managedObject.contents = self.rows; //Maybe not necessary
+    self.saved = NO;
     return self.rows.count - 1;
 }
 
@@ -41,7 +53,7 @@
     {
         [self.rows removeObjectAtIndex:rowNumber];
     }
-    self.managedObject.contents = self.rows;
+    self.saved = NO;
 }
 
 - (void) storeContents: (NSString *) contents forRow: (int) rowNumber column: (int) columnNumber
@@ -53,7 +65,7 @@
 
     NSMutableDictionary *rowDictionary = [self.rows objectAtIndex:rowNumber];
     [rowDictionary setObject:contents forKey:[NSNumber numberWithInt: columnNumber]];
-    self.managedObject.contents = self.rows;
+    self.saved = NO;
 }
 
 - (NSString *) contentsForRow: (int) rowNumber column: (int) columnNumber
@@ -82,7 +94,9 @@
     if(!self.managedObject) return; //If not saved to disk, then don't need to do anything
     [database.managedObjectContext deleteObject:self.managedObject];
     self.managedObject = nil;
-    [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){}];
+    self.saved = NO;
+    [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+    }];
 }
 
 
@@ -95,6 +109,7 @@
         //IMPLEMENT FURTHER IN SUBCLASSES
         
         self.managedObject = managedObject;
+        self.saved = YES;
     }
     return self;
 }

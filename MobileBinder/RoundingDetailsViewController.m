@@ -5,7 +5,10 @@
 #import "UITextFieldCell.h"
 #import "UIButton+Disable.h"
 #import "Constants.h"
+#import "RoundingModel.h"
+#import "MBProgressHUD.h"
 #import "RoundingLogManagedObjectProtocol.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
 #define EMPLOYEE_SECTION 0
 #define EMPLOYEE_SECTION_HEIGHT 35
@@ -14,7 +17,13 @@
 
 #define DELETE_SECTION_HEIGHT 35
 
-@interface RoundingDetailsViewController () <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate, UIActionSheetDelegate>
+#define BACK_PRESSED_ALERT_TITLE @"Unsaved Changes"
+#define BACK_PRESSED_ALERT_MESSAGE @"Do you wish to save your log before going back?"
+#define BACK_PRESSED_ALERT_CANCEL_BUTTON_TITLE @"Don't Save"
+#define BACK_PRESSED_ALERT_BUTTON_TITLE @"Save"
+#define BACK_PRESSED_ALERT_TAG 2
+
+@interface RoundingDetailsViewController () <UITableViewDataSource, UITableViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) int currentRow;
 @property (nonatomic, strong) UITextField *employeeNameField;
@@ -22,9 +31,67 @@
 @property (nonatomic, strong) UIPickerView *employeePicker;
 @property (nonatomic) BOOL pickerIsVisible;
 @property (nonatomic, weak) UIButton *switchButton;
+@property (nonatomic, strong) MFMailComposeViewController *mailer;
 @end
 
 @implementation RoundingDetailsViewController
+
+- (IBAction)backPressed:(id)sender
+{
+    if(self.log.saved)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:BACK_PRESSED_ALERT_TITLE message:BACK_PRESSED_ALERT_MESSAGE delegate:self cancelButtonTitle:BACK_PRESSED_ALERT_CANCEL_BUTTON_TITLE otherButtonTitles:BACK_PRESSED_ALERT_BUTTON_TITLE, nil];
+        alertView.tag = BACK_PRESSED_ALERT_TAG;
+        [alertView show];
+    }
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.tag == BACK_PRESSED_ALERT_TAG)
+    {
+        if(buttonIndex == alertView.cancelButtonIndex)
+        {
+            [self.log discardChanges];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            [self showSavingIndicator];
+            [self.log saveLogWithCompletition:^{
+                self.view.userInteractionEnabled = YES;
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }
+    }
+}
+
+- (IBAction)savePressed:(id)sender
+{
+    [self showSavingIndicator];
+    [self.log saveLogWithCompletition:^{
+        self.view.userInteractionEnabled = YES;
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+}
+
+- (void) showSavingIndicator
+{
+    MBProgressHUD *progressIndicator = [MBProgressHUD showHUDAddedTo:self.view animated:YES fontSize:PROGRESS_INDICATOR_LABEL_FONT_SIZE];
+    progressIndicator.animationType = MBProgressHUDAnimationFade;
+    progressIndicator.mode = MBProgressHUDModeIndeterminate;
+    progressIndicator.labelText = @"Saving";
+    progressIndicator.dimBackground = NO;
+    progressIndicator.taskInProgress = YES;
+    progressIndicator.removeFromSuperViewOnHide = YES;
+    progressIndicator.userInteractionEnabled = NO;
+    self.view.userInteractionEnabled = NO;
+}
 
 - (IBAction)addPressed:(UIBarButtonItem *)sender
 {
@@ -343,6 +410,28 @@
 {
      // Might want to use cancel touches in view here
     return (gestureRecognizer.view == self.switchButton || otherGestureRecognizer.view == self.switchButton);
+}
+
+
+- (IBAction)sharePressed:(UIBarButtonItem *)sender
+{
+    self.mailer = [self.model generateRoundingDocumentFor:self.log];
+    self.mailer.mailComposeDelegate = self;
+    [self presentModalViewController:self.mailer animated:YES];
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    if(!result == MFMailComposeResultCancelled)
+    {
+        [self.mailer dismissViewControllerAnimated:YES completion:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }
+    else
+    {
+        [self.mailer dismissViewControllerAnimated:YES completion:^{}];
+    }
 }
 
 

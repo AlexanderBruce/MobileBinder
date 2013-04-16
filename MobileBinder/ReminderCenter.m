@@ -121,7 +121,7 @@ static ReminderCenter *instance;
     notif.timeZone = [NSTimeZone defaultTimeZone];
     notif.alertBody = managedObj.text;
     notif.hasAction = YES;
-    notif.applicationIconBadgeNumber = 1;
+//    notif.applicationIconBadgeNumber = 1;
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     [dictionary setObject:[NSNumber numberWithInt:managedObj.typeID] forKey:TYPE_ID_KEY];
     [dictionary setObject:[NSNumber numberWithInt:managedObj.uniqueID] forKey:UNIQUE_ID_KEY];
@@ -141,7 +141,7 @@ static ReminderCenter *instance;
     
     notif.alertBody = [NSString stringWithFormat:@"You have not visited %@ recently; therefore, you will stop recieving notifications.  Open the app to re-enable notifications.",appName];
     notif.hasAction = YES;
-    notif.applicationIconBadgeNumber = 1;
+//    notif.applicationIconBadgeNumber = 1;
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     [dictionary setObject:[NSNumber numberWithInt:WARNING_NOTIF_TYPE_ID] forKey:TYPE_ID_KEY];
     [dictionary setObject:[NSNumber numberWithInt:WARNING_NOTIF_UNIQUE_ID] forKey:UNIQUE_ID_KEY];

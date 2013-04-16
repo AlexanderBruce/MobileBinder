@@ -2,7 +2,7 @@
 #import "RoundingDetailsViewController.h"
 #import "RoundingModel.h"
 #import "OutlinedLabel.h"
-#import <MessageUI/MFMailComposeViewController.h>
+#import "RoundingLog.h"
 
 
 #define ROUNDING_DETAILS_SEGUE @"roundingDetailsSegue"
@@ -19,6 +19,7 @@
     {
         RoundingDetailsViewController *dest = segue.destinationViewController;
         dest.log = self.log;
+        dest.model = self.model;
     }
 }
 
@@ -80,7 +81,9 @@
 
 - (IBAction)nextPressed:(id)sender
 {
-    [self performSegueWithIdentifier:ROUNDING_DETAILS_SEGUE sender:self];
+    [self.log saveLogWithCompletition:^{
+        [self performSegueWithIdentifier:ROUNDING_DETAILS_SEGUE sender:self];
+    }];
 }
 
 - (IBAction)deletePressed:(id)sender
@@ -103,14 +106,6 @@
 {
     //ABSTRACT
     [NSException raise:@"Override Error" format:@"Method %@ must be overidden in class %@",NSStringFromSelector(_cmd),self.class];
-}
-
-- (IBAction)sharePressed:(UIBarButtonItem *)sender
-{
-    [self saveDataIntoLog];
-    self.mailer = [self.model generateRoundingDocumentFor:self.log];
-    self.mailer.mailComposeDelegate = self;
-    [self presentModalViewController:self.mailer animated:YES];
 }
 
 

@@ -14,28 +14,47 @@
     return _columnTitles;
 }
 
+- (void) discardChanges
+{
+    self.date = self.managedObject.date;
+    self.unit = self.managedObject.unit;
+    self.name = self.managedObject.name;
+    self.notes = self.managedObject.notes;
+    [super discardChanges];
+}
+
+- (void) saveLogWithCompletition:(void (^)(void))block
+{
+    self.managedObject.date = self.date;
+    self.managedObject.unit = self.unit;
+    self.managedObject.name = self.name;
+    self.managedObject.notes = self.notes;
+    [super saveLogWithCompletition:block];
+}
+
+
 - (void) setDate:(NSDate *)date
 {
     _date = date;
-    self.managedObject.date = date;
+    self.saved = NO;
 }
 
 - (void) setUnit:(NSString *)unit
 {
     _unit = unit;
-    self.managedObject.unit = unit;
+    self.saved = NO;
 }
 
 - (void) setName:(NSString *)name
 {
     _name = name;
-    self.managedObject.name = name;
+    self.saved = NO;
 }
 
 - (void) setNotes:(NSString *)notes
 {
     _notes = notes;
-    self.managedObject.notes = notes;
+    self.saved = NO;
 }
 
 

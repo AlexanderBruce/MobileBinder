@@ -7,6 +7,7 @@
 @property (nonatomic, strong)  id<RoundingLogManagedObjectProtocol> managedObject;
 @property (nonatomic, readonly) int numberOfColumns;
 @property (nonatomic, readonly) int numberOfRows;
+@property (nonatomic) BOOL saved;
 
 //Returns the row number for the row that was just added
 - (int) addRow;
@@ -26,5 +27,11 @@
 - (id) initWithManagedObject: (id<RoundingLogManagedObjectProtocol> ) managedObject;
 
 - (void) deleteFromDatabase: (UIManagedDocument *) database;
+
+//Implement further in subclass and then call super
+- (void) discardChanges;
+
+// Implement further in subclass and then call super
+- (void) saveLogWithCompletition: (void (^)(void)) block;
 
 @end
