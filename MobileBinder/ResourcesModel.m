@@ -108,6 +108,7 @@
             resourceObj.pageTitle = [data objectAtIndex:1];
             resourceObj.webpageURL = [data objectAtIndex:2];
             resourceObj.description = [data objectAtIndex:3];
+            
             [currentCategory addObject:resourceObj];
         }
         else if([line hasPrefix:@"!!"])

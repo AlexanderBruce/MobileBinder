@@ -73,7 +73,7 @@
     {
     if([self.webPageUrl.text hasPrefix:@"www"])self.webPageUrl.text = [NSString stringWithFormat:@"%@%@", @"http://", self.webPageUrl.text];
     if([self.description.text isEqualToString:@""])self.description.text = @" ";
-        [self.myModel addResourceObjectwithPageTitle:self.pageTitle.text url:self.webPageUrl.text description:self.description.text category:self.category.text];
+        [self.myModel addResourceObjectwithPageTitle:self.pageTitle.text url:self.webPageUrl.text description:self.description.text category:[self.category.text capitalizedString]];
     [self dismissModalViewControllerAnimated:YES];
     }
 }
@@ -92,9 +92,11 @@
         [self.myScrollView setContentOffset:CGPointMake(0, PICKER_OFFSET) animated:YES];
         BOOL needToDefault = YES;
         for(int i =0; i<[self.myModel getNumberOfCategoriesWhenUnfiltered];i++){
-            if([self.category.text isEqualToString:[self pickerView:self.myPicker titleForRow:i forComponent:0]]){
+            if([self.category.text caseInsensitiveCompare:[self pickerView:self.myPicker titleForRow:i forComponent:0]] == NSOrderedSame){
+                self.category.text = [self pickerView:self.myPicker titleForRow:i forComponent:0];
                 [self.myPicker selectRow:i inComponent:0 animated:YES];
                 needToDefault = NO;
+                
             }
         }
         if(needToDefault){
