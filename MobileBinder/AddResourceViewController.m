@@ -90,7 +90,20 @@
          }];
         self.firstResponderIsActive = YES;
         [self.myScrollView setContentOffset:CGPointMake(0, PICKER_OFFSET) animated:YES];
+        BOOL needToDefault = YES;
+        for(int i =0; i<[self.myModel getNumberOfCategoriesWhenUnfiltered];i++){
+            if([self.category.text isEqualToString:[self pickerView:self.myPicker titleForRow:i forComponent:0]]){
+                [self.myPicker selectRow:i inComponent:0 animated:YES];
+                needToDefault = NO;
+            }
+        }
+        if(needToDefault){
+        self.category.text =[self pickerView:self.myPicker titleForRow:0 forComponent:0];
+         [self.myPicker selectRow:0 inComponent:0 animated:YES];
+        }
+        
     }
+    
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
