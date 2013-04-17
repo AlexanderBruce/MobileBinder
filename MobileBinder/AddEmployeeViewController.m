@@ -5,7 +5,7 @@
 #import "Constants.h"
 #import "AttendanceModel.h"
 
-#define SCROLL_OFFSET IS_4_INCH_SCREEN ? 100 : 200
+#define SCROLL_OFFSET IS_4_INCH_SCREEN ? 50 : 150
 #define CONTENT_SIZE IS_4_INCH_SCREEN ? 460: 560
 #define REPEAT_EMPLOYEE_ALERTVIEW 2
 #define INCOMPLETE_FIELDS_ALERTVIEW 3
@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *departmentField;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (weak, nonatomic) IBOutlet UITextField *unitField;
+@property (weak, nonatomic) IBOutlet UITextField *uniqueIDField;
 @property (nonatomic) BOOL firstResponderIsActive;
 @end
 
@@ -30,6 +31,7 @@
         self.myRecord.lastName = self.lastNameField.text;
         self.myRecord.department = self.departmentField.text;
         self.myRecord.unit = self.unitField.text;
+        self.myRecord.idNum = self.uniqueIDField.text;
         [Database saveDatabase];
         [self.delegate editedEmployeedRecord];
     }
@@ -41,6 +43,7 @@
         record.lastName = self.lastNameField.text;
         record.department = self.departmentField.text;
         record.unit = self.unitField.text;
+        record.idNum = self.uniqueIDField.text;
         if(!record.unit) record.unit = @"";
         if(!record.department) record.department = @"";
         self.myRecord = record;
@@ -93,12 +96,14 @@
     self.lastNameField.delegate = self;
     self.departmentField.delegate = self;
     self.unitField.delegate = self;
+    self.uniqueIDField.delegate = self;
     self.firstResponderIsActive = NO;
     if(self.myRecord){
         self.firstNameField.text = self.myRecord.firstName;
         self.lastNameField.text = self.myRecord.lastName;
         self.departmentField.text = self.myRecord.department;
         self.unitField.text = self.myRecord.unit;
+        self.uniqueIDField.text = self.myRecord.idNum;
     }
 //    [self.myScrollView setContentSize:CGSizeMake(self.myScrollView.frame.size.width, self.myScrollView.frame.size.height)];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -126,6 +131,7 @@
     [self setDepartmentField:nil];
     [self setUnitField:nil];
     [self setMyScrollView:nil];
+    [self setUniqueIDField:nil];
     [super viewDidUnload];
 }
 
@@ -143,10 +149,12 @@
 {
     self.myScrollView.scrollEnabled = YES;
     self.firstResponderIsActive = YES;
-    if(textField == self.departmentField || textField == self.unitField)
+    if(textField == self.unitField || textField == self.departmentField || textField == self.uniqueIDField)
     {
         [self.myScrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
     }
+    else
+        [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField

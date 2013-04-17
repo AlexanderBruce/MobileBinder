@@ -42,6 +42,7 @@
     self.myManagedObject.idNum = _idNum;
 }
 
+
 - (NSArray *) getAbsencesInPastYear
 {
     return self.absencesInPastYear;
