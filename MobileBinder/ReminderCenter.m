@@ -56,6 +56,23 @@ static ReminderCenter *instance;
     }
 }
 
+- (void) refreshNotificationBadgeNumbers
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[BetterDatabase sharedDocumentHandler] lock]; //Use this lock for lack of a better lock
+        NSArray *scheduledNotifs = [UIApplication sharedApplication].scheduledLocalNotifications;
+        NSMutableArray *newScheduledNotifsArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < scheduledNotifs.count; i++)
+        {
+            UILocalNotification *notif = [scheduledNotifs objectAtIndex:i];
+            notif.applicationIconBadgeNumber = i + 1; //Start badge num at 1
+            [newScheduledNotifsArray addObject:notif];
+        }
+        [UIApplication sharedApplication].scheduledLocalNotifications = newScheduledNotifsArray;
+        [[BetterDatabase sharedDocumentHandler] unlock];
+    });
+}
+
 - (void) refreshReminders
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -68,6 +85,7 @@ static ReminderCenter *instance;
         }];
     });
 }
+
 
 - (void) refreshRemindersPrivatelyWithDatabase: (UIManagedDocument *) document
 {
@@ -108,6 +126,14 @@ static ReminderCenter *instance;
         NSDate *lastScheduledFireDate = [[notifsToSchedule lastObject] fireDate];
         [notifsToSchedule addObject:[self createWarningNotifWithFireDate:lastScheduledFireDate]];
     }
+    
+    //Set badge num for notifs
+    for (int i = 0; i < notifsToSchedule.count; i++)
+    {
+        UILocalNotification *notif = [notifsToSchedule objectAtIndex:i];
+        notif.applicationIconBadgeNumber = i + 1; //Start badge num at 1
+    }
+    
     if(notifsToSchedule.count > 0) //Saftey check to make sure we don't overwrite with zero notifs
     {
         [UIApplication sharedApplication].scheduledLocalNotifications = notifsToSchedule;

@@ -55,13 +55,18 @@
 {
     if (self.tryingToAddEmployees)
     {
-        [self.myModel addEmployeesWithSupervisorID:self.idField.text];
-        [Database saveDatabase];
         self.tryingToAddEmployees = NO;
-        self.view.userInteractionEnabled = YES;
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self.delegate savedSettingsForViewController:self];
-        [self.navigationController popViewControllerAnimated:YES];
+        UIView *view = self.view;
+        id<SettingsDelegate> delegate = self.delegate;
+        UIViewController *mySelf = self;
+        [self.myModel addEmployeesWithSupervisorID:self.idField.text completition:^{
+            [Database saveDatabase];
+            view.userInteractionEnabled = YES;
+            [MBProgressHUD hideAllHUDsForView:view animated:YES];
+            [delegate savedSettingsForViewController:mySelf];
+            [mySelf.navigationController popViewControllerAnimated:YES];
+        }];
+
     }
 }
 
@@ -212,12 +217,16 @@
     
     if(self.myModel.isInitialized)
     {
-        [self.myModel addEmployeesWithSupervisorID:self.idField.text];
-        [Database saveDatabase];
-        self.view.userInteractionEnabled = YES;
-        [self.delegate savedSettingsForViewController:self];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self.navigationController popViewControllerAnimated:YES];
+        UIView *view = self.view;
+        id<SettingsDelegate> delegate = self.delegate;
+        UIViewController *mySelf = self;
+        [self.myModel addEmployeesWithSupervisorID:self.idField.text completition:^{
+            [Database saveDatabase];
+            view.userInteractionEnabled = YES;
+            [MBProgressHUD hideAllHUDsForView:view animated:YES];
+            [delegate savedSettingsForViewController:mySelf];
+            [mySelf.navigationController popViewControllerAnimated:YES];
+        }];
     }
     else
     {

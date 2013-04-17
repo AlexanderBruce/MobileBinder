@@ -21,7 +21,7 @@
 
 - (void) fetchEmployeeRecordsForFutureUse;
 
-- (void) addEmployeesWithSupervisorID: (NSString *) idNum;
+- (void) addEmployeesWithSupervisorID: (NSString *) idNum completition: (void (^) (void)) block;
 
 - (int) getNumberOfEmployeeRecords;
 

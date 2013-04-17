@@ -16,4 +16,7 @@
 
 //Call this when the app becomes active in order to ensure that the proper UILocalNotifications are scheduled
 - (void) refreshReminders;
+
+//Call this when you wish to update the badge nums of already scheduled notifications
+- (void) refreshNotificationBadgeNumbers;
 @end
