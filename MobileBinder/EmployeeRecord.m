@@ -42,6 +42,12 @@
     self.myManagedObject.idNum = _idNum;
 }
 
+- (void) setuniqueID:(NSString *)unique
+{
+    _uniqueID = unique;
+    self.myManagedObject.uniqueID = unique;
+}
+
 - (NSArray *) getAbsencesInPastYear
 {
     return self.absencesInPastYear;

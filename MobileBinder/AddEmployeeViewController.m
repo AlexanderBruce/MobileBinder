@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *departmentField;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (weak, nonatomic) IBOutlet UITextField *unitField;
+@property (weak, nonatomic) IBOutlet UITextField *uniqueIDField;
 @property (nonatomic) BOOL firstResponderIsActive;
 @end
 
@@ -30,6 +31,7 @@
         self.myRecord.lastName = self.lastNameField.text;
         self.myRecord.department = self.departmentField.text;
         self.myRecord.unit = self.unitField.text;
+        self.myRecord.uniqueID = self.uniqueIDField.text;
         [Database saveDatabase];
         [self.delegate editedEmployeedRecord];
     }
@@ -126,6 +128,7 @@
     [self setDepartmentField:nil];
     [self setUnitField:nil];
     [self setMyScrollView:nil];
+    [self setUniqueIDField:nil];
     [super viewDidUnload];
 }
 

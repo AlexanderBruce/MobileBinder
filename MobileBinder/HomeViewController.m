@@ -28,16 +28,16 @@
     notif.alertBody = [NSString stringWithFormat:@"Hi Alex"];
     notif.hasAction = YES;
     
-    notif.fireDate = [[NSDate date] dateByAddingTimeInterval:10] ; //get x minute after
-    [[UIApplication sharedApplication] scheduleLocalNotification:notif];
-    
-    UILocalNotification *notif1 = [[UILocalNotification alloc] init];
-    notif1.timeZone = [NSTimeZone defaultTimeZone];
-    notif1.alertBody = [NSString stringWithFormat:@"Hi Alex"];
-    notif1.hasAction = YES;
-    
-    notif1.fireDate = [[NSDate date] dateByAddingTimeInterval:10] ; //get x minute after
-    [[UIApplication sharedApplication] scheduleLocalNotification:notif1];
+//    notif.fireDate = [[NSDate date] dateByAddingTimeInterval:10] ; //get x minute after
+//    [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+//    
+//    UILocalNotification *notif1 = [[UILocalNotification alloc] init];
+//    notif1.timeZone = [NSTimeZone defaultTimeZone];
+//    notif1.alertBody = [NSString stringWithFormat:@"Hi Alex"];
+//    notif1.hasAction = YES;
+//    
+//    notif1.fireDate = [[NSDate date] dateByAddingTimeInterval:10] ; //get x minute after
+//    [[UIApplication sharedApplication] scheduleLocalNotification:notif1];
 }
 
 @end
