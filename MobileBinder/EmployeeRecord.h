@@ -28,7 +28,6 @@
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *department;
 @property (nonatomic, strong) NSString *unit;
-@property (nonatomic, strong) NSString *uniqueID;
 @property (nonatomic, strong) NSString *idNum;
 
 @property (nonatomic, strong) EmployeeRecordManagedObject *myManagedObject;
