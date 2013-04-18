@@ -51,6 +51,7 @@
 		494D0E5F16B84F7300354964 /* AttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E5E16B84F7300354964 /* AttendanceViewController.m */; };
 		494D0E6216B84FE900354964 /* AttendanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E6116B84FE900354964 /* AttendanceCell.m */; };
 		494D0E6416B8509300354964 /* AttendanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E6316B8509300354964 /* AttendanceCell.xib */; };
+		494EA15117206846000403EB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494EA15017206846000403EB /* Default-568h@2x.png */; };
 		4960AFA116B8590900F16ED6 /* AttendanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA016B8590900F16ED6 /* AttendanceModel.m */; };
 		4960AFAA16B85CF400F16ED6 /* AddEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA916B85CF400F16ED6 /* AddEmployeeViewController.m */; };
 		4960AFB216B8633600F16ED6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4960AFB116B8633600F16ED6 /* CoreData.framework */; };
@@ -216,6 +217,7 @@
 		494D0E6016B84FE900354964 /* AttendanceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceCell.h; sourceTree = "<group>"; };
 		494D0E6116B84FE900354964 /* AttendanceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceCell.m; sourceTree = "<group>"; };
 		494D0E6316B8509300354964 /* AttendanceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttendanceCell.xib; sourceTree = "<group>"; };
+		494EA15017206846000403EB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4960AF9F16B8590900F16ED6 /* AttendanceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceModel.h; sourceTree = "<group>"; };
 		4960AFA016B8590900F16ED6 /* AttendanceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceModel.m; sourceTree = "<group>"; };
 		4960AFA616B85B5400F16ED6 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 		494D0E2416B84BAB00354964 = {
 			isa = PBXGroup;
 			children = (
+				494EA15017206846000403EB /* Default-568h@2x.png */,
 				494D0E3916B84BAB00354964 /* MobileBinder */,
 				494D0E3216B84BAB00354964 /* Frameworks */,
 				494D0E3016B84BAB00354964 /* Products */,
@@ -854,6 +857,7 @@
 				49F58774170B7D5C00589070 /* Employee Rounding Document Template.rtf in Resources */,
 				49451BB51710D41E003E9C10 /* bow_tie.png in Resources */,
 				49C5117C171204980083305E /* MonthlyPayrollData in Resources */,
+				494EA15117206846000403EB /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
