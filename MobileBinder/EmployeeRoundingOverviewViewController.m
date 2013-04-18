@@ -9,8 +9,7 @@
 
 #define ROUNDING_DETAILS_SEGUE @"roundingDetailsSegue"
 
-#define SCROLL_OFFSET IS_4_INCH_SCREEN ? 140 : 200
-#define CONTENT_SIZE IS_4_INCH_SCREEN ? 550: 590
+#define CONTENT_SIZE IS_4_INCH_SCREEN ? 453: 532
 
 @interface EmployeeRoundingOverviewViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate,UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *employeeNameField;
@@ -23,6 +22,38 @@
 @end
 
 @implementation EmployeeRoundingOverviewViewController
+
+#define EMPLOYEE_OFFSET (IS_4_INCH_SCREEN ? 0 : 0)
+#define UNIT_OFFSET (IS_4_INCH_SCREEN ? 0 : 30)
+#define LEADER_OFFSET (IS_4_INCH_SCREEN ? 70 : 87)
+#define FOCUS_OFFSET (IS_4_INCH_SCREEN ? 70 : 160)
+#define REMINDERS_OFFSET (IS_4_INCH_SCREEN ? 70 : 160)
+
+-(void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.scrollView.scrollEnabled = YES;
+    self.firstResponderIsActive = YES;
+    if(textField == self.employeeNameField)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, EMPLOYEE_OFFSET) animated:YES];
+    }
+    else if(textField == self.unitField)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, UNIT_OFFSET) animated:YES];
+    }
+    else if(textField == self.leaderField)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, LEADER_OFFSET) animated:YES];
+    }
+    else if(textField == self.keyFocusField)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, FOCUS_OFFSET) animated:YES];
+    }
+    else if(textField == self.keyRemindersField)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, REMINDERS_OFFSET) animated:YES];
+    }
+}
 
 - (void) viewDidLoad
 {
@@ -52,16 +83,6 @@
         self.leaderField.text = leader;
     }    self.keyFocusField.text = self.log.keyFocus;
     self.keyRemindersField.text = self.log.keyReminders;
-}
-
--(void) textFieldDidBeginEditing:(UITextField *)textField
-{
-    self.scrollView.scrollEnabled = YES;
-    self.firstResponderIsActive = YES;
-    if(textField == self.keyFocusField || textField == self.keyRemindersField)
-    {
-        [self.scrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
-    }
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField

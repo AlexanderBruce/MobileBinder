@@ -51,7 +51,7 @@
 		494D0E5F16B84F7300354964 /* AttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E5E16B84F7300354964 /* AttendanceViewController.m */; };
 		494D0E6216B84FE900354964 /* AttendanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E6116B84FE900354964 /* AttendanceCell.m */; };
 		494D0E6416B8509300354964 /* AttendanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E6316B8509300354964 /* AttendanceCell.xib */; };
-		494EA15117206846000403EB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494EA15017206846000403EB /* Default-568h@2x.png */; };
+		494EA15517207C1B000403EB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494EA15417207C1B000403EB /* Default-568h@2x.png */; };
 		4960AFA116B8590900F16ED6 /* AttendanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA016B8590900F16ED6 /* AttendanceModel.m */; };
 		4960AFAA16B85CF400F16ED6 /* AddEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4960AFA916B85CF400F16ED6 /* AddEmployeeViewController.m */; };
 		4960AFB216B8633600F16ED6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4960AFB116B8633600F16ED6 /* CoreData.framework */; };
@@ -217,7 +217,7 @@
 		494D0E6016B84FE900354964 /* AttendanceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceCell.h; sourceTree = "<group>"; };
 		494D0E6116B84FE900354964 /* AttendanceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceCell.m; sourceTree = "<group>"; };
 		494D0E6316B8509300354964 /* AttendanceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttendanceCell.xib; sourceTree = "<group>"; };
-		494EA15017206846000403EB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		494EA15417207C1B000403EB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		4960AF9F16B8590900F16ED6 /* AttendanceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceModel.h; sourceTree = "<group>"; };
 		4960AFA016B8590900F16ED6 /* AttendanceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceModel.m; sourceTree = "<group>"; };
 		4960AFA616B85B5400F16ED6 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
@@ -390,30 +390,30 @@
 			isa = PBXGroup;
 			children = (
 				49451BB41710D41E003E9C10 /* bow_tie.png */,
-				49A6F623170B25330075BDD9 /* JPImagePicker */,
-				49377B6F1703E27200B33AD2 /* Webpage Request */,
-				49885D9716E901DC000BE747 /* GradientButton.h */,
-				49885D9816E901DC000BE747 /* GradientButton.m */,
 				4939165C16C2D8BA00F9365D /* Constants.h */,
 				4968BB5E16C43CD3002600AF /* CustomAlert.h */,
 				4968BB5F16C43CD3002600AF /* CustomAlert.m */,
+				49885D9716E901DC000BE747 /* GradientButton.h */,
+				49885D9816E901DC000BE747 /* GradientButton.m */,
+				49A6F623170B25330075BDD9 /* JPImagePicker */,
 				4907612A16D5D77D00AC30DB /* MarqueeCell.h */,
 				4907612B16D5D77D00AC30DB /* MarqueeCell.m */,
 				490A5AFC16C1D9730062F36F /* MarqueeLabel.h */,
 				490A5AFD16C1D9730062F36F /* MarqueeLabel.m */,
 				4939165916C2D86C00F9365D /* MBProgressHUD.h */,
 				4939165A16C2D86C00F9365D /* MBProgressHUD.m */,
+				494CD9EF16DD42DC00112E3E /* Media */,
+				49FFC800170CC56C0034ABBE /* OutlinedLabel.h */,
+				49FFC801170CC56C0034ABBE /* OutlinedLabel.m */,
 				49174A6A16E036EA007497A9 /* UIButton+Disable.h */,
 				49174A6B16E036EA007497A9 /* UIButton+Disable.m */,
-				494CD9EF16DD42DC00112E3E /* Media */,
 				49AB41F416C21551007AA467 /* UIScrollView+SVInfiniteScrolling.h */,
 				49AB41F516C21551007AA467 /* UIScrollView+SVInfiniteScrolling.m */,
 				498F86C316DD6387005118C1 /* UITextFieldCell.h */,
 				498F86C416DD6387005118C1 /* UITextFieldCell.m */,
 				4961F83D16DD525000B5EBC8 /* UITextViewCell.h */,
 				4961F83E16DD525000B5EBC8 /* UITextViewCell.m */,
-				49FFC800170CC56C0034ABBE /* OutlinedLabel.h */,
-				49FFC801170CC56C0034ABBE /* OutlinedLabel.m */,
+				49377B6F1703E27200B33AD2 /* Webpage Request */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -467,12 +467,13 @@
 			children = (
 				494D0E4216B84BAB00354964 /* AppDelegate.h */,
 				494D0E4316B84BAB00354964 /* AppDelegate.m */,
-				FA8546F7171DF8A0007951A5 /* LocalDelegate.h */,
-				FA8546F8171DF8A0007951A5 /* LocalDelegate.m */,
+				494EA15417207C1B000403EB /* Default-568h@2x.png */,
 				494D0E4916B84BAB00354964 /* Default-568h@2x.png */,
 				494D0E4516B84BAB00354964 /* Default.png */,
 				494D0E4716B84BAB00354964 /* Default@2x.png */,
 				494D0E3C16B84BAB00354964 /* InfoPlist.strings */,
+				FA8546F7171DF8A0007951A5 /* LocalDelegate.h */,
+				FA8546F8171DF8A0007951A5 /* LocalDelegate.m */,
 				494D0E3F16B84BAB00354964 /* main.m */,
 				494D0E3B16B84BAB00354964 /* MobileBinder-Info.plist */,
 				494D0E4116B84BAB00354964 /* MobileBinder-Prefix.pch */,
@@ -522,7 +523,6 @@
 		494D0E2416B84BAB00354964 = {
 			isa = PBXGroup;
 			children = (
-				494EA15017206846000403EB /* Default-568h@2x.png */,
 				494D0E3916B84BAB00354964 /* MobileBinder */,
 				494D0E3216B84BAB00354964 /* Frameworks */,
 				494D0E3016B84BAB00354964 /* Products */,
@@ -736,14 +736,14 @@
 		49FB670116C2CA50004F576F /* Payroll */ = {
 			isa = PBXGroup;
 			children = (
+				496DFF5516C6D70D00111136 /* BiweeklyPayrollData */,
+				49C5117B171204980083305E /* MonthlyPayrollData */,
+				49C511781711F5130083305E /* PayrollCategory.h */,
+				49C511791711F5130083305E /* PayrollCategory.m */,
 				49FB66FD16C2CA0D004F576F /* PayrollModel.h */,
 				49FB66FE16C2CA0D004F576F /* PayrollModel.m */,
 				F7EFBFE116B9CCAD00C46D04 /* PayrollPeriodViewController.h */,
 				F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */,
-				496DFF5516C6D70D00111136 /* BiweeklyPayrollData */,
-				49C511781711F5130083305E /* PayrollCategory.h */,
-				49C511791711F5130083305E /* PayrollCategory.m */,
-				49C5117B171204980083305E /* MonthlyPayrollData */,
 			);
 			name = Payroll;
 			sourceTree = "<group>";
@@ -751,17 +751,17 @@
 		FAB29C4816FF6DE300B777AF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				49DBA76F1703B3E400605FAD /* ResourceObject.h */,
-				49DBA7701703B3E400605FAD /* ResourceObject.m */,
-				49DBA76C1703B3B500605FAD /* ResourcesModel.h */,
-				49DBA76D1703B3B500605FAD /* ResourcesModel.m */,
-				497661181703B33F00C8E0D9 /* ResourcesViewController.m */,
-				497661191703B33F00C8E0D9 /* ResourcesViewController.h */,
-				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
-				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
-				49DBA7721703B44300605FAD /* ResourcesData */,
 				FA69FD9D1710B2DA0070BFE4 /* AddResourceViewController.h */,
 				FA69FD9E1710B2DA0070BFE4 /* AddResourceViewController.m */,
+				49DBA76F1703B3E400605FAD /* ResourceObject.h */,
+				49DBA7701703B3E400605FAD /* ResourceObject.m */,
+				49DBA7721703B44300605FAD /* ResourcesData */,
+				49DBA76C1703B3B500605FAD /* ResourcesModel.h */,
+				49DBA76D1703B3B500605FAD /* ResourcesModel.m */,
+				497661191703B33F00C8E0D9 /* ResourcesViewController.h */,
+				497661181703B33F00C8E0D9 /* ResourcesViewController.m */,
+				490A5AF716C1D25F0062F36F /* WebviewViewController.h */,
+				490A5AF816C1D25F0062F36F /* WebviewViewController.m */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -857,7 +857,7 @@
 				49F58774170B7D5C00589070 /* Employee Rounding Document Template.rtf in Resources */,
 				49451BB51710D41E003E9C10 /* bow_tie.png in Resources */,
 				49C5117C171204980083305E /* MonthlyPayrollData in Resources */,
-				494EA15117206846000403EB /* Default-568h@2x.png in Resources */,
+				494EA15517207C1B000403EB /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

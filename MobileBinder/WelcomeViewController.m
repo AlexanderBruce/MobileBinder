@@ -100,7 +100,7 @@
     }
     if(!hasCompletedRecommended)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to proceed" message:@"You have uncompleted recommended settings which may limit this app's functionality" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Proceed", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Do you wish to proceed?" message:@"You have uncompleted recommended settings which may limit this app's functionality" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Proceed", nil];
         alert.tag = PROCEED_ALERT_TAG;
         [alert show];
     }

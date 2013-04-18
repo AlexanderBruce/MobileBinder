@@ -7,8 +7,7 @@
 #import "Database.h"
 
 
-#define SCROLL_OFFSET IS_4_INCH_SCREEN ? 120 : 200
-#define CONTENT_SIZE IS_4_INCH_SCREEN ? 480: 590
+#define CONTENT_SIZE IS_4_INCH_SCREEN ? 455: 550
 
 @interface SeniorRoundingOverviewViewController () <UITextFieldDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
@@ -22,6 +21,36 @@
 
 @implementation SeniorRoundingOverviewViewController
 
+
+#define DATE_OFFSET (IS_4_INCH_SCREEN ? 0 : 0)
+#define UNIT_OFFSET (IS_4_INCH_SCREEN ? 0 : 0)
+#define NAME_OFFSET (IS_4_INCH_SCREEN ? 90 : 140)
+#define NOTES_OFFSET (IS_4_INCH_SCREEN ? 90 : 165)
+
+-(void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.scrollView.scrollEnabled = YES;
+    self.firstResponderIsActive = YES;
+    if(textField == self.dateField)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, DATE_OFFSET) animated:YES];
+    }
+    else if(textField == self.unitField)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, UNIT_OFFSET) animated:YES];
+    }
+    else if(textField == self.nameField)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, NAME_OFFSET) animated:YES];
+    }
+}
+
+- (void) textViewDidBeginEditing:(UITextView *)textView
+{
+    self.scrollView.scrollEnabled = YES;
+    self.firstResponderIsActive = YES;
+    [self.scrollView setContentOffset:CGPointMake(0, NOTES_OFFSET) animated:YES];
+}
 
 - (void) viewDidLoad
 {
@@ -121,16 +150,6 @@
 }
 
 
--(void) textFieldDidBeginEditing:(UITextField *)textField
-{
-    self.scrollView.scrollEnabled = YES;
-    self.firstResponderIsActive = YES;
-    if(textField == self.nameField)
-    {
-        [self.scrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
-    }
-}
-
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -149,13 +168,6 @@
             [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         }}
     );
-}
-
-- (void) textViewDidBeginEditing:(UITextView *)textView
-{
-    self.scrollView.scrollEnabled = YES;
-    self.firstResponderIsActive = YES;
-    [self.scrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
 }
 
 - (void) textViewDidEndEditing:(UITextView *)textView
