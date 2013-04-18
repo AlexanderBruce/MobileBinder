@@ -10,7 +10,7 @@
 
 - (NSArray *) getColumnTitles
 {
-    if (!_columnTitles) _columnTitles = [NSArray arrayWithObjects: @"Unit Name",@"Working Well", @"Reward and Recognition", @"Improvement", @"Additional Learnings", @"Follow-Up Action", nil];
+    if (!_columnTitles) _columnTitles = [NSArray arrayWithObjects: @"Unit",@"Working Well", @"Reward and Recognition", @"Improvement", @"Additional Learnings", @"Follow-Up Action", nil];
     return _columnTitles;
 }
 

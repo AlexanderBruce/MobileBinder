@@ -153,6 +153,7 @@
 - (UIView *) createDatePicker
 {
     UIView *pickerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, TOOLBAR_HEIGHT + KEYBOARD_HEIGHT)];
+    pickerView.backgroundColor = [UIColor clearColor];
     
     UIDatePicker *picker = [[UIDatePicker alloc] init];
     [picker sizeToFit];
@@ -163,10 +164,8 @@
     
     
     // Create done button
-    UIToolbar* toolBar = [[UIToolbar alloc] init];
-    toolBar.barStyle = UIBarStyleBlackTranslucent;
+    UIToolbar *toolBar = [[UIToolbar alloc]init];
     toolBar.translucent = YES;
-    toolBar.tintColor = nil;
     [toolBar sizeToFit];
     
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];

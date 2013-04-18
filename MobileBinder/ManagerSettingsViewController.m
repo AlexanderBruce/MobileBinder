@@ -99,7 +99,9 @@
         textField.autocorrectionType = UITextAutocorrectionTypeDefault;
         textField.keyboardType = UIKeyboardAppearanceDefault;
         self.nameField = textField;
-        self.nameField.text = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_NAME];
+        NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_NAME];
+        if(!name) name = @"";
+        self.nameField.text = name;
     }
     else if([indexPath isEqual:ID_INDEX_PATH])
     {
@@ -108,7 +110,9 @@
         textField.autocorrectionType = UITextAutocorrectionTypeNo;
         textField.keyboardType = UIKeyboardTypeDecimalPad;
         self.idField = textField;
-        self.idField.text = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_ID];
+        NSString *managerID = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_ID];
+        if(!managerID)  managerID = @"";
+        self.idField.text = managerID;
     }
     else if([indexPath isEqual: TITLE_INDEX_PATH])
     {
@@ -117,7 +121,9 @@
         textField.autocorrectionType = UITextAutocorrectionTypeDefault;
         textField.keyboardType = UIKeyboardAppearanceDefault;
         self.titleField = textField;
-        self.titleField.text = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_TITLE];
+        NSString *managerTitle = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_TITLE];
+        if(!managerTitle) managerTitle = @"";
+        self.titleField.text = managerTitle;
     }
     else if([indexPath isEqual: EMAIL_INDEX_PATH])
     {
@@ -126,7 +132,9 @@
         textField.autocorrectionType = UITextAutocorrectionTypeNo;
         textField.keyboardType = UIKeyboardTypeEmailAddress;
         self.emailField = textField;
-        self.emailField.text = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_EMAIL_KEY];
+        NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:MANAGER_EMAIL_KEY];
+        if (!email) email = @"";
+        self.emailField.text = email;
     }
     [cell.contentView addSubview:textField];
     

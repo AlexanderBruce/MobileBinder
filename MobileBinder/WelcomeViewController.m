@@ -63,7 +63,7 @@
     if(!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PrototypeCell"];
     cell.textLabel.text = [self.rowTitles objectForKey:indexPath];
     if([self.completedRows containsObject:indexPath]) cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    else cell.accessoryType = UITableViewCellAccessoryNone;
+    else cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 

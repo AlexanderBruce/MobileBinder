@@ -31,13 +31,14 @@
 @property (nonatomic, strong) UIPickerView *employeePicker;
 @property (nonatomic) BOOL pickerIsVisible;
 @property (nonatomic, weak) UIButton *switchButton;
-@property (nonatomic, strong) MFMailComposeViewController *mailer;
+@property (nonatomic, weak) MFMailComposeViewController *mailer;
 @end
 
 @implementation RoundingDetailsViewController
 
 - (IBAction)backPressed:(id)sender
 {
+    [self.tableView endEditing:YES];
     if(self.log.saved)
     {
         [self.navigationController popViewControllerAnimated:YES];
@@ -73,11 +74,14 @@
 
 - (IBAction)savePressed:(id)sender
 {
-    [self showSavingIndicator];
-    [self.log saveLogWithCompletition:^{
-        self.view.userInteractionEnabled = YES;
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    }];
+    [self.tableView endEditing:YES];
+    dispatch_async(dispatch_get_current_queue(), ^{ //Make sure that textfield has a chance to store its info before progressing
+        [self showSavingIndicator];
+        [self.log saveLogWithCompletition:^{
+            self.view.userInteractionEnabled = YES;
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }];
+    });
 }
 
 - (void) showSavingIndicator
@@ -90,10 +94,11 @@
     progressIndicator.taskInProgress = YES;
     progressIndicator.removeFromSuperViewOnHide = YES;
     progressIndicator.userInteractionEnabled = NO;
+    progressIndicator.minShowTime = 1.0;
     self.view.userInteractionEnabled = NO;
 }
 
-- (IBAction)addPressed:(UIBarButtonItem *)sender
+- (IBAction)addPressed:(id)sender
 {
     [self.tableView endEditing:YES];
     self.currentRow = [self.log addRow];
@@ -225,7 +230,8 @@
 {
     if(indexPath.section >= self.log.numberOfColumns) //Delete row
     {
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Are you sure you want to delete the log data for this employee?"] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil];
+        NSString *rowTitle = [[[self.log getColumnTitles] objectAtIndex:0] lowercaseString];
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Are you sure you want to delete the log data for this %@?", rowTitle] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil];
         [sheet showInView:self.view];
     }
 }
@@ -334,6 +340,7 @@
                                                object:nil];
     
     [self.tableView reloadData];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void) applicationWillResignActive
@@ -344,6 +351,10 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if(!self.mailer)
+    {
+        [self.navigationController setNavigationBarHidden:NO animated:animated];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -412,26 +423,19 @@
     return (gestureRecognizer.view == self.switchButton || otherGestureRecognizer.view == self.switchButton);
 }
 
-
-- (IBAction)sharePressed:(UIBarButtonItem *)sender
+- (IBAction)sharePressed:(id)sender
 {
-    self.mailer = [self.model generateRoundingDocumentFor:self.log];
-    self.mailer.mailComposeDelegate = self;
-    [self presentModalViewController:self.mailer animated:YES];
+    [self.tableView endEditing:YES];
+    dispatch_async(dispatch_get_current_queue(), ^{ //Make sure that textfield has a chance to store its info before progressing
+        self.mailer = [self.model generateRoundingDocumentFor:self.log];
+        self.mailer.mailComposeDelegate = self;
+        [self presentModalViewController:self.mailer animated:YES];
+    });
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    if(!result == MFMailComposeResultCancelled)
-    {
-        [self.mailer dismissViewControllerAnimated:YES completion:^{
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-    }
-    else
-    {
-        [self.mailer dismissViewControllerAnimated:YES completion:^{}];
-    }
+    [self.mailer dismissViewControllerAnimated:YES completion:^{}];
 }
 
 

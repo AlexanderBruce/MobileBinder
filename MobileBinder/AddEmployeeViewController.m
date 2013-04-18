@@ -105,7 +105,6 @@
         self.unitField.text = self.myRecord.unit;
         self.uniqueIDField.text = self.myRecord.idNum;
     }
-//    [self.myScrollView setContentSize:CGSizeMake(self.myScrollView.frame.size.width, self.myScrollView.frame.size.height)];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden)
                                                  name:UIKeyboardWillHideNotification object:nil];
@@ -120,6 +119,15 @@
             [label customize];
         }
     }
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:gestureRecognizer];
+}
+
+- (void) hideKeyboard
+{
+    [self.myScrollView endEditing:YES];
 }
 
 
@@ -145,16 +153,37 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#define FIRST_NAME_OFFSET (IS_4_INCH_SCREEN ? 0 : 0)
+#define LAST_NAME_OFFSET (IS_4_INCH_SCREEN ? 0 : 30)
+#define DEPARTMENT_OFFSET (IS_4_INCH_SCREEN ? 70 : 98)
+#define UNIT_OFFSET (IS_4_INCH_SCREEN ? 70 : 160)
+#define UNIQUE_ID_OFFSET (IS_4_INCH_SCREEN ? 70 : 160)
+
 -(void) textFieldDidBeginEditing:(UITextField *)textField
 {
     self.myScrollView.scrollEnabled = YES;
     self.firstResponderIsActive = YES;
-    if(textField == self.unitField || textField == self.departmentField || textField == self.uniqueIDField)
+    if(textField == self.firstNameField)
     {
-        [self.myScrollView setContentOffset:CGPointMake(0, SCROLL_OFFSET) animated:YES];
+        [self.myScrollView setContentOffset:CGPointMake(0, FIRST_NAME_OFFSET) animated:YES];
     }
-    else
-        [self.myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    else if(textField == self.lastNameField)
+    {
+        [self.myScrollView setContentOffset:CGPointMake(0, LAST_NAME_OFFSET) animated:YES];
+    }
+    else if(textField == self.departmentField)
+    {
+        [self.myScrollView setContentOffset:CGPointMake(0, DEPARTMENT_OFFSET) animated:YES];
+    }
+    else if(textField == self.unitField)
+    {
+        [self.myScrollView setContentOffset:CGPointMake(0, UNIT_OFFSET) animated:YES];
+    }
+    else if(textField == self.uniqueIDField)
+    {
+        [self.myScrollView setContentOffset:CGPointMake(0, UNIQUE_ID_OFFSET) animated:YES];
+    }
+
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField

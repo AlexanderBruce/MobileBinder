@@ -111,7 +111,7 @@
 }
 
 
-- (void) saveDataIntoLog
+- (void) storeDataIntoLog
 {
     self.log.date = [self.formatter dateFromString:self.dateField.text];
     self.log.unit = self.unitField.text;

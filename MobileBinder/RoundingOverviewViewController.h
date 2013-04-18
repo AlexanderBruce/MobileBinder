@@ -9,6 +9,6 @@
 @property (nonatomic, strong) RoundingLog *log;
 
 //ABSTRACT
-- (void) saveDataIntoLog;
+- (void) storeDataIntoLog;
 
 @end

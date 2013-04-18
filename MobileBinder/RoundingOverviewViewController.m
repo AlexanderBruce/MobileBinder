@@ -7,8 +7,7 @@
 
 #define ROUNDING_DETAILS_SEGUE @"roundingDetailsSegue"
 
-@interface RoundingOverviewViewController () <UIActionSheetDelegate, UIGestureRecognizerDelegate,MFMailComposeViewControllerDelegate>
-@property (nonatomic, strong) MFMailComposeViewController *mailer;
+@interface RoundingOverviewViewController () <UIActionSheetDelegate, UIGestureRecognizerDelegate>
 @end
 
 @implementation RoundingOverviewViewController
@@ -20,20 +19,6 @@
         RoundingDetailsViewController *dest = segue.destinationViewController;
         dest.log = self.log;
         dest.model = self.model;
-    }
-}
-
-- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    if(!result == MFMailComposeResultCancelled)
-    {
-        [self.mailer dismissViewControllerAnimated:YES completion:^{
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-    }
-    else
-    {
-        [self.mailer dismissViewControllerAnimated:YES completion:^{}];
     }
 }
 
@@ -64,8 +49,15 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [self.scrollView endEditing:YES];
-    [self saveDataIntoLog];
+    if (![[self.navigationController viewControllers] containsObject:self])
+    {
+        // We were removed from the navigation controller's view controller stack
+        // thus, we can infer that the back button was pressed
+        // Actions when next button is pressed are handled elsewhere
+        [self.scrollView endEditing:YES];
+        [self storeDataIntoLog];
+        [self.log saveLogWithCompletition:^{}];
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -81,6 +73,8 @@
 
 - (IBAction)nextPressed:(id)sender
 {
+    [self.scrollView endEditing:YES];
+    [self storeDataIntoLog];
     [self.log saveLogWithCompletition:^{
         [self performSegueWithIdentifier:ROUNDING_DETAILS_SEGUE sender:self];
     }];
@@ -102,7 +96,7 @@
     }
 }
 
-- (void) saveDataIntoLog
+- (void) storeDataIntoLog
 {
     //ABSTRACT
     [NSException raise:@"Override Error" format:@"Method %@ must be overidden in class %@",NSStringFromSelector(_cmd),self.class];

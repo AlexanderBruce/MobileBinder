@@ -84,7 +84,7 @@
     );
 }
 
-- (void) saveDataIntoLog
+- (void) storeDataIntoLog
 {
     self.log.employeeName = self.employeeNameField.text;
     self.log.unit = self.unitField.text;

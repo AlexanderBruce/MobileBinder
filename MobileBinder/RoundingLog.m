@@ -5,6 +5,7 @@
 
 @interface RoundingLog()
 @property (nonatomic, strong) NSMutableArray *rows; //Contains dictionaries of column numbers to column contents
+
 @end
 
 @implementation RoundingLog
@@ -28,22 +29,21 @@
 
 - (void) discardChanges
 {
-    self.rows = (self.managedObject.contents) ? self.managedObject.contents : [[NSMutableArray alloc] init];
+    self.rows = (self.managedObject.contents) ? [self mediumDeepCopyContents:self.managedObject.contents] : [[NSMutableArray alloc] init];
     self.saved = YES;
 }
 
 - (void) saveLogWithCompletition:(void (^)(void))block
 {
-    self.managedObject.contents = self.rows;
+    self.managedObject.contents = [self mediumDeepCopyContents:self.rows];
     self.saved = YES;
     [Database saveDatabaseWithCompletion:block];
 }
 
-
 - (int) addRow
 {
     [self.rows addObject:[[NSMutableDictionary alloc] init]];
-    self.saved = NO;
+    //Do not adjust self.saved here
     return self.rows.count - 1;
 }
 
@@ -99,12 +99,27 @@
     }];
 }
 
+- (NSMutableArray *) mediumDeepCopyContents: (NSMutableArray *) contents
+{
+    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
+    for (NSMutableDictionary *dict in contents)
+    {
+        NSMutableDictionary *resultDict = [[NSMutableDictionary alloc] init];
+        for (id key in dict.allKeys)
+        {
+            [resultDict setObject:[dict objectForKey:key] forKey:key];
+        }
+        [resultArray addObject:resultDict];
+    }
+    return resultArray;
+}
+
 
 - (id) initWithManagedObject: (id<RoundingLogManagedObjectProtocol> ) managedObject
 {
     if(self = [super init])
     {
-        self.rows = (managedObject.contents) ? managedObject.contents : [[NSMutableArray alloc] init];
+        self.rows = (managedObject.contents) ? [self mediumDeepCopyContents:managedObject.contents] : [[NSMutableArray alloc] init];
 
         //IMPLEMENT FURTHER IN SUBCLASSES
         

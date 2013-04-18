@@ -48,7 +48,6 @@
 		494D0E4416B84BAB00354964 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E4316B84BAB00354964 /* AppDelegate.m */; };
 		494D0E4616B84BAB00354964 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E4516B84BAB00354964 /* Default.png */; };
 		494D0E4816B84BAB00354964 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E4716B84BAB00354964 /* Default@2x.png */; };
-		494D0E4A16B84BAB00354964 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E4916B84BAB00354964 /* Default-568h@2x.png */; };
 		494D0E5F16B84F7300354964 /* AttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E5E16B84F7300354964 /* AttendanceViewController.m */; };
 		494D0E6216B84FE900354964 /* AttendanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 494D0E6116B84FE900354964 /* AttendanceCell.m */; };
 		494D0E6416B8509300354964 /* AttendanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 494D0E6316B8509300354964 /* AttendanceCell.xib */; };
@@ -819,7 +818,6 @@
 				494D0E3E16B84BAB00354964 /* InfoPlist.strings in Resources */,
 				494D0E4616B84BAB00354964 /* Default.png in Resources */,
 				494D0E4816B84BAB00354964 /* Default@2x.png in Resources */,
-				494D0E4A16B84BAB00354964 /* Default-568h@2x.png in Resources */,
 				494D0E6416B8509300354964 /* AttendanceCell.xib in Resources */,
 				49AB41FF16C2C93D007AA467 /* iPhone.storyboard in Resources */,
 				496DFF5616C6D70D00111136 /* BiweeklyPayrollData in Resources */,

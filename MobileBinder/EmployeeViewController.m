@@ -361,7 +361,6 @@
     [super viewDidLoad];
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
-    self.myTableView.allowsMultipleSelectionDuringEditing = YES;
     self.expandedSections = [[NSMutableArray alloc] init];
     self.title = self.employeeRecord.lastName;
 }

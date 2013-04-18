@@ -2,7 +2,7 @@
 #import "OutlinedLabel.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define AUTO_SCROLL_SPEED 7 //0.5f
+#define AUTO_SCROLL_SPEED 0.5f
 #define DELAY_BEFORE_AUTOSCROLLING 5
 
 @interface AboutViewController ()
