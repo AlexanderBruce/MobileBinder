@@ -59,7 +59,7 @@ static UIColor *backgroundColor;
 
 + (void) setBackgroundForViewController: (BackgroundViewController *) viewController
 {
-    if(viewController.presentingViewController)
+    if(!viewController.navigationController)
     {
         viewController.view.backgroundColor = [UIColor clearColor];
         UIView *backgroundView = viewController.backgroundView;
