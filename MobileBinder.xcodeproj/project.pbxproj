@@ -105,6 +105,7 @@
 		49DBA76E1703B3B500605FAD /* ResourcesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DBA76D1703B3B500605FAD /* ResourcesModel.m */; };
 		49DBA7711703B3E400605FAD /* ResourceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DBA7701703B3E400605FAD /* ResourceObject.m */; };
 		49DBA7731703B44300605FAD /* ResourcesData in Resources */ = {isa = PBXBuildFile; fileRef = 49DBA7721703B44300605FAD /* ResourcesData */; };
+		49DE62241729A15F000CD1FF /* IncidentAutopopulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DE62231729A15F000CD1FF /* IncidentAutopopulator.m */; };
 		49E7AA27170B450900727724 /* PredefinedImagesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E7AA26170B450900727724 /* PredefinedImagesModel.m */; };
 		49E7AA35170B4BD000727724 /* Thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 49E7AA33170B4BD000727724 /* Thumbnail0.png */; };
 		49E7AA36170B4BD000727724 /* Background0.png in Resources */ = {isa = PBXBuildFile; fileRef = 49E7AA34170B4BD000727724 /* Background0.png */; };
@@ -316,6 +317,8 @@
 		49DBA76F1703B3E400605FAD /* ResourceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceObject.h; sourceTree = "<group>"; };
 		49DBA7701703B3E400605FAD /* ResourceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceObject.m; sourceTree = "<group>"; };
 		49DBA7721703B44300605FAD /* ResourcesData */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ResourcesData; sourceTree = "<group>"; };
+		49DE62221729A15F000CD1FF /* IncidentAutopopulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentAutopopulator.h; sourceTree = "<group>"; };
+		49DE62231729A15F000CD1FF /* IncidentAutopopulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentAutopopulator.m; sourceTree = "<group>"; };
 		49E7AA25170B450900727724 /* PredefinedImagesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredefinedImagesModel.h; sourceTree = "<group>"; };
 		49E7AA26170B450900727724 /* PredefinedImagesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredefinedImagesModel.m; sourceTree = "<group>"; };
 		49E7AA33170B4BD000727724 /* Thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumbnail0.png; sourceTree = "<group>"; };
@@ -729,6 +732,8 @@
 				4960AFB716B8707D00F16ED6 /* EmployeeViewController.m */,
 				4960AFC216B8759600F16ED6 /* IncidentViewController.h */,
 				4960AFC316B8759600F16ED6 /* IncidentViewController.m */,
+				49DE62221729A15F000CD1FF /* IncidentAutopopulator.h */,
+				49DE62231729A15F000CD1FF /* IncidentAutopopulator.m */,
 			);
 			name = Attendance;
 			sourceTree = "<group>";
@@ -795,7 +800,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Duke University";
 			};
-			buildConfigurationList = 494D0E2916B84BAB00354964 /* Build configuration list for PBXProject "MobileBinder" */;
+			buildConfigurationList = 494D0E2916B84BAB00354964 /* Build configuration list for PBXProject "Mobile Manager" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -947,6 +952,7 @@
 				49C5117A1711F5130083305E /* PayrollCategory.m in Sources */,
 				4995577C1715D3D700065708 /* BetterDatabase.m in Sources */,
 				FA8546F9171DF8A0007951A5 /* LocalDelegate.m in Sources */,
+				49DE62241729A15F000CD1FF /* IncidentAutopopulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1002,6 +1008,7 @@
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = MobileBinder;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1030,6 +1037,7 @@
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = MobileBinder;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1069,7 +1077,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		494D0E2916B84BAB00354964 /* Build configuration list for PBXProject "MobileBinder" */ = {
+		494D0E2916B84BAB00354964 /* Build configuration list for PBXProject "Mobile Manager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				494D0E5416B84BAB00354964 /* Debug */,
