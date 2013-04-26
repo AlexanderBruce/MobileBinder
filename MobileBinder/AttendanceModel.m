@@ -2,6 +2,7 @@
 #import "EmployeeRecord.h"
 #import "EmployeeRecordManagedObject.h"
 #import "Database.h"
+#import "IncidentAutopopulator.h"
 #import "EmployeeAutopopulator.h"
 
 
@@ -68,12 +69,17 @@
 - (void) addEmployeesWithSupervisorID: (NSString *) idNum completition:(void (^)(void))block
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+        IncidentAutopopulator *incidentPopulator = [[IncidentAutopopulator alloc] init]; //For testing purposes only
         EmployeeAutopopulator *autopopulator = [[EmployeeAutopopulator alloc] init];
         NSSet *newEmployees = [autopopulator employeesForManagerID:idNum];
         for (EmployeeRecord *record in newEmployees)
         {
             [self addEmployeeRecord:record];
         }
+        [incidentPopulator populateEmployeeRecords:self.employeeRecords];
+        
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             block();
         });
