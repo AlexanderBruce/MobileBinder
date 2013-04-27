@@ -130,7 +130,6 @@
 		F7A843A516D40ECB009F09DD /* Banner copy.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A843A416D40ECB009F09DD /* Banner copy.png */; };
 		F7EFBFE316B9CCAD00C46D04 /* PayrollPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */; };
 		FA69FD9F1710B2DA0070BFE4 /* AddResourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA69FD9E1710B2DA0070BFE4 /* AddResourceViewController.m */; };
-		FA8546F9171DF8A0007951A5 /* LocalDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8546F8171DF8A0007951A5 /* LocalDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -331,8 +330,6 @@
 		F7EFBFE216B9CCAD00C46D04 /* PayrollPeriodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayrollPeriodViewController.m; sourceTree = "<group>"; };
 		FA69FD9D1710B2DA0070BFE4 /* AddResourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddResourceViewController.h; sourceTree = "<group>"; };
 		FA69FD9E1710B2DA0070BFE4 /* AddResourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddResourceViewController.m; sourceTree = "<group>"; };
-		FA8546F7171DF8A0007951A5 /* LocalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDelegate.h; sourceTree = "<group>"; };
-		FA8546F8171DF8A0007951A5 /* LocalDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,8 +411,6 @@
 				494D0E4516B84BAB00354964 /* Default.png */,
 				494D0E4716B84BAB00354964 /* Default@2x.png */,
 				494D0E3C16B84BAB00354964 /* InfoPlist.strings */,
-				FA8546F7171DF8A0007951A5 /* LocalDelegate.h */,
-				FA8546F8171DF8A0007951A5 /* LocalDelegate.m */,
 				494D0E3F16B84BAB00354964 /* main.m */,
 				494D0E3B16B84BAB00354964 /* MobileBinder-Info.plist */,
 				494D0E4116B84BAB00354964 /* MobileBinder-Prefix.pch */,
@@ -881,7 +876,6 @@
 				FA69FD9F1710B2DA0070BFE4 /* AddResourceViewController.m in Sources */,
 				49C5117A1711F5130083305E /* PayrollCategory.m in Sources */,
 				4995577C1715D3D700065708 /* BetterDatabase.m in Sources */,
-				FA8546F9171DF8A0007951A5 /* LocalDelegate.m in Sources */,
 				49DE62241729A15F000CD1FF /* IncidentAutopopulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

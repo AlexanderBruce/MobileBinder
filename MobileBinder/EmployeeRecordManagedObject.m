@@ -1,11 +1,8 @@
-//
-//  EmployeeRecordManagedObject.m
-//  MobileBinder
-//
-//  Created by Samuel Rang on 2/2/13.
-//  Copyright (c) 2013 Duke University. All rights reserved.
-//
-
+/*
+ *  MobileBinder
+ *  Created by Andrew Patterson (nosrettap25@gmail.com), Alex Bruce and Sam Rang
+ *  Copyright (c) 2013. All rights reserved.
+ */
 #import "EmployeeRecordManagedObject.h"
 
 

@@ -1,3 +1,8 @@
+/*
+ *  MobileBinder
+ *  Created by Andrew Patterson (nosrettap25@gmail.com), Alex Bruce and Sam Rang
+ *  Copyright (c) 2013. All rights reserved.
+ */
 #import "HomeViewController.h"
 #import "PayrollModel.h"
 #import "WelcomeViewController.h"
@@ -14,22 +19,6 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-//    UILocalNotification *notif = [[UILocalNotification alloc] init];
-//    notif.timeZone = [NSTimeZone defaultTimeZone];
-//    notif.alertBody = [NSString stringWithFormat:@"Hi Alex1"];
-//    notif.applicationIconBadgeNumber = 2;
-//    notif.hasAction = YES;
-//    
-//    notif.fireDate = [[NSDate date] dateByAddingTimeInterval:10] ; //get x minute after
-//    [[UIApplication sharedApplication] scheduleLocalNotification:notif];
-//    
-//    UILocalNotification *notif1 = [[UILocalNotification alloc] init];
-//    notif1.timeZone = [NSTimeZone defaultTimeZone];
-//    notif1.alertBody = [NSString stringWithFormat:@"Hi Alex2"];
-//    notif1.hasAction = YES;
-//    notif1.applicationIconBadgeNumber = 2;
-//    notif1.fireDate = [[NSDate date] dateByAddingTimeInterval:20] ; //get x minute after
-//    [[UIApplication sharedApplication] scheduleLocalNotification:notif1];
 }
 
 

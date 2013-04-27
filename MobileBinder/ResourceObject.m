@@ -1,11 +1,8 @@
-//
-//  ResourceObject.m
-//  MobileBinder
-//
-//  Created by Alexander Bruce on 3/24/13.
-//  Copyright (c) 2013 Duke University. All rights reserved.
-//
-
+/*
+ *  MobileBinder
+ *  Created by Andrew Patterson (nosrettap25@gmail.com), Alex Bruce and Sam Rang
+ *  Copyright (c) 2013. All rights reserved.
+ */
 #import "ResourceObject.h"
 
 @implementation ResourceObject

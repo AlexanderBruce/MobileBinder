@@ -1,11 +1,8 @@
-//
-//  ButtonGradientView.h
-//  Custom Alert View
-//
-//  Created by jeff on 5/17/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
+/*
+ *  MobileBinder
+ *  Created by Andrew Patterson (nosrettap25@gmail.com), Alex Bruce and Sam Rang
+ *  Copyright (c) 2013. All rights reserved.
+ */
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>

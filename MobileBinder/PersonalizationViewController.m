@@ -1,3 +1,8 @@
+/*
+ *  MobileBinder
+ *  Created by Andrew Patterson (nosrettap25@gmail.com), Alex Bruce and Sam Rang
+ *  Copyright (c) 2013. All rights reserved.
+ */
 #import "PersonalizationViewController.h"
 #import "MobileCoreServices/UTCoreTypes.h"
 #import "Constants.h"

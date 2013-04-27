@@ -1,3 +1,8 @@
+/*
+ *  MobileBinder
+ *  Created by Andrew Patterson (nosrettap25@gmail.com), Alex Bruce and Sam Rang
+ *  Copyright (c) 2013. All rights reserved.
+ */
 #import "EmployeeAutopopulator.h"
 #import "EmployeeRecord.h"
 #define EMPLOYEE_DATA_FILE @"employee_data.csv"
