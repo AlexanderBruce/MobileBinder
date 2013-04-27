@@ -1,6 +1,4 @@
 #import "WebviewViewController.h"
-#import "ASIWebPageRequest.h"
-#import "ASIDownloadCache.h"
 
 
 #define FAILED_TO_CONNECT_ALERT_TITLE @"Failed to Connect"

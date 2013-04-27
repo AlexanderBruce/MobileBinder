@@ -2,7 +2,9 @@
 #import <MessageUI/MFMailComposeViewController.h>
 @class RoundingLog;
 
-
+/*
+ *  Uses a RoundingLog to generate physical rounding log document
+ */
 @interface RoundingDocumentGenerator : NSObject
 
 #define TABLE_PREFACE @"{\\rtf1\\ansi\\deff0\\trowd\\trgaph144"
@@ -11,18 +13,33 @@
 
 @property (nonatomic, strong) RoundingLog *log;
 
+/*
+ *  Uses a RoundingLog to generate a physical rounding log document and attach it to an e-mail (MFMailComposeViewController)
+ */
 - (MFMailComposeViewController *) generateRoundingDocumentFor: (RoundingLog *) log;
 
-//ABSTRACT
+/*
+ *  ABSTRACT METHOD
+ *  Subclasses should return the template that will be used when generating the physical rounding document
+ */
 - (NSString *) getTemplate;
 
-//ABSTRACT
+/*
+ *  ABSTRACT METHOD
+ *  Subclasses should fill the missing information in the template
+ */
 - (NSString *) writeDocumentUsingTemplate: (NSString *) template;
 
-//ABSTRACT
+/*
+ *  ABSTRACT METHOD
+ *  Subclasses should return a string that will be used as the subject of the MFMailComposeViewController
+ */
 - (NSString *) getSubject;
 
-//ABSTRACT
+/*
+ *  ABSTRACT METHOD
+ *  Subclasses sholud return a string that will be used as the body of the MFMailComposeViewController
+ */
 - (NSString *) getBody;
 
 @end

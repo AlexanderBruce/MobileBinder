@@ -1,7 +1,9 @@
 #import <CoreData/CoreData.h>
 #import "RoundingLogManagedObjectProtocol.h"
 
-
+/*
+ *  The CoreData object that backs a SeniorRoundingLog
+ */
 @interface SeniorRoundingLogManagedObject : NSManagedObject <RoundingLogManagedObjectProtocol>
 
 @property (nonatomic, retain) NSDate * date;

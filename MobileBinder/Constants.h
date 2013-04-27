@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
 
+/*
+ * A global resource file
+ */
 @interface Constants : NSObject
 
 #define IS_4_INCH_SCREEN ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )

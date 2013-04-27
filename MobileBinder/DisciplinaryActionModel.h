@@ -2,6 +2,9 @@
 #import <MessageUI/MFMailComposeViewController.h>
 @class EmployeeRecord;
 
+/*
+ *  Creates appropriate documents for disciplining employees
+ */
 @interface DisciplinaryActionModel : NSObject
 
 typedef enum {
@@ -10,6 +13,9 @@ typedef enum {
     Missed_Swipe
 } Behavior;
 
+/*
+ *  Returns a MFMailComposeViewController that contains an attachment of an appropriate disciplinary document
+ */
 - (MFMailComposeViewController *) generateDisciplinaryActionDocumentFor: (EmployeeRecord *) employee forBehavior: (Behavior) behavior level: (int) level;
 
 @end

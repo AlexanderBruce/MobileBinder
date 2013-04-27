@@ -1,5 +1,9 @@
 #import <UIKit/UIKit.h>
 
+/*
+ *  A UILabel where you can select a different color to outline the text in.
+ *  For example, white text with black outlines may be useful when used in a BackgroundViewController (with an unknown background color/image)
+ */
 @interface OutlinedLabel : UILabel
 
 typedef enum _ASIAuthenticationType {

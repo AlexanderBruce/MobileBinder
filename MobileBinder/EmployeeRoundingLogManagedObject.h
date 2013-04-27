@@ -2,7 +2,9 @@
 #import <CoreData/CoreData.h>
 #import "RoundingLogManagedObjectProtocol.h"
 
-
+/*
+ *  The CoreData object that backs an EmployeeRoundingLog
+ */
 @interface EmployeeRoundingLogManagedObject : NSManagedObject <RoundingLogManagedObjectProtocol>
 
 @property (nonatomic, retain) NSString * employeeName;

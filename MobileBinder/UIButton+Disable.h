@@ -1,6 +1,5 @@
 /*
  * Created by Andrew Patterson
- * Copyright (c) 2012 Prometheus Group. All rights reserved.
  */
 #import <UIKit/UIKit.h>
 
@@ -9,8 +8,14 @@
  */
 @interface UIButton (Disable)
 
+/*
+ *  Disable user interaction on this button and change its appearance to reflect this
+ */
 - (void) disableButton;
 
+/*
+ *  Enable user interaction on this button and restore its appearance
+ */
 - (void) enableButton;
 
 @end

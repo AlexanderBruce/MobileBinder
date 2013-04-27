@@ -1,15 +1,10 @@
-//
-//  EmployeeRecordManagedObject.h
-//  MobileBinder
-//
-//  Created by Samuel Rang on 2/2/13.
-//  Copyright (c) 2013 Duke University. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
 
+/*
+ *  The underlying CoreData object of an EmployeeRecord
+ */
 @interface EmployeeRecordManagedObject : NSManagedObject
 
 @property (nonatomic, retain) NSString * firstName;

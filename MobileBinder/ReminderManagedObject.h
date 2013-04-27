@@ -1,7 +1,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
+/*
+ *  The parallel class to Reminder.m/h that interfaces with CoreData
+ *  See Reminder.h for more details
+ *  Design note: Reminder and ReminderManagedObject should probably be combined into one class
+ */
 @interface ReminderManagedObject : NSManagedObject
 
 @property (nonatomic, retain) NSString * text;
