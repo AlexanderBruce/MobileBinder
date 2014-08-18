@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8tJ-h4-1Ol">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8tJ-h4-1Ol">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -288,13 +288,13 @@
                                         <rect key="frame" x="20" y="183" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ulk-CC-e06">
                                         <rect key="frame" x="20" y="116" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Last Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NZw-Pt-HLD" customClass="OutlinedLabel">
                                         <rect key="frame" x="20" y="87" width="100" height="21"/>
@@ -307,7 +307,7 @@
                                         <rect key="frame" x="20" y="250" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Department" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="irX-tC-9D6" customClass="OutlinedLabel">
                                         <rect key="frame" x="21" y="154" width="279" height="21"/>
@@ -334,7 +334,7 @@
                                         <rect key="frame" x="20" y="49" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Unique ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MQT-FX-r9e" customClass="OutlinedLabel">
                                         <rect key="frame" x="21" y="288" width="100" height="21"/>
@@ -347,7 +347,7 @@
                                         <rect key="frame" x="20" y="317" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                 </subviews>
                             </scrollView>
@@ -824,6 +824,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="kRE-hC-gGL"/>
                     <connections>
+                        <outlet property="attendanceButton" destination="k0W-JL-ZgM" id="RE4-zR-YaF"/>
                         <segue destination="es4-s1-S7Y" kind="modal" identifier="welcomeSegue" id="Ps0-O4-oMc"/>
                     </connections>
                 </viewController>
@@ -1017,13 +1018,13 @@
                                         <rect key="frame" x="20" y="183" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Duke Health" minimumFontSize="17" id="yd7-0C-sND">
                                         <rect key="frame" x="20" y="49" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Wepage Url" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mbd-jI-QGI" customClass="OutlinedLabel">
                                         <rect key="frame" x="20" y="87" width="182" height="21"/>
@@ -1043,7 +1044,7 @@
                                         <rect key="frame" x="20" y="251" width="182" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                 </subviews>
                             </scrollView>
@@ -1533,9 +1534,7 @@
         <class className="AddResourceViewController" superclassName="BackgroundViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddResourceViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelButtonPressed:"/>
                 <relationship kind="action" name="doneButtonPressed:"/>
-                <relationship kind="action" name="preExistingPressed:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="category" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="description" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
@@ -1577,6 +1576,7 @@
         <class className="EmployeeViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EmployeeViewController.h"/>
             <relationships>
+                <relationship kind="action" name="editPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
             </relationships>
@@ -1586,6 +1586,9 @@
         </class>
         <class className="HomeViewController" superclassName="BackgroundViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="attendanceButton" candidateClass="GradientButton"/>
+            </relationships>
         </class>
         <class className="IncidentViewController" superclassName="BackgroundViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/IncidentViewController.h"/>
@@ -1614,6 +1617,7 @@
         <class className="PayrollPeriodViewController" superclassName="BackgroundViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PayrollPeriodViewController.h"/>
             <relationships>
+                <relationship kind="action" name="segmentedValueChanged:"/>
                 <relationship kind="outlet" name="myLabel" candidateClass="OutlinedLabel"/>
                 <relationship kind="outlet" name="payPeriodTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="periodSelectionField" candidateClass="UITextField"/>
@@ -1650,12 +1654,17 @@
         <class className="RoundingAllLogsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingAllLogsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addLogPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="RoundingDetailsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundingDetailsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addPressed:"/>
+                <relationship kind="action" name="backPressed:"/>
+                <relationship kind="action" name="savePressed:"/>
+                <relationship kind="action" name="sharePressed:"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
