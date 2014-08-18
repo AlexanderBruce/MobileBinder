@@ -7,11 +7,14 @@
 #import "PayrollModel.h"
 #import "WelcomeViewController.h"
 #import "AttendanceModel.h"
+#import "GradientButton.h"
+#import "UIButton+Disable.h"
 
 #define USED_APP_BEFORE @"firstTimeUsingAppKey"
 #define WELCOME_SEGUE @"welcomeSegue"
 
 @interface HomeViewController ()
+@property (weak, nonatomic) IBOutlet GradientButton *attendanceButton;
 @end
 
 @implementation HomeViewController
@@ -19,6 +22,7 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    [self.attendanceButton disableButton];
 }
 
 
@@ -34,4 +38,8 @@
     }
 }
 
+- (void)viewDidUnload {
+    [self setAttendanceButton:nil];
+    [super viewDidUnload];
+}
 @end
